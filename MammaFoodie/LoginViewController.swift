@@ -60,17 +60,22 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            print("there was an error while logging in with facebook: \(error.localizedDescription)")
+            return
+        }
+        
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if let error = error {
-                print("there was an error while logging in: " + error.localizedDescription)
+                print("Failed to create a firebase user with facebook: \(error.localizedDescription)")
                 return
             }
         })
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        
+        print("Logged out of Facebook")
     }
     
     override func didReceiveMemoryWarning() {
