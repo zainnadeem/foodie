@@ -10,18 +10,24 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import SnapKit
+import GoogleSignIn
 
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController {
     
     var logoView: UIImageView!
-    var loginButton: FBSDKLoginButton!
+    var fbLoginButton: FBSDKLoginButton!
+    var googleLoginButton: GIDSignInButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loginButton = FBSDKLoginButton()
-        loginButton.delegate = self
+        fbLoginButton = FBSDKLoginButton()
+        fbLoginButton.delegate = self
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        googleLoginButton = GIDSignInButton()
+        
         setUpViews()
     }
     
@@ -36,15 +42,23 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             make.height.equalTo(logoView.snp.width)
         }
         
-        view.addSubview(loginButton)
-        loginButton.setTitle("Log in with Facebook", for: .normal)
-        loginButton.snp.makeConstraints { (make) in
+        view.addSubview(fbLoginButton)
+        fbLoginButton.snp.makeConstraints { (make) in
             make.top.equalTo(logoView.snp.bottomMargin).offset(30)
+            make.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(googleLoginButton)
+        googleLoginButton.snp.makeConstraints { (make) in
+            make.top.equalTo(fbLoginButton.snp.bottomMargin).offset(20)
             make.centerX.equalToSuperview()
         }
 
     }
-    
+
+}
+
+extension LoginViewController: FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
@@ -58,21 +72,36 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension LoginViewController: GIDSignInUIDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        // ...
+        if let error = error {
+            
+            print("there was an error while logging in: " + error.localizedDescription)
+            
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                          accessToken: authentication.accessToken)
+        // ...
+        
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            // ...
+            if let error = error {
+                
+                print("there was an error while logging in: " + error.localizedDescription)
+                
+                return
+            }
+        }
     }
-    */
-
 }
