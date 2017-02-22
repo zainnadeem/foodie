@@ -103,7 +103,6 @@ class User
             }
         }
         
-        // deviceToken: created for notifications
         self.blockedUsers = []
         if let followedByDict = dictionary["blocked users"] as? [String : Any] {
             for (_, userDict) in followedByDict {
