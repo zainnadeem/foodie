@@ -16,7 +16,9 @@
 		2B6CD0CA1E5DDBA00001EA68 /* MammaFoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */; };
 		2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */; };
 		2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */; };
-		2B752A251E5DE53C00EAECEB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B752A241E5DE53C00EAECEB /* FBSDKLoginKit.framework */; };
+		2B8C76F41E5DF24400FA60C8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */; };
+		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
+		2B8C76F81E5DF29700FA60C8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F61E5DF29700FA60C8 /* Bolts.framework */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +46,9 @@
 		2B6CD0CB1E5DDBA00001EA68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2B752A241E5DE53C00EAECEB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		2B8C76F61E5DF29700FA60C8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		C757AF9E2CBB7A67E1F46E42 /* Pods-MammaFoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.release.xcconfig"; sourceTree = "<group>"; };
@@ -57,8 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B752A251E5DE53C00EAECEB /* FBSDKLoginKit.framework in Frameworks */,
+				2B8C76F41E5DF24400FA60C8 /* FBSDKLoginKit.framework in Frameworks */,
+				2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */,
 				845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */,
+				2B8C76F81E5DF29700FA60C8 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +127,9 @@
 		2B752A231E5DE52800EAECEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2B752A241E5DE53C00EAECEB /* FBSDKLoginKit.framework */,
+				2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */,
+				2B8C76F61E5DF29700FA60C8 /* Bolts.framework */,
+				2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -497,8 +505,8 @@
 				DEVELOPMENT_TEAM = ZTEU5RXF67;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"~/FacebookSDK",
 					"$(PROJECT_DIR)/MammaFoodie",
-					"~/Documents/FacebookSDKs-iOS-4.19.0",
 				);
 				INFOPLIST_FILE = MammaFoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -517,8 +525,8 @@
 				DEVELOPMENT_TEAM = ZTEU5RXF67;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"~/FacebookSDK",
 					"$(PROJECT_DIR)/MammaFoodie",
-					"~/Documents/FacebookSDKs-iOS-4.19.0",
 				);
 				INFOPLIST_FILE = MammaFoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
