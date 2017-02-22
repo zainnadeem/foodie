@@ -11,11 +11,87 @@ import Firebase
 
 class Dish{
     
+    // MARK: - Dish Properties
     
-    func toDictionary() // -> [String : Any] 
+    let uid                             : String
+    var name                            : String
+    var description                     : String
+    
+    var likedBy                         : [User]
+    var averageRating                   : Int
+    
+    var mainImage                       : UIImage?
+    var price                           : Double
+
+    
+    
+
+    init(uid: String, name: String, description: String, mainImage: UIImage?, price: Double, likedBy: [User], averageRating: Int){
+        
+        self.uid = uid
+        self.name = name
+        self.description = description
+        self.mainImage = mainImage
+        self.price = price
+        self.likedBy = likedBy
+        self.averageRating = averageRating
+        
+    }
+    
+    init(dictionary: [String : Any])
+    {
+        uid = dictionary["uid"] as! String
+        
+        name = dictionary["name"] as! String
+        description = dictionary["description"] as! String
+        
+        price = dictionary["price"] as! Double
+        averageRating = dictionary["average rating"] as! Int
+
+        
+        self.likedBy = []
+        if let likedByDict = dictionary["liked by"] as? [String : Any] {
+            for (_, userDict) in likedByDict {
+                if let userDict = userDict as? [String : Any] {
+                    self.likedBy.append(User(dictionary: userDict))
+                }
+            }
+        }
+    }
+    
+    
+    func save(ref: FIRDatabaseReference, completion: @escaping (Error?) -> Void) {
+        
+        let ref = DatabaseReference.users(uid: self.uid).reference().child("dishes").childByAutoId()
+        ref.setValue(toDictionary())
+        
+        //save likes
+        for user in likedBy {
+            ref.child("like by/\(user.uid)").setValue(user.toDictionary())
+        }
+        //upload image to storage database
+        if let mainImage = self.mainImage {
+                let firImage = FIRImage(image: mainImage)
+                firImage.save(self.uid, completion: { error in
+                    completion(error)
+                })
+                
+                
+            }
+        }
+
+    
+    func toDictionary()-> [String : Any]
     {
 
-        return
+        return [
+            "uid" : uid,
+            "name" : name,
+            "description" : description,
+            "average rating" : averageRating,
+            "price" : price
+        
+        ]
     }
 
 }

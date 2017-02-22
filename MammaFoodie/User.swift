@@ -19,6 +19,7 @@ class User
     var fullName                        : String
     var bio                             : String
     var website                         : String
+    var location                        : String
     var profileImage                    : UIImage?
     
     var dishes                          : [Dish]
@@ -39,13 +40,14 @@ class User
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, bio: String, website: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String])
+    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String])
     {
         self.uid = uid
         self.username = username
         self.fullName = fullName
         self.bio = bio
         self.website = website
+        self.location = location
         self.follows = follows
         self.followedBy = followedBy
         self.profileImage = profileImage
@@ -66,6 +68,7 @@ class User
         fullName = dictionary["fullName"] as! String
         bio = dictionary["bio"] as! String
         website = dictionary["website"] as! String
+        location = dictionary["location"] as! String
         
         averageRating = dictionary["average rating"] as! Int
         totalLikes = dictionary["total likes"] as! Int

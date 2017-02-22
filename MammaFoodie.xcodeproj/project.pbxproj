@@ -139,12 +139,12 @@
 		BFB8535C1E5DE57D009D7069 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BFB853671E5DFABF009D7069 /* Helpers */,
 				BFB853561E5DE20B009D7069 /* User.swift */,
-				BFB8535A1E5DE55F009D7069 /* Review.swift */,
 				BFB853581E5DE342009D7069 /* Dish.swift */,
+				BFB8535A1E5DE55F009D7069 /* Review.swift */,
 				BFB8535F1E5DE7DA009D7069 /* Broadcast.swift */,
 				BFB8535D1E5DE671009D7069 /* Notification.swift */,
+				BFB853671E5DFABF009D7069 /* Helpers */,
 			);
 			name = Models;
 			sourceTree = "<group>";
