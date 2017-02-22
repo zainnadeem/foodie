@@ -14,6 +14,9 @@
 		2B6CD0BC1E5DDBA00001EA68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */; };
 		2B6CD0BF1E5DDBA00001EA68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0BD1E5DDBA00001EA68 /* LaunchScreen.storyboard */; };
 		2B6CD0CA1E5DDBA00001EA68 /* MammaFoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */; };
+		2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */; };
+		2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */; };
+		2B752A251E5DE53C00EAECEB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B752A241E5DE53C00EAECEB /* FBSDKLoginKit.framework */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +42,9 @@
 		2B6CD0C51E5DDBA00001EA68 /* MammaFoodieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MammaFoodieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MammaFoodieTests.swift; sourceTree = "<group>"; };
 		2B6CD0CB1E5DDBA00001EA68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2B752A241E5DE53C00EAECEB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		C757AF9E2CBB7A67E1F46E42 /* Pods-MammaFoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.release.xcconfig"; sourceTree = "<group>"; };
@@ -51,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B752A251E5DE53C00EAECEB /* FBSDKLoginKit.framework in Frameworks */,
 				845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,12 +96,15 @@
 		2B6CD0B31E5DDBA00001EA68 /* MammaFoodie */ = {
 			isa = PBXGroup;
 			children = (
+				2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */,
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
+				2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */,
 				2B6CD0B61E5DDBA00001EA68 /* ViewController.swift */,
 				2B6CD0B81E5DDBA00001EA68 /* Main.storyboard */,
 				2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */,
 				2B6CD0BD1E5DDBA00001EA68 /* LaunchScreen.storyboard */,
 				2B6CD0C01E5DDBA00001EA68 /* Info.plist */,
+				2B752A231E5DE52800EAECEB /* Frameworks */,
 			);
 			path = MammaFoodie;
 			sourceTree = "<group>";
@@ -106,6 +116,14 @@
 				2B6CD0CB1E5DDBA00001EA68 /* Info.plist */,
 			);
 			path = MammaFoodieTests;
+			sourceTree = "<group>";
+		};
+		2B752A231E5DE52800EAECEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B752A241E5DE53C00EAECEB /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A46D1D736EC28A9CC4BE4BA5 /* Pods */ = {
@@ -220,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B6CD0BF1E5DDBA00001EA68 /* LaunchScreen.storyboard in Resources */,
+				2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */,
 				2B6CD0BC1E5DDBA00001EA68 /* Assets.xcassets in Resources */,
 				2B6CD0BA1E5DDBA00001EA68 /* Main.storyboard in Resources */,
 			);
@@ -332,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */,
 				2B6CD0B71E5DDBA00001EA68 /* ViewController.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
 			);
@@ -475,6 +495,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTEU5RXF67;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MammaFoodie",
+					"~/Documents/FacebookSDKs-iOS-4.19.0",
+				);
 				INFOPLIST_FILE = MammaFoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MammaFoodieCorp.developer.MammaFoodie;
@@ -490,6 +515,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTEU5RXF67;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MammaFoodie",
+					"~/Documents/FacebookSDKs-iOS-4.19.0",
+				);
 				INFOPLIST_FILE = MammaFoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MammaFoodieCorp.developer.MammaFoodie;
