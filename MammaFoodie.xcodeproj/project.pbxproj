@@ -20,6 +20,14 @@
 		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
 		2B8C76F81E5DF29700FA60C8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F61E5DF29700FA60C8 /* Bolts.framework */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
+		BFB853571E5DE20B009D7069 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853561E5DE20B009D7069 /* User.swift */; };
+		BFB853591E5DE342009D7069 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853581E5DE342009D7069 /* Dish.swift */; };
+		BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535A1E5DE55F009D7069 /* Review.swift */; };
+		BFB8535E1E5DE671009D7069 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535D1E5DE671009D7069 /* Notification.swift */; };
+		BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535F1E5DE7DA009D7069 /* Broadcast.swift */; };
+		BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853611E5DEA35009D7069 /* DatabaseReference.swift */; };
+		BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853631E5DEE74009D7069 /* FIRImage.swift */; };
+		BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853651E5DFA7A009D7069 /* Datastore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,14 @@
 		2B8C76F61E5DF29700FA60C8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
+		BFB853561E5DE20B009D7069 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BFB853581E5DE342009D7069 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		BFB8535A1E5DE55F009D7069 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		BFB8535D1E5DE671009D7069 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		BFB8535F1E5DE7DA009D7069 /* Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcast.swift; sourceTree = "<group>"; };
+		BFB853611E5DEA35009D7069 /* DatabaseReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
+		BFB853631E5DEE74009D7069 /* FIRImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRImage.swift; sourceTree = "<group>"; };
+		BFB853651E5DFA7A009D7069 /* Datastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datastore.swift; sourceTree = "<group>"; };
 		C757AF9E2CBB7A67E1F46E42 /* Pods-MammaFoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.release.xcconfig"; sourceTree = "<group>"; };
 		EFEBD08B76275951CC679267 /* Pods-MammaFoodieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F298BC0C2AF8494C9185AB67 /* Pods_MammaFoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MammaFoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +122,7 @@
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
 				2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */,
 				2B6CD0B61E5DDBA00001EA68 /* ViewController.swift */,
+				BFB8535C1E5DE57D009D7069 /* Models */,
 				2B6CD0B81E5DDBA00001EA68 /* Main.storyboard */,
 				2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */,
 				2B6CD0BD1E5DDBA00001EA68 /* LaunchScreen.storyboard */,
@@ -143,6 +160,29 @@
 				BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BFB8535C1E5DE57D009D7069 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BFB853671E5DFABF009D7069 /* Helpers */,
+				BFB853561E5DE20B009D7069 /* User.swift */,
+				BFB8535A1E5DE55F009D7069 /* Review.swift */,
+				BFB853581E5DE342009D7069 /* Dish.swift */,
+				BFB8535F1E5DE7DA009D7069 /* Broadcast.swift */,
+				BFB8535D1E5DE671009D7069 /* Notification.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BFB853671E5DFABF009D7069 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BFB853631E5DEE74009D7069 /* FIRImage.swift */,
+				BFB853611E5DEA35009D7069 /* DatabaseReference.swift */,
+				BFB853651E5DFA7A009D7069 /* Datastore.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		ED4FCCBCA995C24377BCEF44 /* Frameworks */ = {
@@ -361,7 +401,15 @@
 			files = (
 				2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */,
 				2B6CD0B71E5DDBA00001EA68 /* ViewController.swift in Sources */,
+				BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */,
+				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
+				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,
+				BFB8535E1E5DE671009D7069 /* Notification.swift in Sources */,
+				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
+				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
+				BFB853591E5DE342009D7069 /* Dish.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
+				BFB853571E5DE20B009D7069 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
