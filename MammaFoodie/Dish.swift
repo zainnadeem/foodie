@@ -13,20 +13,17 @@ class Dish{
     
     // MARK: - Dish Properties
     
-    let uid                             : String
-    var name                            : String
-    var description                     : String
+    let uid                             :           String
+    var name                            :           String
+    var description                     :           String
     
-    var likedBy                         : [User]
-    var averageRating                   : Int
-    var price                           : Int
+    var likedBy                         :           [User]
+    var averageRating                   :           Int
+    var price                           :           Int
     
-    var mainImage                       : UIImage?
-    
-
+    var mainImage                       :           UIImage?
     
     
-
     init(uid: String, name: String, description: String, mainImage: UIImage?, price: Int, likedBy: [User], averageRating: Int){
         
         self.uid = uid
@@ -48,7 +45,7 @@ class Dish{
         
         price = dictionary["price"] as! Int
         averageRating = dictionary["average rating"] as! Int
-
+        
         
         self.likedBy = []
         if let likedByDict = dictionary["liked by"] as? [String : Any] {
@@ -72,27 +69,27 @@ class Dish{
         }
         //upload image to storage database
         if let mainImage = self.mainImage {
-                let firImage = FIRImage(image: mainImage)
-                firImage.save(self.uid, completion: { error in
-                    completion(error)
-                })
-                
-                
-            }
+            let firImage = FIRImage(image: mainImage)
+            firImage.save(self.uid, completion: { error in
+                completion(error)
+            })
+            
+            
         }
-
+    }
+    
     
     func toDictionary()-> [String : Any]
     {
-
+        
         return [
             "uid" : uid,
             "name" : name,
             "description" : description,
             "average rating" : averageRating,
             "price" : price
-        
+            
         ]
     }
-
+    
 }

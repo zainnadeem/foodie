@@ -21,7 +21,6 @@ enum DatabaseReference {
     
     func reference() -> FIRDatabaseReference {
         return rootRef.child(path)
-        
     }
     
     private var rootRef: FIRDatabaseReference{

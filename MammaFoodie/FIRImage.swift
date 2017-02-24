@@ -105,14 +105,9 @@ extension FIRImage {
         }
         
     }
-    
-    
-    
-    
+  
     
 }
-
-
 
 
 private extension UIImage

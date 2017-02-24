@@ -10,32 +10,29 @@ import Foundation
 import Firebase
 
 class User
-
+    
 {
     // MARK: - User Properties
     
-    let uid                             : String
-    var username                        : String
-    var fullName                        : String
-    var bio                             : String
-    var website                         : String
-    var location                        : String
-    var profileImage                    : UIImage?
+    let uid                             :           String
+    var username                        :           String
+    var fullName                        :           String
+    var bio                             :           String
+    var website                         :           String
+    var location                        :           String
+    var profileImage                    :           UIImage?
     
-    var dishes                          : [Dish]
-    var follows                         : [User]
-    var followedBy                      : [User]
-    var reviews                         : [Review]
-    var notifications                   : [Notification]
-    var broadcasts                      : [Broadcast]
-    var blockedUsers                    : [User]
+    var dishes                          :           [Dish]
+    var follows                         :           [User]
+    var followedBy                      :           [User]
+    var reviews                         :           [Review]
+    var notifications                   :           [Notification]
+    var broadcasts                      :           [Broadcast]
+    var blockedUsers                    :           [User]
     
-    var totalLikes                      : Int
-    var averageRating                   : Int
-    var deviceTokens                    : [String]
-
-    
-
+    var totalLikes                      :           Int
+    var averageRating                   :           Int
+    var deviceTokens                    :           [String]
     
     
     // MARK: - Initializers
@@ -111,14 +108,14 @@ class User
                 }
             }
         }
-    
+        
         // notifications
         self.notifications = []
         if let notificationsDict = dictionary["notifications"] as? [String : Any]
         {
             for (_, notificationDict) in notificationsDict {
                 if let notificationDict = notificationDict as? [String : Any] {
-                   // self.notifications.append(Notification(dictionary: notificationDict))
+                    self.notifications.append(Notification(dictionary: notificationDict))
                 }
             }
         }
@@ -129,7 +126,7 @@ class User
         {
             for (_, dishDict) in dishesDict {
                 if let dishDict = dishDict as? [String : Any] {
-                    // self.dishes.append(Dish(dictionary: dishDict))
+                    self.dishes.append(Dish(dictionary: dishDict))
                 }
             }
         }
@@ -140,7 +137,7 @@ class User
         {
             for (_, reviewDict) in reviewsDict {
                 if let reviewDict = reviewDict as? [String : Any] {
-                    // self.reviews.append(Dish(dictionary: reviewDict))
+                    self.reviews.append(Review(dictionary: reviewDict))
                 }
             }
         }
@@ -151,13 +148,13 @@ class User
         {
             for (_, broadcastDict) in broadcastsDict {
                 if let broadcastDict = broadcastDict as? [String : Any] {
-                    // self.reviews.append(Dish(dictionary: reviewDict))
+                   // self.broadcasts.append(Broadcast(dictionary: broadcastDict))
                 }
             }
         }
-
+        
     }
-
+    
     
     func toDictionary() -> [String : Any] {
         return [
