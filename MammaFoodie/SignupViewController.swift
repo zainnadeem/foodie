@@ -8,36 +8,72 @@
 
 import UIKit
 import SnapKit
+import ChameleonFramework
+
 
 class SignupViewController: UIViewController {
     
     var userSelectedManualLogin: Bool!
     
     var profileImageView: UIImageView!
-    var changePictureLabel: UILabel!
+    var changePhotoLabel: UILabel!
     var textFieldStackView: UIStackView!
     var emailTextField: UITextField!
     var fullNameTextField: UITextField!
     var usernameTextField: UITextField!
     var passwordTextField: UITextField?
     var confirmPasswordTextField: UITextField?
-    var finishButton: UIButton!
+    var completeButton: FoodieButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blue
-        finishButton.isEnabled = false
-
+        view.backgroundColor = UIColor.flatMint
+        
+        setUpProfilePicture()
+        setUpInputFields()
+    }
+    
+    
+    fileprivate func setUpProfilePicture() {
+        let profileImage = UIImage(named: "profile_placeholder")
+        profileImageView = UIImageView(image: profileImage)
+        view.addSubview(profileImageView)
+        profileImageView.snp.makeConstraints { (make) in
+            make.width.height.equalTo(75)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(40)
+        }
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
+        let imageViewTapped = UITapGestureRecognizer(target: self, action: #selector(displayImagePicker))
+        profileImageView.addGestureRecognizer(imageViewTapped)
+        profileImageView.isUserInteractionEnabled = true
+        
+        changePhotoLabel = UILabel()
+        view.addSubview(changePhotoLabel)
+        changePhotoLabel.text = "Change Profile Picture"
+        changePhotoLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(profileImageView.snp.bottom).offset(5)
+        }
+    }
+    
+    fileprivate func setUpInputFields() {
+        
+        
+        completeButton = FoodieButton()
+        completeButton.isEnabled = false
+        completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         
     }
     
-    func setUpInputFields() {
+    func completeButtonTapped() {
         
     }
     
-    func finishButtonTapped() {
-        
+    func displayImagePicker() {
+        let imagePicker = UIImagePickerController()
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {

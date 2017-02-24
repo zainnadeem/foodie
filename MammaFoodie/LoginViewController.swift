@@ -70,6 +70,23 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             return
         }
         
+        /*
+         initiate graph request
+         get facebook email and user id
+         create user in firebase database
+        */
+        
+        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, error) in
+            if error != nil {
+                print("there was an error with the fb graph request: \(error?.localizedDescription)")
+            }
+            if let result = result as? [String: Any] {
+                let email: String = result["email"] as! String
+                FIRDatabase.database().reference().child("users").childByAutoId().setValue(["email" : email])
+            }
+            
+        }
+        
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if let error = error {
