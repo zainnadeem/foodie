@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
+            let signupVC = SignupViewController()
+            self.window?.rootViewController = signupVC
+        }
+        
         return true
     }
     
@@ -63,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             
             print("Successfully created a firebase user with google")
+            let signupVC = SignupViewController()
+            self.window?.rootViewController = signupVC
         })
     }
 //

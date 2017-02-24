@@ -23,12 +23,17 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         fbLoginButton = FBSDKLoginButton()
+        fbLoginButton.readPermissions = ["public_profile", "email"]
         fbLoginButton.delegate = self
         
         GIDSignIn.sharedInstance().uiDelegate = self
         googleLoginButton = GIDSignInButton()
         
         setUpViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func setUpViews() {
