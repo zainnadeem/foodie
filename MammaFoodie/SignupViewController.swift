@@ -7,14 +7,65 @@
 //
 
 import UIKit
+import SnapKit
 
 class SignupViewController: UIViewController {
+    
+    var userSelectedManualLogin: Bool!
+    
+    var profileImageView: UIImageView!
+    var changePictureLabel: UILabel!
+    var textFieldStackView: UIStackView!
+    var emailTextField: UITextField!
+    var fullNameTextField: UITextField!
+    var usernameTextField: UITextField!
+    var passwordTextField: UITextField?
+    var confirmPasswordTextField: UITextField?
+    var finishButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blue
+        finishButton.isEnabled = false
 
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    func setUpInputFields() {
+        
+    }
+    
+    func finishButtonTapped() {
+        
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        validate(textField: textField)
+        
+    }
+    
+    fileprivate func validate(textField: UITextField) {
+        if textField === emailTextField {
+            
+        }
+        
+        else if textField === fullNameTextField {
+            
+        }
+        
+        else if textField === usernameTextField {
+            
+        }
+        
+        else if textField === passwordTextField {
+            
+        }
+        
+        else if textField === confirmPasswordTextField {
+            
+        }
     }
 
     
