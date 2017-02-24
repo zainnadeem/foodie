@@ -23,18 +23,16 @@ class SignupViewController: UIViewController {
     var profileImageView: UIImageView!
     var changePhotoLabel: UILabel!
     var textFieldStackView: UIStackView!
-    var emailTextField: UITextField!
-    var fullNameTextField: UITextField!
-    var usernameTextField: UITextField!
-    var passwordTextField: UITextField?
-    var confirmPasswordTextField: UITextField?
+    var emailTextField = UITextField()
+    var fullNameTextField = UITextField()
+    var usernameTextField = UITextField()
+    var passwordTextField = UITextField()
+    var confirmPasswordTextField = UITextField()
     var completeButton: FoodieButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(fullName)
-        print(email)
         view.backgroundColor = UIColor.flatMint
         
         setUpProfilePicture()
@@ -66,11 +64,35 @@ class SignupViewController: UIViewController {
     }
     
     fileprivate func setUpInputFields() {
+        emailTextField.placeholder = "example@example.com"
+        fullNameTextField.placeholder = "Full name"
+        usernameTextField.placeholder = "username"
+        passwordTextField.placeholder = "***"
+        confirmPasswordTextField.placeholder = "***"
+        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField, fullNameTextField, usernameTextField, passwordTextField, confirmPasswordTextField])
+        view.addSubview(textFieldStackView)
+        textFieldStackView.distribution = .fillEqually
+        textFieldStackView.axis = .vertical
+        textFieldStackView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2)
+            make.centerY.equalToSuperview()
+        }
         
-        
-        completeButton = FoodieButton()
+        completeButton = FoodieButton(type: .system)
 //        completeButton.isEnabled = false
         completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
+        completeButton.titleLabel?.textAlignment = .center
+        view.addSubview(completeButton)
+        completeButton.backgroundColor = FlatWhite()
+        completeButton.setTitle("Complete signup", for: .normal)
+        completeButton.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.top.equalTo(textFieldStackView.snp.bottom).offset(30)
+            make.height.equalTo(50)
+        }
         
     }
     
