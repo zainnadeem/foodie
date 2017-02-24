@@ -76,13 +76,22 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
          create user in firebase database
         */
         
-        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, error) in
+        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.type(large)"]).start { (connection, result, error) in
             if error != nil {
                 print("there was an error with the fb graph request: \(error?.localizedDescription)")
             }
+            print("result: \(result)")
             if let result = result as? [String: Any] {
-                let email: String = result["email"] as! String
-                FIRDatabase.database().reference().child("users").childByAutoId().setValue(["email" : email])
+                let signupVC = SignupViewController()
+                
+                let email = result["email"] as! String
+                let fullName:String = result["name"] as! String
+                signupVC.email = email
+                signupVC.fullName = fullName
+                OperationQueue.main.addOperation({ 
+                    self.present(signupVC, animated: true, completion: nil)
+                })
+                
             }
             
         }

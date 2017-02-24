@@ -9,11 +9,16 @@
 import UIKit
 import SnapKit
 import ChameleonFramework
+import Firebase
 
 
 class SignupViewController: UIViewController {
     
     var userSelectedManualLogin: Bool!
+    
+    var email: String?
+    var fullName: String?
+    var pictureURL: String?
     
     var profileImageView: UIImageView!
     var changePhotoLabel: UILabel!
@@ -28,6 +33,8 @@ class SignupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(fullName)
+        print(email)
         view.backgroundColor = UIColor.flatMint
         
         setUpProfilePicture()
@@ -62,13 +69,14 @@ class SignupViewController: UIViewController {
         
         
         completeButton = FoodieButton()
-        completeButton.isEnabled = false
+//        completeButton.isEnabled = false
         completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         
     }
     
     func completeButtonTapped() {
-        
+        FIRDatabase.database().reference().child("users").childByAutoId().setValue(["email" : emailTextField.text, "username" : usernameTextField.text, "fullName" : fullNameTextField.text])
+
     }
     
     func displayImagePicker() {
