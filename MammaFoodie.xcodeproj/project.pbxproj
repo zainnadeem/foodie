@@ -19,6 +19,9 @@
 		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
 		2B8C76F81E5DF29700FA60C8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F61E5DF29700FA60C8 /* Bolts.framework */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
+		BF7F19191E60A51200595CA4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19181E60A51200595CA4 /* Constants.swift */; };
+		BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F191A1E60A7A600595CA4 /* Extentions.swift */; };
+		BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F191C1E60BA3600595CA4 /* Comment.swift */; };
 		BFB853571E5DE20B009D7069 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853561E5DE20B009D7069 /* User.swift */; };
 		BFB853591E5DE342009D7069 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853581E5DE342009D7069 /* Dish.swift */; };
 		BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535A1E5DE55F009D7069 /* Review.swift */; };
@@ -58,6 +61,9 @@
 		2B8C76F61E5DF29700FA60C8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
+		BF7F19181E60A51200595CA4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BF7F191A1E60A7A600595CA4 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		BF7F191C1E60BA3600595CA4 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		BFB853561E5DE20B009D7069 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BFB853581E5DE342009D7069 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		BFB8535A1E5DE55F009D7069 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				BFB8535A1E5DE55F009D7069 /* Review.swift */,
 				BFB8535F1E5DE7DA009D7069 /* Broadcast.swift */,
 				BFB8535D1E5DE671009D7069 /* Notification.swift */,
+				BF7F191C1E60BA3600595CA4 /* Comment.swift */,
 				BFB853671E5DFABF009D7069 /* Helpers */,
 			);
 			name = Models;
@@ -180,6 +187,8 @@
 				BFB853631E5DEE74009D7069 /* FIRImage.swift */,
 				BFB853611E5DEA35009D7069 /* DatabaseReference.swift */,
 				BFB853651E5DFA7A009D7069 /* Datastore.swift */,
+				BF7F19181E60A51200595CA4 /* Constants.swift */,
+				BF7F191A1E60A7A600595CA4 /* Extentions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -404,12 +413,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */,
+				BF7F19191E60A51200595CA4 /* Constants.swift in Sources */,
 				BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */,
 				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,
 				BFB8535E1E5DE671009D7069 /* Notification.swift in Sources */,
 				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
+				BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */,
+				BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */,
 				BFB853591E5DE342009D7069 /* Dish.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,
