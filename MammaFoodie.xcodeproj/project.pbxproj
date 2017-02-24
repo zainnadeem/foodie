@@ -138,8 +138,6 @@
 				2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */,
 				2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */,
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
-				2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */,
-				2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */,
 				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
 				BF7F19261E60DF2C00595CA4 /* ViewControllers */,
 				BFB8535C1E5DE57D009D7069 /* Models */,
@@ -186,6 +184,8 @@
 		BF7F19261E60DF2C00595CA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */,
+				2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */,
 				BF7F191E1E60DE9D00595CA4 /* UserPageViewController.swift */,
 				BF7F19201E60DEE900595CA4 /* ProfileViewController.swift */,
 				BF7F19221E60DF0100595CA4 /* MainFeedViewController.swift */,

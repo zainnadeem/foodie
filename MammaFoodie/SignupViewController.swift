@@ -98,6 +98,9 @@ class SignupViewController: UIViewController {
     
     func completeButtonTapped() {
         FIRDatabase.database().reference().child("users").childByAutoId().setValue(["email" : emailTextField.text, "username" : usernameTextField.text, "fullName" : fullNameTextField.text])
+        
+        let pageVC = UserPageViewController()
+        present(pageVC, animated: true, completion: nil)
 
     }
     
