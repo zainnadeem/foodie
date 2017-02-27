@@ -88,6 +88,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                 let fullName:String = result["name"] as! String
                 signupVC.email = email
                 signupVC.fullName = fullName
+                signupVC.userSelectedManualLogin = false
                 OperationQueue.main.addOperation({ 
                     self.present(signupVC, animated: true, completion: nil)
                 })

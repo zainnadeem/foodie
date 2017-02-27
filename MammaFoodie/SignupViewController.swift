@@ -66,9 +66,19 @@ class SignupViewController: UIViewController {
     fileprivate func setUpInputFields() {
         emailTextField.placeholder = "example@example.com"
         fullNameTextField.placeholder = "Full name"
-        usernameTextField.placeholder = "username"
-        passwordTextField.placeholder = "***"
-        confirmPasswordTextField.placeholder = "***"
+        usernameTextField.placeholder = "Username"
+        passwordTextField.placeholder = "Enter password"
+        passwordTextField.isSecureTextEntry = true
+        confirmPasswordTextField.placeholder = "Confirm password"
+        confirmPasswordTextField.isSecureTextEntry = true
+        
+        if let email = self.email {
+            emailTextField.text = email
+        }
+        if let fullName = self.fullName {
+            fullNameTextField.text = fullName
+        }
+        
         textFieldStackView = UIStackView(arrangedSubviews: [emailTextField, fullNameTextField, usernameTextField, passwordTextField, confirmPasswordTextField])
         view.addSubview(textFieldStackView)
         textFieldStackView.distribution = .fillEqually
@@ -78,6 +88,11 @@ class SignupViewController: UIViewController {
             make.width.equalToSuperview()
             make.height.equalToSuperview().dividedBy(2)
             make.centerY.equalToSuperview()
+        }
+        
+        if userSelectedManualLogin == false {
+            passwordTextField.isHidden = true
+            confirmPasswordTextField.isHidden = true
         }
         
         completeButton = FoodieButton(type: .system)
