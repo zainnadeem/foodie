@@ -17,6 +17,7 @@
 		2B6CD0CA1E5DDBA00001EA68 /* MammaFoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */; };
 		2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */; };
 		2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */; };
+		2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */; };
 		2B8C76F41E5DF24400FA60C8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */; };
 		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
 		2B8C76F81E5DF29700FA60C8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F61E5DF29700FA60C8 /* Bolts.framework */; };
@@ -69,6 +70,7 @@
 		2B6CD0CB1E5DDBA00001EA68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		2B8C76F61E5DF29700FA60C8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				2B9C92F41E647ECA0020FD28 /* ProfileView.swift */,
+				2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */,
 				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
 				2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */,
 				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
@@ -473,6 +476,7 @@
 				2B9C92F31E6478950020FD28 /* FirebaseAPIClient.swift in Sources */,
 				BF7F191F1E60DE9D00595CA4 /* UserPageViewController.swift in Sources */,
 				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
+				2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
 				BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */,
 				BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */,

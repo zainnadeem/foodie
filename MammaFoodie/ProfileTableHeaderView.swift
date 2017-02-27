@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileTableHeaderView.swift
 //  MammaFoodie
 //
 //  Created by Haaris Muneer on 2/27/17.
@@ -8,14 +8,20 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class ProfileTableHeaderView: UITableViewHeaderFooterView {
+    weak var delegate: TableViewHeaderDelegate?
+    
+    var searchBar: UISearchBar!
+    
+    @IBAction func didEnterSearchTerm(_ sender: AnyObject) {
+        delegate?.didEnterSearchTerm()
     }
-    */
+    
 
+}
+
+protocol TableViewHeaderDelegate: class {
+    
+    func didEnterSearchTerm()
+    
 }
