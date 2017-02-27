@@ -18,6 +18,7 @@ class SignupViewController: UIViewController {
     
     var email: String?
     var fullName: String?
+    var userID: String?
     var pictureURL: String?
     
     var profileImageView: UIImageView!
@@ -29,7 +30,6 @@ class SignupViewController: UIViewController {
     var passwordTextField = UITextField()
     var confirmPasswordTextField = UITextField()
     var completeButton: FoodieButton!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +112,8 @@ class SignupViewController: UIViewController {
     }
     
     func completeButtonTapped() {
-        FIRDatabase.database().reference().child("users").childByAutoId().setValue(["email" : emailTextField.text, "username" : usernameTextField.text, "fullName" : fullNameTextField.text])
+//        let user = User(uid: <#T##String#>, username: <#T##String#>, fullName: <#T##String#>, bio: <#T##String#>, website: <#T##String#>, location: <#T##String#>, follows: <#T##[User]#>, followedBy: <#T##[User]#>, profileImage: <#T##UIImage?#>, dishes: <#T##[Dish]#>, reviews: <#T##[Review]#>, notifications: <#T##[Notification]#>, broadcasts: <#T##[Broadcast]#>, blockedUsers: <#T##[User]#>, totalLikes: <#T##Int#>, averageRating: <#T##Int#>, deviceTokens: <#T##[String]#>)
+        FIRDatabase.database().reference().child("users/\(userID!)").setValue(["email" : emailTextField.text, "username" : usernameTextField.text, "fullName" : fullNameTextField.text])
         
         let pageVC = UserPageViewController()
         present(pageVC, animated: true, completion: nil)
@@ -124,9 +125,15 @@ class SignupViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        
-        validate(textField: textField)
+    
+    
+    
+
+}
+
+extension SignupViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
     }
     
@@ -134,35 +141,21 @@ class SignupViewController: UIViewController {
         if textField === emailTextField {
             
         }
-        
+            
         else if textField === fullNameTextField {
             
         }
-        
+            
         else if textField === usernameTextField {
             
         }
-        
+            
         else if textField === passwordTextField {
             
         }
-        
+            
         else if textField === confirmPasswordTextField {
             
         }
     }
-
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
