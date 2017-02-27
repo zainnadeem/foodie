@@ -23,6 +23,7 @@ target 'MammaFoodie' do
     pod 'OneSignal'
     pod 'SnapKit'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'Cosmos', '~> 8.0'
 
   target 'MammaFoodieTests' do
     inherit! :search_paths

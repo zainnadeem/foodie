@@ -58,6 +58,26 @@ class User
         self.deviceTokens = deviceTokens
     }
     
+    init() {
+        self.uid = ""
+        self.username = ""
+        self.fullName = ""
+        self.bio = ""
+        self.website = ""
+        self.location = ""
+        self.follows = []
+        self.followedBy = []
+        self.profileImage = UIImage()
+        self.dishes = []
+        self.reviews = []
+        self.notifications = []
+        self.broadcasts = []
+        self.totalLikes = 0
+        self.blockedUsers = []
+        self.averageRating = 0
+        self.deviceTokens = []
+    }
+    
     init(dictionary: [String : Any])
     {
         uid = dictionary["uid"] as! String

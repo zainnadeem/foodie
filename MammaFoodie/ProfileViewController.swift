@@ -14,7 +14,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.green
-        // Do any additional setup after loading the view.
+        
+        view.addSubview(ProfileView(user: User(), frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)))
     }
 
 

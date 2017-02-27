@@ -20,6 +20,11 @@
 		2B8C76F41E5DF24400FA60C8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */; };
 		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
 		2B8C76F81E5DF29700FA60C8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F61E5DF29700FA60C8 /* Bolts.framework */; };
+		2B9C92F31E6478950020FD28 /* FirebaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F21E6478950020FD28 /* FirebaseAPIClient.swift */; };
+		2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F41E647ECA0020FD28 /* ProfileView.swift */; };
+		2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */; };
+		2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */; };
+		2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 		BF7F19191E60A51200595CA4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19181E60A51200595CA4 /* Constants.swift */; };
 		BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F191A1E60A7A600595CA4 /* Extentions.swift */; };
@@ -67,6 +72,11 @@
 		2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		2B8C76F61E5DF29700FA60C8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		2B9C92F21E6478950020FD28 /* FirebaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIClient.swift; sourceTree = "<group>"; };
+		2B9C92F41E647ECA0020FD28 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
+		2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF7F19181E60A51200595CA4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -140,6 +150,7 @@
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
 				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
 				BF7F19261E60DF2C00595CA4 /* ViewControllers */,
+				2B9C92F61E647ECF0020FD28 /* Views */,
 				BFB8535C1E5DE57D009D7069 /* Models */,
 				BFB853671E5DFABF009D7069 /* Helpers */,
 				2B6CD0B81E5DDBA00001EA68 /* Main.storyboard */,
@@ -168,6 +179,17 @@
 				2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B9C92F61E647ECF0020FD28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C92F41E647ECA0020FD28 /* ProfileView.swift */,
+				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
+				2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */,
+				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		A46D1D736EC28A9CC4BE4BA5 /* Pods */ = {
@@ -211,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				BFB853631E5DEE74009D7069 /* FIRImage.swift */,
+				2B9C92F21E6478950020FD28 /* FirebaseAPIClient.swift */,
 				BFB853611E5DEA35009D7069 /* DatabaseReference.swift */,
 				BFB853651E5DFA7A009D7069 /* Datastore.swift */,
 				BF7F19181E60A51200595CA4 /* Constants.swift */,
@@ -442,10 +465,12 @@
 				BF7F19191E60A51200595CA4 /* Constants.swift in Sources */,
 				BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */,
 				2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */,
+				2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */,
 				BF7F19251E60DF1E00595CA4 /* SearchViewController.swift in Sources */,
 				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,
 				BFB8535E1E5DE671009D7069 /* Notification.swift in Sources */,
+				2B9C92F31E6478950020FD28 /* FirebaseAPIClient.swift in Sources */,
 				BF7F191F1E60DE9D00595CA4 /* UserPageViewController.swift in Sources */,
 				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
@@ -456,6 +481,9 @@
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,
 				2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */,
+				2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */,
+				2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */,
+				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,
 				BF7F19231E60DF0100595CA4 /* MainFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

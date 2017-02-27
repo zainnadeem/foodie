@@ -2,6 +2,7 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - Cosmos (8.0.2)
   - DZNEmptyDataSet (1.8.1)
   - Firebase/Auth (3.13.0):
     - Firebase/Core
@@ -72,6 +73,7 @@ PODS:
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - Cosmos (~> 8.0)
   - DZNEmptyDataSet
   - Firebase/Auth
   - Firebase/Core
@@ -99,6 +101,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Cosmos: 007c0b8e33a85e5363911bdd933571bbe221f7ef
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
@@ -121,6 +124,6 @@ SPEC CHECKSUMS:
   SAMCache: 790b2623a3e087c903daff872c90c248726c4c82
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
 
-PODFILE CHECKSUM: 747bc55aa0e26ee4aa2ad0f5ff7d2f420cb7422d
+PODFILE CHECKSUM: 72e059cf92ae4d75b898fd578033b4de81ee661a
 
 COCOAPODS: 1.2.0
