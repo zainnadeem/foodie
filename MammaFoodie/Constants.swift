@@ -7,11 +7,39 @@
 //
 
 import Foundation
+import UIKit
 
+//Numbers
+let collectionCellCornerRadius = CGFloat(6)
+let featuredChefCollectionViewHeightMultiplier = CGFloat(0.23)
+let cookingNowCollectionViewHeightMultiplier = CGFloat(0.32)
+let liveNowCollectionViewHeightMultiplier = CGFloat(0.17)
+let upcomingBroadcastsCollectionViewHeightMultiplier = CGFloat(0.13)
+
+let featuredChefCellHeightMultiplier = CGFloat(0.21)
+let cookingNowCellHeightMultiplier = CGFloat(0.30)
+let liveNowCellHeightMultiplier = CGFloat(0.15)
+let upcomingBroadcastsCellHeightMultiplier = CGFloat(0.11)
+
+
+
+//Cell Identifiers
+let featuredChefTableViewCellIdentifier = "featuredTableViewCell"
+let cookingNowTableViewCellIdentifier = "cookingNowTableViewCell"
+let liveNowTableViewCellIdentifier = "liveNowTableViewIdentifier"
+let upcomingBroadcastsTableViewCellIdentifier = "upcomingTableVIewIdentifier"
+
+let featuredChefCollectionViewIdentifier = "featuredChefCollectionViewCell"
+let cookingNowCollectionViewIdentifier = "cookingNowCollectionViewCell"
+let liveNowCollectionViewIdentifier = "liveNowCollectionViewCell"
+let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
 
 class Constants {
     
      // MARK: - Time Constants
+    
+    
+    
     
     class func twoHoursAgo() -> Date {
         return Constants.dateFormatter().date(from: Constants.twoHoursAgo())!
@@ -49,6 +77,11 @@ class Constants {
         dateFormatter.dateFormat = "M/d/yy, HH:mm:ss"
         return dateFormatter
     }
+    
+    
+    //Magic Numbers
+
+
     
     
 }
