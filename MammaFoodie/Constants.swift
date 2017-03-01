@@ -34,6 +34,10 @@ let cookingNowCollectionViewIdentifier = "cookingNowCollectionViewCell"
 let liveNowCollectionViewIdentifier = "liveNowCollectionViewCell"
 let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
 
+let dishCellIdentifier = "dishCell"
+let reviewCellIdentifier = "reviewCell"
+let followCellIdentifier = "followCell"
+
 class Constants {
     
      // MARK: - Time Constants

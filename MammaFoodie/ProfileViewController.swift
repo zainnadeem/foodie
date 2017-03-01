@@ -31,6 +31,8 @@ class ProfileViewController: UIViewController {
         user.reviews.append(review1)
         arrayForTableView = user.dishes
         
+        profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
+        
     }
 
 
@@ -49,11 +51,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell: DishTableViewCell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier) as! DishTableViewCell
+        cell.dish = user.dishes[indexPath.row]
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
     }
 }
 
