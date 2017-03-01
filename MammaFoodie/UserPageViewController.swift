@@ -21,6 +21,7 @@ class UserPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.accessibilityLabel = "Main User Page View Controller"
         
         self.dataSource = self
@@ -42,6 +43,14 @@ class UserPageViewController: UIPageViewController {
                 print("PageVC contains: \(viewController.accessibilityLabel)")
             }
         }
+    }
+    
+    override init(transitionStyle style: UIPageViewControllerTransitionStyle, navigationOrientation: UIPageViewControllerNavigationOrientation, options: [String : Any]? = nil) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     

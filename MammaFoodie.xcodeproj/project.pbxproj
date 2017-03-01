@@ -40,6 +40,11 @@
 		BF7F192F1E647D3700595CA4 /* LiveNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F192E1E647D3700595CA4 /* LiveNowCollectionViewCell.swift */; };
 		BF7F19311E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19301E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift */; };
 		BF7F19331E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19321E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift */; };
+		BF7F19351E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19341E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift */; };
+		BF7F193B1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F193A1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift */; };
+		BF7F193D1E64CFFC00595CA4 /* CookingNowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F193C1E64CFFC00595CA4 /* CookingNowTableViewCell.swift */; };
+		BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F193E1E64D03600595CA4 /* LiveNowTableViewCell.swift */; };
+		BF7F19411E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */; };
 		BFB853571E5DE20B009D7069 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853561E5DE20B009D7069 /* User.swift */; };
 		BFB853591E5DE342009D7069 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853581E5DE342009D7069 /* Dish.swift */; };
 		BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535A1E5DE55F009D7069 /* Review.swift */; };
@@ -100,6 +105,11 @@
 		BF7F192E1E647D3700595CA4 /* LiveNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		BF7F19301E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBroadcastsCollectionViewCell.swift; sourceTree = "<group>"; };
 		BF7F19321E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedChefCollectionViewCell.swift; sourceTree = "<group>"; };
+		BF7F19341E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		BF7F193A1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedChefTableViewCell.swift; sourceTree = "<group>"; };
+		BF7F193C1E64CFFC00595CA4 /* CookingNowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookingNowTableViewCell.swift; sourceTree = "<group>"; };
+		BF7F193E1E64D03600595CA4 /* LiveNowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveNowTableViewCell.swift; sourceTree = "<group>"; };
+		BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBroadcastsTableViewCell.swift; sourceTree = "<group>"; };
 		BFB853561E5DE20B009D7069 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BFB853581E5DE342009D7069 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		BFB8535A1E5DE55F009D7069 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -235,12 +245,32 @@
 		BF7F192D1E647C1000595CA4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BF7F19391E64CFC300595CA4 /* MainFeedCollectionViewCells */,
+				BF7F19381E64CFAE00595CA4 /* MainFeedTableViewCells */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		BF7F19381E64CFAE00595CA4 /* MainFeedTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F193A1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift */,
+				BF7F193C1E64CFFC00595CA4 /* CookingNowTableViewCell.swift */,
+				BF7F193E1E64D03600595CA4 /* LiveNowTableViewCell.swift */,
+				BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */,
+			);
+			name = MainFeedTableViewCells;
+			sourceTree = "<group>";
+		};
+		BF7F19391E64CFC300595CA4 /* MainFeedCollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
 				BF7F19321E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift */,
 				BF7F192B1E647C0600595CA4 /* CookingNowCollectionViewCell.swift */,
 				BF7F192E1E647D3700595CA4 /* LiveNowCollectionViewCell.swift */,
 				BF7F19301E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift */,
 			);
-			name = Cells;
+			name = MainFeedCollectionViewCells;
 			sourceTree = "<group>";
 		};
 		BFB8535C1E5DE57D009D7069 /* Models */ = {
@@ -252,6 +282,7 @@
 				BFB8535F1E5DE7DA009D7069 /* Broadcast.swift */,
 				BFB8535D1E5DE671009D7069 /* Notification.swift */,
 				BF7F191C1E60BA3600595CA4 /* Comment.swift */,
+				BF7F19341E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -497,6 +528,8 @@
 				2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */,
 				2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */,
 				BF7F19251E60DF1E00595CA4 /* SearchViewController.swift in Sources */,
+				BF7F19351E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift in Sources */,
+				BF7F193B1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift in Sources */,
 				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
 				BF7F192C1E647C0600595CA4 /* CookingNowCollectionViewCell.swift in Sources */,
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,
@@ -506,13 +539,16 @@
 				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
 				2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */,
 				BF7F19311E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift in Sources */,
+				BF7F193D1E64CFFC00595CA4 /* CookingNowTableViewCell.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
 				BF7F192A1E64731900595CA4 /* NavBar.swift in Sources */,
 				BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */,
 				BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */,
+				BF7F19411E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift in Sources */,
 				BFB853591E5DE342009D7069 /* Dish.swift in Sources */,
 				BF7F19211E60DEE900595CA4 /* ProfileViewController.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
+				BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */,
 				BF7F19281E6472CE00595CA4 /* MediaPickerHelper.swift in Sources */,
 				BF7F19331E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,

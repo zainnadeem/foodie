@@ -51,7 +51,7 @@ class NavBarView: UIView {
     
     func createToolBar(_ left : UIImage?, right : UIImage?, middle : UIImage?){
 
-        self.topToolBar.barTintColor = UIColor.black
+        self.topToolBar.barTintColor = UIColor.white
         self.topToolBar.alpha = 1
         self.topToolBar.isTranslucent = true
         
@@ -61,17 +61,17 @@ class NavBarView: UIView {
         
         
         leftButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: #selector(leftBarButtonTapped))
-        leftButton.tintColor = UIColor.white
+        leftButton.tintColor = UIColor.black
         leftButton.image = left
         
         rightButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: #selector(rightBarButtonTapped))
-        rightButton.tintColor = UIColor.white
+        rightButton.tintColor = UIColor.black
         rightButton.image = right
         
         
         middleButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: #selector(middleBarButtonTapped))
         
-        middleButton.tintColor = UIColor.white
+        middleButton.tintColor = UIColor.black
         middleButton.image = middle
         
         
