@@ -19,8 +19,6 @@ enum SelectedTableViewStatus {
 
 class ProfileView: UIView, UITableViewDelegate {
     
-    
-    
     let user: User
     
     var profileTopStackView: UIStackView!
@@ -63,8 +61,6 @@ class ProfileView: UIView, UITableViewDelegate {
         profileTableViewStatus = .menu
     }
     
-    
-    
 }
 
 //tableview button functions
@@ -102,11 +98,8 @@ extension ProfileView {
     }
 }
 
+//do all the auto layout here
 extension ProfileView {
-    
-}
-
-fileprivate extension ProfileView {
     func setupViewLayout() {
         
         profileImageView = UIImageView(image: UIImage(named: "profile_placeholder"))

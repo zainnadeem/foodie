@@ -42,8 +42,19 @@ class DishTableViewCell: UITableViewCell {
         ratingView = CosmosView()
         ratingView.text = "(3)"
         ratingView.settings.starSize = 15
+        ratingView.setContentCompressionResistancePriority(1000, for: .horizontal)
         priceLabel = UILabel(text: "$12.34")
         priceLabel.font = UIFont.mammaFoodieFont(14)
+        
+        titleDescriptionStackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
+        titleDescriptionStackView.axis = .vertical
+        titleDescriptionStackView.distribution = .fillProportionally
+        titleDescriptionStackView.alignment = .leading
+        
+        priceRatingStackView = UIStackView(arrangedSubviews: [priceLabel, ratingView])
+        priceRatingStackView.axis = .vertical
+        priceRatingStackView.distribution = .fillProportionally
+        priceRatingStackView.alignment = .trailing
         
         setConstraints()
     }
@@ -56,20 +67,8 @@ class DishTableViewCell: UITableViewCell {
     func setConstraints() {
         
 //        contentView.addSubview(dishImageView)
-        titleDescriptionStackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
         contentView.addSubview(titleDescriptionStackView)
-        priceRatingStackView = UIStackView(arrangedSubviews: [priceLabel, ratingView])
         contentView.addSubview(priceRatingStackView)
-        
-        titleDescriptionStackView.axis = .vertical
-        titleDescriptionStackView.distribution = .fillProportionally
-        titleDescriptionStackView.alignment = .leading
-        
-        priceRatingStackView.axis = .vertical
-        priceRatingStackView.distribution = .fillProportionally
-        priceRatingStackView.alignment = .trailing
-        ratingView.setContentCompressionResistancePriority(1000, for: .horizontal)
-        
         
 //        dishImageView.snp.makeConstraints { (make) in
 //            make.centerY.equalToSuperview()

@@ -22,6 +22,15 @@ class ProfileViewController: UIViewController {
         profileView.tableView.dataSource = self
         profileView.delegate = self
         self.view = profileView
+        makeDummyData()
+        
+        profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
+        profileView.tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: reviewCellIdentifier)
+        profileView.tableView.register(UserTableViewCell.self, forCellReuseIdentifier: followCellIdentifier)
+        
+    }
+    
+    fileprivate func makeDummyData() {
         user = User()
         let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
         user.dishes.append(dish1)
@@ -31,8 +40,12 @@ class ProfileViewController: UIViewController {
         user.reviews.append(review1)
         arrayForTableView = user.dishes
         
-        profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
-        
+        let otherUser1 = User()
+        let otherUser2 = User()
+        user.follows.append(otherUser1)
+        user.follows.append(otherUser2)
+        user.followedBy.append(otherUser1)
+        user.followedBy.append(otherUser2)
     }
 
 
@@ -51,8 +64,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: DishTableViewCell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier) as! DishTableViewCell
-        cell.dish = user.dishes[indexPath.row]
+        let cell: UITableViewCell
+        switch profileView.profileTableViewStatus {
+        case .menu: cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier) as! DishTableViewCell
+            (cell as! DishTableViewCell).dish = user.dishes[indexPath.row]
+        case .reviews: cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier) as! ReviewTableViewCell
+            (cell as! ReviewTableViewCell).review = user.reviews[indexPath.row]
+        case .followers: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier) as! UserTableViewCell
+            (cell as! UserTableViewCell).user = user.followedBy[indexPath.row]
+        case .following: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier) as! UserTableViewCell
+            (cell as! UserTableViewCell).user = user.follows[indexPath.row]
+
+        }
+        
         return cell
     }
     
@@ -61,7 +85,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        switch profileView.profileTableViewStatus {
+        case .menu: return 75
+        case .reviews: return 120
+        case .followers, .following: return 60
+        }
     }
 }
 

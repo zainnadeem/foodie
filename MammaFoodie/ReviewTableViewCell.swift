@@ -35,8 +35,15 @@ class ReviewTableViewCell: UITableViewCell {
         dateLabel.font = UIFont.mammaFoodieFont(12)
         descriptionTextView = UITextView()
         descriptionTextView.text = loremIpsumString
+        descriptionTextView.isScrollEnabled = false
+        descriptionTextView.isEditable = false
         descriptionTextView.font = UIFont.mammaFoodieFont(12)
         
+        ratingDateStackView = UIStackView(arrangedSubviews: [ratingView, dateLabel])
+        ratingDateStackView.axis = .horizontal
+        ratingDateStackView.alignment = .center
+        ratingDateStackView.distribution = .fillEqually
+        ratingDateStackView.spacing = 5
         
         setConstraints()
     }
@@ -47,14 +54,14 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
     func setConstraints() {
-        ratingDateStackView = UIStackView(arrangedSubviews: [ratingView, dateLabel])
-        ratingDateStackView.axis = .horizontal
-        ratingDateStackView.alignment = .center
-        ratingDateStackView.distribution = .fillEqually
-        ratingDateStackView.spacing = 5
+       
+        
+        contentView.addSubview(usernameLabel)
+        contentView.addSubview(ratingDateStackView)
+        contentView.addSubview(descriptionTextView)
         
         usernameLabel.snp.makeConstraints { (make) in
-            make.top.left.equalToSuperview().offset(5)
+            make.top.left.equalToSuperview().offset(10)
         }
         
         ratingDateStackView.snp.makeConstraints { (make) in
@@ -63,9 +70,11 @@ class ReviewTableViewCell: UITableViewCell {
         }
         
         descriptionTextView.snp.makeConstraints { (make) in
-            make.top.equalTo(ratingDateStackView.snp.bottom).offset(5)
+            make.top.equalTo(ratingDateStackView.snp.bottom)
             make.centerX.equalToSuperview()
             make.left.equalTo(usernameLabel)
+            make.height.equalTo(30)
+//            make.right.equalToSuperview().offset(10)
         }
         
     }
