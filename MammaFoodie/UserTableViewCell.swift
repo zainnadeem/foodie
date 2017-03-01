@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import ChameleonFramework
 
 class UserTableViewCell: UITableViewCell {
     
@@ -15,6 +16,7 @@ class UserTableViewCell: UITableViewCell {
     var usernameLabel: UILabel!
     var fullNameLabel: UILabel!
     var labelStackView: UIStackView!
+    var followButton: UIButton!
     
     var user: User!
 
@@ -30,6 +32,11 @@ class UserTableViewCell: UITableViewCell {
         usernameLabel.font = UIFont.mammaFoodieFontBold(14)
         fullNameLabel = UILabel(text: "Sulu Candles")
         fullNameLabel.font = UIFont.mammaFoodieFont(12)
+        followButton = UIButton(type: .system)
+        followButton.setTitle("Follow", for: .normal)
+        followButton.titleLabel?.font = UIFont.mammaFoodieFont(14)
+        followButton.setTitleColor(FlatWhite(), for: .normal)
+        followButton.backgroundColor = FlatSkyBlueDark()
         
         labelStackView = UIStackView(arrangedSubviews: [usernameLabel, fullNameLabel])
         labelStackView.axis = .vertical
@@ -47,10 +54,11 @@ class UserTableViewCell: UITableViewCell {
     func setConstraints() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(labelStackView)
+        contentView.addSubview(followButton)
         
         profileImageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.75)
+            make.height.equalToSuperview().multipliedBy(0.6)
             make.width.equalTo(profileImageView.snp.height)
             make.left.equalToSuperview().offset(10)
         }
@@ -59,6 +67,12 @@ class UserTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.6)
             make.left.equalTo(profileImageView.snp.right).offset(10)
+        }
+        
+        followButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-25)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(70)
         }
     }
     
