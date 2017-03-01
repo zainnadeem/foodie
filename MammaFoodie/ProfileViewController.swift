@@ -43,7 +43,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(arrayForTableView.count)
+        print("TableView array count: \(arrayForTableView.count)")
         return arrayForTableView.count
         
     }
@@ -59,7 +59,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ProfileViewController: ProfileTableViewDelegate {
     func updateTableView(for button: UIButton) {
-        profileView.profileTableViewStatus = .menu
         switch profileView.profileTableViewStatus {
         case .menu: arrayForTableView = user.dishes
         case .reviews: arrayForTableView = user.reviews
