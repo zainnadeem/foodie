@@ -14,6 +14,10 @@ class CookingNowTableViewCell:  UITableViewCell{
     
     let cookingNowCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     
+    var usersCookingNow: [User] = [User]()
+    
+    let store = DataStore.sharedInstance
+    
     func layOutCollectionView(){
         
         cookingNowCollectionView.delegate = self
@@ -45,6 +49,12 @@ class CookingNowTableViewCell:  UITableViewCell{
         
     }
     
+    func fetchUsers(){
+        //Fetch Users from firebase 
+        usersCookingNow = store.createDummyUsers()
+
+    }
+    
 }
 
 extension CookingNowTableViewCell: UICollectionViewDataSource {
@@ -54,7 +64,7 @@ extension CookingNowTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return usersCookingNow.count
     }
     
     
@@ -63,6 +73,8 @@ extension CookingNowTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cookingNowCellIdentifier, for: indexPath) as! CookingNowCollectionViewCell
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = collectionCellCornerRadius
+        cell.user = usersCookingNow[indexPath.row]
+    
         
         
         return cell

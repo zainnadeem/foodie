@@ -45,6 +45,8 @@
 		BF7F193D1E64CFFC00595CA4 /* CookingNowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F193C1E64CFFC00595CA4 /* CookingNowTableViewCell.swift */; };
 		BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F193E1E64D03600595CA4 /* LiveNowTableViewCell.swift */; };
 		BF7F19411E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */; };
+		BF7F19461E672AB900595CA4 /* Nexa Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF7F19451E672AB900595CA4 /* Nexa Bold.otf */; };
+		BF7F19481E672ACC00595CA4 /* Nexa Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF7F19471E672ACC00595CA4 /* Nexa Light.otf */; };
 		BFB853571E5DE20B009D7069 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853561E5DE20B009D7069 /* User.swift */; };
 		BFB853591E5DE342009D7069 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853581E5DE342009D7069 /* Dish.swift */; };
 		BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535A1E5DE55F009D7069 /* Review.swift */; };
@@ -110,6 +112,8 @@
 		BF7F193C1E64CFFC00595CA4 /* CookingNowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookingNowTableViewCell.swift; sourceTree = "<group>"; };
 		BF7F193E1E64D03600595CA4 /* LiveNowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveNowTableViewCell.swift; sourceTree = "<group>"; };
 		BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBroadcastsTableViewCell.swift; sourceTree = "<group>"; };
+		BF7F19451E672AB900595CA4 /* Nexa Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Bold.otf"; sourceTree = "<group>"; };
+		BF7F19471E672ACC00595CA4 /* Nexa Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Light.otf"; sourceTree = "<group>"; };
 		BFB853561E5DE20B009D7069 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BFB853581E5DE342009D7069 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		BFB8535A1E5DE55F009D7069 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				BF7F192D1E647C1000595CA4 /* Cells */,
 				BFB8535C1E5DE57D009D7069 /* Models */,
 				BFB853671E5DFABF009D7069 /* Helpers */,
+				BF7F19441E672A5500595CA4 /* Fonts */,
 				2B6CD0B81E5DDBA00001EA68 /* Main.storyboard */,
 				2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */,
 				2B6CD0BD1E5DDBA00001EA68 /* LaunchScreen.storyboard */,
@@ -245,8 +250,8 @@
 		BF7F192D1E647C1000595CA4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BF7F19391E64CFC300595CA4 /* MainFeedCollectionViewCells */,
 				BF7F19381E64CFAE00595CA4 /* MainFeedTableViewCells */,
+				BF7F19391E64CFC300595CA4 /* MainFeedCollectionViewCells */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -271,6 +276,15 @@
 				BF7F19301E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift */,
 			);
 			name = MainFeedCollectionViewCells;
+			sourceTree = "<group>";
+		};
+		BF7F19441E672A5500595CA4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F19471E672ACC00595CA4 /* Nexa Light.otf */,
+				BF7F19451E672AB900595CA4 /* Nexa Bold.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		BFB8535C1E5DE57D009D7069 /* Models */ = {
@@ -367,7 +381,7 @@
 				TargetAttributes = {
 					2B6CD0B01E5DDBA00001EA68 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = ZTEU5RXF67;
+						DevelopmentTeam = VC999G43T3;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -410,7 +424,9 @@
 				2B6CD0BF1E5DDBA00001EA68 /* LaunchScreen.storyboard in Resources */,
 				2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */,
 				2B6CD0BC1E5DDBA00001EA68 /* Assets.xcassets in Resources */,
+				BF7F19461E672AB900595CA4 /* Nexa Bold.otf in Resources */,
 				2B6CD0BA1E5DDBA00001EA68 /* Main.storyboard in Resources */,
+				BF7F19481E672ACC00595CA4 /* Nexa Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,7 +714,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MammaFoodie/MammaFoodie.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ZTEU5RXF67;
+				DEVELOPMENT_TEAM = VC999G43T3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"~/FacebookSDK",
@@ -719,7 +735,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MammaFoodie/MammaFoodie.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ZTEU5RXF67;
+				DEVELOPMENT_TEAM = VC999G43T3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"~/FacebookSDK",

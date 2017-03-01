@@ -14,12 +14,16 @@ class LiveNowTableViewCell: UITableViewCell{
     
     let liveNowCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     
+    var usersLiveNow: [User] = [User]()
+    
+    let store = DataStore.sharedInstance
+    
     func layOutCollectionView(){
         
         liveNowCollectionView.delegate = self
         liveNowCollectionView.dataSource = self
         
-       liveNowCollectionView.register(LiveNowCollectionViewCell.self, forCellWithReuseIdentifier: liveNowCellIdentifier)
+        liveNowCollectionView.register(LiveNowCollectionViewCell.self, forCellWithReuseIdentifier: liveNowCellIdentifier)
         
         let liveNowLayout = UICollectionViewFlowLayout()
         liveNowLayout.scrollDirection = .horizontal
@@ -45,6 +49,12 @@ class LiveNowTableViewCell: UITableViewCell{
         
     }
     
+    func fetchUsers(){
+        //Fetch Users from firebase
+        usersLiveNow = store.createDummyUsers()
+        
+    }
+    
 }
 
 extension LiveNowTableViewCell: UICollectionViewDataSource {
@@ -54,7 +64,7 @@ extension LiveNowTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return usersLiveNow.count
     }
     
     
@@ -63,6 +73,7 @@ extension LiveNowTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: liveNowCellIdentifier, for: indexPath) as! LiveNowCollectionViewCell
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = collectionCellCornerRadius
+        cell.user = usersLiveNow[indexPath.row]
         
         
         return cell
