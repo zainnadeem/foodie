@@ -35,6 +35,8 @@ let cookingNowCollectionViewIdentifier = "cookingNowCollectionViewCell"
 let liveNowCollectionViewIdentifier = "liveNowCollectionViewCell"
 let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
 
+let searchUserTableViewCellIdentifier = "searchUserTableViewCell"
+
 let dishCellIdentifier = "dishCell"
 let reviewCellIdentifier = "reviewCell"
 let followCellIdentifier = "followCell"

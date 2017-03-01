@@ -47,6 +47,7 @@
 		BF7F19411E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */; };
 		BF7F19461E672AB900595CA4 /* Nexa Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF7F19451E672AB900595CA4 /* Nexa Bold.otf */; };
 		BF7F19481E672ACC00595CA4 /* Nexa Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF7F19471E672ACC00595CA4 /* Nexa Light.otf */; };
+		BF7F194A1E676C8200595CA4 /* SearchUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */; };
 		BFB853571E5DE20B009D7069 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853561E5DE20B009D7069 /* User.swift */; };
 		BFB853591E5DE342009D7069 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853581E5DE342009D7069 /* Dish.swift */; };
 		BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535A1E5DE55F009D7069 /* Review.swift */; };
@@ -114,6 +115,7 @@
 		BF7F19401E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBroadcastsTableViewCell.swift; sourceTree = "<group>"; };
 		BF7F19451E672AB900595CA4 /* Nexa Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Bold.otf"; sourceTree = "<group>"; };
 		BF7F19471E672ACC00595CA4 /* Nexa Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Light.otf"; sourceTree = "<group>"; };
+		BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewCell.swift; sourceTree = "<group>"; };
 		BFB853561E5DE20B009D7069 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BFB853581E5DE342009D7069 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		BFB8535A1E5DE55F009D7069 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
 				2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */,
 				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
+				BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */,
 				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
 			);
 			name = Views;
@@ -546,6 +549,7 @@
 				BF7F19251E60DF1E00595CA4 /* SearchViewController.swift in Sources */,
 				BF7F19351E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift in Sources */,
 				BF7F193B1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift in Sources */,
+				BF7F194A1E676C8200595CA4 /* SearchUserTableViewCell.swift in Sources */,
 				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
 				BF7F192C1E647C0600595CA4 /* CookingNowCollectionViewCell.swift in Sources */,
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,

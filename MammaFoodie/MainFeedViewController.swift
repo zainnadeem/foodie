@@ -17,6 +17,7 @@ class MainFeedViewController: UIViewController {
     
     //TableView
     var sections = ["~Featured Chefs~", "~Cooking Now~", "~Live Now~", "~Upcoming Broadcasts~"]
+    
     lazy var tableView : UITableView = UITableView()
     
     
