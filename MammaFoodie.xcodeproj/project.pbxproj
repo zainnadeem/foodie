@@ -176,7 +176,6 @@
 				2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */,
 				2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */,
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
-				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
 				BF7F19261E60DF2C00595CA4 /* ViewControllers */,
 				2B9C92F61E647ECF0020FD28 /* Views */,
 				BF7F192D1E647C1000595CA4 /* Cells */,
@@ -219,6 +218,7 @@
 				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
 				2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */,
 				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
+				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

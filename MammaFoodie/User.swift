@@ -48,6 +48,8 @@ class User
         return string
     }
     
+    
+    
     // MARK: - Initializers
     
     init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String])
@@ -234,3 +236,7 @@ extension User {
     }
     
 }
+
+
+
+

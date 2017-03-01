@@ -21,7 +21,8 @@ let cookingNowCellHeightMultiplier = CGFloat(0.30)
 let liveNowCellHeightMultiplier = CGFloat(0.15)
 let upcomingBroadcastsCellHeightMultiplier = CGFloat(0.11)
 
-
+//Lorem Ipsum
+let loremIpsumString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel enim sed turpis congue pretium. Cras pharetra dolor ante, auctor semper neque tristique sed. Praesent ultricies porttitor ex. Aenean vulputate est vel nisi convallis, nec fermentum ante rutrum. Pellentesque eleifend, diam a malesuada ornare, quam mauris tempor urna, eu facilisis ante velit eget libero. Sed a ligula mattis sapien lobortis convallis vitae at libero. Integer sit amet venenatis ipsum. Fusce sed sapien enim. Sed sed scelerisque orci, semper egestas lacus. Aliquam fringilla, lacus nec venenatis condimentum, arcu purus condimentum turpis, a suscipit lectus ligula in eros. Proin aliquam arcu convallis turpis accumsan, in euismod odio imperdiet. Curabitur faucibus pharetra felis non tincidunt. Maecenas elit ex, tristique a urna vitae, sagittis dignissim orci."
 
 //Cell Identifiers
 let featuredChefTableViewCellIdentifier = "featuredTableViewCell"
@@ -33,6 +34,10 @@ let featuredChefCollectionViewIdentifier = "featuredChefCollectionViewCell"
 let cookingNowCollectionViewIdentifier = "cookingNowCollectionViewCell"
 let liveNowCollectionViewIdentifier = "liveNowCollectionViewCell"
 let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
+
+let dishCellIdentifier = "dishCell"
+let reviewCellIdentifier = "reviewCell"
+let followCellIdentifier = "followCell"
 
 class Constants {
     

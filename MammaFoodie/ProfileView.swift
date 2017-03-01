@@ -11,7 +11,13 @@ import Cosmos
 import SnapKit
 import ChameleonFramework
 
-class ProfileView: UIView {
+//changes depending on which button was pressed
+enum SelectedTableViewStatus {
+    case menu, reviews, followers, following
+}
+
+
+class ProfileView: UIView, UITableViewDelegate {
     
     let user: User
     
@@ -30,6 +36,10 @@ class ProfileView: UIView {
     var lastTappedButton: UIButton!
     var tableViewButtonStackView: UIStackView!
     var tableView: UITableView!
+    var profileTableViewStatus: SelectedTableViewStatus = .menu
+    
+    weak var delegate: ProfileTableViewDelegate?
+    
     
     init(user: User, frame: CGRect) {
         self.user = user
@@ -48,9 +58,8 @@ class ProfileView: UIView {
         setupViewLayout()
         menuButton.isSelected = true
         lastTappedButton = menuButton
+        profileTableViewStatus = .menu
     }
-    
-    
     
 }
 
@@ -60,29 +69,37 @@ extension ProfileView {
         lastTappedButton.isSelected = false
         menuButton.isSelected = true
         lastTappedButton = menuButton
+        profileTableViewStatus = .menu
+        self.delegate?.updateTableView(for: menuButton)
     }
     
     func reviewsButtonTapped() {
         lastTappedButton.isSelected = false
         reviewsButton.isSelected = true
         lastTappedButton = reviewsButton
+        profileTableViewStatus = .reviews
+        self.delegate?.updateTableView(for: reviewsButton)
     }
     
     func followersButtonTapped() {
         lastTappedButton.isSelected = false
         followersButton.isSelected = true
         lastTappedButton = followersButton
+        profileTableViewStatus = .followers
+        self.delegate?.updateTableView(for: followersButton)
     }
     
     func followingButtonTapped() {
         lastTappedButton.isSelected = false
         followingButton.isSelected = true
         lastTappedButton = followingButton
+        profileTableViewStatus = .following
+        self.delegate?.updateTableView(for: followingButton)
     }
 }
 
-
-fileprivate extension ProfileView {
+//do all the auto layout here
+extension ProfileView {
     func setupViewLayout() {
         
         profileImageView = UIImageView(image: UIImage(named: "profile_placeholder"))
@@ -94,7 +111,7 @@ fileprivate extension ProfileView {
         likesLabel.text = "0 likes"
         bioTextView = UITextView()
         
-        bioTextView.text = "Lorem ipsum dolor sit amet, option appareat te pro, feugait suavitate est ad. Verear iriure euismod cu eos. An eirmod antiopam consulatu sit, delicata salutandi vis ut, in ferri nullam quo. Nec at atqui velit postea, tota regione sit in, ut aeterno scripta eos. Vis dolor comprehensam ut, nominati antiopam mnesarchum ut sed, vel commodo habemus maluisset et. Eos ex commodo mentitum. Eu nec magna commodo nostrum, per vero insolens menandri ad, graeco pertinax sapientem ei usu. Adipisci deterruisset vel te, vocent fierent praesent at qui, te timeam integre fastidii sea."
+        bioTextView.text = loremIpsumString
         websiteLabel = UILabel()
         websiteLabel.font = UIFont.mammaFoodieFont(12)
         websiteLabel.text = "mammafoodie.com"
@@ -159,3 +176,8 @@ fileprivate extension ProfileView {
         }
     }
 }
+
+protocol ProfileTableViewDelegate: class {
+    func updateTableView(for button: UIButton)
+}
+
