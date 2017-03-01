@@ -35,6 +35,8 @@ class User
     var deviceTokens                    :           [String]
     
     
+    
+    
     // MARK: - Initializers
     
     init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String])
@@ -215,3 +217,7 @@ extension User {
     }
     
 }
+
+
+
+

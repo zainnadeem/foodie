@@ -11,7 +11,15 @@ import Cosmos
 import SnapKit
 import ChameleonFramework
 
-class ProfileView: UIView {
+//changes depending on which button was pressed
+enum SelectedTableViewStatus {
+    case menu, reviews, followers, following
+}
+
+
+class ProfileView: UIView, UITableViewDelegate {
+    
+    
     
     let user: User
     
@@ -30,6 +38,10 @@ class ProfileView: UIView {
     var lastTappedButton: UIButton!
     var tableViewButtonStackView: UIStackView!
     var tableView: UITableView!
+    var profileTableViewStatus: SelectedTableViewStatus = .menu
+    
+    weak var delegate: ProfileTableViewDelegate?
+    
     
     init(user: User, frame: CGRect) {
         self.user = user
@@ -48,6 +60,7 @@ class ProfileView: UIView {
         setupViewLayout()
         menuButton.isSelected = true
         lastTappedButton = menuButton
+        profileTableViewStatus = .menu
     }
     
     
@@ -60,27 +73,38 @@ extension ProfileView {
         lastTappedButton.isSelected = false
         menuButton.isSelected = true
         lastTappedButton = menuButton
+        profileTableViewStatus = .menu
+        self.delegate?.updateTableView(for: menuButton)
     }
     
     func reviewsButtonTapped() {
         lastTappedButton.isSelected = false
         reviewsButton.isSelected = true
         lastTappedButton = reviewsButton
+        profileTableViewStatus = .reviews
+        self.delegate?.updateTableView(for: reviewsButton)
     }
     
     func followersButtonTapped() {
         lastTappedButton.isSelected = false
         followersButton.isSelected = true
         lastTappedButton = followersButton
+        profileTableViewStatus = .followers
+        self.delegate?.updateTableView(for: followersButton)
     }
     
     func followingButtonTapped() {
         lastTappedButton.isSelected = false
         followingButton.isSelected = true
         lastTappedButton = followingButton
+        profileTableViewStatus = .following
+        self.delegate?.updateTableView(for: followingButton)
     }
 }
 
+extension ProfileView {
+    
+}
 
 fileprivate extension ProfileView {
     func setupViewLayout() {
@@ -159,3 +183,8 @@ fileprivate extension ProfileView {
         }
     }
 }
+
+protocol ProfileTableViewDelegate: class {
+    func updateTableView(for button: UIButton)
+}
+

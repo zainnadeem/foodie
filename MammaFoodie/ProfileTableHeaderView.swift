@@ -22,6 +22,8 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
 protocol TableViewHeaderDelegate: class {
     
+    static var buttonIndex: Int { get set }
+    
     func didEnterSearchTerm()
     
 }
