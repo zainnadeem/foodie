@@ -33,11 +33,12 @@ class User
     var totalLikes                      :           Int
     var averageRating                   :           Int
     var deviceTokens                    :           [String]
+    var isAvailable                     :           Bool
     
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String])
+    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool)
     {
         self.uid = uid
         self.username = username
@@ -56,6 +57,7 @@ class User
         self.blockedUsers = blockedUsers
         self.averageRating = averageRating
         self.deviceTokens = deviceTokens
+        self.isAvailable = isAvailable
     }
     
     init() {
@@ -76,6 +78,7 @@ class User
         self.blockedUsers = []
         self.averageRating = 0
         self.deviceTokens = []
+        self.isAvailable = false
     }
     
     init(dictionary: [String : Any])
@@ -89,6 +92,7 @@ class User
         
         averageRating = dictionary["average rating"] as! Int
         totalLikes = dictionary["total likes"] as! Int
+        isAvailable = dictionary["is available"] as! Bool
         
         // deviceToken: created for notifications
         self.deviceTokens = []

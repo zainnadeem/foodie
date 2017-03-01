@@ -16,7 +16,7 @@ class MainFeedViewController: UIViewController {
     
     
     //TableView
-    var sections = ["Featured Chefs", "Cooking Now", "Live Now", "Upcoming Broadcasts"]
+    var sections = ["~Featured Chefs~", "~Cooking Now~", "~Live Now~", "~Upcoming Broadcasts~"]
     lazy var tableView : UITableView = UITableView()
     
     
@@ -62,12 +62,14 @@ extension MainFeedViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: featuredChefTableViewCellIdentifier) as! FeaturedChefTableViewCell
             cell.layOutCollectionView()
+            cell.fetchUsers()
             return cell
             
         case 1:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: cookingNowTableViewCellIdentifier) as! CookingNowTableViewCell
             cell.layOutCollectionView()
+            cell.fetchUsers()
             return cell
             
         case 2:
@@ -75,6 +77,7 @@ extension MainFeedViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: liveNowTableViewCellIdentifier) as!
             LiveNowTableViewCell
             cell.layOutCollectionView()
+            cell.fetchUsers()
             return cell
             
         //default case upcomingbroadcasts
@@ -82,8 +85,27 @@ extension MainFeedViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: upcomingBroadcastsTableViewCellIdentifier) as! UpcomingBroadcastsTableViewCell
             cell.layOutCollectionView()
+            cell.fetchUsers()
             return cell
         }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        let label = UILabel()
+        label.text = sections[section]
+        label.font = UIFont.mammaFoodieFontBold(15)
+        
+        
+        label.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 35)
+        label.textAlignment = .center
+        
+        
+        view.addSubview(label)
+        
+        return view
         
     }
     
@@ -124,8 +146,7 @@ extension MainFeedViewController {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
-        
+ 
     }
     
 }
@@ -148,7 +169,8 @@ extension MainFeedViewController : NavBarViewDelegate {
     }
     
     func middleBarButtonTapped(_ Sender: AnyObject) {
-  
+        let index = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: .top, animated: true)
     }
     
 }

@@ -14,11 +14,11 @@ import UIKit
 //Font Constants
 extension UIFont {
     class func mammaFoodieFont(_ size : CGFloat) -> UIFont {
-        return UIFont(name: "Avenir", size: size)!
+        return UIFont(name: "Nexa Light", size: size)!
     }
     
     class func mammaFoodieFontBold(_ size : CGFloat) -> UIFont {
-        return UIFont(name: "Avenir-Black", size: size)!
+        return UIFont(name: "Nexa Bold", size: size)!
     }
     
     class func mammaFoodieFontItalic(_ size : CGFloat) -> UIFont {

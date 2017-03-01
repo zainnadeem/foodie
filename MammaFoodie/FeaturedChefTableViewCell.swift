@@ -14,6 +14,11 @@ class FeaturedChefTableViewCell: UITableViewCell{
    
     let featuredChefCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     
+    var featuredChefs: [User] = [User]()
+    
+    let store = DataStore.sharedInstance
+
+    
     func layOutCollectionView(){
         
         featuredChefCollectionView.delegate = self
@@ -45,6 +50,13 @@ class FeaturedChefTableViewCell: UITableViewCell{
             
         }
     
+    
+    func fetchUsers(){
+        //Fetch Users from firebase
+        featuredChefs = store.createDummyUsers()
+        
+    }
+    
 }
 
 extension FeaturedChefTableViewCell: UICollectionViewDataSource {
@@ -54,7 +66,7 @@ extension FeaturedChefTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return featuredChefs.count
     }
     
     
@@ -63,8 +75,7 @@ extension FeaturedChefTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredChefCollectionViewIdentifier, for: indexPath) as! FeaturedChefCollectionViewCell
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = collectionCellCornerRadius
-        
-        
+        cell.user = featuredChefs[indexPath.row]
         return cell
         
     }

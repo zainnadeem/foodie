@@ -14,6 +14,10 @@ class UpcomingBroadcastsTableViewCell: UITableViewCell{
     
     let upcomingBroadcastsCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     
+    var usersWithUpcomingBroadcasts: [User] = [User]()
+    
+    let store = DataStore.sharedInstance
+    
     func layOutCollectionView(){
         
         upcomingBroadcastsCollectionView.delegate = self
@@ -45,6 +49,12 @@ class UpcomingBroadcastsTableViewCell: UITableViewCell{
         
     }
     
+    func fetchUsers(){
+        //Fetch Users from firebase
+        usersWithUpcomingBroadcasts = store.createDummyUsers()
+        
+    }
+    
 }
 
 extension UpcomingBroadcastsTableViewCell: UICollectionViewDataSource {
@@ -54,7 +64,7 @@ extension UpcomingBroadcastsTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return usersWithUpcomingBroadcasts.count
     }
     
     
@@ -63,6 +73,7 @@ extension UpcomingBroadcastsTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: upcomingBroadcastsCollectionViewCellIdentifier, for: indexPath) as! UpcomingBroadcastsCollectionViewCell
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = collectionCellCornerRadius
+        cell.user = usersWithUpcomingBroadcasts[indexPath.row]
         
         
         return cell
