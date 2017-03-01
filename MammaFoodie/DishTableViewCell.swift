@@ -23,10 +23,6 @@ class DishTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        
-        
-        
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

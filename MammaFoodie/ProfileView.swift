@@ -118,7 +118,7 @@ fileprivate extension ProfileView {
         likesLabel.text = "0 likes"
         bioTextView = UITextView()
         
-        bioTextView.text = "Lorem ipsum dolor sit amet, option appareat te pro, feugait suavitate est ad. Verear iriure euismod cu eos. An eirmod antiopam consulatu sit, delicata salutandi vis ut, in ferri nullam quo. Nec at atqui velit postea, tota regione sit in, ut aeterno scripta eos. Vis dolor comprehensam ut, nominati antiopam mnesarchum ut sed, vel commodo habemus maluisset et. Eos ex commodo mentitum. Eu nec magna commodo nostrum, per vero insolens menandri ad, graeco pertinax sapientem ei usu. Adipisci deterruisset vel te, vocent fierent praesent at qui, te timeam integre fastidii sea."
+        bioTextView.text = loremIpsumString
         websiteLabel = UILabel()
         websiteLabel.font = UIFont.mammaFoodieFont(12)
         websiteLabel.text = "mammafoodie.com"
