@@ -22,7 +22,13 @@ class ProfileViewController: UIViewController {
         profileView.tableView.dataSource = self
         profileView.delegate = self
         self.view = profileView
-        user = profileView.user
+        user = User()
+        let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
+        user.dishes.append(dish1)
+        
+        let review1 = Review(description: "good", rating: 5, reviewCreatedByUID: "123", reviewForUID: "1234")
+        user.reviews.append(review1)
+        user.reviews.append(review1)
         arrayForTableView = user.dishes
         
     }
@@ -37,7 +43,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(arrayForTableView.count)
         return arrayForTableView.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
