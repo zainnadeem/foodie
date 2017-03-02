@@ -35,7 +35,7 @@ class DishTableViewCell: UITableViewCell {
         //        priceLabel = UILabel(text: String(dish.price))
         dishImageView = UIImageView(image: UIImage(named: "profile_placeholder"))
         titleLabel = UILabel(text: "Buffalo Chicken Fingers")
-        titleLabel.font = UIFont.mammaFoodieFontBold(14)
+        titleLabel.font = UIFont.mammaFoodieFont(14)
         descriptionLabel = UILabel(text: "Packed with blue cheese, carrots, celery, and lots of other delicious stuff that is getting truncated")
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.font = UIFont.mammaFoodieFont(12)

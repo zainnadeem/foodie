@@ -29,7 +29,7 @@ class UserTableViewCell: UITableViewCell {
         
         profileImageView = UIImageView(image: UIImage(named: "profile_placeholder"))
         usernameLabel = UILabel(text: "sulu_candles")
-        usernameLabel.font = UIFont.mammaFoodieFontBold(14)
+        usernameLabel.font = UIFont.mammaFoodieFont(14)
         fullNameLabel = UILabel(text: "Sulu Candles")
         fullNameLabel.font = UIFont.mammaFoodieFont(12)
         followButton = UIButton(type: .system)

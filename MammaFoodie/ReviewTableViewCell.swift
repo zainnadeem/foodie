@@ -28,7 +28,7 @@ class ReviewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         usernameLabel = UILabel(text: "Cherry Dude")
-        usernameLabel.font = UIFont.mammaFoodieFontBold(14)
+        usernameLabel.font = UIFont.mammaFoodieFont(14)
         ratingView = CosmosView()
         ratingView.settings.starSize = 12
         dateLabel = UILabel(text: "Feb 29, 2016")

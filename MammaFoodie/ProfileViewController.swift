@@ -10,6 +10,9 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    //NavBar
+    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "searchIcon"), leftButtonImage: #imageLiteral(resourceName: "icon-profile"), middleButtonImage: nil)
+    
     var profileView: ProfileView!
     var user: User!
     var arrayForTableView: [Any]!
@@ -17,12 +20,17 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navBar.delegate = self
+        
+        
         profileView = ProfileView(user: User(), frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         profileView.tableView.delegate = self
         profileView.tableView.dataSource = self
         profileView.delegate = self
         self.view = profileView
+        self.view.addSubview(navBar)
         makeDummyData()
+        navBar.middleButton.title = user.username
         
         profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
         profileView.tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: reviewCellIdentifier)
@@ -31,7 +39,7 @@ class ProfileViewController: UIViewController {
     }
     
     fileprivate func makeDummyData() {
-        user = User()
+        user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImage: #imageLiteral(resourceName: "profile_placeholder"), dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true)
         let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
         user.dishes.append(dish1)
         
@@ -58,7 +66,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("TableView array count: \(arrayForTableView.count)")
+//        print("TableView array count: \(arrayForTableView.count)")
         return arrayForTableView.count
         
     }
@@ -91,6 +99,43 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .followers, .following: return 60
         }
     }
+    
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        
+//        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, index) in
+//            self.user.dishes.remove(at: indexPath.row)
+//            print("delete action tapped!")
+//        }
+//        
+//        let blockFollower = UITableViewRowAction(style: .destructive, title: "Block") { (action, index) in
+//            self.user.blockedUsers.append(self.user.followedBy[indexPath.row])
+//            print("blockFollower action tapped!")
+//        }
+//        
+//        let blockFollowing = UITableViewRowAction(style: .destructive, title: "Block") { (action, index) in
+//            self.user.blockedUsers.append(self.user.follows[indexPath.row])
+//            print("blockFollowing action tapped!")
+//        }
+//        
+//        switch profileView.profileTableViewStatus {
+//        case .menu: return [delete]
+//        case .reviews: return nil
+//        case .followers: return [blockFollower]
+//        case .following: return [blockFollowing]
+//        }
+//    }
+    
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        switch profileView.profileTableViewStatus {
+//        case .reviews: return false
+//        case .menu, .followers, .following: return true
+//        }
+//        return true
+//    }
+//    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        
+//    }
 }
 
 extension ProfileViewController: ProfileTableViewDelegate {
@@ -105,4 +150,27 @@ extension ProfileViewController: ProfileTableViewDelegate {
         profileView.tableView.reloadData()
         
     }
+}
+
+//NavBar
+extension ProfileViewController : NavBarViewDelegate {
+    
+    func rightBarButtonTapped(_ sender: AnyObject) {
+        if let pageVC = self.parent as? UserPageViewController {
+            pageVC.navigateToMainFeedViewController(.forward)
+        }
+        
+    }
+    
+    func leftBarButtonTapped(_ sender: AnyObject) {
+        if let pageVC = self.parent as? UserPageViewController {
+            pageVC.navigateToProfileViewController(.reverse)
+        }
+        
+    }
+    
+    func middleBarButtonTapped(_ Sender: AnyObject) {
+        
+    }
+    
 }

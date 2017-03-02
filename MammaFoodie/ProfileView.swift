@@ -153,7 +153,7 @@ extension ProfileView {
         self.addSubview(profileTopStackView)
         profileTopStackView.snp.makeConstraints { (make) in
             make.height.equalToSuperview().dividedBy(2)
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(84)
             make.width.equalToSuperview()
             make.centerX.equalToSuperview()
         }
