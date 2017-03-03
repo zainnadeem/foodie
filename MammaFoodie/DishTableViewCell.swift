@@ -20,6 +20,7 @@ class DishTableViewCell: UITableViewCell {
     var priceLabel: UILabel!
     var priceRatingStackView: UIStackView!
     var dish: Dish!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +56,8 @@ class DishTableViewCell: UITableViewCell {
         priceRatingStackView.axis = .vertical
         priceRatingStackView.distribution = .fillProportionally
         priceRatingStackView.alignment = .trailing
+        
+        
         
         setConstraints()
     }

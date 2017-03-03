@@ -162,6 +162,11 @@ extension ProfileView {
             make.width.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+        
+        profileImageView.snp.makeConstraints { (make) in
+            make.width.equalTo(75)
+            make.height.equalTo(profileImageView.snp.width)
+        }
 
         bioTextView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()

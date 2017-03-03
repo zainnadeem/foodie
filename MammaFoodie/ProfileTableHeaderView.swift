@@ -13,7 +13,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     var searchBar: UISearchBar!
     
-    @IBAction func didEnterSearchTerm(_ sender: AnyObject) {
+    func didEnterSearchTerm(_ sender: AnyObject) {
         delegate?.didEnterSearchTerm()
     }
     

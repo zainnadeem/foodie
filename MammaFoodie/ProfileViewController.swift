@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     //NavBar
-    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "home_icon"), leftButtonImage: nil, middleButtonImage: nil)
+    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "home_icon"), leftButtonImage: #imageLiteral(resourceName: "settings"), middleButtonImage: nil)
     
     var profileView: ProfileView!
     var user: User!
@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
         profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
         profileView.tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: reviewCellIdentifier)
         profileView.tableView.register(UserTableViewCell.self, forCellReuseIdentifier: followCellIdentifier)
+        profileView.tableView.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: "headerView")
         
     }
     
@@ -76,12 +77,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch profileView.profileTableViewStatus {
         case .menu: cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier) as! DishTableViewCell
             (cell as! DishTableViewCell).dish = user.dishes[indexPath.row]
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(deleteDishTapped))
+            cell.addGestureRecognizer(longPressGesture)
         case .reviews: cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier) as! ReviewTableViewCell
             (cell as! ReviewTableViewCell).review = user.reviews[indexPath.row]
         case .followers: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier) as! UserTableViewCell
             (cell as! UserTableViewCell).user = user.followedBy[indexPath.row]
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
+            cell.addGestureRecognizer(longPressGesture)
         case .following: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier) as! UserTableViewCell
             (cell as! UserTableViewCell).user = user.follows[indexPath.row]
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
+            cell.addGestureRecognizer(longPressGesture)
 
         }
         
@@ -149,6 +156,18 @@ extension ProfileViewController: ProfileTableViewDelegate {
         
         profileView.tableView.reloadData()
         
+    }
+}
+
+//Long press gesture handlers for TableView cells
+extension ProfileViewController {
+    
+    func deleteDishTapped() {
+        print ("delete dish tapped")
+    }
+    
+    func blockUserTapped() {
+        print ("block user tapped")
     }
 }
 
