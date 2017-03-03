@@ -20,8 +20,7 @@ class FeaturedChefCollectionViewCell: UICollectionViewCell {
     var availabilityIcon            : UIImageView = UIImageView()
     
     let store = DataStore.sharedInstance
-    
-    
+
     var user: User! {
         
         didSet{

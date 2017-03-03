@@ -17,6 +17,7 @@ class MainFeedViewController: UIViewController {
     
     //TableView
     var sections = ["~Featured Chefs~", "~Cooking Now~", "~Live Now~", "~Upcoming Broadcasts~"]
+    
     lazy var tableView : UITableView = UITableView()
     
     
@@ -24,11 +25,21 @@ class MainFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .red
+        
+        
         self.navBar.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        
+        
         self.navBar.middleButton.title = "Mamma Foodie"
+        
+        self.tableView.layer.cornerRadius = 30
+        self.tableView.backgroundColor = .black
+        self.view.backgroundColor = .black
+        
         
         self.tableView.register(FeaturedChefTableViewCell.self, forCellReuseIdentifier: featuredChefTableViewCellIdentifier)
         self.tableView.register(CookingNowTableViewCell.self, forCellReuseIdentifier: cookingNowTableViewCellIdentifier)
@@ -36,9 +47,10 @@ class MainFeedViewController: UIViewController {
         self.tableView.register(UpcomingBroadcastsTableViewCell.self, forCellReuseIdentifier: upcomingBroadcastsTableViewCellIdentifier)
         
         self.setViewConstraints()
-        self.view.backgroundColor = UIColor.red
+
     }
     
+
 }
 
 extension MainFeedViewController: UITableViewDataSource {

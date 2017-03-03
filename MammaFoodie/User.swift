@@ -20,6 +20,7 @@ class User
     var bio                             :           String
     var website                         :           String
     var location                        :           String
+    var tags                            :           [String]
     var profileImage                    :           UIImage?
     
     var dishes                          :           [Dish]
@@ -35,12 +36,23 @@ class User
     var deviceTokens                    :           [String]
     var isAvailable                     :           Bool
     
+    var tagsString                      : String {
+        
+        var string = ""
+        
+        for (index, tag) in self.tags.enumerated() {
+            if index == self.tags.count - 1 { string += "\(tag)" }
+            else { string += "\(tag), " }
+        }
+        
+        return string
+    }
     
     
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool)
+    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String])
     {
         self.uid = uid
         self.username = username
@@ -60,6 +72,7 @@ class User
         self.averageRating = averageRating
         self.deviceTokens = deviceTokens
         self.isAvailable = isAvailable
+        self.tags = tags
     }
     
     init() {
@@ -81,6 +94,7 @@ class User
         self.averageRating = 0
         self.deviceTokens = []
         self.isAvailable = false
+        self.tags = [""]
     }
     
     init(dictionary: [String : Any])
@@ -95,6 +109,7 @@ class User
         averageRating = dictionary["average rating"] as! Int
         totalLikes = dictionary["total likes"] as! Int
         isAvailable = dictionary["is available"] as! Bool
+        tags = dictionary["tags"] as! [String]
         
         // deviceToken: created for notifications
         self.deviceTokens = []
