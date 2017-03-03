@@ -40,6 +40,7 @@ let searchUserTableViewCellIdentifier = "searchUserTableViewCell"
 let dishCellIdentifier = "dishCell"
 let reviewCellIdentifier = "reviewCell"
 let followCellIdentifier = "followCell"
+let profileHeaderIdentifier = "headerView"
 
 class Constants {
     

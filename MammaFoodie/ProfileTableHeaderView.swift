@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     weak var delegate: TableViewHeaderDelegate?
@@ -16,6 +17,33 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     func didEnterSearchTerm(_ sender: AnyObject) {
         delegate?.didEnterSearchTerm()
     }
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        searchBar = UISearchBar()
+        self.contentView.addSubview(searchBar)
+        searchBar.searchBarStyle = .minimal
+                
+        
+        setConstraints()
+        
+    }
+    
+    func setConstraints() {
+        searchBar.snp.makeConstraints { (make) in
+            make.height.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.75)
+            make.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    
+    
     
 
 }

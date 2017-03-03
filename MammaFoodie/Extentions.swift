@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import ChameleonFramework
 
 
 //Font Constants
@@ -77,3 +77,4 @@ extension UIView {
         self.layer.mask = mask
     }
 }
+

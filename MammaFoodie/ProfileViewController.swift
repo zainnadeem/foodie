@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController {
     var profileView: ProfileView!
     var user: User!
     var arrayForTableView: [Any]!
+    var filteredArray: [Any]!
+    let alertView = DishAlertView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,7 @@ class ProfileViewController: UIViewController {
         profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
         profileView.tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: reviewCellIdentifier)
         profileView.tableView.register(UserTableViewCell.self, forCellReuseIdentifier: followCellIdentifier)
-        profileView.tableView.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: "headerView")
+        profileView.tableView.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: profileHeaderIdentifier)
         
     }
     
@@ -97,7 +99,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: profileHeaderIdentifier)
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -163,8 +170,28 @@ extension ProfileViewController: ProfileTableViewDelegate {
 //Long press gesture handlers for TableView cells
 extension ProfileViewController {
     
-    func deleteDishTapped() {
-        print ("delete dish tapped")
+    func deleteDishTapped(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            print ("delete dish tapped")
+            
+            view.addSubview(alertView)
+            alertView.snp.makeConstraints({ (make) in
+                make.edges.equalToSuperview()
+            })
+            alertView.alpha = 0
+            UIView.animate(withDuration: 0.4) {
+                self.alertView.alpha = 1
+            }
+            let hideGesture = UITapGestureRecognizer(target: self, action: #selector(hideAlertView))
+            alertView.backGroundView.addGestureRecognizer(hideGesture)
+        }
+    }
+    
+    func hideAlertView() {
+        UIView.animate(withDuration: 0.2) { 
+            self.alertView.alpha = 0
+        }
+        
     }
     
     func blockUserTapped() {
@@ -179,18 +206,25 @@ extension ProfileViewController : NavBarViewDelegate {
         if let pageVC = self.parent as? UserPageViewController {
             pageVC.navigateToMainFeedViewController(.forward)
         }
-        
     }
     
     func leftBarButtonTapped(_ sender: AnyObject) {
         if let pageVC = self.parent as? UserPageViewController {
             pageVC.navigateToProfileViewController(.reverse)
         }
-        
     }
     
     func middleBarButtonTapped(_ Sender: AnyObject) {
         
     }
     
+}
+
+extension ProfileViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredArray = user.dishes.filter { $0.name.localizedCaseInsensitiveContains(searchText)}
+        
+        
+        profileView.tableView.reloadData()
+    }
 }

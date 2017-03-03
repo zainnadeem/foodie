@@ -42,7 +42,7 @@ class DishTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.mammaFoodieFont(12)
         ratingView = CosmosView()
         ratingView.text = "(3)"
-        ratingView.settings.starSize = 15
+        ratingView.settings.starSize = 12
         ratingView.setContentCompressionResistancePriority(1000, for: .horizontal)
         priceLabel = UILabel(text: "$12.34")
         priceLabel.font = UIFont.mammaFoodieFont(14)

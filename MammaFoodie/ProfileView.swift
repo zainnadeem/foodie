@@ -29,11 +29,11 @@ class ProfileView: UIView, UITableViewDelegate {
     var bioTextView: UITextView!
     var websiteTextView: UITextView!
     
-    var menuButton: UIButton!
-    var reviewsButton: UIButton!
-    var followersButton: UIButton!
-    var followingButton: UIButton!
-    var lastTappedButton: UIButton!
+    var menuButton: ProfileTableViewButton!
+    var reviewsButton: ProfileTableViewButton!
+    var followersButton: ProfileTableViewButton!
+    var followingButton: ProfileTableViewButton!
+    var lastTappedButton: ProfileTableViewButton!
     var tableViewButtonStackView: UIStackView!
     var tableView: UITableView!
     var profileTableViewStatus: SelectedTableViewStatus = .menu
@@ -122,25 +122,21 @@ extension ProfileView {
         websiteTextView.textAlignment = .center
         
         
-        menuButton = UIButton(type: .system)
+        menuButton = ProfileTableViewButton()
         menuButton.setTitle("Menu", for: .normal)
         menuButton.titleLabel?.textAlignment = .center
-        menuButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
-        reviewsButton = UIButton(type: .system)
+        reviewsButton = ProfileTableViewButton()
         reviewsButton.setTitle("Reviews", for: .normal)
         reviewsButton.titleLabel?.textAlignment = .center
-        reviewsButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         reviewsButton.addTarget(self, action: #selector(reviewsButtonTapped), for: .touchUpInside)
-        followersButton = UIButton(type: .system)
+        followersButton = ProfileTableViewButton()
         followersButton.setTitle("Followers", for: .normal)
         followersButton.titleLabel?.textAlignment = .center
-        followersButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         followersButton.addTarget(self, action: #selector(followersButtonTapped), for: .touchUpInside)
-        followingButton = UIButton(type: .system)
+        followingButton = ProfileTableViewButton()
         followingButton.setTitle("Following", for: .normal)
         followingButton.titleLabel?.textAlignment = .center
-        followingButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         followingButton.addTarget(self, action: #selector(followingButtonTapped), for: .touchUpInside)
         
         
@@ -157,7 +153,7 @@ extension ProfileView {
         profileTopStackView.spacing = 5
         self.addSubview(profileTopStackView)
         profileTopStackView.snp.makeConstraints { (make) in
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalToSuperview().dividedBy(2.5)
             make.top.equalToSuperview().offset(84)
             make.width.equalToSuperview()
             make.centerX.equalToSuperview()

@@ -32,7 +32,7 @@ class UserTableViewCell: UITableViewCell {
         usernameLabel.font = UIFont.mammaFoodieFont(14)
         fullNameLabel = UILabel(text: "Sulu Candles")
         fullNameLabel.font = UIFont.mammaFoodieFont(12)
-        followButton = UIButton(type: .system)
+        followButton = FollowButton()
         followButton.setTitle("Follow", for: .normal)
         followButton.titleLabel?.font = UIFont.mammaFoodieFont(14)
         followButton.setTitleColor(FlatWhite(), for: .normal)
