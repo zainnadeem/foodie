@@ -18,7 +18,7 @@ class SearchViewController: UIViewController {
     
     let store = DataStore.sharedInstance
     
-    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "searchIcon"), leftButtonImage: #imageLiteral(resourceName: "icon-profile"), middleButtonImage: nil)
+    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "feedImage"), middleButtonImage: nil)
     
     lazy var searchBar: UISearchBar = UISearchBar()
     
@@ -29,15 +29,20 @@ class SearchViewController: UIViewController {
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
         
+        navBar.middleButton.title = "Search"
+        
         fetchUsers()
         setViewConstraints()
         
+        self.navBar.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.searchBar.delegate = self
         
+        searchBar.searchBarStyle = .minimal
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .white
         self.tableView.register(SearchUserTableViewCell.self, forCellReuseIdentifier: searchUserTableViewCellIdentifier)
-
         searchBar.becomeFirstResponder()
         
     }
@@ -67,6 +72,7 @@ class SearchViewController: UIViewController {
     }
     
     func fetchUsers(){
+        
         UsersToSearch = store.createDummyUsers()
     }
 
@@ -139,7 +145,9 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredUsers = self.UsersToSearch.filter { $0.username.localizedCaseInsensitiveContains(searchText) }
+        filteredUsers = self.UsersToSearch.filter { $0.tagsString.localizedCaseInsensitiveContains(searchText) || $0.username.localizedCaseInsensitiveContains(searchText)  ||  $0.fullName.localizedCaseInsensitiveContains(searchText) }
+        
+        
         tableView.reloadData()
     }
     
@@ -148,6 +156,27 @@ extension SearchViewController: UISearchBarDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+}
 
+extension SearchViewController : NavBarViewDelegate {
+    
+    func rightBarButtonTapped(_ sender: AnyObject) {
+        if let pageVC = self.parent as? UserPageViewController {
+            //pageVC.navigateToSearchViewController(.forward)
+        }
+        
+    }
+    
+    func leftBarButtonTapped(_ sender: AnyObject) {
+        if let pageVC = self.parent as? UserPageViewController {
+            pageVC.navigateToMainFeedViewController(.reverse)
+        }
+        
+    }
+    
+    func middleBarButtonTapped(_ Sender: AnyObject) {
+        let index = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: .top, animated: true)
+    }
     
 }

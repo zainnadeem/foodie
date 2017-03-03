@@ -18,10 +18,10 @@ class DataStore {
     
     func createDummyUsers() -> [User] {
         
-        let user1 = User(uid: "", username: "Jenny1", fullName: "Jenny Cook", bio: "Awesome Woman Cook", website: "", location: "", follows: [], followedBy: [], profileImage: #imageLiteral(resourceName: "dummyImage1"), dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: [""])
+        let user1 = User(uid: "", username: "Jenny1", fullName: "Jenny Cook", bio: "Awesome Woman Cook", website: "", location: "", follows: [], followedBy: [], profileImage: #imageLiteral(resourceName: "dummyImage1"), dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: ["Cookies, Soups, Pizza, Cake"])
        
 
-        let user2 = User(uid: "", username: "greg1", fullName: "Greg Cook", bio: "Awesome Man Cook", website: "", location: "", follows: [], followedBy: [], profileImage: #imageLiteral(resourceName: "dummyImage2"), dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: false, tags: [""])
+        let user2 = User(uid: "", username: "greg1", fullName: "Greg Cook", bio: "Awesome Man Cook", website: "", location: "", follows: [], followedBy: [], profileImage: #imageLiteral(resourceName: "dummyImage2"), dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: false, tags: ["Panini, Pizza, Indian, Meatballs"])
         
         return [user1, user2]
         

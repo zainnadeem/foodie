@@ -10,6 +10,6 @@ import UIKit
 
 class FoodieButton: UIButton {
 
-    
 
+    
 }

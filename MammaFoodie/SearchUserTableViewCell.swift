@@ -10,15 +10,24 @@ import Foundation
 import UIKit
 import SnapKit
 import ChameleonFramework
+import Cosmos
 
 class SearchUserTableViewCell: UITableViewCell {
     
     lazy var profileImageView           : UIImageView = UIImageView()
     lazy var usernameLabel              : UILabel     = UILabel()
     lazy var fullNameLabel              : UILabel     = UILabel()
+    lazy var availibilityLabel          : UILabel     = UILabel()
     
-    lazy var labelStackView             : UIStackView = UIStackView()
-    lazy var followButton               : UIButton    = UIButton()
+    lazy var leftStackView              : UIStackView = UIStackView()
+    lazy var rightStackView             : UIStackView = UIStackView()
+    lazy var followButton               : FollowButton = FollowButton()
+    
+    var ratingStars                     : CosmosView!
+    var tags                            : UILabel = UILabel()
+    
+    lazy var borderWidth                  : CGFloat =       3.0
+    lazy var profileImageHeightMultiplier : CGFloat =      (0.5)
     
     var user: User! {
         didSet {
@@ -33,6 +42,7 @@ class SearchUserTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        createStackViews()
         setViewConstraints()
         setViewProperties()
 
@@ -47,6 +57,18 @@ class SearchUserTableViewCell: UITableViewCell {
         usernameLabel.text = user.username
         fullNameLabel.text = user.fullName
         profileImageView.image = user.profileImage
+        ratingStars.rating = Double(user.averageRating)
+        
+        if user.isAvailable {
+            availibilityLabel.text = "Online"
+            availibilityLabel.textColor = FlatGreen()
+        }else{
+            availibilityLabel.text = "Offline"
+            availibilityLabel.textColor = .lightGray
+        }
+
+        tags.text = user.tagsString
+        setImageViewCircular()
     }
     
     
@@ -60,43 +82,82 @@ class SearchUserTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(10)
         }
         
-         contentView.addSubview(labelStackView)
-        labelStackView.snp.makeConstraints { (make) in
+         contentView.addSubview(leftStackView)
+        leftStackView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.6)
             make.left.equalTo(profileImageView.snp.right).offset(10)
         }
-        
-        contentView.addSubview(followButton)
-        followButton.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().offset(-25)
+
+        contentView.addSubview(rightStackView)
+        rightStackView.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-5)
+            make.height.equalToSuperview().multipliedBy(0.6)
             make.centerY.equalToSuperview()
-            make.width.equalTo(70)
         }
+        
+        followButton.snp.makeConstraints { (make) in
+            make.width.equalTo(rightStackView.snp.width)
+            make.height.equalTo(rightStackView.snp.height).multipliedBy(0.45)
+        }
+        
+        
+        
     }
     
     func setViewProperties(){
-        
+        //username
         usernameLabel.font = UIFont.mammaFoodieFontBold(14)
+        usernameLabel.textColor = .black
+        
+        //fullname
         fullNameLabel.font = UIFont.mammaFoodieFont(12)
+        fullNameLabel.textColor = .darkGray
         
-        followButton = UIButton(type: .system)
-        followButton.setTitle("Follow", for: .normal)
-        followButton.titleLabel?.font = UIFont.mammaFoodieFont(14)
+        //rating
+        ratingStars.settings.updateOnTouch = false
+        ratingStars.settings.starSize = 12
+        ratingStars.settings.filledColor = .flatYellowDark
+        ratingStars.settings.emptyBorderColor = .black
+        ratingStars.settings.filledBorderColor = .black
         
-        followButton.setTitleColor(FlatWhite(), for: .normal)
-        followButton.backgroundColor = FlatSkyBlueDark()
+        //tags
+        tags.font = UIFont.mammaFoodieFontBold(9)
+        tags.textColor = .darkGray
         
-        labelStackView = UIStackView(arrangedSubviews: [usernameLabel, fullNameLabel])
-        labelStackView.axis = .vertical
-        labelStackView.distribution = .fillProportionally
-        labelStackView.alignment = .leading
-    
+        //availability label
+        availibilityLabel.font = UIFont.mammaFoodieFont(9)
+        
     }
     
+    func createStackViews(){
+        leftStackView = UIStackView(arrangedSubviews: [usernameLabel, fullNameLabel, availibilityLabel])
+        leftStackView.axis = .vertical
+        leftStackView.distribution = .fillProportionally
+        leftStackView.alignment = .leading
+        
+        
+        ratingStars = CosmosView()
+
+        rightStackView = UIStackView(arrangedSubviews: [followButton, ratingStars, tags])
+        rightStackView.axis = .vertical
+        rightStackView.distribution = .fillProportionally
+        rightStackView.alignment = .center
+        rightStackView.spacing = 2
+    }
+    
+    func setImageViewCircular() {
+        self.profileImageView.contentMode = .scaleAspectFill
+        self.profileImageView.isUserInteractionEnabled = true
+        self.profileImageView.layer.cornerRadius = self.frame.height * profileImageHeightMultiplier / 2
+        self.profileImageView.layer.borderColor = UIColor.black.cgColor
+        self.profileImageView.layer.borderWidth = borderWidth
+        self.profileImageView.clipsToBounds = true
+    }
+    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     
