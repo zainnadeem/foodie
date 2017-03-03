@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     //NavBar
-    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "searchIcon"), leftButtonImage: #imageLiteral(resourceName: "icon-profile"), middleButtonImage: nil)
+    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "home_icon"), leftButtonImage: nil, middleButtonImage: nil)
     
     var profileView: ProfileView!
     var user: User!

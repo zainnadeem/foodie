@@ -27,7 +27,7 @@ class ProfileView: UIView, UITableViewDelegate {
     var followButton: UIButton!
     var likesLabel: UILabel!
     var bioTextView: UITextView!
-    var websiteLabel: UILabel!
+    var websiteTextView: UITextView!
     
     var menuButton: UIButton!
     var reviewsButton: UIButton!
@@ -110,11 +110,16 @@ extension ProfileView {
         likesLabel = UILabel()
         likesLabel.text = "0 likes"
         bioTextView = UITextView()
-        
         bioTextView.text = loremIpsumString
-        websiteLabel = UILabel()
-        websiteLabel.font = UIFont.mammaFoodieFont(12)
-        websiteLabel.text = "mammafoodie.com"
+        bioTextView.isEditable = false
+        
+        websiteTextView = UITextView()
+        websiteTextView.dataDetectorTypes = .link
+        websiteTextView.isEditable = false
+        websiteTextView.font = UIFont.mammaFoodieFont(12)
+        websiteTextView.text = "mammafoodie.com"
+        websiteTextView.backgroundColor = UIColor.clear
+        websiteTextView.textAlignment = .center
         
         
         menuButton = UIButton(type: .system)
@@ -145,7 +150,7 @@ extension ProfileView {
         self.addSubview(tableViewButtonStackView)
         
         
-        profileTopStackView = UIStackView(arrangedSubviews: [profileImageView, ratingView, followButton, likesLabel, bioTextView, websiteLabel, tableViewButtonStackView])
+        profileTopStackView = UIStackView(arrangedSubviews: [profileImageView, ratingView, followButton, likesLabel, bioTextView, websiteTextView, tableViewButtonStackView])
         profileTopStackView.axis = .vertical
         profileTopStackView.distribution = .fill
         profileTopStackView.alignment = .center
@@ -159,6 +164,11 @@ extension ProfileView {
         }
 
         bioTextView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+        }
+        
+        websiteTextView.snp.makeConstraints { (make) in
+            make.height.equalTo(20)
             make.width.equalToSuperview()
         }
         
