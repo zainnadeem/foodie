@@ -52,11 +52,11 @@ extension CGPoint{
 
 //Color Constants
 extension UIColor {
-    class func mammaFoodieRed() -> UIColor {
+    class func mammaFoodieMainColor() -> UIColor {
         return UIColor(red: 95.0/255.0, green: 146.0/255.0, blue: 170.0/255.0, alpha: 1.0)
     }
     
-    class func mammaFoodieYellow() -> UIColor {
+    class func mammaFoodieSecondaryColor() -> UIColor {
         return UIColor(red: 226.0/255.0, green: 176.0/255.0, blue: 100.0/255.0, alpha: 1.0)
     }
     
@@ -66,6 +66,13 @@ extension UILabel {
     convenience init (text: String) {
         self.init()
         self.text = text
+    }
+}
+
+extension UITextField {
+    convenience init (placeholder: String) {
+        self.init()
+        self.placeholder = text
     }
 }
 

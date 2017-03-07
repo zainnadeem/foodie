@@ -13,6 +13,7 @@ target 'MammaFoodie' do
     pod 'GoogleSignIn'
 
     pod 'SAMCache'
+    pod 'IQKeyboardManagerSwift'
     pod 'GooglePlaces'
     pod 'GooglePlacePicker'
     pod 'GoogleMaps'

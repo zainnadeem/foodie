@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 enum UserPageViewControllerIndices : Int {
-    case profileViewController = 0
-    case mainFeedViewController = 1
-    case searchViewController = 2
+    case settingViewController = 0
+    case profileViewController = 1
+    case mainFeedViewController = 2
+    case searchViewController = 3
 }
 
 class UserPageViewController: UIPageViewController {
@@ -56,15 +57,19 @@ class UserPageViewController: UIPageViewController {
     
     func createInitialViewControllers() -> [UIViewController]? {
         
+        let settingsVC = SettingsViewController(nibName: nil, bundle: nil)
         let profileVC = ProfileViewController(nibName: nil, bundle: nil)
         let mainFeedVC = MainFeedViewController(nibName: nil, bundle: nil)
         let searchVC = SearchViewController(nibName: nil, bundle: nil)
         
+        
+        settingsVC.accessibilityLabel = "settingsVC"
         profileVC.accessibilityLabel = "profile VC"
         mainFeedVC.accessibilityLabel = "mainFeed VC"
         searchVC.accessibilityLabel = "search VC"
         
-        return [profileVC, mainFeedVC, searchVC]
+        
+        return [settingsVC, profileVC, mainFeedVC, searchVC]
     }
     
 }
@@ -98,6 +103,17 @@ extension UserPageViewController : UIPageViewControllerDelegate, UIPageViewContr
         
     }
     
+    func navigateToSettingsViewController(_ direction: UIPageViewControllerNavigationDirection){
+        
+        let profileViewIndex = UserPageViewControllerIndices.settingViewController.rawValue
+        
+        self.setViewControllers([self.viewsArray[profileViewIndex]], direction: direction, animated: true) { (completed) in
+            if completed {
+                
+                print("transitioned to settings")
+            }
+        }
+    }
     
     func navigateToProfileViewController(_ direction: UIPageViewControllerNavigationDirection){
         
@@ -106,7 +122,7 @@ extension UserPageViewController : UIPageViewControllerDelegate, UIPageViewContr
         self.setViewControllers([self.viewsArray[profileViewIndex]], direction: direction, animated: true) { (completed) in
             if completed {
                 
-                print("ProfileViewController")
+                print("transitioned to profile")
             }
         }
     }
