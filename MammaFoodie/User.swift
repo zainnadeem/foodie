@@ -14,14 +14,15 @@ class User
 {
     // MARK: - User Properties
     
-    let uid                             :           String
+    var uid                             :           String
     var username                        :           String
     var fullName                        :           String
+    var email                           :           String
     var bio                             :           String
     var website                         :           String
     var location                        :           String
     var tags                            :           [String]
-    var profileImage                    :           UIImage?
+    var profileImageURL                 :           String
     
     var addresses                       :           [Address]
     
@@ -54,17 +55,18 @@ class User
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address])
+    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address])
     {
         self.uid = uid
         self.username = username
         self.fullName = fullName
+        self.email = email
         self.bio = bio
         self.website = website
         self.location = location
         self.follows = follows
         self.followedBy = followedBy
-        self.profileImage = profileImage
+        self.profileImageURL = profileImageURL
         self.dishes = dishes
         self.reviews = reviews
         self.notifications = notifications
@@ -78,16 +80,26 @@ class User
         self.addresses = addresses
     }
     
+    convenience init(uid: String, username: String, fullName: String, email: String, profileImageURL: String) {
+        self.init()
+        self.uid = uid
+        self.username = username
+        self.fullName = fullName
+        self.email = email
+        self.profileImageURL = profileImageURL
+    }
+    
     init() {
         self.uid = ""
         self.username = ""
         self.fullName = ""
+        self.email = ""
         self.bio = ""
         self.website = ""
         self.location = ""
         self.follows = []
         self.followedBy = []
-        self.profileImage = UIImage()
+        self.profileImageURL = ""
         self.dishes = []
         self.reviews = []
         self.notifications = []
@@ -106,9 +118,11 @@ class User
         uid = dictionary["uid"] as! String
         username = dictionary["username"] as! String
         fullName = dictionary["fullName"] as! String
+        email = dictionary["email"] as! String
         bio = dictionary["bio"] as! String
         website = dictionary["website"] as! String
         location = dictionary["location"] as! String
+        profileImageURL = dictionary["profileImageURL"] as! String
         
         averageRating = dictionary["average rating"] as! Int
         totalLikes = dictionary["total likes"] as! Int
@@ -229,13 +243,13 @@ extension User {
         DatabaseReference.users(uid: uid).reference().child("dishes").childByAutoId().setValue(dish.toDictionary)
     }
     
-    func downloadProfilePicture(completion: @escaping (UIImage?, NSError?) -> Void)
-    {
-        FIRImage.downloadProfileImage(uid, completion: { (image, error) in
-            self.profileImage = image
-            completion(image, error as NSError?)
-        })
-    }
+//    func downloadProfilePicture(completion: @escaping (UIImage?, NSError?) -> Void)
+//    {
+//        FIRImage.downloadProfileImage(uid, completion: { (image, error) in
+//            self.profileImageURL = image
+//            completion(image, error as NSError?)
+//        })
+//    }
     
     func follow(user: User) {
         self.follows.append(user)

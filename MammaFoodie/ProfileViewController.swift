@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     fileprivate func makeDummyData() {
 
-        user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImage: #imageLiteral(resourceName: "profile_placeholder"), dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true, tags: ["carrots, chocolate, Indian, Meatballs"], addresses: [])
+        user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", email: "carrot@slat.com", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImageURL: "", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true, tags: ["carrots, chocolate, Indian, Meatballs"], addresses: [])
         let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
         user.dishes.append(dish1)
         

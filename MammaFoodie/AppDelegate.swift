@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //        }
 
         
-        let pageVC = UserPageViewController()
-        self.window?.rootViewController = pageVC
+//        let pageVC = UserPageViewController()
+//        self.window?.rootViewController = pageVC
         
         IQKeyboardManager.sharedManager().enable = true
         
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         signupVC.fullName = user.profile.name
         signupVC.email = user.profile.email
         signupVC.userSelectedManualLogin = false
-        signupVC.pictureURL = user.profile.imageURL(withDimension: 100)
+        signupVC.pictureURL = user.profile.imageURL(withDimension: 300)
         self.window?.rootViewController = signupVC
         
     }

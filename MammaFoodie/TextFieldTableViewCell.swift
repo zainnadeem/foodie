@@ -17,10 +17,8 @@ class TextFieldTableViewCell: UITableViewCell {
         
         contentView.addSubview(textField)
         textField.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.8)
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.center.equalToSuperview()
+            make.height.width.equalToSuperview().multipliedBy(0.8)
         }
         
         textField.layer.borderWidth = 3

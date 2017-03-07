@@ -58,7 +58,7 @@ class Dish{
     }
     
     
-    func save(ref: FIRDatabaseReference, completion: @escaping (Error?) -> Void) {
+    func save(ref: FIRDatabaseReference, completion: @escaping (URL) -> Void) {
         
         let ref = DatabaseReference.users(uid: self.uid).reference().child("dishes").childByAutoId()
         ref.setValue(toDictionary())
@@ -70,8 +70,8 @@ class Dish{
         //upload image to storage database
         if let mainImage = self.mainImage {
             let firImage = FIRImage(image: mainImage)
-            firImage.save(self.uid, completion: { error in
-                completion(error)
+            firImage.save(self.uid, completion: { (downloadURL) in
+                completion(downloadURL)
             })
             
             

@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import SDWebImage
 
 class UpcomingBroadcastsCollectionViewCell: UICollectionViewCell {
  
@@ -52,7 +53,7 @@ class UpcomingBroadcastsCollectionViewCell: UICollectionViewCell {
         topTitle.text = user.fullName
         bottomTitle.text = user.bio
         
-        backgroundImageView.image = user.profileImage
+        backgroundImageView.sd_setImage(with: URL(string: user.profileImageURL))
         backgroundImageView.contentMode = .scaleAspectFill
         
         ratingStars.rating = Double(user.averageRating)

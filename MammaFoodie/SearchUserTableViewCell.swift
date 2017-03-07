@@ -11,6 +11,7 @@ import UIKit
 import SnapKit
 import ChameleonFramework
 import Cosmos
+import SDWebImage
 
 class SearchUserTableViewCell: UITableViewCell {
     
@@ -56,7 +57,7 @@ class SearchUserTableViewCell: UITableViewCell {
     func updateUI(){
         usernameLabel.text = user.username
         fullNameLabel.text = user.fullName
-        profileImageView.image = user.profileImage
+        profileImageView.sd_setImage(with: URL(string: user.profileImageURL))
         ratingStars.rating = Double(user.averageRating)
         
         if user.isAvailable {

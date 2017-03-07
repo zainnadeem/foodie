@@ -22,7 +22,7 @@ class FIRImage {
 }
 
 extension FIRImage {
-    func  saveProfileImage(_ userUID: String, _ completion: @escaping (Error?) -> Void)
+    func saveProfileImage(_ userUID: String, _ completion: @escaping (Error?) -> Void)
     {
         let resizedImage = image.resized()
         let imageData = UIImageJPEGRepresentation(resizedImage, 0.9)
@@ -36,7 +36,7 @@ extension FIRImage {
         
     }
     
-    func  save(_ uid:String, completion: @escaping (Error?) -> Void) {
+    func  save(_ uid:String, completion: @escaping (URL) -> Void) {
         
         let resizedImage = image.resized()
         let imageData = UIImageJPEGRepresentation(resizedImage, 0.9)
@@ -55,7 +55,12 @@ extension FIRImage {
         }
         
         ref.put(imageData!, metadata: nil) { (metaData, error) in
-            completion(error)
+            if error != nil {
+                print("there was an error uploading the image to firebase: \(error?.localizedDescription)")
+                return
+            }
+            let downloadURL = metaData?.downloadURL()
+            completion(downloadURL!)
         }
         
     }

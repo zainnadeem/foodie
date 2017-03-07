@@ -53,7 +53,7 @@ class EditProfileTableViewCell: UITableViewCell {
     
     func updateUI(){
 
-        profileImageView.image = user.profileImage
+        profileImageView.sd_setImage(with: URL(string: user.profileImageURL))
         usernameLabel.text = user.username
         fullNameLabel.text = user.fullName
         locationLabel.text = user.location

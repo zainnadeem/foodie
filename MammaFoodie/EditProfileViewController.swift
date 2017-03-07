@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EditProfileViewController: UIViewController {
     
@@ -79,7 +80,8 @@ class EditProfileViewController: UIViewController {
         self.profileImageView.layer.borderColor = UIColor.black.cgColor
         self.profileImageView.layer.borderWidth = 2
         self.profileImageView.clipsToBounds = true
-        self.profileImageView.image = store.currentUser.profileImage
+        self.profileImageView.sd_setImage(with: URL(string: store.currentUser.profileImageURL))
+        
 
         saveButton.setTitle("save", for: .normal)
         saveButton.titleLabel?.font = UIFont.mammaFoodieFontBold(16)

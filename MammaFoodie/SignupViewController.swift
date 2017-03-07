@@ -15,6 +15,7 @@ import SDWebImage
 class SignupViewController: UIViewController {
 
     let constants = Constants()
+    let store = DataStore.sharedInstance
     var userSelectedManualLogin: Bool!
     var mediaPickerHelper: MediaPickerHelper!
     
@@ -126,7 +127,6 @@ class SignupViewController: UIViewController {
     }
     
     func completeButtonTapped() {
-//        let user = User(uid: <#T##String#>, username: <#T##String#>, fullName: <#T##String#>, bio: <#T##String#>, website: <#T##String#>, location: <#T##String#>, follows: <#T##[User]#>, followedBy: <#T##[User]#>, profileImage: <#T##UIImage?#>, dishes: <#T##[Dish]#>, reviews: <#T##[Review]#>, notifications: <#T##[Notification]#>, broadcasts: <#T##[Broadcast]#>, blockedUsers: <#T##[User]#>, totalLikes: <#T##Int#>, averageRating: <#T##Int#>, deviceTokens: <#T##[String]#>)
         FIRDatabase.database().reference().child("users/\(userID!)").setValue(["email" : emailTextField.text, "username" : usernameTextField.text, "fullName" : fullNameTextField.text])
         
         if let credential = credential {
@@ -136,8 +136,13 @@ class SignupViewController: UIViewController {
                     return
                 }
             })
+            
         }
-        
+        let firImage = FIRImage(image: profileImageView.image!)
+        firImage.save(userID!) { (downloadURL) in
+            let newUser = User(uid: self.userID!, username: self.usernameTextField.text!, fullName: self.fullNameTextField.text!, email: self.emailTextField.text!, profileImageURL: downloadURL.path)
+            self.store.currentUser = newUser
+        }
         
         let pageVC = UserPageViewController()
         present(pageVC, animated: true, completion: nil)
