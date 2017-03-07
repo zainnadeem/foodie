@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -30,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //            let pageVC = UserPageViewController()
 //            self.window?.rootViewController = pageVC
 //        }
+
+        
+        let pageVC = UserPageViewController()
+        self.window?.rootViewController = pageVC
+        
+        IQKeyboardManager.sharedManager().enable = true
         
         return true
     }

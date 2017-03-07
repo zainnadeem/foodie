@@ -36,6 +36,10 @@ let liveNowCollectionViewIdentifier = "liveNowCollectionViewCell"
 let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
 
 let searchUserTableViewCellIdentifier = "searchUserTableViewCell"
+let textViewTableViewCellIdentifier = "textViewTableViewCell"
+let editProfileTableViewCellIdentifier = "editProfileTableViewCell"
+let infoTableViewCellIdentifier = "infoTableViewCell"
+let defaultReuseIdentifier = "cell"
 
 let dishCellIdentifier = "dishCell"
 let reviewCellIdentifier = "reviewCell"
