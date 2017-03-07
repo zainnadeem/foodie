@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         signupVC.fullName = user.profile.name
         signupVC.email = user.profile.email
         signupVC.userSelectedManualLogin = false
-//        signupVC.pictureURL = user.profile.imageURL(withDimension: 100)
+        signupVC.pictureURL = user.profile.imageURL(withDimension: 100)
         self.window?.rootViewController = signupVC
         
     }

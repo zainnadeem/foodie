@@ -29,14 +29,14 @@ class MediaPickerHelper: NSObject {
     
     // MARK: - HELPER METHODS
     func showPhotoSourceSelection() {
-        let actionSheet = UIAlertController(title: "Pick New Media", message: "Would you like to open photos library or camera", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "Change Profile Picture", message: "", preferredStyle: .actionSheet)
         
-        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {
+        let cameraAction = UIAlertAction(title: "Take New Photo", style: .default, handler: {
             action in
             self.showImagePicker(sourceType: .camera)
         })
         
-        let photosLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: {
+        let photosLibraryAction = UIAlertAction(title: "Choose from Photo Library", style: .default, handler: {
             action in
             self.showImagePicker(sourceType: .photoLibrary)
         })
@@ -46,8 +46,8 @@ class MediaPickerHelper: NSObject {
             self.completion(nil)
         })
         
-        actionSheet.addAction(cameraAction)
         actionSheet.addAction(photosLibraryAction)
+        actionSheet.addAction(cameraAction)
         actionSheet.addAction(cancelAction)
         
         viewController.present(actionSheet, animated: true, completion: nil)

@@ -25,7 +25,7 @@ class SignupViewController: UIViewController {
     var credential: FIRAuthCredential?
     
     var profileImageView: UIImageView!
-    var changePhotoLabel: UILabel!
+    var changePhotoButton: UIButton!
     var textFieldStackView: UIStackView!
     var emailTextField = UITextField()
     var fullNameTextField = UITextField()
@@ -66,12 +66,13 @@ class SignupViewController: UIViewController {
         profileImageView.addGestureRecognizer(imageViewTapped)
         profileImageView.isUserInteractionEnabled = true
         
-        changePhotoLabel = UILabel()
-        view.addSubview(changePhotoLabel)
-        changePhotoLabel.text = "Change Profile Picture"
-        changePhotoLabel.snp.makeConstraints { (make) in
+        changePhotoButton = UIButton(type: .system)
+        view.addSubview(changePhotoButton)
+        changePhotoButton.setTitle("Change Profile Picture", for: .normal)
+        changePhotoButton.addTarget(self, action: #selector(displayImagePicker), for: .touchUpInside)
+        changePhotoButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(profileImageView.snp.bottom).offset(5)
+            make.top.equalTo(profileImageView.snp.bottom).offset(2)
         }
     }
     
