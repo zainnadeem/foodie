@@ -16,7 +16,6 @@ enum SelectedTableViewStatus {
     case menu, reviews, followers, following
 }
 
-
 class ProfileView: UIView, UITableViewDelegate {
     
     let user: User

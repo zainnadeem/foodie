@@ -31,12 +31,8 @@ class MainFeedViewController: UIViewController {
         self.navBar.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        
-        
+
         self.navBar.middleButton.title = "Mamma Foodie"
-        
-        self.tableView.layer.cornerRadius = 30
         self.tableView.backgroundColor = .black
         self.view.backgroundColor = .black
         

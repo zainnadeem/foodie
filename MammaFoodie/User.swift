@@ -23,6 +23,8 @@ class User
     var tags                            :           [String]
     var profileImage                    :           UIImage?
     
+    var addresses                       :           [Address]
+    
     var dishes                          :           [Dish]
     var follows                         :           [User]
     var followedBy                      :           [User]
@@ -52,7 +54,7 @@ class User
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String])
+    init(uid: String, username: String, fullName: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImage: UIImage?, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address])
     {
         self.uid = uid
         self.username = username
@@ -73,6 +75,7 @@ class User
         self.deviceTokens = deviceTokens
         self.isAvailable = isAvailable
         self.tags = tags
+        self.addresses = addresses
     }
     
     init() {
@@ -95,6 +98,7 @@ class User
         self.deviceTokens = []
         self.isAvailable = false
         self.tags = [""]
+        self.addresses = []
     }
     
     init(dictionary: [String : Any])
@@ -179,6 +183,17 @@ class User
             for (_, reviewDict) in reviewsDict {
                 if let reviewDict = reviewDict as? [String : Any] {
                     self.reviews.append(Review(dictionary: reviewDict))
+                }
+            }
+        }
+        
+        //Addresses
+        self.addresses = []
+        if let addressesDict = dictionary["addresses"] as? [String : Any]
+        {
+            for (_, addressDict) in addressesDict {
+                if let addressDict = addressDict as? [String : Any] {
+                    self.addresses.append(Address(dictionary: addressDict))
                 }
             }
         }
