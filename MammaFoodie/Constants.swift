@@ -37,6 +37,7 @@ let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
 
 let searchUserTableViewCellIdentifier = "searchUserTableViewCell"
 let textViewTableViewCellIdentifier = "textViewTableViewCell"
+let textFieldTableViewCellIdentifier = "textFieldTableViewCell"
 let editProfileTableViewCellIdentifier = "editProfileTableViewCell"
 let infoTableViewCellIdentifier = "infoTableViewCell"
 let defaultReuseIdentifier = "cell"

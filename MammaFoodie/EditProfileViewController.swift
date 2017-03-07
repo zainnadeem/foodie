@@ -30,8 +30,8 @@ class EditProfileViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        self.tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textViewTableViewCellIdentifier)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: defaultReuseIdentifier)
+        self.tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldTableViewCellIdentifier)
+        self.tableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: textViewTableViewCellIdentifier)
         
         setViewConstraints()
         setViewProperties()
@@ -99,13 +99,13 @@ class EditProfileViewController: UIViewController {
         let fullNameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
         let websiteCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
         let tagsCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
-        let bioCell = tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! TextFieldTableViewCell
+        let bioCell = tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! TextViewTableViewCell
         
         if let username     = userNameCell.textField.text     { store.currentUser.username   = username }
         if let fullName     = fullNameCell.textField.text     { store.currentUser.fullName   = fullName }
         if let website      = websiteCell.textField.text      { store.currentUser.website    = website }
         if let tags         = tagsCell.textField.text         { store.currentUser.tags       = tags.components(separatedBy: ",")}
-        if let bio          = bioCell.textField.text          { store.currentUser.bio        = bio }
+        if let bio          = bioCell.textView.text           { store.currentUser.bio        = bio }
 
         
         //save to firebase
@@ -126,9 +126,16 @@ extension EditProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell  = tableView.dequeueReusableCell(withIdentifier: textViewTableViewCellIdentifier, for: indexPath) as! TextFieldTableViewCell
-        cell.textField.delegate = self
-        return cell
+        if indexPath == IndexPath(row: 0, section: 4){
+            let cell  = tableView.dequeueReusableCell(withIdentifier: textViewTableViewCellIdentifier, for: indexPath) as! TextViewTableViewCell
+            cell.textView.delegate = self
+            return cell
+        }else{
+            let cell  = tableView.dequeueReusableCell(withIdentifier: textFieldTableViewCellIdentifier, for: indexPath) as! TextFieldTableViewCell
+            cell.textField.delegate = self
+            return cell
+        }
+    
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -155,7 +162,7 @@ extension EditProfileViewController: UITableViewDataSource {
     
 }
 
-extension EditProfileViewController: UITableViewDelegate{
+extension EditProfileViewController: UITableViewDelegate, UITextViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -163,6 +170,14 @@ extension EditProfileViewController: UITableViewDelegate{
         
         print(indexPath.section)
         print(indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == IndexPath(row: 0, section: 4){
+            return self.view.frame.height / 3
+        }else{
+            return 44
+        }
     }
     
     

@@ -1,39 +1,40 @@
 //
-//  TextFieldTableViewCell.swift
+//  TextViewTableViewCell.swift
 //  MammaFoodie
 //
-//  Created by Zain Nadeem on 3/3/17.
+//  Created by Zain Nadeem on 3/7/17.
 //  Copyright © 2017 MammaFoodieCorp. All rights reserved.
 //
 
 import UIKit
 
-class TextFieldTableViewCell: UITableViewCell {
-
-    lazy var textField:         UITextField = UITextField()
+class TextViewTableViewCell: UITableViewCell {
+    
+    lazy var textView:         UITextView = UITextView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(textField)
-        textField.snp.makeConstraints { (make) in
+        contentView.addSubview(textView)
+        textView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.8)
             make.width.equalToSuperview().multipliedBy(0.8)
         }
         
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 10
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.font = UIFont.mammaFoodieFont(15)
-        textField.textAlignment = .center
-
+        textView.layer.borderWidth = 3
+        textView.layer.cornerRadius = 10
+        textView.layer.borderColor = UIColor.black.cgColor
+        textView.font = UIFont.mammaFoodieFont(15)
+        textView.textAlignment = .center
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-  
+    
     
 }
+
