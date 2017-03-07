@@ -26,10 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
-            let pageVC = UserPageViewController()
-            self.window?.rootViewController = pageVC
-        }
+//        if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
+//            let pageVC = UserPageViewController()
+//            self.window?.rootViewController = pageVC
+//        }
         
         return true
     }
@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
         if let error = error {
             
             print("there was an error logging in with google: \(error.localizedDescription)")
@@ -59,18 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         guard let authentication = user.authentication else { return }
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        // ...
+        let signupVC = SignupViewController()
+        signupVC.credential = credential
+        signupVC.userID = user.userID
+        signupVC.fullName = user.profile.name
+        signupVC.email = user.profile.email
+        signupVC.userSelectedManualLogin = false
+//        signupVC.pictureURL = user.profile.imageURL(withDimension: 100)
+        self.window?.rootViewController = signupVC
         
-        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-            if let error = error {
-                print("Failed to create a firebase user with google: \(error.localizedDescription)")
-                return
-            }
-            
-            print("Successfully created a firebase user with google")
-            let signupVC = SignupViewController()
-            self.window?.rootViewController = signupVC
-        })
     }
 //
 //    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,

@@ -86,10 +86,18 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                 
                 let email = result["email"] as! String
                 let fullName: String = result["name"] as! String
+                let pictureDict = result["picture"] as! [String: Any]
+                let pictureData = pictureDict["data"] as! [String: Any]
+                let pictureURL = pictureData["url"] as! String
+                
+                
                 signupVC.email = email
                 signupVC.fullName = fullName
                 signupVC.userID = result["id"] as? String
+                signupVC.pictureURL = NSURL(string: pictureURL)
                 signupVC.userSelectedManualLogin = false
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                signupVC.credential = credential
                 OperationQueue.main.addOperation({ 
                     self.present(signupVC, animated: true, completion: nil)
                 })
@@ -98,13 +106,8 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             
         }
         
-        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-            if let error = error {
-                print("Failed to create a firebase user with facebook: \(error.localizedDescription)")
-                return
-            }
-        })
+        
+        
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
