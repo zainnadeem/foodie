@@ -10,16 +10,18 @@ import UIKit
 import SnapKit
 import ChameleonFramework
 import Firebase
-
+import SDWebImage
 
 class SignupViewController: UIViewController {
-    
+
+    let constants = Constants()
     var userSelectedManualLogin: Bool!
+    var mediaPickerHelper: MediaPickerHelper!
     
     var email: String?
     var fullName: String?
     var userID: String?
-    var pictureURL: NSURL?
+    var pictureURL: URL?
     var credential: FIRAuthCredential?
     
     var profileImageView: UIImageView!
@@ -43,14 +45,23 @@ class SignupViewController: UIViewController {
     
     fileprivate func setUpProfilePicture() {
         let profileImage = UIImage(named: "profile_placeholder")
-        profileImageView = UIImageView(image: profileImage)
+        
+        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: constants.profileImageHeight, height: constants.profileImageHeight))
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2.0
         view.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(75)
+            make.width.height.equalTo(constants.profileImageHeight)
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(40)
         }
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
+        if let pictureURL = self.pictureURL {
+            profileImageView.sd_setImage(with: pictureURL)
+        }
+        else {
+            profileImageView.image = profileImage
+        }
+        
         let imageViewTapped = UITapGestureRecognizer(target: self, action: #selector(displayImagePicker))
         profileImageView.addGestureRecognizer(imageViewTapped)
         profileImageView.isUserInteractionEnabled = true
@@ -133,8 +144,15 @@ class SignupViewController: UIViewController {
     }
     
     func displayImagePicker() {
-        let imagePicker = UIImagePickerController()
-        present(imagePicker, animated: true, completion: nil)
+        mediaPickerHelper = MediaPickerHelper(viewController: self) { (image) in
+            print("in the MediaPickerHelper")
+            if let image = image as? UIImage {
+                OperationQueue.main.addOperation({ 
+                    self.profileImageView.image = image
+                })
+                
+            }
+        }
     }
     
     

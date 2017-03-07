@@ -24,6 +24,7 @@ target 'MammaFoodie' do
     pod 'SnapKit'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
     pod 'Cosmos', '~> 8.0'
+    pod 'SDWebImage', '~>3.8'
 
   target 'MammaFoodieTests' do
     inherit! :search_paths

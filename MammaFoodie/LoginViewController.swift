@@ -76,7 +76,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
          create user in firebase database
         */
         
-        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.type(large)"]).start { (connection, result, error) in
+        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.width(100).height(100)"]).start { (connection, result, error) in
             if error != nil {
                 print("there was an error with the fb graph request: \(error?.localizedDescription)")
             }
@@ -94,7 +94,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                 signupVC.email = email
                 signupVC.fullName = fullName
                 signupVC.userID = result["id"] as? String
-                signupVC.pictureURL = NSURL(string: pictureURL)
+                signupVC.pictureURL = URL(string: pictureURL)
                 signupVC.userSelectedManualLogin = false
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 signupVC.credential = credential

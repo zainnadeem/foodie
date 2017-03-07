@@ -42,6 +42,8 @@ let reviewCellIdentifier = "reviewCell"
 let followCellIdentifier = "followCell"
 let profileHeaderIdentifier = "headerView"
 
+
+
 class Constants {
     
      // MARK: - Time Constants
@@ -87,8 +89,9 @@ class Constants {
     }
     
     
+    
     //Magic Numbers
-
+    let profileImageHeight = 100
 
     
     

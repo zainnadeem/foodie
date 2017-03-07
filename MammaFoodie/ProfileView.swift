@@ -160,7 +160,7 @@ extension ProfileView {
         }
         
         profileImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(75)
+            make.width.equalTo(100)
             make.height.equalTo(profileImageView.snp.width)
         }
 
