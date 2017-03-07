@@ -173,6 +173,8 @@ extension ProfileViewController {
     func deleteDishTapped(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             print ("delete dish tapped")
+            let cell = sender.view as! DishTableViewCell
+            alertView.nameLabel.text = cell.dish.name
             
             view.addSubview(alertView)
             alertView.snp.makeConstraints({ (make) in

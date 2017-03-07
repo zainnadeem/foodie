@@ -23,7 +23,15 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         searchBar = UISearchBar()
         self.contentView.addSubview(searchBar)
         searchBar.searchBarStyle = .minimal
-                
+        
+        for view in searchBar.subviews {
+            for subview in view.subviews {
+                if subview.isKind(of: UITextField.self) {
+                    let textField: UITextField = subview as! UITextField
+                    textField.layer.backgroundColor = UIColor.green.cgColor
+                }
+            }
+        }
         
         setConstraints()
         
@@ -48,9 +56,31 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
 }
 
-protocol TableViewHeaderDelegate: class {
+extension UISearchBar {
     
-    static var buttonIndex: Int { get set }
+    private func getViewElement<T>(type: T.Type) -> T? {
+        
+        let svs = subviews.flatMap { $0.subviews }
+        guard let element = (svs.filter { $0 is T }).first as? T else { return nil }
+        return element
+    }
+    
+    func setTextFieldColor(color: UIColor) {
+        
+        if let textField = getViewElement(type: UITextField.self) {
+            switch searchBarStyle {
+            case .minimal:
+                textField.layer.backgroundColor = color.cgColor
+                textField.layer.cornerRadius = 6
+                
+            case .prominent, .default:
+                textField.backgroundColor = color
+            }
+        }
+    }
+}
+
+protocol TableViewHeaderDelegate: class {
     
     func didEnterSearchTerm()
     
