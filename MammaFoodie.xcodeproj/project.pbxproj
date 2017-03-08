@@ -10,6 +10,7 @@
 		1CD8625914E88A054A9AF18D /* Pods_MammaFoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F298BC0C2AF8494C9185AB67 /* Pods_MammaFoodieTests.framework */; };
 		2B025E311E69CCFA00113729 /* ProfileTableViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E301E69CCFA00113729 /* ProfileTableViewButton.swift */; };
 		2B025E331E69DB1C00113729 /* DishAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E321E69DB1B00113729 /* DishAlertView.swift */; };
+		2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E391E6F5D2300113729 /* AddDishViewController.swift */; };
 		2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */; };
 		2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */; };
 		2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */; };
@@ -85,6 +86,7 @@
 		09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MammaFoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B025E301E69CCFA00113729 /* ProfileTableViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewButton.swift; sourceTree = "<group>"; };
 		2B025E321E69DB1B00113729 /* DishAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishAlertView.swift; sourceTree = "<group>"; };
+		2B025E391E6F5D2300113729 /* AddDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDishViewController.swift; sourceTree = "<group>"; };
 		2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MammaFoodie.entitlements; sourceTree = "<group>"; };
 		2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodieButton.swift; path = ../FoodieButton.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				BF7F19201E60DEE900595CA4 /* ProfileViewController.swift */,
 				BF7F19221E60DF0100595CA4 /* MainFeedViewController.swift */,
 				BF7F19241E60DF1E00595CA4 /* SearchViewController.swift */,
+				2B025E391E6F5D2300113729 /* AddDishViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */,
 				BF7F19211E60DEE900595CA4 /* ProfileViewController.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
+				2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */,
 				BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */,
 				BF7F19281E6472CE00595CA4 /* MediaPickerHelper.swift in Sources */,
 				BF7F19331E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift in Sources */,
