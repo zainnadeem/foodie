@@ -12,8 +12,8 @@ enum DatabaseReference {
     
     case root
     case users(uid: String)
+    case tokens(token: String)
     case allUsers
-    case dimes
     case chats
     case messages
     
@@ -31,6 +31,8 @@ enum DatabaseReference {
         switch self {
         case .root:
             return ""
+        case .tokens(let token):
+            return "tokens/\(token)"
         case .users(let uid):
             return "users/\(uid)"
         case .allUsers:
