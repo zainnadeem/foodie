@@ -11,14 +11,19 @@ import SnapKit
 
 class AddDishViewController: UIViewController {
     
+    var sendingViewController: UIViewController?
+    
     lazy var tableView = UITableView()
-    lazy var addButton = UIButton()
+    lazy var addButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        addButton.setTitle("Add Dish", for: .normal)
+        addButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         view.addSubview(tableView)
         view.addSubview(addButton)
@@ -32,6 +37,20 @@ class AddDishViewController: UIViewController {
             make.height.equalToSuperview().multipliedBy(0.8)
             make.leading.trailing.equalToSuperview()
         }
+        
+        addButton.snp.makeConstraints { (make) in
+            make.centerX.width.equalToSuperview()
+            make.top.equalTo(tableView.snp.bottom).offset(10)
+        }
+    }
+    
+    func dismissAction() {
+        if let profileVC = sendingViewController as? ProfileViewController {
+            self.dismiss(animated: true) {
+                profileVC.profileView.tableView.reloadData()
+            }
+        }
+    
     }
 
 

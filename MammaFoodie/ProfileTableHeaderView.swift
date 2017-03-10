@@ -12,7 +12,9 @@ import SnapKit
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     weak var delegate: TableViewHeaderDelegate?
     
-    var searchBar: UISearchBar!
+    lazy var searchBar = UISearchBar()
+    lazy var addItemButton = UIButton(type: .system)
+    
     
     func didEnterSearchTerm(_ sender: AnyObject) {
         delegate?.didEnterSearchTerm()
@@ -20,19 +22,12 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        searchBar = UISearchBar()
         self.contentView.addSubview(searchBar)
         searchBar.searchBarStyle = .minimal
         
-        for view in searchBar.subviews {
-            for subview in view.subviews {
-                if subview.isKind(of: UITextField.self) {
-                    let textField: UITextField = subview as! UITextField
-                    textField.layer.backgroundColor = UIColor.green.cgColor
-                }
-            }
-        }
-        
+        addItemButton.setTitle("+", for: .normal)
+        addItemButton.titleLabel?.font = UIFont.mammaFoodieFont(30)
+        self.contentView.addSubview(addItemButton)
         setConstraints()
         
     }
@@ -40,19 +35,21 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     func setConstraints() {
         searchBar.snp.makeConstraints { (make) in
             make.height.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.75)
-            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.85)
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+        }
+        
+        addItemButton.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.height.equalToSuperview()
+            make.left.equalTo(searchBar.snp.right).offset(10)
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
-    
-    
-    
 
 }
 

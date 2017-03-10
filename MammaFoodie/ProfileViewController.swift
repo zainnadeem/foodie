@@ -41,6 +41,12 @@ class ProfileViewController: UIViewController {
         
     }
     
+    func showAddDishVC() {
+        let addDishVC = AddDishViewController()
+        addDishVC.sendingViewController = self
+        self.present(addDishVC, animated: true, completion: nil)
+    }
+    
     fileprivate func makeDummyData() {
 
         user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", email: "carrot@slat.com", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImageURL: "", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true, tags: ["carrots, chocolate, Indian, Meatballs"], addresses: [])
@@ -70,7 +76,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("TableView array count: \(arrayForTableView.count)")
         return arrayForTableView.count
         
     }
@@ -99,7 +104,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: profileHeaderIdentifier)
+        
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: profileHeaderIdentifier) as! ProfileTableHeaderView
+        headerView.addItemButton.addTarget(self, action: #selector(showAddDishVC), for: .touchUpInside)
+        switch profileView.profileTableViewStatus {
+        case .reviews, .followers, .following: headerView.addItemButton.isHidden = true
+        default: headerView.addItemButton.isHidden = false
+        }
+        
         return headerView
     }
     

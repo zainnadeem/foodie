@@ -27,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-//        if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
-//            let pageVC = UserPageViewController()
-//            self.window?.rootViewController = pageVC
-//        }
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
+            let pageVC = UserPageViewController()
+            self.window?.rootViewController = pageVC
+        }
 
         
 //        let pageVC = UserPageViewController()

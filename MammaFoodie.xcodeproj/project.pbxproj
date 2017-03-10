@@ -458,7 +458,7 @@
 				TargetAttributes = {
 					2B6CD0B01E5DDBA00001EA68 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VC999G43T3;
+						DevelopmentTeam = ZTEU5RXF67;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -806,7 +806,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MammaFoodie/MammaFoodie.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VC999G43T3;
+				DEVELOPMENT_TEAM = ZTEU5RXF67;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"~/FacebookSDK",
@@ -828,7 +828,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MammaFoodie/MammaFoodie.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VC999G43T3;
+				DEVELOPMENT_TEAM = ZTEU5RXF67;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"~/FacebookSDK",

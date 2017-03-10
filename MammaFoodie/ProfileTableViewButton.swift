@@ -32,7 +32,7 @@ class ProfileTableViewButton: UIButton {
                 
             case false:
                 UIView.animate(withDuration: 0.5, animations: { 
-                    self.backgroundColor = UIColor.white
+                    self.backgroundColor = FlatWhite()
                     self.setTitleColor(FlatBlack(), for: .normal)
                 })
                 
