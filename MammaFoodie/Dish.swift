@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class Dish{
+class Dish {
     
     // MARK: - Dish Properties
     
@@ -58,7 +58,7 @@ class Dish{
     }
     
     
-    func save(ref: FIRDatabaseReference, completion: @escaping (URL) -> Void) {
+    func save(completion: @escaping (URL) -> Void) {
         
         let ref = DatabaseReference.users(uid: self.uid).reference().child("dishes").childByAutoId()
         ref.setValue(toDictionary())

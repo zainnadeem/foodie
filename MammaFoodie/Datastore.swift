@@ -16,7 +16,7 @@ class DataStore {
     
     
     
-    var currentUser = User(uid: "", username: "currentUser", fullName: "Johnny Appleseed", email: "apple@seed.com", bio: "This is my bio", website: "www.mammafoodie.com", location: "NY", follows: [], followedBy: [], profileImageURL: "", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: ["Cookies, Soups, Pizza, Cake"], addresses: [])
+    var currentUser = User(uid: "10212031178032177", username: "currentUser", fullName: "Johnny Appleseed", email: "apple@seed.com", bio: "This is my bio", website: "www.mammafoodie.com", location: "NY", follows: [], followedBy: [], profileImageURL: "", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: ["Cookies, Soups, Pizza, Cake"], addresses: [])
     
     
     func createDummyUsers() -> [User] {

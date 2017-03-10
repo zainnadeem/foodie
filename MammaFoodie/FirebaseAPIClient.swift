@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class FirebaseAPIClient {
+    
     class func uploadImageToStorage(image: UIImage, completion: @escaping (URL) -> ()) {
         let imageData = UIImagePNGRepresentation(image)
         
@@ -25,4 +26,12 @@ class FirebaseAPIClient {
             }
         }
     }
+    
+//    class func saveDishToDatabase(dish: Dish, completion: @escaping (Error?) -> ()) {
+//        let userRef = DatabaseReference.users(uid: DataStore.sharedInstance.currentUser.uid).reference()
+//        let dishRef = userRef.child("dishes").childByAutoId()
+//        let newDish = Dish(uid: <#T##String#>, name: <#T##String#>, description: <#T##String#>, mainImage: <#T##UIImage?#>, price: <#T##Int#>, likedBy: <#T##[User]#>, averageRating: <#T##Int#>)
+//        dishRef.setValue(["name": dish.name, "description": dish.description, ])
+////        let databaseRef = FIRDatabase.database().reference().child("users")
+//    }
 }

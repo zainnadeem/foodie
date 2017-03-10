@@ -48,7 +48,7 @@ extension FIRImage {
         // Delete the file
         ref.delete { error in
             if let error = error {
-                // Uh-oh, an error occurred!
+                print("there was an error deleting the file from firebase: \(error.localizedDescription)")
             } else {
                 // File deleted successfully
             }
