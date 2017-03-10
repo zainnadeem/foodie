@@ -17,6 +17,7 @@ class AddDishViewController: UIViewController {
     var mediaPickerHelper: MediaPickerHelper!
     let store = DataStore.sharedInstance
     
+    
     lazy var tableView = UITableView()
     lazy var addButton = UIButton(type: .system)
 
@@ -27,10 +28,16 @@ class AddDishViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
+        let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.endEditing(true)
+        self.view.addGestureRecognizer(dismissGesture)
+        tableView.addGestureRecognizer(dismissGesture)
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AddImageTableViewCell.self, forCellReuseIdentifier: addImageTableViewCelIdentifier)
         tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldTableViewCellIdentifier)
+        tableView.register(MoneyTextFieldTableViewCell.self, forCellReuseIdentifier: moneyTextFieldTableViewCellIdentifier)
         
         navBar.delegate = self
         navBar.middleButton.title = "Add a New Dish"
@@ -51,7 +58,11 @@ class AddDishViewController: UIViewController {
         setConstraints()
     }
     
-    func setConstraints() {
+    func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    fileprivate func setConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(navBar.snp.bottom)
             make.height.equalToSuperview().multipliedBy(0.82)
@@ -67,16 +78,44 @@ class AddDishViewController: UIViewController {
     }
     
     func dismissAction() {
-        let newDish = Dish(uid: store.currentUser.uid, name: "Pizza", description: "delicious", mainImage: #imageLiteral(resourceName: "profile_placeholder"), price: 10, likedBy: [], averageRating: 0)
-        store.currentUser.dishes.append(newDish)
-        newDish.save { (url) in
-            print("The dish was successfully saved with download URL \(url)")
-        }
-        if let profileVC = sendingViewController as? ProfileViewController {
-            self.dismiss(animated: true) {
-                profileVC.profileView.tableView.reloadData()
+        
+        saveDish { (success) in
+            
+            if success {
+                if let profileVC = self.sendingViewController as? ProfileViewController {
+                    self.dismiss(animated: true) {
+                        profileVC.profileView.tableView.reloadData()
+                    }
+                }
             }
         }
+        
+    }
+    
+    func saveDish(completion: @escaping (Bool) -> ()) {
+        
+        let titleCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TextFieldTableViewCell
+        let descriptionCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
+        let priceCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
+        let imageCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! AddImageTableViewCell
+        let title = titleCell.textField.text
+        let description = descriptionCell.textField.text
+        let price = priceCell.textField.text
+        let image = imageCell.dishImageView.image
+        
+        if validateFields(title: title, description: description, price: price, image: image) {
+            let priceInCents = Int(Float(price!)! * 100)
+            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image, price: priceInCents, likedBy: [], averageRating: 0)
+            store.currentUser.dishes.append(newDish)
+            newDish.save { (url) in
+                print("The dish was successfully saved! Its image can be downloaded at \(url)")
+                
+            }
+            completion(true)
+        }
+        else { completion(false) }
+        
+        
     }
     
     func displayImagePicker() {
@@ -90,6 +129,42 @@ class AddDishViewController: UIViewController {
                 
             }
         }
+    }
+    
+    func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
+        print("validating now")
+        let alertController = UIAlertController(title: "hol up", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "word", style: .default) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(okAction)
+
+        let titleFieldCheck = title != "" && title != nil
+        let descriptionFieldCheck = description != "" && description != nil
+        
+        let imageCheck = image != #imageLiteral(resourceName: "add_dish")
+        
+        if !titleFieldCheck {
+            alertController.message = "yo son you gotta enter a name for ya dish"
+            print("showing alert controller for title now")
+            present(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        if !descriptionFieldCheck {
+            alertController.message = "yo son you gotta enter a description for ya dish"
+            print("showing alert controller for description now")
+            present(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        if !imageCheck {
+            alertController.message = "yo son pick an image real quick"
+            print("showing alert controller for image now")
+            present(alertController, animated: true, completion: nil)
+            return false
+        }
+        return true
     }
 
 
@@ -112,6 +187,12 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dishImageView.isUserInteractionEnabled = true
             return cell
         }
+            
+        else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: moneyTextFieldTableViewCellIdentifier, for: indexPath) as! MoneyTextFieldTableViewCell
+            return cell
+        }
+        
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldTableViewCellIdentifier, for: indexPath) as! TextFieldTableViewCell
             return cell
@@ -139,13 +220,9 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddDishViewController: NavBarViewDelegate {
-    func rightBarButtonTapped(_ sender: AnyObject) {
-        
-    }
+    func rightBarButtonTapped(_ sender: AnyObject) {}
     
-    func middleBarButtonTapped(_ Sender: AnyObject) {
-        
-    }
+    func middleBarButtonTapped(_ Sender: AnyObject) {}
     
     func leftBarButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)

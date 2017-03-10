@@ -35,3 +35,24 @@ class TextFieldTableViewCell: UITableViewCell {
   
     
 }
+
+class MoneyTextFieldTableViewCell: TextFieldTableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        let dollarSign = UILabel(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        dollarSign.textColor = UIColor.darkGray
+        dollarSign.text = "  $"
+        self.textField.leftViewMode = .always
+        self.textField.leftView = dollarSign
+        
+        let buffer = UILabel(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        buffer.textColor = UIColor.darkGray
+        buffer.text = "   "
+        self.textField.rightViewMode = .always
+        self.textField.rightView = buffer
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
