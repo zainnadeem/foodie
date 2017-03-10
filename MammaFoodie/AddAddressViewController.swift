@@ -30,6 +30,7 @@ class AddAddressViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textViewTableViewCellIdentifier)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: defaultReuseIdentifier)
+        self.tableView.register(FormTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: formTableViewHeaderViewIdentifier)
         
         setViewConstraints()
         setViewProperties()
@@ -121,25 +122,16 @@ extension AddAddressViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        let label = UILabel()
-        label.text = sections[section]
-        label.font = UIFont.mammaFoodieFontBold(15)
-        
-        
-        label.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 35)
-        label.textAlignment = .center
-        
-        
-        view.addSubview(label)
+        let view = FormTableViewHeaderView(reuseIdentifier: formTableViewHeaderViewIdentifier)
+        view.label.text = sections[section]
         
         return view
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 24
     }
+    
     
     
 }

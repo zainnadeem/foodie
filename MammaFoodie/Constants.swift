@@ -38,6 +38,7 @@ let upcomingBroadcastsViewIdentifier = "upcomingBroadcastsViewCell"
 let searchUserTableViewCellIdentifier = "searchUserTableViewCell"
 let textViewTableViewCellIdentifier = "textViewTableViewCell"
 let textFieldTableViewCellIdentifier = "textFieldTableViewCell"
+let addImageTableViewCelIdentifier = "addImageTableViewCell"
 let editProfileTableViewCellIdentifier = "editProfileTableViewCell"
 let infoTableViewCellIdentifier = "infoTableViewCell"
 let defaultReuseIdentifier = "cell"
@@ -46,6 +47,7 @@ let dishCellIdentifier = "dishCell"
 let reviewCellIdentifier = "reviewCell"
 let followCellIdentifier = "followCell"
 let profileHeaderIdentifier = "headerView"
+let formTableViewHeaderViewIdentifier = "formHeaderView"
 
 
 

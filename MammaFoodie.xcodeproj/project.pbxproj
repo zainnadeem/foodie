@@ -11,6 +11,8 @@
 		2B025E311E69CCFA00113729 /* ProfileTableViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E301E69CCFA00113729 /* ProfileTableViewButton.swift */; };
 		2B025E331E69DB1C00113729 /* DishAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E321E69DB1B00113729 /* DishAlertView.swift */; };
 		2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E391E6F5D2300113729 /* AddDishViewController.swift */; };
+		2B025E3C1E73070800113729 /* AddImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */; };
+		2B025E3E1E73101C00113729 /* FormTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */; };
 		2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */; };
 		2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */; };
 		2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */; };
@@ -88,6 +90,8 @@
 		2B025E301E69CCFA00113729 /* ProfileTableViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewButton.swift; sourceTree = "<group>"; };
 		2B025E321E69DB1B00113729 /* DishAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishAlertView.swift; sourceTree = "<group>"; };
 		2B025E391E6F5D2300113729 /* AddDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDishViewController.swift; sourceTree = "<group>"; };
+		2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageTableViewCell.swift; sourceTree = "<group>"; };
+		2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewHeaderView.swift; sourceTree = "<group>"; };
 		2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MammaFoodie.entitlements; sourceTree = "<group>"; };
 		2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodieButton.swift; path = ../FoodieButton.swift; sourceTree = "<group>"; };
@@ -249,14 +253,16 @@
 			children = (
 				2B9C92F41E647ECA0020FD28 /* ProfileView.swift */,
 				2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */,
-				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
-				2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */,
-				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
+				2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */,
 				2B025E321E69DB1B00113729 /* DishAlertView.swift */,
-				BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */,
 				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
 				2B025E301E69CCFA00113729 /* ProfileTableViewButton.swift */,
 				BF7F194B1E68F2CA00595CA4 /* FollowButton.swift */,
+				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
+				2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */,
+				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
+				BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */,
+				2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -638,6 +644,7 @@
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,
 				BFB8535E1E5DE671009D7069 /* Notification.swift in Sources */,
 				2B9C92F31E6478950020FD28 /* FirebaseAPIClient.swift in Sources */,
+				2B025E3E1E73101C00113729 /* FormTableViewHeaderView.swift in Sources */,
 				BF7F191F1E60DE9D00595CA4 /* UserPageViewController.swift in Sources */,
 				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
 				2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */,
@@ -665,6 +672,7 @@
 				2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */,
 				BFCCC4A71E6DCDC000CFF898 /* EditProfileTableViewCell.swift in Sources */,
 				2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */,
+				2B025E3C1E73070800113729 /* AddImageTableViewCell.swift in Sources */,
 				2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */,
 				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,
 				BF7F19231E60DF0100595CA4 /* MainFeedViewController.swift in Sources */,

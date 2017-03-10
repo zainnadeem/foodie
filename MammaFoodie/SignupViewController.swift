@@ -154,7 +154,7 @@ class SignupViewController: UIViewController {
         mediaPickerHelper = MediaPickerHelper(viewController: self) { (image) in
             print("in the MediaPickerHelper")
             if let image = image as? UIImage {
-                OperationQueue.main.addOperation({ 
+                OperationQueue.main.addOperation({
                     self.profileImageView.image = image
                 })
                 
