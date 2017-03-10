@@ -35,6 +35,7 @@
 		BF3F61061E6F0DD9008EF3C9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */; };
 		BF3F61081E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */; };
 		BF3F610B1E6F211E008EF3C9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F610A1E6F211E008EF3C9 /* EditProfileViewController.swift */; };
+		BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */; };
 		BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */; };
 		BF75FF541E69DBB900DD7102 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */; };
 		BF75FF561E69F28E00DD7102 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */; };
@@ -117,6 +118,7 @@
 		BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleBroadcastViewController.swift; sourceTree = "<group>"; };
 		BF3F610A1E6F211E008EF3C9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			children = (
 				BFCCC4A61E6DCDC000CFF898 /* EditProfileTableViewCell.swift */,
 				BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */,
+				BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */,
 				BFCCC4A81E6DF12000CFF898 /* InfoTableViewCell.swift */,
 			);
 			name = Cells;
@@ -665,6 +668,7 @@
 				2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */,
 				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,
 				BF7F19231E60DF0100595CA4 /* MainFeedViewController.swift in Sources */,
+				BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
