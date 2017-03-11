@@ -127,22 +127,29 @@ class SignupViewController: UIViewController {
     }
     
     func completeButtonTapped() {
-//        let user = User(uid: <#T##String#>, username: <#T##String#>, fullName: <#T##String#>, bio: <#T##String#>, website: <#T##String#>, location: <#T##String#>, follows: <#T##[User]#>, followedBy: <#T##[User]#>, profileImage: <#T##UIImage?#>, dishes: <#T##[Dish]#>, reviews: <#T##[Review]#>, notifications: <#T##[Notification]#>, broadcasts: <#T##[Broadcast]#>, blockedUsers: <#T##[User]#>, totalLikes: <#T##Int#>, averageRating: <#T##Int#>, deviceTokens: <#T##[String]#>)
-        FIRDatabase.database().reference().child("users/\(userID!)").setValue(["email" : emailTextField.text, "username" : usernameTextField.text, "fullName" : fullNameTextField.text])
-        
         if let credential = credential {
             FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
                 if let error = error {
                     print("Failed to create a firebase user with facebook or google: \(error.localizedDescription)")
                     return
                 }
+                guard let user = user else{ return }
+                
+                let firImage = FIRImage(image: self.profileImageView.image!)
+                firImage.save(user.uid) { (downloadURL) in
+                    
+                    let newUser = User(uid: user.uid, username: self.usernameTextField.text!, fullName: self.fullNameTextField.text!, email: self.emailTextField.text!, bio: "", website: "", location: "", follows: [], followedBy: [], profileImageURL: downloadURL.absoluteString, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 0, deviceTokens: [], isAvailable: false, tags: [""], addresses: [])
+                    
+                    self.store.currentUser = newUser
+                    self.store.currentUser.updateUserInfo()
+                    
+                    guard let id = self.userID else { return }
+                    DatabaseReference.tokens(token: id).reference().setValue(user.uid)
+
+                }
+
             })
             
-        }
-        let firImage = FIRImage(image: profileImageView.image!)
-        firImage.save(userID!) { (downloadURL) in
-            let newUser = User(uid: self.userID!, username: self.usernameTextField.text!, fullName: self.fullNameTextField.text!, email: self.emailTextField.text!, profileImageURL: downloadURL.path)
-            self.store.currentUser = newUser
         }
         
         let pageVC = UserPageViewController()

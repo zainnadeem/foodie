@@ -8,15 +8,39 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 
 class DataStore {
     
     static let sharedInstance = DataStore()
+
+    var currentUser = User()
     
+    func getCurrentUserWithToken(token: String,_ completion: @escaping () -> Void){
+        
+        DatabaseReference.tokens(token: token).reference().observeSingleEvent(of: .value, with: { (snapshot) in
+            if let uid = snapshot.value {
+                self.getCurrentUserWithUID(uid: uid as! String, {
+                   completion()
+                })
+            }
+            
+        })
+        
+    }
     
-    
-    var currentUser = User(uid: "10212031178032177", username: "currentUser", fullName: "Johnny Appleseed", email: "apple@seed.com", bio: "This is my bio", website: "www.mammafoodie.com", location: "NY", follows: [], followedBy: [], profileImageURL: "", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: ["Cookies, Soups, Pizza, Cake"], addresses: [])
+    func getCurrentUserWithUID(uid: String,_ completion: @escaping () -> Void){
+        
+        DatabaseReference.users(uid: uid).reference().observeSingleEvent(of: .value, with: { (snapshot) in
+                if let userDict = snapshot.value as? [String : Any] {
+                    self.currentUser = User(dictionary: userDict)
+                    completion()
+            }
+            
+        })
+        
+    }
     
     
     func createDummyUsers() -> [User] {

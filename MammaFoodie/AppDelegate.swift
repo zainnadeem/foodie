@@ -16,7 +16,7 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-
+    let store = DataStore.sharedInstance
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -28,11 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().delegate = self
         
         if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
+            
+            var token = String()
+            if let user = GIDSignIn.sharedInstance().currentUser{
+                token = GIDSignIn.sharedInstance().currentUser.userID
+            }else{
+                token = FBSDKAccessToken.current().userID
+            }
+            
+            store.getCurrentUserWithToken(token: token, { 
+                
+            })
+            
             let pageVC = UserPageViewController()
             self.window?.rootViewController = pageVC
         }
-        
-        
 
         
 //        let pageVC = UserPageViewController()

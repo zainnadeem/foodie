@@ -122,7 +122,7 @@ class User
         bio = dictionary["bio"] as! String
         website = dictionary["website"] as! String
         location = dictionary["location"] as! String
-        profileImageURL = dictionary["profileImageURL"] as! String
+        profileImageURL = dictionary["profile image URL"] as! String
         
         averageRating = dictionary["average rating"] as! Int
         totalLikes = dictionary["total likes"] as! Int
@@ -228,11 +228,20 @@ class User
     
     func toDictionary() -> [String : Any] {
         return [
-            "uid" : uid,
-            "username" : username,
-            "fullName" : fullName,
-            "bio" : bio,
-            "website" : website
+            "uid"             : uid,
+            "username"        : username,
+            "fullName"        : fullName,
+            "location"        : location,
+            "email"           : email,
+            "tags"            : tags,
+            "bio"             : bio,
+            "website"         : website,
+            "profile image URL" : profileImageURL,
+            "average rating"  : averageRating,
+            "total likes"     : totalLikes,
+            "is available"    : isAvailable
+            
+            
         ]
     }
 }
@@ -263,6 +272,13 @@ extension User {
         let ref = DatabaseReference.users(uid: uid).reference()
         ref.child("followed by/\(user.uid)").setValue(user.toDictionary())
     }
+    
+    
+    
+    func updateUserInfo(){
+        DatabaseReference.users(uid: uid).reference().updateChildValues(self.toDictionary())
+    }
+
     
 }
 

@@ -20,12 +20,15 @@ class EditProfileViewController: UIViewController {
     
     var sections = ["username", "fullname", "website", "tags", "bio"]
     let store = DataStore.sharedInstance
-    
-    
+    var userInfo = [""]
+
     override func viewDidLoad()  {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Edit Profile"
+        
+        let user = store.currentUser
+        userInfo = [user.username, user.fullName, user.website, user.tagsString, user.bio]
         
         self.navBar.delegate = self
         self.tableView.delegate = self
@@ -33,6 +36,7 @@ class EditProfileViewController: UIViewController {
         
         self.tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldTableViewCellIdentifier)
         self.tableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: textViewTableViewCellIdentifier)
+        
         
         setViewConstraints()
         setViewProperties()
@@ -56,7 +60,7 @@ class EditProfileViewController: UIViewController {
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(profileImageView.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(0.69)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
@@ -72,8 +76,9 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    func setViewProperties(){
 
+    
+    func setViewProperties(){
         self.profileImageView.contentMode = .scaleAspectFill
         self.profileImageView.isUserInteractionEnabled = true
         self.profileImageView.layer.cornerRadius = 10
@@ -81,6 +86,8 @@ class EditProfileViewController: UIViewController {
         self.profileImageView.layer.borderWidth = 2
         self.profileImageView.clipsToBounds = true
         self.profileImageView.sd_setImage(with: URL(string: store.currentUser.profileImageURL))
+        
+        
         
 
         saveButton.setTitle("save", for: .normal)
@@ -111,6 +118,7 @@ class EditProfileViewController: UIViewController {
 
         
         //save to firebase
+        store.currentUser.updateUserInfo()
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -131,10 +139,12 @@ extension EditProfileViewController: UITableViewDataSource {
         if indexPath == IndexPath(row: 0, section: 4){
             let cell  = tableView.dequeueReusableCell(withIdentifier: textViewTableViewCellIdentifier, for: indexPath) as! TextViewTableViewCell
             cell.textView.delegate = self
+            cell.textView.text = userInfo[4]
             return cell
         }else{
             let cell  = tableView.dequeueReusableCell(withIdentifier: textFieldTableViewCellIdentifier, for: indexPath) as! TextFieldTableViewCell
             cell.textField.delegate = self
+            cell.textField.text = userInfo[indexPath.section]
             return cell
         }
     

@@ -46,7 +46,7 @@ class SettingsViewController: UIViewController {
         self.navBar.middleButton.title = "Settings"
         
         self.tableView.register(EditProfileTableViewCell.self, forCellReuseIdentifier: editProfileTableViewCellIdentifier)
-
+        
         sections = [
             Section(type: .YourAccount, items: [.EditProfile, .Payment, .Address]),
             Section(type: .Support, items: [.SubmitFeedback, .Terms]),
@@ -55,6 +55,10 @@ class SettingsViewController: UIViewController {
         
         self.setViewConstraints()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     private func setViewConstraints(){
@@ -95,7 +99,7 @@ extension SettingsViewController : UITableViewDataSource {
             let cell = UITableViewCell.init(style: .subtitle, reuseIdentifier: defaultReuseIdentifier)
             
             switch sections[indexPath.section].items[indexPath.row] {
-               
+                
             case .Payment:
                 cell.textLabel?.text = "Payment"
                 cell.accessoryType = .disclosureIndicator
@@ -134,7 +138,7 @@ extension SettingsViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch sections[indexPath.section].items[indexPath.row] {
-          
+            
         case .EditProfile:
             let destinationVC = EditProfileViewController()
             destinationVC.modalTransitionStyle = .crossDissolve
@@ -153,11 +157,11 @@ extension SettingsViewController: UITableViewDelegate{
             
         case .Terms:
             print("Open Terms")
-
+            
             
         case .LogoutUser:
             print("Show Logout")
-
+            
             
         default:
             print("should not reach this point (cellForRow)")
@@ -169,7 +173,7 @@ extension SettingsViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == IndexPath(row: 0, section: 0) { return self.view.bounds.width / 4 } else {
             return self.view.bounds.width / 6 }
-        }
+    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
@@ -205,7 +209,7 @@ extension SettingsViewController : NavBarViewDelegate {
     
     func leftBarButtonTapped(_ sender: AnyObject) {
         if let pageVC = self.parent as? UserPageViewController {
-           
+            
         }
         
     }
