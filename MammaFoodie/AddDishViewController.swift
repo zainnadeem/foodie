@@ -142,25 +142,30 @@ class AddDishViewController: UIViewController {
         let titleFieldCheck = title != "" && title != nil
         let descriptionFieldCheck = description != "" && description != nil
         
+        let priceFieldCheck = price?.isValidCurrency()
+        
         let imageCheck = image != #imageLiteral(resourceName: "add_dish")
         
         if !titleFieldCheck {
             alertController.message = "yo son you gotta enter a name for ya dish"
-            print("showing alert controller for title now")
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !descriptionFieldCheck {
             alertController.message = "yo son you gotta enter a description for ya dish"
-            print("showing alert controller for description now")
+            present(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        if !priceFieldCheck! {
+            alertController.message = "yo son you gotta enter a valid price"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !imageCheck {
             alertController.message = "yo son pick an image real quick"
-            print("showing alert controller for image now")
             present(alertController, animated: true, completion: nil)
             return false
         }
