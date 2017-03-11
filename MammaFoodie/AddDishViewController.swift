@@ -29,7 +29,6 @@ class AddDishViewController: UIViewController {
         self.view.backgroundColor = .white
         
         let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.view.endEditing(true)
         self.view.addGestureRecognizer(dismissGesture)
         tableView.addGestureRecognizer(dismissGesture)
 
@@ -220,7 +219,7 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 24
+        return formTableViewSectionHeaderHeight
     }
 }
 
