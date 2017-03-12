@@ -106,6 +106,7 @@ class SignupViewController: UIViewController {
         completeButton.layer.cornerRadius = 10
         completeButton.layer.borderColor = UIColor.white.cgColor
         completeButton.layer.borderWidth = 1
+        completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         
         view.addSubview(completeButton)
         
@@ -203,6 +204,17 @@ extension SignupViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: textFieldTableViewCellIdentifier) as! TextFieldTableViewCell
+        switch indexPath.section {
+        case 0:
+            cell.textField.placeholder = "Email"
+            if let email = self.email { cell.textField.text = email }
+        case 1:
+            cell.textField.placeholder = "Full Name"
+            if let fullName = self.fullName { cell.textField.text = fullName }
+        case 2:
+            cell.textField.placeholder = "Username"
+        default: print("we shouldn't get here...")
+        }
         return cell
     }
     
@@ -217,11 +229,6 @@ extension SignupViewController: UITableViewDelegate, UITableViewDataSource {
         return formTableViewSectionHeaderHeight
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == sections.count-1 {
-//            preFillTextFields()
-        }
-    }
 }
 
 extension SignupViewController : NavBarViewDelegate {

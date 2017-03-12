@@ -66,7 +66,7 @@ extension String {
     func isValidCurrency() -> Bool {
         var notDigitsSet = NSCharacterSet.decimalDigits.inverted //everything that's not a digit
         notDigitsSet.remove(charactersIn: ".") //a period in the price is valid
-        var currencyCheck = self.rangeOfCharacter(from: notDigitsSet) == nil
+        var currencyCheck = self.rangeOfCharacter(from: notDigitsSet) == nil && self != ""
         if self.contains(".") {
             let periodRange = self.range(of: ".")
             let substringAfterPeriod = self.substring(from: (periodRange?.upperBound)!)
