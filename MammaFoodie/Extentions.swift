@@ -63,6 +63,7 @@ extension UIView {
 }
 
 extension String {
+    
     func isValidCurrency() -> Bool {
         var notDigitsSet = NSCharacterSet.decimalDigits.inverted //everything that's not a digit
         notDigitsSet.remove(charactersIn: ".") //a period in the price is valid
@@ -74,6 +75,13 @@ extension String {
             currencyCheck = currencyCheck && afterPeriodCount == 2 && !substringAfterPeriod.contains(".")
         }
         return currencyCheck
+    }
+    
+    mutating func convertPriceInCentsToDollars() -> String {
+        let endIndex = self.endIndex
+        self.insert(".", at: self.index(endIndex, offsetBy: -2))
+        self.insert("$", at: self.startIndex)
+        return self
     }
 }
 

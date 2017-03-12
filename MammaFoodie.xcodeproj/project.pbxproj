@@ -22,6 +22,7 @@
 		2B6CD0CA1E5DDBA00001EA68 /* MammaFoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */; };
 		2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */; };
 		2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */; };
+		2B8881511E75C80A008BB0B5 /* PurchaseDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */; };
 		2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */; };
 		2B8C76F41E5DF24400FA60C8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */; };
 		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
@@ -106,6 +107,7 @@
 		2B6CD0CB1E5DDBA00001EA68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseDishViewController.swift; sourceTree = "<group>"; };
 		2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		BF3F61091E6F20B5008EF3C9 /* To Do */ = {
 			isa = PBXGroup;
 			children = (
+				2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */,
 				BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */,
 				BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */,
 			);
@@ -625,6 +628,7 @@
 			files = (
 				2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */,
 				BF7F192F1E647D3700595CA4 /* LiveNowCollectionViewCell.swift in Sources */,
+				2B8881511E75C80A008BB0B5 /* PurchaseDishViewController.swift in Sources */,
 				BF7F19191E60A51200595CA4 /* Constants.swift in Sources */,
 				BFCCC4A91E6DF12000CFF898 /* InfoTableViewCell.swift in Sources */,
 				BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */,

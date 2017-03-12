@@ -120,7 +120,6 @@ extension ProfileView {
         websiteTextView.backgroundColor = UIColor.clear
         websiteTextView.textAlignment = .center
         
-        
         menuButton = ProfileTableViewButton()
         menuButton.setTitle("Menu", for: .normal)
         menuButton.titleLabel?.textAlignment = .center
@@ -137,7 +136,6 @@ extension ProfileView {
         followingButton.setTitle("Following", for: .normal)
         followingButton.titleLabel?.textAlignment = .center
         followingButton.addTarget(self, action: #selector(followingButtonTapped), for: .touchUpInside)
-        
         
         tableViewButtonStackView = UIStackView(arrangedSubviews: [menuButton, reviewsButton, followersButton, followingButton])
         tableViewButtonStackView.axis = .horizontal
