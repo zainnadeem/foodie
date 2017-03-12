@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsViewController: UIViewController {
     
@@ -160,6 +161,7 @@ extension SettingsViewController: UITableViewDelegate{
             
             
         case .LogoutUser:
+            self.logOutUser()
             print("Show Logout")
             
             
@@ -218,6 +220,55 @@ extension SettingsViewController : NavBarViewDelegate {
         let index = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: index, at: .top, animated: true)
     }
+    
+}
+
+
+//Mark : Logout
+extension SettingsViewController {
+    
+     func logOutUser(){
+        
+        let alertVC = UIAlertController(title: "Are you sure you want to log out?", message: "", preferredStyle: .alert)
+        let logOut = UIAlertAction(title: "Log Out", style: .default, handler: {
+            action in
+            
+            print("Logout tapped")
+            
+            do {
+                
+                try FIRAuth.auth()?.signOut()
+//                self.store.currentUser?.unregisterToken()
+                
+            }catch{
+                print("error \(error)")
+            }
+            
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "initialLogin")
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let transition = CATransition()
+            transition.type = kCATransitionFade
+            
+            appDelegate.window!.setRootViewController(loginVC, transition: transition)
+
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            action in
+            
+        })
+        
+        alertVC.addAction(logOut)
+        alertVC.addAction(cancel)
+        
+        present(alertVC, animated: true, completion: nil)
+    }
+    
     
 }
 
