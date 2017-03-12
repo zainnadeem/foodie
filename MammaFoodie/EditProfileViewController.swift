@@ -17,6 +17,9 @@ class EditProfileViewController: UIViewController {
     lazy var profileImageView:       UIImageView = UIImageView()
     lazy var tableView:          UITableView = UITableView()
     lazy var saveButton:         UIButton    = UIButton()
+    lazy var user:               User = User()
+    
+    var mediaPickerHelper:  MediaPickerHelper!
     
     var sections = ["username", "fullname", "website", "tags", "bio"]
     let store = DataStore.sharedInstance
@@ -27,7 +30,7 @@ class EditProfileViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Edit Profile"
         
-        let user = store.currentUser
+        self.user = store.currentUser
         userInfo = [user.username, user.fullName, user.website, user.tagsString, user.bio]
         
         self.navBar.delegate = self
@@ -85,6 +88,11 @@ class EditProfileViewController: UIViewController {
         self.profileImageView.layer.borderColor = UIColor.black.cgColor
         self.profileImageView.layer.borderWidth = 2
         self.profileImageView.clipsToBounds = true
+        let imageViewTapped = UITapGestureRecognizer(target: self, action: #selector(displayImagePicker))
+        profileImageView.addGestureRecognizer(imageViewTapped)
+        profileImageView.isUserInteractionEnabled = true
+        
+        
         self.profileImageView.sd_setImage(with: URL(string: store.currentUser.profileImageURL))
         
         
@@ -113,7 +121,7 @@ class EditProfileViewController: UIViewController {
         if let username     = userNameCell.textField.text     { store.currentUser.username   = username }
         if let fullName     = fullNameCell.textField.text     { store.currentUser.fullName   = fullName }
         if let website      = websiteCell.textField.text      { store.currentUser.website    = website }
-        if let tags         = tagsCell.textField.text         { store.currentUser.tags       = tags.components(separatedBy: ",")}
+        if let tags         = tagsCell.textField.text         { store.currentUser.tags       = tags.components(separatedBy: ", ")}
         if let bio          = bioCell.textView.text           { store.currentUser.bio        = bio }
 
         
@@ -121,6 +129,26 @@ class EditProfileViewController: UIViewController {
         store.currentUser.updateUserInfo()
         self.dismiss(animated: true, completion: nil)
         
+    }
+    
+    func displayImagePicker() {
+        mediaPickerHelper = MediaPickerHelper(viewController: self) { (image) in
+            print("in the MediaPickerHelper")
+            if let image = image as? UIImage {
+                OperationQueue.main.addOperation({
+                    self.profileImageView.image = image
+                    
+                })
+                
+                let firImage = FIRImage(image: image)
+                firImage.save(self.user.uid, completion: { (url) in
+                    self.user.profileImageURL = url.absoluteString
+                    self.user.updateUserInfo()
+                })
+                
+                
+            }
+        }
     }
 }
 
