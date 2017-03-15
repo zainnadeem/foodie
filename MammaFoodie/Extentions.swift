@@ -78,10 +78,10 @@ extension String {
     }
     
     mutating func convertPriceInCentsToDollars() -> String {
-        let endIndex = self.endIndex
-        self.insert(".", at: self.index(endIndex, offsetBy: -2))
-        self.insert("$", at: self.startIndex)
-        return self
+        var copy = self
+        copy.insert(".", at: copy.index(endIndex, offsetBy: -2))
+        copy.insert("$", at: copy.startIndex)
+        return copy
     }
 }
 

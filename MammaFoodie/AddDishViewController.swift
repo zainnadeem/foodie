@@ -28,10 +28,20 @@ class AddDishViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
+        setViewProperties()
+        setViewConstraints()
+    }
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    func setViewProperties() {
+        
         let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(dismissGesture)
         tableView.addGestureRecognizer(dismissGesture)
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AddImageTableViewCell.self, forCellReuseIdentifier: addImageTableViewCelIdentifier)
@@ -49,19 +59,15 @@ class AddDishViewController: UIViewController {
         addButton.layer.borderColor = UIColor.white.cgColor
         addButton.layer.borderWidth = 1
         addButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+    }
+    
+    
+    func setViewConstraints() {
         
         view.addSubview(tableView)
         view.addSubview(addButton)
         view.addSubview(navBar)
         
-        setConstraints()
-    }
-    
-    func hideKeyboard() {
-        self.view.endEditing(true)
-    }
-    
-    fileprivate func setConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(navBar.snp.bottom)
             make.height.equalToSuperview().multipliedBy(0.82)

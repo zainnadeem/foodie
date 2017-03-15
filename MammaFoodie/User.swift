@@ -33,6 +33,7 @@ class User
     var notifications                   :           [Notification]
     var broadcasts                      :           [Broadcast]
     var blockedUsers                    :           [User]
+    var cart                            :           [Dish]
     
     var totalLikes                      :           Int
     var averageRating                   :           Int
@@ -55,7 +56,7 @@ class User
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address])
+    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address])
     {
         self.uid = uid
         self.username = username
@@ -73,6 +74,7 @@ class User
         self.broadcasts = broadcasts
         self.totalLikes = totalLikes
         self.blockedUsers = blockedUsers
+        self.cart = cart
         self.averageRating = averageRating
         self.deviceTokens = deviceTokens
         self.isAvailable = isAvailable
@@ -106,6 +108,7 @@ class User
         self.broadcasts = []
         self.totalLikes = 0
         self.blockedUsers = []
+        self.cart = []
         self.averageRating = 0
         self.deviceTokens = []
         self.isAvailable = false
@@ -167,6 +170,8 @@ class User
                 }
             }
         }
+        
+        self.cart = []
         
         // notifications
         self.notifications = []

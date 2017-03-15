@@ -13,6 +13,7 @@
 		2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E391E6F5D2300113729 /* AddDishViewController.swift */; };
 		2B025E3C1E73070800113729 /* AddImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */; };
 		2B025E3E1E73101C00113729 /* FormTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */; };
+		2B05E7561E76DAF40060821C /* PlaceOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */; };
 		2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */; };
 		2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */; };
 		2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */; };
@@ -93,6 +94,7 @@
 		2B025E391E6F5D2300113729 /* AddDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDishViewController.swift; sourceTree = "<group>"; };
 		2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageTableViewCell.swift; sourceTree = "<group>"; };
 		2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewHeaderView.swift; sourceTree = "<group>"; };
+		2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOrderViewController.swift; sourceTree = "<group>"; };
 		2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MammaFoodie.entitlements; sourceTree = "<group>"; };
 		2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodieButton.swift; path = ../FoodieButton.swift; sourceTree = "<group>"; };
@@ -283,9 +285,9 @@
 		BF3F61091E6F20B5008EF3C9 /* To Do */ = {
 			isa = PBXGroup;
 			children = (
-				2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */,
 				BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */,
 				BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */,
+				2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */,
 			);
 			name = "To Do";
 			sourceTree = "<group>";
@@ -301,6 +303,7 @@
 				BF7F19221E60DF0100595CA4 /* MainFeedViewController.swift */,
 				BF7F19241E60DF1E00595CA4 /* SearchViewController.swift */,
 				2B025E391E6F5D2300113729 /* AddDishViewController.swift */,
+				2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */,
+				2B05E7561E76DAF40060821C /* PlaceOrderViewController.swift in Sources */,
 				BF7F192F1E647D3700595CA4 /* LiveNowCollectionViewCell.swift in Sources */,
 				2B8881511E75C80A008BB0B5 /* PurchaseDishViewController.swift in Sources */,
 				BF7F19191E60A51200595CA4 /* Constants.swift in Sources */,
