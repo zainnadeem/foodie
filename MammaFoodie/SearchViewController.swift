@@ -30,6 +30,7 @@ class SearchViewController: UIViewController {
         view.isOpaque = false
         
         navBar.middleButton.title = "Search"
+        navBar.rightButton.title = "$"
         
         fetchUsers()
         setViewConstraints()
@@ -161,10 +162,8 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController : NavBarViewDelegate {
     
     func rightBarButtonTapped(_ sender: AnyObject) {
-        if let pageVC = self.parent as? UserPageViewController {
-            //pageVC.navigateToSearchViewController(.forward)
-        }
-        
+        let placeOrderVC = PlaceOrderViewController()
+        self.present(placeOrderVC, animated: true, completion: nil)
     }
     
     func leftBarButtonTapped(_ sender: AnyObject) {

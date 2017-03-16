@@ -249,6 +249,16 @@ class User
             
         ]
     }
+    
+    func calculateCartTotal() -> String? {
+        if !self.cart.isEmpty {
+            let cartTotal = self.cart.reduce(0) { return $0 + $1.price }
+            var cartTotalAsString = String(cartTotal)
+            cartTotalAsString = cartTotalAsString.convertPriceInCentsToDollars()
+            return cartTotalAsString
+        }
+        return nil
+    }
 }
 
 extension User {

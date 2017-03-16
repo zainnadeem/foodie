@@ -14,6 +14,8 @@ class PlaceOrderViewController: UIViewController {
     lazy var navBar: NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "cross_icon"), middleButtonImage: nil)
     
     lazy var tableView = UITableView()
+    lazy var deliveryView: DeliveryInfoView = DeliveryInfoView()
+    lazy var paymentView: PaymentView = PaymentView()
     lazy var placeOrderButton: FormSubmitButton = FormSubmitButton()
     
     let store = DataStore.sharedInstance
@@ -28,6 +30,7 @@ class PlaceOrderViewController: UIViewController {
     }
     
     func setViewProperties() {
+        self.view.backgroundColor = .white
         
         navBar.delegate = self
         navBar.middleButton.title = "Your Order"
@@ -36,6 +39,8 @@ class PlaceOrderViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CartItemTableViewCell.self, forCellReuseIdentifier: cartItemCellIdentifier)
+        tableView.tableFooterView = UIView()
+        view.addSubview(tableView)
         
         setPlaceOrderButtonTitle()
         placeOrderButton.addTarget(self, action: #selector(placeOrderButtonTapped), for: .touchUpInside)
@@ -47,44 +52,64 @@ class PlaceOrderViewController: UIViewController {
     func setViewConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.width.centerX.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.45)
             make.top.equalTo(navBar.snp.bottom).offset(10)
         }
         
-        placeOrderButton.snp.makeConstraints { (make) in
+        view.addSubview(deliveryView)
+        deliveryView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.80)
             make.top.equalTo(tableView.snp.bottom).offset(5)
+            make.height.equalToSuperview().multipliedBy(0.25)
+        }
+        
+        view.addSubview(paymentView)
+        paymentView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.80)
+            make.top.equalTo(deliveryView.snp.bottom).offset(5)
+            make.height.equalToSuperview().multipliedBy(0.08)
+        }
+        
+        placeOrderButton.snp.makeConstraints { (make) in
+            make.top.equalTo(paymentView.snp.bottom).offset(5)
             make.bottom.equalToSuperview().offset(-5)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.width.equalToSuperview().multipliedBy(0.80)
         }
     }
     
     func deleteCartItem(for sender: UIButton) {
-        if let cell = sender.superview as? UITableViewCell {
+        if let cell = sender.superview?.superview as? CartItemTableViewCell {
             let indexPath = tableView.indexPath(for: cell)
             store.currentUser.cart.remove(at: indexPath!.row)
             tableView.deleteRows(at: [indexPath!], with: .fade)
+            setPlaceOrderButtonTitle()
         }
         
     }
     
     func placeOrderButtonTapped() {
-        
+        store.currentUser.cart.removeAll()
+        self.dismiss(animated: true, completion: nil)
+        // ???
     }
     
     func setPlaceOrderButtonTitle() {
-        var cartTotal = store.currentUser.cart.reduce(0) { return $0 + $1.price }
-        if let deliveryFee = deliveryFee {
-            cartTotal = cartTotal + deliveryFee
+        if let cartTotal = store.currentUser.calculateCartTotal() {
+            placeOrderButton.setTitle("Place Order - \(cartTotal)", for: .normal)
+            placeOrderButton.isEnabled = true
         }
-        var cartTotalAsString = String(cartTotal)
-        cartTotalAsString = cartTotalAsString.convertPriceInCentsToDollars()
-        placeOrderButton.setTitle("Place Order - \(cartTotalAsString)", for: .normal)
+        else {
+            placeOrderButton.setTitle("Your cart is empty!", for: .normal)
+            placeOrderButton.isEnabled = false
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -104,6 +129,10 @@ extension PlaceOrderViewController: UITableViewDelegate, UITableViewDataSource {
         cell.dish = store.currentUser.cart[indexPath.row]
         cell.deleteButton.addTarget(self, action: #selector(deleteCartItem(for:)), for: .touchUpInside)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 

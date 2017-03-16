@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import SCLAlertView
 
 class AddDishViewController: UIViewController {
     
@@ -136,11 +137,19 @@ class AddDishViewController: UIViewController {
     
     func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
         print("validating now")
-        let alertController = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-            alertController.dismiss(animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+//            alertController.dismiss(animated: true, completion: nil)
+//        }
+//        alertController.addAction(okAction)
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK") {
+            print("ok button tapped")
         }
-        alertController.addAction(okAction)
 
         let titleFieldCheck = title != "" && title != nil
         let descriptionFieldCheck = description != "" && description != nil
@@ -150,26 +159,22 @@ class AddDishViewController: UIViewController {
         let imageCheck = image != #imageLiteral(resourceName: "add_dish")
         
         if !titleFieldCheck {
-            alertController.message = "Please enter a name for your dish"
-            present(alertController, animated: true, completion: nil)
+            alertView.showError("Error", subTitle: "Please enter a name for your dish")
             return false
         }
         
         if !descriptionFieldCheck {
-            alertController.message = "Please enter a description for your dish"
-            present(alertController, animated: true, completion: nil)
+            alertView.showError("Error", subTitle: "Please enter a description for your dish")
             return false
         }
         
         if !priceFieldCheck! {
-            alertController.message = "Please enter a valid price"
-            present(alertController, animated: true, completion: nil)
+            alertView.showError("Error", subTitle: "Please enter a valid price")
             return false
         }
         
         if !imageCheck {
-            alertController.message = "Please select an image for your dish"
-            present(alertController, animated: true, completion: nil)
+            alertView.showError("Error", subTitle: "Please select an image for your dish")
             return false
         }
         return true

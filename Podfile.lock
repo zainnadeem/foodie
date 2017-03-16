@@ -69,6 +69,7 @@ PODS:
   - NVActivityIndicatorView (3.5)
   - OneSignal (2.3.5)
   - SAMCache (0.3.3)
+  - SCLAlertView (0.7.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - OneSignal
   - SAMCache
+  - SCLAlertView
   - SDWebImage (~> 3.8)
   - SnapKit
 
@@ -126,9 +128,10 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: e5252b082f93885f0bfc24c318719b4eaabcd37b
   OneSignal: 4cb42948ebc141bd5deb54d3fda25105db94f6d4
   SAMCache: 790b2623a3e087c903daff872c90c248726c4c82
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
 
-PODFILE CHECKSUM: ae14b5f0b9e894e305a22eb717d8198c6ac4a958
+PODFILE CHECKSUM: 2fa9ced786f2a186fab5e986cd2cdd165773698e
 
 COCOAPODS: 1.2.0

@@ -9,7 +9,7 @@
 import UIKit
 import ChameleonFramework
 
-class ProfileTableViewButton: UIButton {
+class SegmentedControlButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

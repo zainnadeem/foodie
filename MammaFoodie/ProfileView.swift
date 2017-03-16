@@ -19,8 +19,6 @@ enum SelectedTableViewStatus {
 
 class ProfileView: UIView, UITableViewDelegate {
     
-    let user: User
-    
     var profileTopStackView: UIStackView!
     var profileImageView: UIImageView!
     var ratingView: CosmosView!
@@ -29,20 +27,25 @@ class ProfileView: UIView, UITableViewDelegate {
     var bioTextView: UITextView!
     var websiteTextView: UITextView!
     
-    var menuButton: ProfileTableViewButton!
-    var reviewsButton: ProfileTableViewButton!
-    var followersButton: ProfileTableViewButton!
-    var followingButton: ProfileTableViewButton!
-    var lastTappedButton: ProfileTableViewButton!
+    var menuButton: SegmentedControlButton!
+    var reviewsButton: SegmentedControlButton!
+    var followersButton: SegmentedControlButton!
+    var followingButton: SegmentedControlButton!
+    var lastTappedButton: SegmentedControlButton!
     var tableViewButtonStackView: UIStackView!
     var tableView: UITableView!
     var profileTableViewStatus: SelectedTableViewStatus = .menu
     
     weak var delegate: ProfileTableViewDelegate?
     
+    var user: User! {
+        didSet {
+            let imageURL = URL(string: user.profileImageURL)
+            profileImageView.sd_setImage(with: imageURL)
+        }
+    }
     
-    init(user: User, frame: CGRect) {
-        self.user = user
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
     }
@@ -65,46 +68,38 @@ class ProfileView: UIView, UITableViewDelegate {
 
 //tableview button functions
 extension ProfileView {
-    func menuButtonTapped() {
+    
+    func segmentedControlButtonTapped(sender: SegmentedControlButton) {
         lastTappedButton.isSelected = false
-        menuButton.isSelected = true
-        lastTappedButton = menuButton
-        profileTableViewStatus = .menu
-        self.delegate?.updateTableView(for: menuButton)
+        sender.isSelected = true
+        lastTappedButton = sender
+        switch sender {
+        case menuButton:
+            profileTableViewStatus = .menu
+        case reviewsButton:
+            profileTableViewStatus = .reviews
+        case followersButton:
+            profileTableViewStatus = .followers
+        case followingButton:
+            profileTableViewStatus = .following
+        default: print("should never reach here - segmentedControlButtonTapped")
+        }
+        self.delegate?.updateTableView(for: sender)
     }
     
-    func reviewsButtonTapped() {
-        lastTappedButton.isSelected = false
-        reviewsButton.isSelected = true
-        lastTappedButton = reviewsButton
-        profileTableViewStatus = .reviews
-        self.delegate?.updateTableView(for: reviewsButton)
-    }
-    
-    func followersButtonTapped() {
-        lastTappedButton.isSelected = false
-        followersButton.isSelected = true
-        lastTappedButton = followersButton
-        profileTableViewStatus = .followers
-        self.delegate?.updateTableView(for: followersButton)
-    }
-    
-    func followingButtonTapped() {
-        lastTappedButton.isSelected = false
-        followingButton.isSelected = true
-        lastTappedButton = followingButton
-        profileTableViewStatus = .following
-        self.delegate?.updateTableView(for: followingButton)
-    }
 }
 
 //do all the auto layout here
 extension ProfileView {
     func setupViewLayout() {
         
-        let imageURL = URL(string: user.profileImageURL)
+        
         profileImageView = UIImageView()
-        profileImageView.sd_setImage(with: imageURL)
+        profileImageView.layer.borderColor = UIColor.black.cgColor
+        profileImageView.layer.borderWidth = 3
+        profileImageView.layer.cornerRadius = 10
+        profileImageView.clipsToBounds = true
+        
         ratingView = CosmosView()
         ratingView.settings.updateOnTouch = false
         followButton = FollowButton()
@@ -124,22 +119,22 @@ extension ProfileView {
         websiteTextView.backgroundColor = UIColor.clear
         websiteTextView.textAlignment = .center
         
-        menuButton = ProfileTableViewButton()
+        menuButton = SegmentedControlButton()
         menuButton.setTitle("Menu", for: .normal)
         menuButton.titleLabel?.textAlignment = .center
-        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
-        reviewsButton = ProfileTableViewButton()
+        menuButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
+        reviewsButton = SegmentedControlButton()
         reviewsButton.setTitle("Reviews", for: .normal)
         reviewsButton.titleLabel?.textAlignment = .center
-        reviewsButton.addTarget(self, action: #selector(reviewsButtonTapped), for: .touchUpInside)
-        followersButton = ProfileTableViewButton()
+        reviewsButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
+        followersButton = SegmentedControlButton()
         followersButton.setTitle("Followers", for: .normal)
         followersButton.titleLabel?.textAlignment = .center
-        followersButton.addTarget(self, action: #selector(followersButtonTapped), for: .touchUpInside)
-        followingButton = ProfileTableViewButton()
+        followersButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
+        followingButton = SegmentedControlButton()
         followingButton.setTitle("Following", for: .normal)
         followingButton.titleLabel?.textAlignment = .center
-        followingButton.addTarget(self, action: #selector(followingButtonTapped), for: .touchUpInside)
+        followingButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
         
         tableViewButtonStackView = UIStackView(arrangedSubviews: [menuButton, reviewsButton, followersButton, followingButton])
         tableViewButtonStackView.axis = .horizontal

@@ -11,6 +11,7 @@ import SnapKit
 import ChameleonFramework
 import Firebase
 import SDWebImage
+import SCLAlertView
 
 class SignupViewController: UIViewController {
     

@@ -31,10 +31,17 @@ class PurchaseDishViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+        let dismissKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(dismissKeyboardGesture)
+        tableView.addGestureRecognizer(dismissKeyboardGesture)
         
         setViewProperties()
         setViewConstraints()
         
+    }
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
     }
     
     func setViewProperties() {
@@ -46,6 +53,7 @@ class PurchaseDishViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldTableViewCellIdentifier)
+        tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
         let imageURL = URL(string: dish.mainImageURL)
@@ -129,6 +137,8 @@ extension PurchaseDishViewController: UITableViewDelegate, UITableViewDataSource
             cell.textField.placeholder = "Quantity"
             cell.textField.textAlignment = .left
             cell.textField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
+            cell.textField.keyboardType = .numberPad
+            cell.textField.becomeFirstResponder()
             cell.removeBorders()
             return cell
         }
