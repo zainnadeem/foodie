@@ -50,8 +50,9 @@ let reviewCellIdentifier = "reviewCell"
 let followCellIdentifier = "followCell"
 let profileHeaderIdentifier = "headerView"
 let formTableViewHeaderViewIdentifier = "formHeaderView"
+let cartItemCellIdentifier = "cartItemCell"
 
-
+let notDigitsSet = CharacterSet.decimalDigits.inverted
 
 class Constants {
     

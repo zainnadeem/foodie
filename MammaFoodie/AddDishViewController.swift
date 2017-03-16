@@ -19,9 +19,9 @@ class AddDishViewController: UIViewController {
     
     
     lazy var tableView = UITableView()
-    lazy var addButton = UIButton(type: .system)
+    lazy var addButton: FormSubmitButton = FormSubmitButton(frame: CGRect())
 
-    let sections = ["Title", "Description", "Price", "Picture"]
+    let sections = ["Title", "Description", "Price", "Quantity", "Picture"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +52,7 @@ class AddDishViewController: UIViewController {
         navBar.middleButton.title = "Add a New Dish"
         
         addButton.setTitle("Add Dish", for: .normal)
-        addButton.titleLabel?.font = UIFont.mammaFoodieFontBold(16)
-        addButton.setTitleColor(.white, for: .normal)
-        addButton.backgroundColor = .black
-        addButton.layer.cornerRadius = 10
-        addButton.layer.borderColor = UIColor.white.cgColor
-        addButton.layer.borderWidth = 1
+        
         addButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
     }
     
@@ -76,7 +71,7 @@ class AddDishViewController: UIViewController {
         
         addButton.snp.makeConstraints { (make) in
             make.top.equalTo(tableView.snp.bottom)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(10)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
         }
@@ -102,15 +97,18 @@ class AddDishViewController: UIViewController {
         let titleCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TextFieldTableViewCell
         let descriptionCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
         let priceCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
-        let imageCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! AddImageTableViewCell
+        let quantityCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
+        let imageCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! AddImageTableViewCell
         let title = titleCell.textField.text
         let description = descriptionCell.textField.text
         let price = priceCell.textField.text
+        let quantity = quantityCell.textField.text
+        let quantityAsInt = Int(quantity!)
         let image = imageCell.dishImageView.image
         
-        if validateFields(title: title, description: description, price: price, image: image) {
+        if validateFields(title: title, description: description, price: price, quantity: quantity, image: image) {
             let priceInCents = Int(Float(price!)! * 100)
-            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image, price: priceInCents, likedBy: [], averageRating: 0)
+            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image, price: priceInCents, availableQuantity: quantityAsInt!, likedBy: [], averageRating: 0)
             store.currentUser.dishes.append(newDish)
             newDish.save { (url) in
                 print("The dish was successfully saved! Its image can be downloaded at \(url)")
@@ -128,7 +126,7 @@ class AddDishViewController: UIViewController {
             print("in the MediaPickerHelper")
             if let image = image as? UIImage {
                 OperationQueue.main.addOperation({
-                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! AddImageTableViewCell
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! AddImageTableViewCell
                     cell.dishImageView.image = image
                 })
                 
@@ -136,7 +134,7 @@ class AddDishViewController: UIViewController {
         }
     }
     
-    func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
+    func validateFields(title: String?, description: String?, price: String?, quantity: String?, image: UIImage?) -> Bool {
         print("validating now")
         let alertController = UIAlertController(title: "hol up", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "word", style: .default) { (action) in
@@ -149,28 +147,36 @@ class AddDishViewController: UIViewController {
         
         let priceFieldCheck = price?.isValidCurrency()
         
+        let quantityFieldCheck = quantity != "" && quantity != nil && quantity?.rangeOfCharacter(from: notDigitsSet) == nil
+        
         let imageCheck = image != #imageLiteral(resourceName: "add_dish")
         
         if !titleFieldCheck {
-            alertController.message = "yo son you gotta enter a name for ya dish"
+            alertController.message = "Please enter a name for your dish"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !descriptionFieldCheck {
-            alertController.message = "yo son you gotta enter a description for ya dish"
+            alertController.message = "Please enter a description for your dish"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !priceFieldCheck! {
-            alertController.message = "yo son you gotta enter a valid price"
+            alertController.message = "Please enter a valid price"
+            present(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        if !quantityFieldCheck {
+            alertController.message = "Please enter a valid quantity"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !imageCheck {
-            alertController.message = "yo son pick an image real quick"
+            alertController.message = "Please select an image for your dish"
             present(alertController, animated: true, completion: nil)
             return false
         }
@@ -190,7 +196,7 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: addImageTableViewCelIdentifier, for: indexPath) as! AddImageTableViewCell
             let imageViewTapped = UITapGestureRecognizer(target: self, action: #selector(displayImagePicker))
             cell.dishImageView.addGestureRecognizer(imageViewTapped)
@@ -212,7 +218,7 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 3: return 200
+        case 4: return 200
         default: return 44
         }
     }

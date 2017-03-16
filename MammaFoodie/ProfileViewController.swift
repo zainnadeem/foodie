@@ -102,10 +102,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             (cell as! UserTableViewCell).user = user.follows[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
-
         }
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch profileView.profileTableViewStatus {
+        case .menu:
+            let purchaseDishVC = PurchaseDishViewController()
+            purchaseDishVC.dish = self.user.dishes[indexPath.row]
+            self.present(purchaseDishVC, animated: true, completion: nil)
+        default:
+            return
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

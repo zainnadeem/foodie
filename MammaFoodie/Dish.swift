@@ -20,17 +20,19 @@ class Dish {
     var likedBy                         :           [User]
     var averageRating                   :           Int
     var price                           :           Int
+    var availableQuantity               :           Int
     
     var mainImage                       :           UIImage?
     
     
-    init(uid: String, name: String, description: String, mainImage: UIImage?, price: Int, likedBy: [User], averageRating: Int){
+    init(uid: String, name: String, description: String, mainImage: UIImage?, price: Int, availableQuantity: Int, likedBy: [User], averageRating: Int){
         
         self.uid = uid
         self.name = name
         self.description = description
         self.mainImage = mainImage
         self.price = price
+        self.availableQuantity = availableQuantity
         self.likedBy = likedBy
         self.averageRating = averageRating
         
@@ -44,6 +46,7 @@ class Dish {
         description = dictionary["description"] as! String
         
         price = dictionary["price"] as! Int
+        availableQuantity = dictionary["available quantity"] as! Int
         averageRating = dictionary["average rating"] as! Int
         
         
@@ -87,7 +90,8 @@ class Dish {
             "name" : name,
             "description" : description,
             "average rating" : averageRating,
-            "price" : price
+            "price" : price,
+            "available quantity" : availableQuantity
             
         ]
     }
