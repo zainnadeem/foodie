@@ -19,8 +19,8 @@ class AddDishViewController: UIViewController {
     
     
     lazy var tableView = UITableView()
-    lazy var addButton = UIButton(type: .system)
-    
+
+    lazy var addButton: FormSubmitButton = FormSubmitButton(frame: CGRect())
 
     let sections = ["Title", "Description", "Price", "Picture"]
     
@@ -29,10 +29,20 @@ class AddDishViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
+        setViewProperties()
+        setViewConstraints()
+    }
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    func setViewProperties() {
+        
         let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(dismissGesture)
         tableView.addGestureRecognizer(dismissGesture)
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AddImageTableViewCell.self, forCellReuseIdentifier: addImageTableViewCelIdentifier)
@@ -43,26 +53,17 @@ class AddDishViewController: UIViewController {
         navBar.middleButton.title = "Add a New Dish"
         
         addButton.setTitle("Add Dish", for: .normal)
-        addButton.titleLabel?.font = UIFont.mammaFoodieFontBold(16)
-        addButton.setTitleColor(.white, for: .normal)
-        addButton.backgroundColor = .black
-        addButton.layer.cornerRadius = 10
-        addButton.layer.borderColor = UIColor.white.cgColor
-        addButton.layer.borderWidth = 1
+        
         addButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+    }
+    
+    
+    func setViewConstraints() {
         
         view.addSubview(tableView)
         view.addSubview(addButton)
         view.addSubview(navBar)
         
-        setConstraints()
-    }
-    
-    func hideKeyboard() {
-        self.view.endEditing(true)
-    }
-    
-    fileprivate func setConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(navBar.snp.bottom)
             make.height.equalToSuperview().multipliedBy(0.82)
@@ -71,7 +72,7 @@ class AddDishViewController: UIViewController {
         
         addButton.snp.makeConstraints { (make) in
             make.top.equalTo(tableView.snp.bottom)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-5)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
         }
@@ -101,15 +102,18 @@ class AddDishViewController: UIViewController {
         let title = titleCell.textField.text
         let description = descriptionCell.textField.text
         let price = priceCell.textField.text
+        
+        
         let image = imageCell.dishImageView.image
         
         if validateFields(title: title, description: description, price: price, image: image) {
             let priceInCents = Int(Float(price!)! * 100)
-            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image, price: priceInCents, likedBy: [], averageRating: 0)
-            store.currentUser.dishes.append(newDish)
+            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image!, mainImageURL: "", price: priceInCents, likedBy: [], averageRating: 0)
+            
             newDish.save { (url) in
                 print("The dish was successfully saved! Its image can be downloaded at \(url)")
-                
+                newDish.mainImageURL = url.absoluteString
+                self.store.currentUser.dishes.append(newDish)
             }
             completion(true)
         }
@@ -133,8 +137,8 @@ class AddDishViewController: UIViewController {
     
     func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
         print("validating now")
-        let alertController = UIAlertController(title: "hol up", message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "word", style: .default) { (action) in
+        let alertController = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
             alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(okAction)
@@ -147,25 +151,25 @@ class AddDishViewController: UIViewController {
         let imageCheck = image != #imageLiteral(resourceName: "add_dish")
         
         if !titleFieldCheck {
-            alertController.message = "yo son you gotta enter a name for ya dish"
+            alertController.message = "Please enter a name for your dish"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !descriptionFieldCheck {
-            alertController.message = "yo son you gotta enter a description for ya dish"
+            alertController.message = "Please enter a description for your dish"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !priceFieldCheck! {
-            alertController.message = "yo son you gotta enter a valid price"
+            alertController.message = "Please enter a valid price"
             present(alertController, animated: true, completion: nil)
             return false
         }
         
         if !imageCheck {
-            alertController.message = "yo son pick an image real quick"
+            alertController.message = "Please select an image for your dish"
             present(alertController, animated: true, completion: nil)
             return false
         }

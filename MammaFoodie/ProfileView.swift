@@ -10,6 +10,7 @@ import UIKit
 import Cosmos
 import SnapKit
 import ChameleonFramework
+import SDWebImage
 
 //changes depending on which button was pressed
 enum SelectedTableViewStatus {
@@ -23,7 +24,7 @@ class ProfileView: UIView, UITableViewDelegate {
     var profileTopStackView: UIStackView!
     var profileImageView: UIImageView!
     var ratingView: CosmosView!
-    var followButton: UIButton!
+    var followButton: FollowButton!
     var likesLabel: UILabel!
     var bioTextView: UITextView!
     var websiteTextView: UITextView!
@@ -101,13 +102,16 @@ extension ProfileView {
 extension ProfileView {
     func setupViewLayout() {
         
-        profileImageView = UIImageView(image: UIImage(named: "profile_placeholder"))
+        let imageURL = URL(string: user.profileImageURL)
+        profileImageView = UIImageView()
+        profileImageView.sd_setImage(with: imageURL)
         ratingView = CosmosView()
         ratingView.settings.updateOnTouch = false
-        followButton = UIButton(type: .system)
+        followButton = FollowButton()
         followButton.setTitle("Follow", for: .normal)
         likesLabel = UILabel()
         likesLabel.text = "0 likes"
+        likesLabel.font = UIFont.mammaFoodieFont(14)
         bioTextView = UITextView()
         bioTextView.text = loremIpsumString
         bioTextView.isEditable = false
@@ -119,7 +123,6 @@ extension ProfileView {
         websiteTextView.text = "mammafoodie.com"
         websiteTextView.backgroundColor = UIColor.clear
         websiteTextView.textAlignment = .center
-        
         
         menuButton = ProfileTableViewButton()
         menuButton.setTitle("Menu", for: .normal)
@@ -137,7 +140,6 @@ extension ProfileView {
         followingButton.setTitle("Following", for: .normal)
         followingButton.titleLabel?.textAlignment = .center
         followingButton.addTarget(self, action: #selector(followingButtonTapped), for: .touchUpInside)
-        
         
         tableViewButtonStackView = UIStackView(arrangedSubviews: [menuButton, reviewsButton, followersButton, followingButton])
         tableViewButtonStackView.axis = .horizontal
@@ -161,6 +163,10 @@ extension ProfileView {
         profileImageView.snp.makeConstraints { (make) in
             make.width.equalTo(100)
             make.height.equalTo(profileImageView.snp.width)
+        }
+        
+        followButton.snp.makeConstraints { (make) in
+            make.width.equalTo(80)
         }
 
         bioTextView.snp.makeConstraints { (make) in

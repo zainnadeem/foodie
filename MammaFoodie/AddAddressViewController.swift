@@ -13,7 +13,7 @@ class AddAddressViewController: UIViewController {
     lazy var navBar:                NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "settings"), middleButtonImage: nil)
     
     lazy var tableView:              UITableView = UITableView()
-    lazy var saveButton:             UIButton    = UIButton()
+    lazy var saveButton:             FormSubmitButton    = FormSubmitButton()
     
     let store = DataStore.sharedInstance
     

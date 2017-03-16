@@ -13,8 +13,9 @@
 		2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E391E6F5D2300113729 /* AddDishViewController.swift */; };
 		2B025E3C1E73070800113729 /* AddImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */; };
 		2B025E3E1E73101C00113729 /* FormTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */; };
+		2B05E7561E76DAF40060821C /* PlaceOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */; };
 		2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */; };
-		2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */; };
+		2B35B15D1E60C4B100A6C06C /* FormSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15C1E60C4B100A6C06C /* FormSubmitButton.swift */; };
 		2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */; };
 		2B6CD0BA1E5DDBA00001EA68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B81E5DDBA00001EA68 /* Main.storyboard */; };
 		2B6CD0BC1E5DDBA00001EA68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		2B6CD0CA1E5DDBA00001EA68 /* MammaFoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */; };
 		2B752A201E5DE10C00EAECEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */; };
 		2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */; };
+		2B8881511E75C80A008BB0B5 /* PurchaseDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */; };
 		2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */; };
 		2B8C76F41E5DF24400FA60C8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */; };
 		2B8C76F71E5DF29700FA60C8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */; };
@@ -31,6 +33,9 @@
 		2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */; };
 		2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */; };
 		2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */; };
+		2BA794EE1E7ABD2F00489F8D /* CartItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */; };
+		2BA794F01E7ACC3300489F8D /* PaymentInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794EF1E7ACC3300489F8D /* PaymentInformationViewController.swift */; };
+		2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 		BF3F61021E6DF555008EF3C9 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61011E6DF555008EF3C9 /* Address.swift */; };
 		BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */; };
@@ -97,9 +102,10 @@
 		2B025E391E6F5D2300113729 /* AddDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDishViewController.swift; sourceTree = "<group>"; };
 		2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageTableViewCell.swift; sourceTree = "<group>"; };
 		2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewHeaderView.swift; sourceTree = "<group>"; };
+		2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOrderViewController.swift; sourceTree = "<group>"; };
 		2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MammaFoodie.entitlements; sourceTree = "<group>"; };
 		2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodieButton.swift; path = ../FoodieButton.swift; sourceTree = "<group>"; };
+		2B35B15C1E60C4B100A6C06C /* FormSubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormSubmitButton.swift; path = ../FormSubmitButton.swift; sourceTree = "<group>"; };
 		2B6CD0B11E5DDBA00001EA68 /* MammaFoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MammaFoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B6CD0B91E5DDBA00001EA68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 		2B6CD0CB1E5DDBA00001EA68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseDishViewController.swift; sourceTree = "<group>"; };
 		2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		2B8C76F31E5DF24400FA60C8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2B8C76F51E5DF29700FA60C8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -120,6 +127,9 @@
 		2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
 		2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItemTableViewCell.swift; sourceTree = "<group>"; };
+		2BA794EF1E7ACC3300489F8D /* PaymentInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInformationViewController.swift; sourceTree = "<group>"; };
+		2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryInfoView.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF3F61011E6DF555008EF3C9 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -265,7 +275,7 @@
 				2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */,
 				2B025E3D1E73101C00113729 /* FormTableViewHeaderView.swift */,
 				2B025E321E69DB1B00113729 /* DishAlertView.swift */,
-				2B35B15C1E60C4B100A6C06C /* FoodieButton.swift */,
+				2B35B15C1E60C4B100A6C06C /* FormSubmitButton.swift */,
 				2B025E301E69CCFA00113729 /* ProfileTableViewButton.swift */,
 				BF7F194B1E68F2CA00595CA4 /* FollowButton.swift */,
 				2B9C92F71E647F380020FD28 /* DishTableViewCell.swift */,
@@ -273,6 +283,8 @@
 				2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */,
 				BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */,
 				2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */,
+				2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */,
+				2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -307,6 +319,9 @@
 				BF7F19221E60DF0100595CA4 /* MainFeedViewController.swift */,
 				BF7F19241E60DF1E00595CA4 /* SearchViewController.swift */,
 				2B025E391E6F5D2300113729 /* AddDishViewController.swift */,
+				2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */,
+				2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */,
+				2BA794EF1E7ACC3300489F8D /* PaymentInformationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -655,8 +670,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */,
+				2B05E7561E76DAF40060821C /* PlaceOrderViewController.swift in Sources */,
 				BF7F192F1E647D3700595CA4 /* LiveNowCollectionViewCell.swift in Sources */,
+				2B8881511E75C80A008BB0B5 /* PurchaseDishViewController.swift in Sources */,
 				BF7F19191E60A51200595CA4 /* Constants.swift in Sources */,
+				2BA794EE1E7ABD2F00489F8D /* CartItemTableViewCell.swift in Sources */,
 				BFCCC4A91E6DF12000CFF898 /* InfoTableViewCell.swift in Sources */,
 				BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */,
 				2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */,
@@ -685,6 +703,7 @@
 				BF7F193D1E64CFFC00595CA4 /* CookingNowTableViewCell.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
 				BF7F192A1E64731900595CA4 /* NavBar.swift in Sources */,
+				2BA794F01E7ACC3300489F8D /* PaymentInformationViewController.swift in Sources */,
 				BF75FF541E69DBB900DD7102 /* SettingsViewController.swift in Sources */,
 				BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */,
 				BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */,
@@ -705,13 +724,14 @@
 				BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,
 				BF706C3D1E79111100D792B5 /* BroadcastImageTableViewCell.swift in Sources */,
-				2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */,
+				2B35B15D1E60C4B100A6C06C /* FormSubmitButton.swift in Sources */,
 				BFCCC4A71E6DCDC000CFF898 /* EditProfileTableViewCell.swift in Sources */,
 				2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */,
 				2B025E3C1E73070800113729 /* AddImageTableViewCell.swift in Sources */,
 				2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */,
 				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,
 				BF7F19231E60DF0100595CA4 /* MainFeedViewController.swift in Sources */,
+				2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */,
 				BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

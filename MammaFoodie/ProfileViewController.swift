@@ -21,14 +21,18 @@ class ProfileViewController: UIViewController {
     
     let store = DataStore.sharedInstance
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navBar.delegate = self
         
         
-        profileView = ProfileView(user: User(), frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        profileView = ProfileView(user: user, frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         profileView.tableView.delegate = self
         profileView.tableView.dataSource = self
         profileView.delegate = self
@@ -52,9 +56,11 @@ class ProfileViewController: UIViewController {
     
     fileprivate func makeDummyData() {
 
-        user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", email: "carrot@slat.com", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImageURL: store.currentUser.profileImageURL, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true, tags: ["carrots, chocolate, Indian, Meatballs"], addresses: [])
-        let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
-        user.dishes.append(dish1)
+//        user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", email: "carrot@slat.com", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImageURL: store.currentUser.profileImageURL, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true, tags: ["carrots, chocolate, Indian, Meatballs"], addresses: [])
+//        let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
+//        user.dishes.append(dish1)
+        
+        user = store.currentUser
         
         let review1 = Review(description: "good", rating: 5, reviewCreatedByUID: "123", reviewForUID: "1234")
         user.reviews.append(review1)
@@ -100,10 +106,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             (cell as! UserTableViewCell).user = user.follows[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
-
         }
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch profileView.profileTableViewStatus {
+        case .menu:
+            let purchaseDishVC = PurchaseDishViewController()
+            purchaseDishVC.dish = self.user.dishes[indexPath.row]
+            self.present(purchaseDishVC, animated: true, completion: nil)
+        default:
+            return
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

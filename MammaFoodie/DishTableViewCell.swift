@@ -19,10 +19,15 @@ class DishTableViewCell: UITableViewCell {
     var ratingView: CosmosView!
     var priceLabel: UILabel!
     var priceRatingStackView: UIStackView!
-    
+
     var dish: Dish! {
         didSet {
-            self.updateUI()
+            dishImageView = UIImageView(image: dish.mainImage)
+            titleLabel = UILabel(text: dish.name)
+            descriptionLabel = UILabel(text: dish.description)
+            var priceAsString = String(dish.price)
+            priceLabel = UILabel(text: priceAsString.convertPriceInCentsToDollars())
+            setUpLayout()
         }
     }
     
@@ -33,23 +38,25 @@ class DishTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
-        //        dishImageView = UIImageView(image: dish.mainImage)
-        //        titleLabel = UILabel(text: dish.name)
-        //        descriptionLabel = UILabel(text: dish.description)
-        //        ratingView = CosmosView()
-        //        priceLabel = UILabel(text: String(dish.price))
+    }
+    
+    func setUpLayout() {
         dishImageView = UIImageView(image: UIImage(named: "profile_placeholder"))
-        titleLabel = UILabel(text: "Buffalo Chicken Fingers")
+        //        titleLabel = UILabel(text: "Buffalo Chicken Fingers")
         titleLabel.font = UIFont.mammaFoodieFont(14)
-        descriptionLabel = UILabel(text: "Packed with blue cheese, carrots, celery, and lots of other delicious stuff that is getting truncated")
+        //        descriptionLabel = UILabel(text: "Packed with blue cheese, carrots, celery, and lots of other delicious stuff that is getting truncated")
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.font = UIFont.mammaFoodieFont(12)
         ratingView = CosmosView()
         ratingView.text = "(3)"
         ratingView.settings.starSize = 12
         ratingView.setContentCompressionResistancePriority(1000, for: .horizontal)
-        priceLabel = UILabel(text: "$12.34")
+        //        priceLabel = UILabel(text: "$12.34")
         priceLabel.font = UIFont.mammaFoodieFont(14)
         
         titleDescriptionStackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
@@ -65,11 +72,6 @@ class DishTableViewCell: UITableViewCell {
         
         
         setConstraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
     }
     
     func setConstraints() {
@@ -100,13 +102,6 @@ class DishTableViewCell: UITableViewCell {
         }
     }
     
-    func updateUI(){
-        self.titleLabel.text = dish.name
-        self.descriptionLabel.text = dish.description
-        self.priceLabel.text = String(dish.price)
-        self.ratingView.rating = Double(dish.averageRating)
-        
-    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

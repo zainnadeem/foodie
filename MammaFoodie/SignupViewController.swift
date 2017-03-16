@@ -41,11 +41,12 @@ class SignupViewController: UIViewController {
         
         view.addSubview(navBar)
         self.navBar.middleButton.title = "Complete Signup"
-        self.navBar.leftButton.title = "<"
+        self.navBar.leftButton.title = "‹"
         self.navBar.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.alwaysBounceVertical = false
         tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldTableViewCellIdentifier)
         tableView.register(FormTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: formTableViewHeaderViewIdentifier)
         
@@ -140,7 +141,7 @@ class SignupViewController: UIViewController {
                 let firImage = FIRImage(image: self.profileImageView.image!)
                 firImage.save(user.uid) { (downloadURL) in
                     
-                    let newUser = User(uid: user.uid, username: usernameCell.textField.text!, fullName: fullNameCell.textField.text!, email: emailCell.textField.text!, bio: "", website: "", location: "", follows: [], followedBy: [], profileImageURL: downloadURL.absoluteString, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 0, averageRating: 0, deviceTokens: [], isAvailable: false, tags: [""], addresses: [])
+                    let newUser = User(uid: user.uid, username: usernameCell.textField.text!, fullName: fullNameCell.textField.text!, email: emailCell.textField.text!, bio: "", website: "", location: "", follows: [], followedBy: [], profileImageURL: downloadURL.absoluteString, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 0, deviceTokens: [], isAvailable: false, tags: [""], addresses: [])
                     
                     self.store.currentUser = newUser
                     self.store.currentUser.updateUserInfo()
@@ -213,6 +214,7 @@ extension SignupViewController: UITableViewDelegate, UITableViewDataSource {
             if let fullName = self.fullName { cell.textField.text = fullName }
         case 2:
             cell.textField.placeholder = "Username"
+            cell.textField.autocapitalizationType = .none
         default: print("we shouldn't get here...")
         }
         return cell
