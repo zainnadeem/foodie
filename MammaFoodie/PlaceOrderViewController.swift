@@ -11,12 +11,13 @@ import SnapKit
 
 class PlaceOrderViewController: UIViewController {
     
-    lazy var navBar: NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: nil, middleButtonImage: nil)
+    lazy var navBar: NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "cross_icon"), middleButtonImage: nil)
     
     lazy var tableView = UITableView()
-    lazy var checkOutButton: FormSubmitButton = FormSubmitButton()
+    lazy var placeOrderButton: FormSubmitButton = FormSubmitButton()
     
     let store = DataStore.sharedInstance
+    var deliveryFee: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,27 +30,28 @@ class PlaceOrderViewController: UIViewController {
     func setViewProperties() {
         
         navBar.delegate = self
-        navBar.middleButton.title = "Cart"
-        navBar.leftButton.title = "X"
+        navBar.middleButton.title = "Your Order"
         view.addSubview(navBar)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CartItemTableViewCell.self, forCellReuseIdentifier: cartItemCellIdentifier)
         
-        checkOutButton.setTitle("Check Out", for: .normal)
-        view.addSubview(checkOutButton)
+        setPlaceOrderButtonTitle()
+        placeOrderButton.addTarget(self, action: #selector(placeOrderButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(placeOrderButton)
         
     }
     
     func setViewConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.width.centerX.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.8)
+            make.height.equalToSuperview().multipliedBy(0.5)
             make.top.equalTo(navBar.snp.bottom).offset(10)
         }
         
-        checkOutButton.snp.makeConstraints { (make) in
+        placeOrderButton.snp.makeConstraints { (make) in
             make.top.equalTo(tableView.snp.bottom).offset(5)
             make.bottom.equalToSuperview().offset(-5)
             make.centerX.equalToSuperview()
@@ -64,7 +66,20 @@ class PlaceOrderViewController: UIViewController {
             tableView.deleteRows(at: [indexPath!], with: .fade)
         }
         
+    }
+    
+    func placeOrderButtonTapped() {
         
+    }
+    
+    func setPlaceOrderButtonTitle() {
+        var cartTotal = store.currentUser.cart.reduce(0) { return $0 + $1.price }
+        if let deliveryFee = deliveryFee {
+            cartTotal = cartTotal + deliveryFee
+        }
+        var cartTotalAsString = String(cartTotal)
+        cartTotalAsString = cartTotalAsString.convertPriceInCentsToDollars()
+        placeOrderButton.setTitle("Place Order - \(cartTotalAsString)", for: .normal)
     }
 
     override func didReceiveMemoryWarning() {

@@ -34,6 +34,8 @@
 		2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */; };
 		2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */; };
 		2BA794EE1E7ABD2F00489F8D /* CartItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */; };
+		2BA794F01E7ACC3300489F8D /* PaymentInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794EF1E7ACC3300489F8D /* PaymentInformationViewController.swift */; };
+		2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 		BF3F61021E6DF555008EF3C9 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61011E6DF555008EF3C9 /* Address.swift */; };
 		BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */; };
@@ -121,6 +123,8 @@
 		2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItemTableViewCell.swift; sourceTree = "<group>"; };
+		2BA794EF1E7ACC3300489F8D /* PaymentInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInformationViewController.swift; sourceTree = "<group>"; };
+		2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryInfoView.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF3F61011E6DF555008EF3C9 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 				BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */,
 				2B025E3B1E73070800113729 /* AddImageTableViewCell.swift */,
 				2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */,
+				2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				2B025E391E6F5D2300113729 /* AddDishViewController.swift */,
 				2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */,
 				2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */,
+				2BA794EF1E7ACC3300489F8D /* PaymentInformationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -664,6 +670,7 @@
 				BF7F193D1E64CFFC00595CA4 /* CookingNowTableViewCell.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
 				BF7F192A1E64731900595CA4 /* NavBar.swift in Sources */,
+				2BA794F01E7ACC3300489F8D /* PaymentInformationViewController.swift in Sources */,
 				BF75FF541E69DBB900DD7102 /* SettingsViewController.swift in Sources */,
 				BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */,
 				BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */,
@@ -688,6 +695,7 @@
 				2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */,
 				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,
 				BF7F19231E60DF0100595CA4 /* MainFeedViewController.swift in Sources */,
+				2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */,
 				BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

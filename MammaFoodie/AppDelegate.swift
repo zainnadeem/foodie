@@ -37,11 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             
             store.getCurrentUserWithToken(token: token, { 
-                
+                let pageVC = UserPageViewController()
+                self.window?.rootViewController = pageVC
             })
             
-            let pageVC = UserPageViewController()
-            self.window?.rootViewController = pageVC
+            
         }
 
         

@@ -11,14 +11,18 @@ import SnapKit
 
 class CartItemTableViewCell: UITableViewCell {
     
-    var dish: Dish!
-    
     lazy var nameLabel = UILabel()
     lazy var deleteButton = UIButton(type: .system)
     
+    var dish: Dish! {
+        didSet {
+            nameLabel.text = dish.name
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        nameLabel.text = dish.name
+        
         nameLabel.font = UIFont.mammaFoodieFont(16)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.lineBreakMode = .byTruncatingTail

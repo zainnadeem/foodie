@@ -21,14 +21,18 @@ class ProfileViewController: UIViewController {
     
     let store = DataStore.sharedInstance
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navBar.delegate = self
         
         
-        profileView = ProfileView(user: User(), frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        profileView = ProfileView(user: user, frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         profileView.tableView.delegate = self
         profileView.tableView.dataSource = self
         profileView.delegate = self

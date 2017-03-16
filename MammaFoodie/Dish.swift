@@ -20,19 +20,19 @@ class Dish {
     var likedBy                         :           [User]
     var averageRating                   :           Int
     var price                           :           Int
-    var availableQuantity               :           Int
     
     var mainImage                       :           UIImage?
+    var mainImageURL                    :           String
     
     
-    init(uid: String, name: String, description: String, mainImage: UIImage?, price: Int, availableQuantity: Int, likedBy: [User], averageRating: Int){
+    init(uid: String, name: String, description: String, mainImage: UIImage, mainImageURL: String, price: Int, likedBy: [User], averageRating: Int){
         
         self.uid = uid
         self.name = name
         self.description = description
         self.mainImage = mainImage
+        self.mainImageURL = mainImageURL
         self.price = price
-        self.availableQuantity = availableQuantity
         self.likedBy = likedBy
         self.averageRating = averageRating
         
@@ -46,9 +46,8 @@ class Dish {
         description = dictionary["description"] as! String
         
         price = dictionary["price"] as! Int
-        availableQuantity = dictionary["available quantity"] as! Int
         averageRating = dictionary["average rating"] as! Int
-        
+        mainImageURL = dictionary["main image URL"] as! String
         
         self.likedBy = []
         if let likedByDict = dictionary["liked by"] as? [String : Any] {
@@ -64,21 +63,22 @@ class Dish {
     func save(completion: @escaping (URL) -> Void) {
         
         let ref = DatabaseReference.users(uid: self.uid).reference().child("dishes").childByAutoId()
-        ref.setValue(toDictionary())
+        
         
         //save likes
         for user in likedBy {
             ref.child("like by/\(user.uid)").setValue(user.toDictionary())
         }
         //upload image to storage database
-        if let mainImage = self.mainImage {
+        if let mainImage = mainImage {
             let firImage = FIRImage(image: mainImage)
             firImage.save(self.uid, completion: { (downloadURL) in
                 completion(downloadURL)
+                ref.setValue(self.toDictionary())
             })
-            
-            
         }
+        
+        
     }
     
     
@@ -91,8 +91,7 @@ class Dish {
             "description" : description,
             "average rating" : averageRating,
             "price" : price,
-            "available quantity" : availableQuantity
-            
+            "main image URL" : mainImageURL
         ]
     }
     

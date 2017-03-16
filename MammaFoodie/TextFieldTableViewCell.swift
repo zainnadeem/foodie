@@ -32,6 +32,10 @@ class TextFieldTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    func removeBorders() {
+        textField.layer.borderWidth = 0
+    }
   
     
 }

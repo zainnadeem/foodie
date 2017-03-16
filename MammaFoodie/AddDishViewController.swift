@@ -21,7 +21,7 @@ class AddDishViewController: UIViewController {
     lazy var tableView = UITableView()
     lazy var addButton: FormSubmitButton = FormSubmitButton(frame: CGRect())
 
-    let sections = ["Title", "Description", "Price", "Quantity", "Picture"]
+    let sections = ["Title", "Description", "Price", "Picture"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ class AddDishViewController: UIViewController {
         
         addButton.snp.makeConstraints { (make) in
             make.top.equalTo(tableView.snp.bottom)
-            make.bottom.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-5)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
         }
@@ -97,22 +97,22 @@ class AddDishViewController: UIViewController {
         let titleCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TextFieldTableViewCell
         let descriptionCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
         let priceCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
-        let quantityCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
-        let imageCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! AddImageTableViewCell
+        let imageCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! AddImageTableViewCell
         let title = titleCell.textField.text
         let description = descriptionCell.textField.text
         let price = priceCell.textField.text
-        let quantity = quantityCell.textField.text
-        let quantityAsInt = Int(quantity!)
+        
+        
         let image = imageCell.dishImageView.image
         
-        if validateFields(title: title, description: description, price: price, quantity: quantity, image: image) {
+        if validateFields(title: title, description: description, price: price, image: image) {
             let priceInCents = Int(Float(price!)! * 100)
-            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image, price: priceInCents, availableQuantity: quantityAsInt!, likedBy: [], averageRating: 0)
-            store.currentUser.dishes.append(newDish)
+            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image!, mainImageURL: "", price: priceInCents, likedBy: [], averageRating: 0)
+            
             newDish.save { (url) in
                 print("The dish was successfully saved! Its image can be downloaded at \(url)")
-                
+                newDish.mainImageURL = url.absoluteString
+                self.store.currentUser.dishes.append(newDish)
             }
             completion(true)
         }
@@ -126,7 +126,7 @@ class AddDishViewController: UIViewController {
             print("in the MediaPickerHelper")
             if let image = image as? UIImage {
                 OperationQueue.main.addOperation({
-                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! AddImageTableViewCell
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! AddImageTableViewCell
                     cell.dishImageView.image = image
                 })
                 
@@ -134,10 +134,10 @@ class AddDishViewController: UIViewController {
         }
     }
     
-    func validateFields(title: String?, description: String?, price: String?, quantity: String?, image: UIImage?) -> Bool {
+    func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
         print("validating now")
-        let alertController = UIAlertController(title: "hol up", message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "word", style: .default) { (action) in
+        let alertController = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
             alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(okAction)
@@ -146,8 +146,6 @@ class AddDishViewController: UIViewController {
         let descriptionFieldCheck = description != "" && description != nil
         
         let priceFieldCheck = price?.isValidCurrency()
-        
-        let quantityFieldCheck = quantity != "" && quantity != nil && quantity?.rangeOfCharacter(from: notDigitsSet) == nil
         
         let imageCheck = image != #imageLiteral(resourceName: "add_dish")
         
@@ -165,12 +163,6 @@ class AddDishViewController: UIViewController {
         
         if !priceFieldCheck! {
             alertController.message = "Please enter a valid price"
-            present(alertController, animated: true, completion: nil)
-            return false
-        }
-        
-        if !quantityFieldCheck {
-            alertController.message = "Please enter a valid quantity"
             present(alertController, animated: true, completion: nil)
             return false
         }
@@ -196,7 +188,7 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 4 {
+        if indexPath.section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: addImageTableViewCelIdentifier, for: indexPath) as! AddImageTableViewCell
             let imageViewTapped = UITapGestureRecognizer(target: self, action: #selector(displayImagePicker))
             cell.dishImageView.addGestureRecognizer(imageViewTapped)
@@ -218,7 +210,7 @@ extension AddDishViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 4: return 200
+        case 3: return 200
         default: return 44
         }
     }
