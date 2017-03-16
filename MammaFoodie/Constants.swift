@@ -43,6 +43,7 @@ let moneyTextFieldTableViewCellIdentifier = "moneyTextFieldTableViewCell"
 let addImageTableViewCelIdentifier = "addImageTableViewCell"
 let editProfileTableViewCellIdentifier = "editProfileTableViewCell"
 let infoTableViewCellIdentifier = "infoTableViewCell"
+let broadcastImageTableViewCellIdentifier = "broadcastImageTableViewCellIdentifier"
 let defaultReuseIdentifier = "cell"
 
 let dishCellIdentifier = "dishCell"

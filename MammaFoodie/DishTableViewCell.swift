@@ -19,6 +19,7 @@ class DishTableViewCell: UITableViewCell {
     var ratingView: CosmosView!
     var priceLabel: UILabel!
     var priceRatingStackView: UIStackView!
+
     var dish: Dish! {
         didSet {
             dishImageView = UIImageView(image: dish.mainImage)
@@ -100,6 +101,7 @@ class DishTableViewCell: UITableViewCell {
             make.left.equalTo(titleDescriptionStackView.snp.right)
         }
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

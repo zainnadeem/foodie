@@ -68,8 +68,25 @@ class Broadcast{
         
         ref = DatabaseReference.users(uid: userUID).reference().child("broadcasts").childByAutoId()
         uid = ref.key
+  
+    }
+    
+    init(userUID: String) {
         
+        self.userUID = userUID
+        self.title = ""
+        self.scheduledTime = ""
+        self.createdTime = Constants.dateFormatter().string(from: Date(timeIntervalSinceNow: 0))
+        self.numberOfViews = 0
+        self.likes = 0
+        self.claimedDishes = 0
+        self.dishesAvailable = 0
+        self.comments = []
+        self.usersWatching = []
         
+        ref = DatabaseReference.users(uid: userUID).reference().child("broadcasts").childByAutoId()
+        uid = ref.key
+  
     }
     
 //    init(dictionary: [String : Any]){

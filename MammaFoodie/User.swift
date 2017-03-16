@@ -292,6 +292,8 @@ extension User {
     
     func updateUserInfo(){
         DatabaseReference.users(uid: uid).reference().updateChildValues(self.toDictionary())
+        //save other user data
+        
     }
 
     

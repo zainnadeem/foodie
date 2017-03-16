@@ -20,6 +20,7 @@ class AddDishViewController: UIViewController {
     
     
     lazy var tableView = UITableView()
+
     lazy var addButton: FormSubmitButton = FormSubmitButton(frame: CGRect())
 
     let sections = ["Title", "Description", "Price", "Picture"]

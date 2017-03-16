@@ -43,6 +43,8 @@
 		BF3F61081E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */; };
 		BF3F610B1E6F211E008EF3C9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F610A1E6F211E008EF3C9 /* EditProfileViewController.swift */; };
 		BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */; };
+		BF706C3B1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF706C3A1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift */; };
+		BF706C3D1E79111100D792B5 /* BroadcastImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF706C3C1E79111100D792B5 /* BroadcastImageTableViewCell.swift */; };
 		BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */; };
 		BF75FF541E69DBB900DD7102 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */; };
 		BF75FF561E69F28E00DD7102 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */; };
@@ -68,6 +70,9 @@
 		BF7F19481E672ACC00595CA4 /* Nexa Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF7F19471E672ACC00595CA4 /* Nexa Light.otf */; };
 		BF7F194A1E676C8200595CA4 /* SearchUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */; };
 		BF7F194C1E68F2CA00595CA4 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F194B1E68F2CA00595CA4 /* FollowButton.swift */; };
+		BF9E09B31E76004000059A30 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E09B21E76004000059A30 /* DatePickerViewController.swift */; };
+		BF9E09B51E77157D00059A30 /* BroadcastTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E09B41E77157D00059A30 /* BroadcastTitleViewController.swift */; };
+		BF9E09B91E7715CB00059A30 /* SelectDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E09B81E7715CB00059A30 /* SelectDishViewController.swift */; };
 		BFB853571E5DE20B009D7069 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853561E5DE20B009D7069 /* User.swift */; };
 		BFB853591E5DE342009D7069 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB853581E5DE342009D7069 /* Dish.swift */; };
 		BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8535A1E5DE55F009D7069 /* Review.swift */; };
@@ -133,6 +138,8 @@
 		BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleBroadcastViewController.swift; sourceTree = "<group>"; };
 		BF3F610A1E6F211E008EF3C9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		BF706C3A1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastDescriptionViewController.swift; sourceTree = "<group>"; };
+		BF706C3C1E79111100D792B5 /* BroadcastImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastImageTableViewCell.swift; sourceTree = "<group>"; };
 		BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -158,6 +165,9 @@
 		BF7F19471E672ACC00595CA4 /* Nexa Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Light.otf"; sourceTree = "<group>"; };
 		BF7F19491E676C8200595CA4 /* SearchUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewCell.swift; sourceTree = "<group>"; };
 		BF7F194B1E68F2CA00595CA4 /* FollowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
+		BF9E09B21E76004000059A30 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		BF9E09B41E77157D00059A30 /* BroadcastTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastTitleViewController.swift; sourceTree = "<group>"; };
+		BF9E09B81E7715CB00059A30 /* SelectDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDishViewController.swift; sourceTree = "<group>"; };
 		BFB853561E5DE20B009D7069 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BFB853581E5DE342009D7069 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		BFB8535A1E5DE55F009D7069 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -294,7 +304,6 @@
 		BF3F61091E6F20B5008EF3C9 /* To Do */ = {
 			isa = PBXGroup;
 			children = (
-				BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */,
 				BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */,
 			);
 			name = "To Do";
@@ -303,8 +312,8 @@
 		BF7F19261E60DF2C00595CA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */,
-				2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */,
+				BF9E09BA1E7715D100059A30 /* BroadcastViews */,
+				BF9E09BB1E77160100059A30 /* Sign in */,
 				BF7F191E1E60DE9D00595CA4 /* UserPageViewController.swift */,
 				BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */,
 				BF7F19201E60DEE900595CA4 /* ProfileViewController.swift */,
@@ -355,6 +364,27 @@
 				BF7F19451E672AB900595CA4 /* Nexa Bold.otf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		BF9E09BA1E7715D100059A30 /* BroadcastViews */ = {
+			isa = PBXGroup;
+			children = (
+				BF3F61071E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift */,
+				BF9E09B41E77157D00059A30 /* BroadcastTitleViewController.swift */,
+				BF706C3A1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift */,
+				BF9E09B21E76004000059A30 /* DatePickerViewController.swift */,
+				BF9E09B81E7715CB00059A30 /* SelectDishViewController.swift */,
+			);
+			name = BroadcastViews;
+			sourceTree = "<group>";
+		};
+		BF9E09BB1E77160100059A30 /* Sign in */ = {
+			isa = PBXGroup;
+			children = (
+				2B35B15A1E60A86F00A6C06C /* SignupViewController.swift */,
+				2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */,
+			);
+			name = "Sign in";
 			sourceTree = "<group>";
 		};
 		BFB8535C1E5DE57D009D7069 /* Models */ = {
@@ -410,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				BFCCC4A61E6DCDC000CFF898 /* EditProfileTableViewCell.swift */,
+				BF706C3C1E79111100D792B5 /* BroadcastImageTableViewCell.swift */,
 				BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */,
 				BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */,
 				BFCCC4A81E6DF12000CFF898 /* InfoTableViewCell.swift */,
@@ -657,6 +688,7 @@
 				BF7F194A1E676C8200595CA4 /* SearchUserTableViewCell.swift in Sources */,
 				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
 				BF7F192C1E647C0600595CA4 /* CookingNowCollectionViewCell.swift in Sources */,
+				BF9E09B91E7715CB00059A30 /* SelectDishViewController.swift in Sources */,
 				BF3F61081E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift in Sources */,
 				BF7F194C1E68F2CA00595CA4 /* FollowButton.swift in Sources */,
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,
@@ -667,6 +699,7 @@
 				BFB853641E5DEE74009D7069 /* FIRImage.swift in Sources */,
 				2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */,
 				BF7F19311E647D5400595CA4 /* UpcomingBroadcastsCollectionViewCell.swift in Sources */,
+				BF9E09B31E76004000059A30 /* DatePickerViewController.swift in Sources */,
 				BF7F193D1E64CFFC00595CA4 /* CookingNowTableViewCell.swift in Sources */,
 				BFB853601E5DE7DA009D7069 /* Broadcast.swift in Sources */,
 				BF7F192A1E64731900595CA4 /* NavBar.swift in Sources */,
@@ -682,11 +715,14 @@
 				2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */,
 				BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */,
 				BF7F19281E6472CE00595CA4 /* MediaPickerHelper.swift in Sources */,
+				BF706C3B1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift in Sources */,
 				BF7F19331E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift in Sources */,
 				2B025E331E69DB1C00113729 /* DishAlertView.swift in Sources */,
 				BF3F61061E6F0DD9008EF3C9 /* OnboardingViewController.swift in Sources */,
+				BF9E09B51E77157D00059A30 /* BroadcastTitleViewController.swift in Sources */,
 				BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,
+				BF706C3D1E79111100D792B5 /* BroadcastImageTableViewCell.swift in Sources */,
 				2B35B15D1E60C4B100A6C06C /* FormSubmitButton.swift in Sources */,
 				2B4900371E7B24B7003403CD /* PaymentView.swift in Sources */,
 				BFCCC4A71E6DCDC000CFF898 /* EditProfileTableViewCell.swift in Sources */,

@@ -42,6 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let pageVC = UserPageViewController()
             self.window?.rootViewController = pageVC
             
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let nav1 = UINavigationController()
+            let mainView = UserPageViewController() //ViewController = Name of your controller
+            nav1.viewControllers = [mainView]
+            nav1.setNavigationBarHidden(true, animated: false)
+            nav1.view.backgroundColor = .white
+            self.window!.rootViewController = nav1
+            self.window?.makeKeyAndVisible()
+            
+//            
+//            
+//            let pageVC = UserPageViewController()
+//            self.window?.rootViewController = pageVC
+
         }
 
         

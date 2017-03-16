@@ -241,6 +241,9 @@ extension ProfileViewController : NavBarViewDelegate {
     
     func middleBarButtonTapped(_ Sender: AnyObject) {
         
+        let scheduleBroadcastVC = ScheduleBroadcastViewController()
+        self.navigationController?.pushViewController(scheduleBroadcastVC, animated: true)
+        
     }
     
 }
