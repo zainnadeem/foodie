@@ -36,8 +36,8 @@ class SelectDishViewController: UIViewController {
         user = self.store.currentUser
         
 
-           let dish1 = Dish.init(uid: "1", name: "chicken wings", description: "bacon", mainImage: nil, price: Int(12.00), likedBy: [], averageRating: 3)
-           let dish2 = Dish.init(uid: "1", name: "homemade pizza", description: "marinara", mainImage: nil, price: Int(12.00), likedBy: [], averageRating: 3)
+        let dish1 = Dish(uid: "1", name: "chicken wings", description: "bacon", mainImage: UIImage(), mainImageURL: "", price: Int(12.00), likedBy: [], averageRating: 3)
+        let dish2 = Dish(uid: "1", name: "homemade pizza", description: "marinara", mainImage: UIImage(), mainImageURL: "", price: Int(12.00), likedBy: [], averageRating: 3)
         
         dishesToSearch = [dish1, dish2]
             
