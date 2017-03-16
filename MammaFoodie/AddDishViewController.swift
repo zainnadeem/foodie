@@ -20,6 +20,7 @@ class AddDishViewController: UIViewController {
     
     lazy var tableView = UITableView()
     lazy var addButton = UIButton(type: .system)
+    
 
     let sections = ["Title", "Description", "Price", "Picture"]
     

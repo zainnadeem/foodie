@@ -19,7 +19,12 @@ class DishTableViewCell: UITableViewCell {
     var ratingView: CosmosView!
     var priceLabel: UILabel!
     var priceRatingStackView: UIStackView!
-    var dish: Dish!
+    
+    var dish: Dish! {
+        didSet {
+            self.updateUI()
+        }
+    }
     
 
     override func awakeFromNib() {
@@ -93,6 +98,14 @@ class DishTableViewCell: UITableViewCell {
             make.height.equalToSuperview().multipliedBy(0.75)
             make.left.equalTo(titleDescriptionStackView.snp.right)
         }
+    }
+    
+    func updateUI(){
+        self.titleLabel.text = dish.name
+        self.descriptionLabel.text = dish.description
+        self.priceLabel.text = String(dish.price)
+        self.ratingView.rating = Double(dish.averageRating)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

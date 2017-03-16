@@ -154,7 +154,9 @@ extension SettingsViewController: UITableViewDelegate{
             self.present(destinationVC, animated: true, completion: nil)
             
         case .SubmitFeedback:
+            self.openMailForFeedback()
             print("Open Mail Client")
+
             
         case .Terms:
             print("Open Terms")
@@ -224,8 +226,14 @@ extension SettingsViewController : NavBarViewDelegate {
 }
 
 
-//Mark : Logout
+//Mark : Table View functions
 extension SettingsViewController {
+    
+    func  openMailForFeedback(){
+        let email = "haaris@mammafoodie.com"
+        let url = NSURL(string: "mailto:\(email)")
+        UIApplication.shared.open(url as! URL, options: [:], completionHandler: nil)
+    }
     
      func logOutUser(){
         

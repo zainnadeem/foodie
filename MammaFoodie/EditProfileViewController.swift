@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController {
     var sections = ["username", "fullname", "website", "tags", "bio"]
     let store = DataStore.sharedInstance
     var userInfo = [""]
-
+    
     override func viewDidLoad()  {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -46,7 +46,7 @@ class EditProfileViewController: UIViewController {
         
     }
     
-   
+    
     func setViewConstraints(){
         
         self.view.addSubview(navBar)
@@ -74,12 +74,12 @@ class EditProfileViewController: UIViewController {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
-
+            
             
         }
     }
     
-
+    
     
     func setViewProperties(){
         self.profileImageView.contentMode = .scaleAspectFill
@@ -97,7 +97,7 @@ class EditProfileViewController: UIViewController {
         
         
         
-
+        
         saveButton.setTitle("save", for: .normal)
         saveButton.titleLabel?.font = UIFont.mammaFoodieFontBold(16)
         saveButton.setTitleColor(.white, for: .normal)
@@ -123,7 +123,7 @@ class EditProfileViewController: UIViewController {
         if let website      = websiteCell.textField.text      { store.currentUser.website    = website }
         if let tags         = tagsCell.textField.text         { store.currentUser.tags       = tags.components(separatedBy: ", ")}
         if let bio          = bioCell.textView.text           { store.currentUser.bio        = bio }
-
+        
         
         //save to firebase
         store.currentUser.updateUserInfo()
@@ -175,7 +175,7 @@ extension EditProfileViewController: UITableViewDataSource {
             cell.textField.text = userInfo[indexPath.section]
             return cell
         }
-    
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
