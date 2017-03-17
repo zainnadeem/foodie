@@ -19,12 +19,15 @@ class ProfileViewController: UIViewController {
     var user: User!
     var arrayForTableView: [Any]!
     var filteredArray: [Any]!
-    let alertView = DishAlertView()
     
     let store = DataStore.sharedInstance
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        OperationQueue.main.addOperation {
+            self.user.dishes = self.store.currentUser.dishes
+            self.profileView.tableView.reloadData()
+        }
         
     }
     
@@ -82,24 +85,29 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayForTableView.count
+        switch profileView.profileTableViewStatus {
+        case .menu:         return user.dishes.count
+        case .reviews:      return user.reviews.count
+        case .followers:    return user.followedBy.count
+        case .following:    return user.follows.count
+        }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         switch profileView.profileTableViewStatus {
-        case .menu: cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier) as! DishTableViewCell
+        case .menu: cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier, for: indexPath) as! DishTableViewCell
             (cell as! DishTableViewCell).dish = user.dishes[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(deleteDishTapped))
             cell.addGestureRecognizer(longPressGesture)
-        case .reviews: cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier) as! ReviewTableViewCell
+        case .reviews: cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier, for: indexPath) as! ReviewTableViewCell
             (cell as! ReviewTableViewCell).review = user.reviews[indexPath.row]
-        case .followers: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier) as! UserTableViewCell
+        case .followers: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
             (cell as! UserTableViewCell).user = user.followedBy[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
-        case .following: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier) as! UserTableViewCell
+        case .following: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
             (cell as! UserTableViewCell).user = user.follows[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
@@ -177,27 +185,9 @@ extension ProfileViewController {
             })
             alertView.showEdit(cell.dish.name, subTitle: cell.dish.description)
 
-//            alertView.nameLabel.text = cell.dish.name
-//            view.addSubview(alertView)
-//            alertView.snp.makeConstraints({ (make) in
-//                make.edges.equalToSuperview()
-//            })
-//            alertView.alpha = 0
-//            UIView.animate(withDuration: 0.4) {
-//                self.alertView.alpha = 1
-//            }
-//            let hideGesture = UITapGestureRecognizer(target: self, action: #selector(hideAlertView))
-//            alertView.backGroundView.addGestureRecognizer(hideGesture)
-            
         }
     }
     
-//    func hideAlertView() {
-//        UIView.animate(withDuration: 0.2) { 
-//            self.alertView.alpha = 0
-//        }
-//        
-//    }
     
     func blockUserTapped(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {

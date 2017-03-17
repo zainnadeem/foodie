@@ -55,7 +55,7 @@ class AddDishViewController: UIViewController {
         
         addButton.setTitle("Add Dish", for: .normal)
         
-        addButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     
@@ -79,16 +79,11 @@ class AddDishViewController: UIViewController {
         }
     }
     
-    func dismissAction() {
+    func addButtonTapped() {
         
         saveDish { (success) in
-            
             if success {
-                if let profileVC = self.sendingViewController as? ProfileViewController {
-                    self.dismiss(animated: true) {
-                        profileVC.profileView.tableView.reloadData()
-                    }
-                }
+                self.dismiss(animated: true, completion: nil)
             }
         }
         
@@ -115,8 +110,9 @@ class AddDishViewController: UIViewController {
                 print("The dish was successfully saved! Its image can be downloaded at \(url)")
                 newDish.mainImageURL = url.absoluteString
                 self.store.currentUser.dishes.append(newDish)
+                completion(true)
             }
-            completion(true)
+            
         }
         else { completion(false) }
         
