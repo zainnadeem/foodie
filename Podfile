@@ -26,9 +26,7 @@ target 'MammaFoodie' do
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
     pod 'Cosmos', '~> 8.0'
     pod 'SDWebImage', '~>3.8'
-    pod 'Stripe'
     pod 'SCLAlertView'
-
 
   target 'MammaFoodieTests' do
     inherit! :search_paths
@@ -36,3 +34,4 @@ target 'MammaFoodie' do
   end
 
 end
+
