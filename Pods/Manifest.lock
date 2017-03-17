@@ -73,6 +73,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.2.0)
+  - Stripe (10.0.0)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
@@ -93,6 +94,7 @@ DEPENDENCIES:
   - SAMCache
   - SDWebImage (~> 3.8)
   - SnapKit
+  - Stripe
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -128,7 +130,8 @@ SPEC CHECKSUMS:
   SAMCache: 790b2623a3e087c903daff872c90c248726c4c82
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  Stripe: abf87fc01f74a2143bba1b1798dd2e4d71fd2cb3
 
-PODFILE CHECKSUM: ae14b5f0b9e894e305a22eb717d8198c6ac4a958
+PODFILE CHECKSUM: 674644abc18f654456f5d6930fbee10f2b9daa70
 
 COCOAPODS: 1.2.0

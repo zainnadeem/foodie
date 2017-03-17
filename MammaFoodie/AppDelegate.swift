@@ -11,6 +11,7 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 import IQKeyboardManagerSwift
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -20,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        //Stripe
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_GR7oEMC78jWcX3qsXVXlMsuC"
+
         FIRApp.configure()
-        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
@@ -50,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             self.window!.rootViewController = nav1
             self.window?.makeKeyAndVisible()
             
-//            
+//
 //            
 //            let pageVC = UserPageViewController()
 //            self.window?.rootViewController = pageVC

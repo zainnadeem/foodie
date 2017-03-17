@@ -177,8 +177,13 @@ extension MainFeedViewController : NavBarViewDelegate {
     }
     
     func middleBarButtonTapped(_ Sender: AnyObject) {
-        let index = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: index, at: .top, animated: true)
+        
+        let destinationVC = StipeDummyViewController()
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+        
+//        
+//        let index = IndexPath(row: 0, section: 0)
+//        self.tableView.scrollToRow(at: index, at: .top, animated: true)
     }
     
 }

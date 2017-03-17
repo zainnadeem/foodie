@@ -32,6 +32,14 @@
 		2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92F91E647F490020FD28 /* ReviewTableViewCell.swift */; };
 		2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
+		BF29817D1E7B164900AE1357 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817C1E7B164900AE1357 /* APIClient.swift */; };
+		BF29817F1E7B16DD00AE1357 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817E1E7B16DD00AE1357 /* Networking.swift */; };
+		BF2981821E7B1E4F00AE1357 /* StipeDummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981811E7B1E4F00AE1357 /* StipeDummyViewController.swift */; };
+		BF2981841E7B1FD700AE1357 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981831E7B1FD700AE1357 /* CheckoutViewController.swift */; };
+		BF2981861E7B200200AE1357 /* CheckoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981851E7B200200AE1357 /* CheckoutRowView.swift */; };
+		BF2981881E7B203700AE1357 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981871E7B203700AE1357 /* Buttons.swift */; };
+		BF29818A1E7B20B000AE1357 /* StripeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981891E7B20B000AE1357 /* StripeSettingsViewController.swift */; };
+		BF29818C1E7B2C5E00AE1357 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29818B1E7B2C5E00AE1357 /* Secrets.swift */; };
 		BF3F61021E6DF555008EF3C9 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61011E6DF555008EF3C9 /* Address.swift */; };
 		BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */; };
 		BF3F61061E6F0DD9008EF3C9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */; };
@@ -40,6 +48,8 @@
 		BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */; };
 		BF706C3B1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF706C3A1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift */; };
 		BF706C3D1E79111100D792B5 /* BroadcastImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF706C3C1E79111100D792B5 /* BroadcastImageTableViewCell.swift */; };
+		BF706C3F1E7AE59700D792B5 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF706C3E1E7AE59700D792B5 /* PaymentViewController.swift */; };
+		BF706C411E7B0BE900D792B5 /* StripeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF706C401E7B0BE900D792B5 /* StripeClient.swift */; };
 		BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */; };
 		BF75FF541E69DBB900DD7102 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */; };
 		BF75FF561E69F28E00DD7102 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */; };
@@ -122,6 +132,14 @@
 		2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
+		BF29817C1E7B164900AE1357 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		BF29817E1E7B16DD00AE1357 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		BF2981811E7B1E4F00AE1357 /* StipeDummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StipeDummyViewController.swift; sourceTree = "<group>"; };
+		BF2981831E7B1FD700AE1357 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		BF2981851E7B200200AE1357 /* CheckoutRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutRowView.swift; sourceTree = "<group>"; };
+		BF2981871E7B203700AE1357 /* Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		BF2981891E7B20B000AE1357 /* StripeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeSettingsViewController.swift; sourceTree = "<group>"; };
+		BF29818B1E7B2C5E00AE1357 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BF3F61011E6DF555008EF3C9 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesViewController.swift; sourceTree = "<group>"; };
 		BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +148,8 @@
 		BF3F610C1E6F5923008EF3C9 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		BF706C3A1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastDescriptionViewController.swift; sourceTree = "<group>"; };
 		BF706C3C1E79111100D792B5 /* BroadcastImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastImageTableViewCell.swift; sourceTree = "<group>"; };
+		BF706C3E1E7AE59700D792B5 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		BF706C401E7B0BE900D792B5 /* StripeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeClient.swift; sourceTree = "<group>"; };
 		BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BF75FF551E69F28E00DD7102 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +242,7 @@
 				2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */,
 				2B752A1F1E5DE10C00EAECEB /* GoogleService-Info.plist */,
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
+				BF29818B1E7B2C5E00AE1357 /* Secrets.swift */,
 				BF3F61091E6F20B5008EF3C9 /* To Do */,
 				BF7F19261E60DF2C00595CA4 /* ViewControllers */,
 				BFCCC4AC1E6DF14D00CFF898 /* Settings */,
@@ -288,10 +309,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BF2981801E7B1BAF00AE1357 /* Stripe */ = {
+			isa = PBXGroup;
+			children = (
+				BF29817E1E7B16DD00AE1357 /* Networking.swift */,
+				BF2981811E7B1E4F00AE1357 /* StipeDummyViewController.swift */,
+				BF2981831E7B1FD700AE1357 /* CheckoutViewController.swift */,
+				BF2981851E7B200200AE1357 /* CheckoutRowView.swift */,
+				BF706C401E7B0BE900D792B5 /* StripeClient.swift */,
+				BF29817C1E7B164900AE1357 /* APIClient.swift */,
+				BF2981891E7B20B000AE1357 /* StripeSettingsViewController.swift */,
+				BF2981871E7B203700AE1357 /* Buttons.swift */,
+			);
+			name = Stripe;
+			sourceTree = "<group>";
+		};
 		BF3F61091E6F20B5008EF3C9 /* To Do */ = {
 			isa = PBXGroup;
 			children = (
 				BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */,
+				BF706C3E1E7AE59700D792B5 /* PaymentViewController.swift */,
+				BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */,
+				BF2981801E7B1BAF00AE1357 /* Stripe */,
 			);
 			name = "To Do";
 			sourceTree = "<group>";
@@ -302,7 +341,6 @@
 				BF9E09BA1E7715D100059A30 /* BroadcastViews */,
 				BF9E09BB1E77160100059A30 /* Sign in */,
 				BF7F191E1E60DE9D00595CA4 /* UserPageViewController.swift */,
-				BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */,
 				BF7F19201E60DEE900595CA4 /* ProfileViewController.swift */,
 				BF7F19221E60DF0100595CA4 /* MainFeedViewController.swift */,
 				BF7F19241E60DF1E00595CA4 /* SearchViewController.swift */,
@@ -661,8 +699,11 @@
 				BFB8535B1E5DE55F009D7069 /* Review.swift in Sources */,
 				2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */,
 				2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */,
+				BF706C3F1E7AE59700D792B5 /* PaymentViewController.swift in Sources */,
 				2B025E311E69CCFA00113729 /* ProfileTableViewButton.swift in Sources */,
+				BF2981821E7B1E4F00AE1357 /* StipeDummyViewController.swift in Sources */,
 				BF7F19251E60DF1E00595CA4 /* SearchViewController.swift in Sources */,
+				BF706C411E7B0BE900D792B5 /* StripeClient.swift in Sources */,
 				BF7F19351E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift in Sources */,
 				BF3F61021E6DF555008EF3C9 /* Address.swift in Sources */,
 				BF7F193B1E64CFEF00595CA4 /* FeaturedChefTableViewCell.swift in Sources */,
@@ -687,23 +728,29 @@
 				BF7F192A1E64731900595CA4 /* NavBar.swift in Sources */,
 				BF75FF541E69DBB900DD7102 /* SettingsViewController.swift in Sources */,
 				BF7F191D1E60BA3600595CA4 /* Comment.swift in Sources */,
+				BF2981881E7B203700AE1357 /* Buttons.swift in Sources */,
 				BF7F191B1E60A7A600595CA4 /* Extentions.swift in Sources */,
 				BF7F19411E64D04900595CA4 /* UpcomingBroadcastsTableViewCell.swift in Sources */,
 				BFB853591E5DE342009D7069 /* Dish.swift in Sources */,
 				BF3F610B1E6F211E008EF3C9 /* EditProfileViewController.swift in Sources */,
 				BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */,
 				BF7F19211E60DEE900595CA4 /* ProfileViewController.swift in Sources */,
+				BF29818C1E7B2C5E00AE1357 /* Secrets.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
 				2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */,
 				BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */,
 				BF7F19281E6472CE00595CA4 /* MediaPickerHelper.swift in Sources */,
 				BF706C3B1E78FDA800D792B5 /* BroadcastDescriptionViewController.swift in Sources */,
+				BF29818A1E7B20B000AE1357 /* StripeSettingsViewController.swift in Sources */,
 				BF7F19331E6485BA00595CA4 /* FeaturedChefCollectionViewCell.swift in Sources */,
 				2B025E331E69DB1C00113729 /* DishAlertView.swift in Sources */,
+				BF29817F1E7B16DD00AE1357 /* Networking.swift in Sources */,
 				BF3F61061E6F0DD9008EF3C9 /* OnboardingViewController.swift in Sources */,
 				BF9E09B51E77157D00059A30 /* BroadcastTitleViewController.swift in Sources */,
 				BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */,
+				BF2981841E7B1FD700AE1357 /* CheckoutViewController.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,
+				BF2981861E7B200200AE1357 /* CheckoutRowView.swift in Sources */,
 				BF706C3D1E79111100D792B5 /* BroadcastImageTableViewCell.swift in Sources */,
 				2B35B15D1E60C4B100A6C06C /* FoodieButton.swift in Sources */,
 				BFCCC4A71E6DCDC000CFF898 /* EditProfileTableViewCell.swift in Sources */,
@@ -713,6 +760,7 @@
 				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,
 				BF7F19231E60DF0100595CA4 /* MainFeedViewController.swift in Sources */,
 				BF3F610D1E6F5923008EF3C9 /* TextViewTableViewCell.swift in Sources */,
+				BF29817D1E7B164900AE1357 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

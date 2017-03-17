@@ -8,13 +8,21 @@
 
 import UIKit
 import Firebase
+import Stripe
+
 
 class SettingsViewController: UIViewController {
     
     lazy var navBar:                NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "icon-profile"), leftButtonImage: nil, middleButtonImage: nil)
     lazy var tableView:             UITableView = UITableView()
     
+    var paymentContext: STPPaymentContext!
+    
     let store = DataStore.sharedInstance
+    
+    let companyName = "Emoji Apparel"
+    let paymentCurrency = "usd"
+
     
     enum SectionType {
         case YourAccount
@@ -38,8 +46,11 @@ class SettingsViewController: UIViewController {
     
     var sections = [Section]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         navBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -75,6 +86,8 @@ class SettingsViewController: UIViewController {
         }
         
     }
+    
+    
 }
 
 extension SettingsViewController : UITableViewDataSource {
@@ -147,6 +160,7 @@ extension SettingsViewController: UITableViewDelegate{
             
         case .Payment:
             print("Show Payment Methods")
+            self.choosePaymentButtonTapped()
             
         case .Address:
             let destinationVC = AddressesViewController()
@@ -277,8 +291,64 @@ extension SettingsViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
+}
+
+extension SettingsViewController : STPPaymentContextDelegate {
+    
+    //This method is called, as you might expect, when the payment context's contents change, e.g. when the user selects a new payment method or enters shipping info. This is a good place to update your UI:
+    
+    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        //        self.activityIndicator.animating = paymentContext.loading
+        //        self.paymentButton.enabled = paymentContext.selectedPaymentMethod != nil
+        //        self.paymentLabel.text = paymentContext.selectedPaymentMethod?.label
+        //        self.paymentIcon.image = paymentContext.selectedPaymentMethod?.image
+    }
+    
+    //This method is called when the user has successfully selected a payment method and completed their purchase. You should pass the contents of the paymentResult object to your backend, which should then finish charging your user using the create charge API. When this API request is finished, call the provided completion block with nil as its only argument if the call succeeded, or, if an error occurred, with that error as the argument instead.
+    
+    func paymentContext(_ paymentContext: STPPaymentContext,
+                        didCreatePaymentResult paymentResult: STPPaymentResult,
+                        completion: @escaping STPErrorBlock) {
+        
+        //        myAPIClient.createCharge(paymentResult.source.stripeID, completion: { (error: Error?) in
+        //            if let error = error {
+        //                completion(error)
+        //            } else {
+        //                completion(nil)
+        //            }
+        //        })
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext,
+                        didFinishWith status: STPPaymentStatus,
+                        error: Error?) {
+        
+        //        switch status {
+        //        case .error:
+        //            self.showError(error)
+        //        case .success:
+        //            self.showReceipt()
+        //        case .userCancellation:
+        //            return // Do nothing
+        //        }
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext,
+                        didFailToLoadWithError error: Error) {
+        //   self.navigationController?.popViewController(animated: true)
+        // Show the error to your user, etc.
+    }
+    
+    func choosePaymentButtonTapped() {
+        self.paymentContext.presentPaymentMethodsViewController()
+    }
+    
+    
+    
     
 }
+
+
 
 
 
