@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             var token = String()
             if let user = GIDSignIn.sharedInstance().currentUser{
-                token = GIDSignIn.sharedInstance().currentUser.userID
+                token = user.userID
             }else{
                 token = FBSDKAccessToken.current().userID
             }
@@ -42,7 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             store.getCurrentUserWithToken(token: token, { 
                 
             })
-            
+            let pageVC = UserPageViewController()
+            self.window?.rootViewController = pageVC
             
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let nav1 = UINavigationController()
@@ -57,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //            
 //            let pageVC = UserPageViewController()
 //            self.window?.rootViewController = pageVC
+
         }
 
         

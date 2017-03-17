@@ -27,7 +27,8 @@ target 'MammaFoodie' do
     pod 'Cosmos', '~> 8.0'
     pod 'SDWebImage', '~>3.8'
     pod 'Stripe'
-    
+    pod 'SCLAlertView'
+
 
   target 'MammaFoodieTests' do
     inherit! :search_paths

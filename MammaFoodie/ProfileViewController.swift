@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SCLAlertView
+import ChameleonFramework
 
 class ProfileViewController: UIViewController {
     
@@ -21,20 +23,23 @@ class ProfileViewController: UIViewController {
     
     let store = DataStore.sharedInstance
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navBar.delegate = self
-        
-        
-        profileView = ProfileView(user: User(), frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         profileView.tableView.delegate = self
         profileView.tableView.dataSource = self
         profileView.delegate = self
         self.view = profileView
         self.view.addSubview(navBar)
         makeDummyData()
+        profileView.user = user
         navBar.middleButton.title = user.username
         
         profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
@@ -51,18 +56,16 @@ class ProfileViewController: UIViewController {
     }
     
     fileprivate func makeDummyData() {
-
-        user = User(uid: "123456", username: "carrot_slat", fullName: "Carrot Slat", email: "carrot@slat.com", bio: "sup", website: "mammafoodie.com", location: "Long Beach", follows: [], followedBy: [], profileImageURL: store.currentUser.profileImageURL, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], totalLikes: 500, averageRating: 5, deviceTokens: [], isAvailable: true, tags: ["carrots, chocolate, Indian, Meatballs"], addresses: [])
-        let dish1 = Dish(uid: "111", name: "pizza", description: "delicious", mainImage: UIImage(), price: 10, likedBy: [], averageRating: 0)
-        user.dishes.append(dish1)
+        
+        user = store.currentUser
         
         let review1 = Review(description: "good", rating: 5, reviewCreatedByUID: "123", reviewForUID: "1234")
         user.reviews.append(review1)
         user.reviews.append(review1)
         arrayForTableView = user.dishes
         
-        let otherUser1 = User()
-        let otherUser2 = User()
+        let otherUser1 = User(uid: "123", username: "sulu_candles", fullName: "Sulu Candles", email: "sulu@gmail.com", profileImageURL: "google.com")
+        let otherUser2 = User(uid: "456", username: "ghee_buttersnaps", fullName: "Ghee Buttersnaps", email: "ghee@gmail.com", profileImageURL: "wikipedia.org")
         user.follows.append(otherUser1)
         user.follows.append(otherUser2)
         user.followedBy.append(otherUser1)
@@ -100,10 +103,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             (cell as! UserTableViewCell).user = user.follows[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
-
         }
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch profileView.profileTableViewStatus {
+        case .menu:
+            let purchaseDishVC = PurchaseDishViewController()
+            purchaseDishVC.dish = self.user.dishes[indexPath.row]
+            self.present(purchaseDishVC, animated: true, completion: nil)
+        default:
+            return
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -129,43 +141,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .followers, .following: return 60
         }
     }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        
-//        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, index) in
-//            self.user.dishes.remove(at: indexPath.row)
-//            print("delete action tapped!")
-//        }
-//        
-//        let blockFollower = UITableViewRowAction(style: .destructive, title: "Block") { (action, index) in
-//            self.user.blockedUsers.append(self.user.followedBy[indexPath.row])
-//            print("blockFollower action tapped!")
-//        }
-//        
-//        let blockFollowing = UITableViewRowAction(style: .destructive, title: "Block") { (action, index) in
-//            self.user.blockedUsers.append(self.user.follows[indexPath.row])
-//            print("blockFollowing action tapped!")
-//        }
-//        
-//        switch profileView.profileTableViewStatus {
-//        case .menu: return [delete]
-//        case .reviews: return nil
-//        case .followers: return [blockFollower]
-//        case .following: return [blockFollowing]
-//        }
-//    }
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        switch profileView.profileTableViewStatus {
-//        case .reviews: return false
-//        case .menu, .followers, .following: return true
-//        }
-//        return true
-//    }
-//    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        
-//    }
 }
 
 extension ProfileViewController: ProfileTableViewDelegate {
@@ -189,30 +164,63 @@ extension ProfileViewController {
         if sender.state == .began {
             print ("delete dish tapped")
             let cell = sender.view as! DishTableViewCell
-            alertView.nameLabel.text = cell.dish.name
-            
-            view.addSubview(alertView)
-            alertView.snp.makeConstraints({ (make) in
-                make.edges.equalToSuperview()
-            })
-            alertView.alpha = 0
-            UIView.animate(withDuration: 0.4) {
-                self.alertView.alpha = 1
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false,
+                hideWhenBackgroundViewIsTapped: true
+            )
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Edit") {
+                print("edit button tapped")
             }
-            let hideGesture = UITapGestureRecognizer(target: self, action: #selector(hideAlertView))
-            alertView.backGroundView.addGestureRecognizer(hideGesture)
+            alertView.addButton("Delete", backgroundColor: FlatRed(), textColor: .white, showDurationStatus: false, action: { 
+                print("delete button tapped")
+            })
+            alertView.showEdit(cell.dish.name, subTitle: cell.dish.description)
+
+//            alertView.nameLabel.text = cell.dish.name
+//            view.addSubview(alertView)
+//            alertView.snp.makeConstraints({ (make) in
+//                make.edges.equalToSuperview()
+//            })
+//            alertView.alpha = 0
+//            UIView.animate(withDuration: 0.4) {
+//                self.alertView.alpha = 1
+//            }
+//            let hideGesture = UITapGestureRecognizer(target: self, action: #selector(hideAlertView))
+//            alertView.backGroundView.addGestureRecognizer(hideGesture)
+            
         }
     }
     
-    func hideAlertView() {
-        UIView.animate(withDuration: 0.2) { 
-            self.alertView.alpha = 0
-        }
-        
-    }
+//    func hideAlertView() {
+//        UIView.animate(withDuration: 0.2) { 
+//            self.alertView.alpha = 0
+//        }
+//        
+//    }
     
-    func blockUserTapped() {
-        print ("block user tapped")
+    func blockUserTapped(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            print ("block user tapped")
+            let cell = sender.view as! UserTableViewCell
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false,
+                hideWhenBackgroundViewIsTapped: true
+            )
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Block", backgroundColor: FlatRed(), textColor: .white, showDurationStatus: false, action: {
+                print("block button tapped")
+                if let followingIndex = self.store.currentUser.follows.index(where: { $0 === cell.user }) {
+                    self.store.currentUser.follows.remove(at: followingIndex)
+                }
+                if let followedIndex = self.store.currentUser.followedBy.index(where: { $0 === cell.user }) {
+                    self.store.currentUser.followedBy.remove(at: followedIndex)
+                }
+                self.store.currentUser.blockedUsers.append(cell.user)
+                
+            })
+            alertView.showWarning(cell.user.username, subTitle: "(\(cell.user.fullName))")
+        }
     }
 }
 
