@@ -24,30 +24,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+        guard let signIn = GIDSignIn.sharedInstance() else { fatalError() }
+        signIn.scopes = ["https://www.googleapis.com/auth/plus.stream.read", "https://www.googleapis.com/auth/plus.me", "https://www.googleapis.com/auth/plus.login"]
+        signIn.clientID = FIRApp.defaultApp()?.options.clientID
+        signIn.delegate = self
+        if signIn.hasAuthInKeychain() {
+            signIn.signInSilently()
+        }
         
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
+        if signIn.hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
             
             var token = String()
-            if let user = GIDSignIn.sharedInstance().currentUser{
+            if let user = signIn.currentUser{
                 token = user.userID
-            }else{
+            } else{
                 token = FBSDKAccessToken.current().userID
             }
             
             store.getCurrentUserWithToken(token: token, { 
-                
+                OperationQueue.main.addOperation({ 
+                    self.setUpNavigationController()
+                })
             })
             
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            let nav1 = UINavigationController()
-            let mainView = UserPageViewController()
-            nav1.viewControllers = [mainView]
-            nav1.setNavigationBarHidden(true, animated: false)
-            nav1.view.backgroundColor = .white
-            self.window!.rootViewController = nav1
-            self.window?.makeKeyAndVisible()
+            
 
         }
         
@@ -69,8 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         return handled
     }
-    
-
    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         if let error = error {
@@ -86,22 +84,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         guard let authentication = user.authentication else { return }
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        let signupVC = SignupViewController()
-        signupVC.credential = credential
-        signupVC.userID = user.userID
-        signupVC.fullName = user.profile.name
-        signupVC.email = user.profile.email
-        signupVC.userSelectedManualLogin = false
-        signupVC.pictureURL = user.profile.imageURL(withDimension: 300)
-        self.window?.rootViewController = signupVC
+        FirebaseAPIClient.checkForUserToken(for: user.userID) { (userExists) in
+            if userExists {
+                OperationQueue.main.addOperation({ 
+                    self.setUpNavigationController()
+                })
+                
+            }
+            else {
+                let signupVC = SignupViewController()
+                signupVC.credential = credential
+                signupVC.userID = user.userID
+                signupVC.fullName = user.profile.name
+                signupVC.email = user.profile.email
+                signupVC.userSelectedManualLogin = false
+                signupVC.pictureURL = user.profile.imageURL(withDimension: 300)
+                OperationQueue.main.addOperation({ 
+                    self.window?.rootViewController = signupVC
+                })
+                
+            }
+        }
+        
         
     }
-//
-//    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
-//                withError error: NSError!) {
-//        // Perform any operations when the user disconnects from app here.
-//        // ...
-//    }
+
+    func setUpNavigationController() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let nav1 = UINavigationController()
+        let mainView = UserPageViewController()
+        nav1.viewControllers = [mainView]
+        nav1.setNavigationBarHidden(true, animated: false)
+        nav1.view.backgroundColor = .white
+        self.window!.rootViewController = nav1
+        self.window?.makeKeyAndVisible()
+    }
 
     
 

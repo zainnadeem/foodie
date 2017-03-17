@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
+import GoogleSignIn
+import SCLAlertView
 
 class SettingsViewController: UIViewController {
     
@@ -236,45 +239,39 @@ extension SettingsViewController {
     }
     
      func logOutUser(){
-        
-        let alertVC = UIAlertController(title: "Are you sure you want to log out?", message: "", preferredStyle: .alert)
-        let logOut = UIAlertAction(title: "Log Out", style: .default, handler: {
-            action in
-            
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            hideWhenBackgroundViewIsTapped: true
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Cancel") {}
+        alertView.addButton("Log out") { 
             print("Logout tapped")
             
             do {
-                
                 try FIRAuth.auth()?.signOut()
-//                self.store.currentUser?.unregisterToken()
+                if FBSDKAccessToken.current() != nil {
+                    FBSDKLoginManager().logOut()
+                }
+                if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+                    GIDSignIn.sharedInstance().signOut()
+                }
+                
+                //                self.store.currentUser?.unregisterToken()
                 
             }catch{
                 print("error \(error)")
             }
             
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "initialLogin")
-            
+            let loginVC = LoginViewController()
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             let transition = CATransition()
             transition.type = kCATransitionFade
             
             appDelegate.window!.setRootViewController(loginVC, transition: transition)
-
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            action in
-            
-        })
-        
-        alertVC.addAction(logOut)
-        alertVC.addAction(cancel)
-        
-        present(alertVC, animated: true, completion: nil)
+        }
+        alertView.showWarning("Wait!", subTitle: "Are you sure you want to log out?")
     }
     
     

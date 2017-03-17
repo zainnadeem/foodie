@@ -20,6 +20,7 @@ class DataStore {
     func getCurrentUserWithToken(token: String,_ completion: @escaping () -> Void){
         
         DatabaseReference.tokens(token: token).reference().observeSingleEvent(of: .value, with: { (snapshot) in
+            print("Snapshot value is \(snapshot.value)")
             if let uid = snapshot.value {
                 self.getCurrentUserWithUID(uid: uid as! String, {
                    completion()
@@ -30,10 +31,11 @@ class DataStore {
         
     }
     
-    func getCurrentUserWithUID(uid: String,_ completion: @escaping () -> Void){
+    fileprivate func getCurrentUserWithUID(uid: String,_ completion: @escaping () -> Void){
         
         DatabaseReference.users(uid: uid).reference().observeSingleEvent(of: .value, with: { (snapshot) in
                 if let userDict = snapshot.value as? [String : Any] {
+                    print("user dict is \(userDict)")
                     self.currentUser = User(dictionary: userDict)
                     completion()
             }

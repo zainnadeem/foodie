@@ -144,9 +144,7 @@ class AddDishViewController: UIViewController {
 //        }
 //        alertController.addAction(okAction)
         
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
+        let appearance = SCLAlertView.SCLAppearance( showCloseButton: false )
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("OK") {
             print("ok button tapped")

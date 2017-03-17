@@ -77,7 +77,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             }
             print("result: \(result)")
             if let result = result as? [String: Any] {
-                let signupVC = SignupViewController()
                 
                 let email = result["email"] as! String
                 let fullName: String = result["name"] as! String
@@ -85,19 +84,24 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                 let pictureData = pictureDict["data"] as! [String: Any]
                 let pictureURL = pictureData["url"] as! String
                 let id = result["id"] as! String
-                
                 FirebaseAPIClient.checkForUserToken(for: id, completion: { (userExists) in
                     if(userExists) {
-                        let nav1 = UINavigationController()
-                        let mainView = UserPageViewController()
-                        nav1.viewControllers = [mainView]
-                        nav1.setNavigationBarHidden(true, animated: false)
-                        nav1.view.backgroundColor = .white
-                        OperationQueue.main.addOperation({
-                            self.present(nav1, animated: true, completion: nil)
+                        DataStore.sharedInstance.getCurrentUserWithToken(token: FBSDKAccessToken.current().userID, {
+                            print("in get current user")
+                            let nav1 = UINavigationController()
+                            let mainView = UserPageViewController()
+                            nav1.viewControllers = [mainView]
+                            nav1.setNavigationBarHidden(true, animated: false)
+                            nav1.view.backgroundColor = .white
+                            OperationQueue.main.addOperation({
+                                print("back in the main queue")
+                                self.present(nav1, animated: true, completion: nil)
+                            })
                         })
+                        
                     }
                     else {
+                        let signupVC = SignupViewController()
                         signupVC.email = email
                         signupVC.fullName = fullName
                         signupVC.userID = id
