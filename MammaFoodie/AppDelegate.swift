@@ -39,28 +39,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             store.getCurrentUserWithToken(token: token, { 
                 
             })
-            let pageVC = UserPageViewController()
-            self.window?.rootViewController = pageVC
             
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let nav1 = UINavigationController()
-            let mainView = UserPageViewController() //ViewController = Name of your controller
+            let mainView = UserPageViewController()
             nav1.viewControllers = [mainView]
             nav1.setNavigationBarHidden(true, animated: false)
             nav1.view.backgroundColor = .white
             self.window!.rootViewController = nav1
             self.window?.makeKeyAndVisible()
-            
-//            
-//            
-//            let pageVC = UserPageViewController()
-//            self.window?.rootViewController = pageVC
 
         }
-
         
-//        let pageVC = UserPageViewController()
-//        self.window?.rootViewController = pageVC
+        else {
+            let loginVC = LoginViewController()
+            self.window?.rootViewController = loginVC
+        }
+        
         
         IQKeyboardManager.sharedManager().enable = true
         
