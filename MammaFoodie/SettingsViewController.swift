@@ -62,7 +62,12 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.tableView.reloadData()
+        
+        if let pageVC = self.parent as? UserPageViewController {
+            pageVC.setUpCartView()
+        }
     }
     
     private func setViewConstraints(){

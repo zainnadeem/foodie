@@ -20,7 +20,7 @@ class DeliveryInfoView: UIView {
     lazy var deliveryLabel = UILabel(text: "Delivery Options")
     
     lazy var pickUpLabel = UILabel(text: "Pick Up")
-    lazy var uberLabel = UILabel(text: "Uber Eats")
+    lazy var uberLabel = UILabel(text: "Uber")
     lazy var postmatesLabel = UILabel(text: "Postmates")
     var labelsStackView: UIStackView!
     

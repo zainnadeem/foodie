@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 enum UserPageViewControllerIndices : Int {
     case settingViewController = 0
@@ -20,8 +21,11 @@ class UserPageViewController: UIPageViewController {
     
     var viewsArray : [UIViewController]!
     
+    var cartView: FloatingCartView = FloatingCartView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.accessibilityLabel = "Main User Page View Controller"
         
@@ -70,6 +74,27 @@ class UserPageViewController: UIPageViewController {
         
         
         return [settingsVC, profileVC, mainFeedVC, searchVC]
+    }
+    
+    func setUpCartView() {
+        if !(DataStore.sharedInstance.currentUser.cart.isEmpty) {
+            cartView.updateLabels()
+            view.addSubview(cartView)
+            cartView.snp.makeConstraints { (make) in
+                make.bottom.centerX.width.equalToSuperview()
+                make.height.equalTo(50)
+            }
+            let cartTapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPlaceOrderView))
+            cartView.addGestureRecognizer(cartTapGesture)
+        }
+        else {
+            cartView.removeFromSuperview()
+        }
+    }
+    
+    func presentPlaceOrderView() {
+        let placeOrderVC = PlaceOrderViewController()
+        self.present(placeOrderVC, animated: true, completion: nil)
     }
     
 }

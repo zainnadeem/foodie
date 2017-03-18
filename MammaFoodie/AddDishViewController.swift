@@ -134,11 +134,6 @@ class AddDishViewController: UIViewController {
     
     func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
         print("validating now")
-//        let alertController = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-//            alertController.dismiss(animated: true, completion: nil)
-//        }
-//        alertController.addAction(okAction)
         
         let appearance = SCLAlertView.SCLAppearance( showCloseButton: false )
         let alertView = SCLAlertView(appearance: appearance)

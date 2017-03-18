@@ -29,6 +29,10 @@ class ProfileViewController: UIViewController {
             self.profileView.tableView.reloadData()
         }
         
+        if let pageVC = self.parent as? UserPageViewController {
+            pageVC.setUpCartView()
+        }
+        
     }
     
     override func viewDidLoad() {

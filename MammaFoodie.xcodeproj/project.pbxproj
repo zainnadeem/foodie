@@ -18,6 +18,7 @@
 		2B35B15D1E60C4B100A6C06C /* FormSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35B15C1E60C4B100A6C06C /* FormSubmitButton.swift */; };
 		2B4900371E7B24B7003403CD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4900361E7B24B7003403CD /* PaymentView.swift */; };
 		2B4900391E7C7078003403CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B4900381E7C7078003403CD /* GoogleService-Info.plist */; };
+		2B49003B1E7C8072003403CD /* FloatingCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B49003A1E7C8072003403CD /* FloatingCartView.swift */; };
 		2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */; };
 		2B6CD0BA1E5DDBA00001EA68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0B81E5DDBA00001EA68 /* Main.storyboard */; };
 		2B6CD0BC1E5DDBA00001EA68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */; };
@@ -108,6 +109,7 @@
 		2B35B15C1E60C4B100A6C06C /* FormSubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormSubmitButton.swift; path = ../FormSubmitButton.swift; sourceTree = "<group>"; };
 		2B4900361E7B24B7003403CD /* PaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		2B4900381E7C7078003403CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2B49003A1E7C8072003403CD /* FloatingCartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingCartView.swift; sourceTree = "<group>"; };
 		2B6CD0B11E5DDBA00001EA68 /* MammaFoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MammaFoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B6CD0B91E5DDBA00001EA68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */,
 				2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */,
 				2B4900361E7B24B7003403CD /* PaymentView.swift */,
+				2B49003A1E7C8072003403CD /* FloatingCartView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				BFB853621E5DEA35009D7069 /* DatabaseReference.swift in Sources */,
 				BF7F192C1E647C0600595CA4 /* CookingNowCollectionViewCell.swift in Sources */,
 				BF9E09B91E7715CB00059A30 /* SelectDishViewController.swift in Sources */,
+				2B49003B1E7C8072003403CD /* FloatingCartView.swift in Sources */,
 				BF3F61081E6F1EB3008EF3C9 /* ScheduleBroadcastViewController.swift in Sources */,
 				BF7F194C1E68F2CA00595CA4 /* FollowButton.swift in Sources */,
 				BFB853661E5DFA7A009D7069 /* Datastore.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 import Cosmos
 import SnapKit
 import SDWebImage
+import SCLAlertView
 
 class PurchaseDishViewController: UIViewController {
     
@@ -114,12 +115,14 @@ class PurchaseDishViewController: UIViewController {
         }
         
         else {
-            let invalidQuantityAlert = UIAlertController(title: "Error", message: "Please enter a valid quantity", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                self.dismiss(animated: true, completion: nil)
-            })
-            invalidQuantityAlert.addAction(okAction)
-            self.present(invalidQuantityAlert, animated: true, completion: nil)
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false,
+                hideWhenBackgroundViewIsTapped: true
+            )
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Ok", action: {})
+            alertView.showError("Error", subTitle: "Please enter a valid quantity")
+           
         }
     }
 }
