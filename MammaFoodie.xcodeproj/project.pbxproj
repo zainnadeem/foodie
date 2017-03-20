@@ -37,6 +37,8 @@
 		2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */; };
 		2BA794EE1E7ABD2F00489F8D /* CartItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */; };
 		2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */; };
+		2BC3CA0F1E802EB900D8D855 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CA0E1E802EB900D8D855 /* Secrets.swift */; };
+		2BC3CA111E80343E00D8D855 /* PostmatesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 		BF29817D1E7B164900AE1357 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817C1E7B164900AE1357 /* APIClient.swift */; };
 		BF29817F1E7B16DD00AE1357 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817E1E7B16DD00AE1357 /* Networking.swift */; };
@@ -140,6 +142,8 @@
 		2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItemTableViewCell.swift; sourceTree = "<group>"; };
 		2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryInfoView.swift; sourceTree = "<group>"; };
+		2BC3CA0E1E802EB900D8D855 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesAPIClient.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF29817C1E7B164900AE1357 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -440,8 +444,10 @@
 		BFB853671E5DFABF009D7069 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2BC3CA0E1E802EB900D8D855 /* Secrets.swift */,
 				BFB853631E5DEE74009D7069 /* FIRImage.swift */,
 				2B9C92F21E6478950020FD28 /* FirebaseAPIClient.swift */,
+				2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */,
 				BFB853611E5DEA35009D7069 /* DatabaseReference.swift */,
 				BFB853651E5DFA7A009D7069 /* Datastore.swift */,
 				BF7F19181E60A51200595CA4 /* Constants.swift */,
@@ -750,7 +756,7 @@
 				BF3F610B1E6F211E008EF3C9 /* EditProfileViewController.swift in Sources */,
 				BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */,
 				BF7F19211E60DEE900595CA4 /* ProfileViewController.swift in Sources */,
-				BF29818C1E7B2C5E00AE1357 /* Secrets.swift in Sources */,
+				2BC3CA0F1E802EB900D8D855 /* Secrets.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
 				2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */,
 				BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */,
@@ -767,6 +773,7 @@
 				BF2981861E7B200200AE1357 /* CheckoutRowView.swift in Sources */,
 				BF706C3D1E79111100D792B5 /* BroadcastImageTableViewCell.swift in Sources */,
 				2B35B15D1E60C4B100A6C06C /* FormSubmitButton.swift in Sources */,
+				2BC3CA111E80343E00D8D855 /* PostmatesAPIClient.swift in Sources */,
 				2B4900371E7B24B7003403CD /* PaymentView.swift in Sources */,
 				BFCCC4A71E6DCDC000CFF898 /* EditProfileTableViewCell.swift in Sources */,
 				2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */,

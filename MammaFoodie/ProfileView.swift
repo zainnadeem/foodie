@@ -181,9 +181,7 @@ extension ProfileView {
         self.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(profileTopStackView.snp.bottom)
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.bottom.width.centerX.equalToSuperview()
         }
     }
 }

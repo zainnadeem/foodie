@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.3.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -77,6 +78,7 @@ PODS:
   - Stripe (10.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Cosmos (~> 8.0)
   - DZNEmptyDataSet
@@ -108,6 +110,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Cosmos: 007c0b8e33a85e5363911bdd933571bbe221f7ef
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -135,6 +138,10 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   Stripe: abf87fc01f74a2143bba1b1798dd2e4d71fd2cb3
 
+<<<<<<< Updated upstream
 PODFILE CHECKSUM: e9e2e3082455b6508252e8c8dbdafb40f6c6e142
+=======
+PODFILE CHECKSUM: 4153758b273bc54bfe167991680eabb90caea661
+>>>>>>> Stashed changes
 
 COCOAPODS: 1.2.0

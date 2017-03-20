@@ -121,7 +121,6 @@ class AddDishViewController: UIViewController {
     
     func displayImagePicker() {
         mediaPickerHelper = MediaPickerHelper(viewController: self) { (image) in
-            print("in the MediaPickerHelper")
             if let image = image as? UIImage {
                 OperationQueue.main.addOperation({
                     let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! AddImageTableViewCell
@@ -133,13 +132,10 @@ class AddDishViewController: UIViewController {
     }
     
     func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
-        print("validating now")
         
         let appearance = SCLAlertView.SCLAppearance( showCloseButton: false )
         let alertView = SCLAlertView(appearance: appearance)
-        alertView.addButton("OK") {
-            print("ok button tapped")
-        }
+        alertView.addButton("OK") {}
 
         let titleFieldCheck = title != "" && title != nil
         let descriptionFieldCheck = description != "" && description != nil
