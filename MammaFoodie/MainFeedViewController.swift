@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Stripe
 
 
 class MainFeedViewController: UIViewController {
@@ -20,6 +21,9 @@ class MainFeedViewController: UIViewController {
     
     lazy var tableView : UITableView = UITableView()
     
+    let store = DataStore.sharedInstance
+    
+    let str = StripeUtil()
     
     //CollectionViews
     override func viewDidLoad() {
@@ -178,16 +182,67 @@ extension MainFeedViewController : NavBarViewDelegate {
     
     func middleBarButtonTapped(_ Sender: AnyObject) {
         
-        let destinationVC = StipeDummyViewController()
-        self.navigationController?.pushViewController(destinationVC, animated: true)
+//        let stpCardParams1 = STPCardParams()
+//        stpCardParams1.number = "4242424242424242"
+//        stpCardParams1.last4()
+//        stpCardParams1.expMonth = UInt(09)
+//        stpCardParams1.expYear = UInt(19)
+//        stpCardParams1.cvc = "989"
+//        stpCardParams1.name = "Zain"
+//        
+//        let stpCardParams2 = STPCardParams()
+//        stpCardParams2.number = "4012888888881881"
+//        stpCardParams2.last4()
+//        stpCardParams2.expMonth = UInt(09)
+//        stpCardParams2.expYear = UInt(19)
+//        stpCardParams2.cvc = "333"
+//        stpCardParams2.name = "Omer"
+//        
+//        let stpCardParams3 = STPCardParams()
+//        stpCardParams3.number = "4207670162371796"
+//        stpCardParams3.last4()
+//        stpCardParams3.expMonth = UInt(06)
+//        stpCardParams3.expYear = UInt(20)
+//        stpCardParams3.cvc = "720"
+//        stpCardParams3.name = "Zain Nadeem"
+//        
+//        
+//        
+//        str.createUser(card: stpCardParams2) { (success) in
+//            
+//            self.str.createCharge(stripeId: self.store.currentUser.stripeId, amount: Int(50), currency: paymentCurrency) { (success) in
+//                  
+//            }
+//        }
+//        
+//     
+        
+        
+//
         
 //        
-//        let index = IndexPath(row: 0, section: 0)
-//        self.tableView.scrollToRow(at: index, at: .top, animated: true)
+//        str.createUser(card: stpCardParams1) { (success) in
+//            print(success)
+//            
+//        }
+//        
+//          str.retrieveCustomer { (customer, error) in
+//            
+//            let paymentContext = STPPaymentContext.init(apiAdapter: StripeUtil.sharedClient)
+//            paymentContext.paymentAmount = Int(20.00)
+//            paymentContext.requestPayment()
+// 
+//        
+//        }
+        
+//        str.createCard(stripeId: self.store.currentUser.stripeId, card: stpCardParams3) { (success) in
+//            
+//            
+//            
+//        }
+  
     }
     
+    
 }
-
-
-
 

@@ -1,19 +1,15 @@
 //
-//  StripeClient.swift
+//  StripeApiClient.swift
 //  MammaFoodie
 //
-//  Created by Zain Nadeem on 3/16/17.
+//  Created by Zain Nadeem on 3/18/17.
 //  Copyright © 2017 MammaFoodieCorp. All rights reserved.
 //
 
 import Foundation
-import Foundation
 import Stripe
 
 struct StripeTools {
-    
-    //store stripe secret key
-    private var stripeSecret = stripeAPIKey
     
     //generate token each time you need to get an api call
     func generateToken(card: STPCardParams, completion: @escaping (_ token: STPToken?) -> Void) {
@@ -27,15 +23,15 @@ struct StripeTools {
             }
         }
     }
-    
     func getBasicAuth() -> String{
-        return "Bearer \(self.stripeSecret)"
+        return "Bearer \(stripeSecret)"
     }
     
 }
 
-
 class StripeUtil {
+    
+    static let sharedClient = StripeUtil()
     
     var stripeTool = StripeTools()
     var customerId: String?
@@ -43,6 +39,10 @@ class StripeUtil {
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
     
+    var defaultSource: STPCard? = nil
+    var sources: [STPCard] = []
+    
+    let store = DataStore.sharedInstance
     
     //createUser
     func createUser(card: STPCardParams, completion: @escaping (_ success: Bool) -> Void) {
@@ -52,11 +52,16 @@ class StripeUtil {
             if(token != nil) {
                 
                 //request to create the user
-                let request = NSMutableURLRequest(url: NSURL(string: "https://api.stripe.com/v1/customers")! as URL)
+                let baseURL = URL(string: backendBaseURL)
+                let path = "/customer/create"
+                let url = baseURL?.appendingPathComponent(path)
+                let request = NSMutableURLRequest(url: url!)
+                
                 
                 //params array where you can put your user informations
                 var params = [String:String]()
-                params["email"] = "test@test.test"
+                params["email"] = "zn.nadeem@gmail.com"
+                params["token"] = token?.tokenId
                 
                 //transform this array into a string
                 var str = ""
@@ -69,7 +74,6 @@ class StripeUtil {
                 
                 //POST method, refer to Stripe documentation
                 request.httpMethod = "POST"
-                
                 request.httpBody = str.data(using: String.Encoding.utf8)
                 
                 //create request block
@@ -84,14 +88,16 @@ class StripeUtil {
                         //you can also check returned response
                         if(httpResponse.statusCode == 200) {
                             if let data = data {
-                                let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
+                                let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
                                 //serialize the returned datas an get the customerId
                                 if let id = json?["id"] as? String {
                                     self.customerId = id
-                                    self.createCard(stripeId: id, card: card) { (success) in
-                                        completion(true)
-                                    }
+                                    self.store.currentUser.registerStripeId(id: id)
                                 }
+                                
+                                let responseData = String(data: data, encoding: String.Encoding.utf8)
+                                //
+                                print(responseData ?? "No data")
                             }
                         }
                         else {
@@ -106,16 +112,60 @@ class StripeUtil {
         }
     }
     
+    func retrieveCustomer(_ completion: @escaping STPCustomerCompletionBlock) {
+        guard let key = Stripe.defaultPublishableKey() , !key.contains("#") else {
+            
+            let error = NSError(domain: StripeDomain, code: 50, userInfo: [
+                NSLocalizedDescriptionKey: "Please set stripePublishableKey to your account's test publishable key in CheckoutViewController.swift"
+                ])
+            
+            completion(nil, error)
+            return
+        }
+        
+        var defaultSource: STPCard? = nil
+        var sources: [STPCard] = []
+        let customer = STPCustomer(stripeID: self.store.currentUser.stripeId, defaultSource: defaultSource , sources: sources)
+        
+        completion(customer, nil)
+        //    return
+        //}
+        let baseURL = URL(string: backendBaseURL)
+        let path = "/customer/\(customer.stripeID)"
+        let url = baseURL?.appendingPathComponent(path)
+        
+        let request = URLRequest.request(url!, method: .GET, params: [:])
+        
+        self.dataTask = self.defaultSession.dataTask(with: request) { (data, urlResponse, error) in
+            DispatchQueue.main.async {
+                let deserializer = STPCustomerDeserializer(data: data, urlResponse: urlResponse, error: error)
+                if let error = deserializer.error {
+                    completion(nil, error)
+                    return
+                } else if let customer = deserializer.customer {
+                    completion(customer, nil)
+                }
+            }
+        }
+        self.dataTask?.resume()
+    }
+    
+    
     //create card for given user
     func createCard(stripeId: String, card: STPCardParams, completion: @escaping (_ success: Bool) -> Void) {
         
         stripeTool.generateToken(card: card) { (token) in
             if(token != nil) {
-                let request = NSMutableURLRequest(url: NSURL(string: "https://api.stripe.com/v1/customers/\(stripeId)/sources")! as URL)
+                
+                let baseURL = URL(string: backendBaseURL)
+                let path = "/customer/sources"
+                let url = baseURL?.appendingPathComponent(path)
+                let request = NSMutableURLRequest(url: url!)
                 
                 //token needed
                 var params = [String:String]()
                 params["source"] = token!.tokenId
+                params["id"] = stripeId
                 
                 var str = ""
                 params.forEach({ (key, value) in
@@ -148,11 +198,66 @@ class StripeUtil {
         
     }
     
-    //get user card list
+    
+    func decodeResponse(_ response: URLResponse?, error: NSError?) -> NSError? {
+        if let httpResponse = response as? HTTPURLResponse
+            , httpResponse.statusCode != 200 {
+            return error ?? NSError.networkingError(httpResponse.statusCode)
+        }
+        return error
+    }
+    
+    
+    
+    func createCharge(stripeId: String, amount: Int, currency: String, destination: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        let baseURL = URL(string: backendBaseURL)
+        let path = "/customer/charge"
+        let url = baseURL?.appendingPathComponent(path)
+        let request = NSMutableURLRequest(url: url!)
+        
+        //token needed
+        var params = [String:String]()
+        params["id"] = stripeId
+        params["amount"] = String(amount)
+        params["currency"] = currency
+        params["destination"] = destination
+        
+        var str = ""
+        params.forEach({ (key, value) in
+            str = "\(str)\(key)=\(value)&"
+        })
+        
+        //basic auth
+        request.setValue(self.stripeTool.getBasicAuth(), forHTTPHeaderField: "Authorization")
+        
+        request.httpMethod = "POST"
+        
+        request.httpBody = str.data(using: String.Encoding.utf8)
+        
+        self.dataTask = self.defaultSession.dataTask(with: request as URLRequest) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = self.decodeResponse(response, error: error as NSError?) {
+                    completion(false)
+                    return
+                }
+                
+                
+                completion(true)
+            }
+        }
+        
+        self.dataTask?.resume()
+    }
+    
+
     func getCardsList(completion: @escaping (_ result: [AnyObject]?) -> Void) {
         
         //request to create the user
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.stripe.com/v1/customers/\(self.customerId!)/sources?object=card")! as URL)
+        let baseURL = URL(string: backendBaseURL)
+        let path = "/customer/getCards"
+        let url = baseURL?.appendingPathComponent(path)
+        let request = NSMutableURLRequest(url: url!)
         
         //basic auth
         request.setValue(self.stripeTool.getBasicAuth(), forHTTPHeaderField: "Authorization")
@@ -187,5 +292,6 @@ class StripeUtil {
         self.dataTask?.resume()
         
     }
-    
+
 }
+

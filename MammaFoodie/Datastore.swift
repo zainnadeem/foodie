@@ -45,10 +45,10 @@ class DataStore {
     
     func createDummyUsers() -> [User] {
         
-        let user1 = User(uid: "", username: "Jenny1", fullName: "Jenny Cook", email: "jenny@cook.com", bio: "Awesome Woman Cook", website: "", location: "", follows: [], followedBy: [], profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fwearing-apron-in-the-kitchen.jpg?alt=media&token=2c903cc7-f143-4bab-bdc5-9a48ebd50d2e", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: ["Cookies, Soups, Pizza, Cake"], addresses: [])
+        let user1 = User(uid: "", username: "Jenny1", fullName: "Jenny Cook", email: "jenny@cook.com", bio: "Awesome Woman Cook", website: "", location: "", follows: [], followedBy: [], profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fwearing-apron-in-the-kitchen.jpg?alt=media&token=2c903cc7-f143-4bab-bdc5-9a48ebd50d2e", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: true, tags: ["Cookies, Soups, Pizza, Cake"], addresses: [], stripeId: "")
        
 
-        let user2 = User(uid: "", username: "greg1", fullName: "Greg Cook", email: "greg@cook.com", bio: "Awesome Man Cook", website: "", location: "", follows: [], followedBy: [], profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fimages.jpg?alt=media&token=89af4243-8189-4039-949b-5047e5cc9602", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: false, tags: ["Panini, Pizza, Indian, Meatballs"], addresses: [])
+        let user2 = User(uid: "", username: "greg1", fullName: "Greg Cook", email: "greg@cook.com", bio: "Awesome Man Cook", website: "", location: "", follows: [], followedBy: [], profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fimages.jpg?alt=media&token=89af4243-8189-4039-949b-5047e5cc9602", dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 2, deviceTokens: [], isAvailable: false, tags: ["Panini, Pizza, Indian, Meatballs"], addresses: [], stripeId: "")
         
         return [user1, user2]
         

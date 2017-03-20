@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //Stripe
-        STPPaymentConfiguration.shared().publishableKey = "pk_test_GR7oEMC78jWcX3qsXVXlMsuC"
+        STPPaymentConfiguration.shared().publishableKey = stripePublishableKey
 
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

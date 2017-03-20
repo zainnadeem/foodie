@@ -32,7 +32,7 @@ class StripeSettingsViewController: UITableViewController {
     private var applePay: Switch = .Enabled
     private var requiredBillingAddressFields: RequiredBillingAddressFields = .None
     private var requiredShippingAddressFields: RequiredShippingAddressFields = .PostalAddressPhone
-    private var shippingType: ShippingType = .Shipping
+    private var shippingType: ShippingType = .Delivery
     private var smsAutofill: Switch = .Enabled
 
     fileprivate enum Section: String {
@@ -161,19 +161,19 @@ class StripeSettingsViewController: UITableViewController {
     }
 
     private enum ShippingType: String {
-        case Shipping = "Shipping"
+        //case Shipping = "Shipping"
         case Delivery = "Delivery"
 
         init(row: Int) {
             switch row {
-            case 0: self = .Shipping
+            //case 0: self = .Shipping
             default: self = .Delivery
             }
         }
 
         var stpShippingType: STPShippingType {
             switch self {
-            case .Shipping: return .shipping
+            //case .Shipping: return .delivery
             case .Delivery: return .delivery
             }
         }

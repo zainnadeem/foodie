@@ -8,4 +8,15 @@
 
 import Foundation
 
-let stripeAPIKey = "sk_test_ILoBhJpbX4bmuygd0NQs23V5"
+
+let appleMerchantID: String? = nil
+
+let companyName = "Mamma Foodie"
+
+let paymentCurrency = "usd"
+
+let stripeSecret = "sk_test_ILoBhJpbX4bmuygd0NQs23V5"
+
+let stripePublishableKey = "pk_test_GR7oEMC78jWcX3qsXVXlMsuC"
+
+var backendBaseURL = "http://192.168.1.8:3000"

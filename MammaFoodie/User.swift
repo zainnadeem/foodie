@@ -52,11 +52,13 @@ class User
         return string
     }
     
+    var stripeId: String
+    
     
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address])
+    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address], stripeId: String)
     {
         self.uid = uid
         self.username = username
@@ -80,6 +82,7 @@ class User
         self.isAvailable = isAvailable
         self.tags = tags
         self.addresses = addresses
+        self.stripeId = stripeId
     }
     
     convenience init(uid: String, username: String, fullName: String, email: String, profileImageURL: String) {
@@ -114,6 +117,7 @@ class User
         self.isAvailable = false
         self.tags = [""]
         self.addresses = []
+        self.stripeId = ""
     }
     
     init(dictionary: [String : Any])
@@ -131,6 +135,8 @@ class User
         totalLikes = dictionary["total likes"] as! Int
         isAvailable = dictionary["is available"] as! Bool
         tags = dictionary["tags"] as! [String]
+        
+        stripeId = dictionary["stripe id"] as! String
         
         // deviceToken: created for notifications
         self.deviceTokens = []
@@ -244,6 +250,7 @@ class User
             "profile image URL" : profileImageURL,
             "average rating"  : averageRating,
             "total likes"     : totalLikes,
+            "stripe id"       : stripeId,
             "is available"    : isAvailable
             
             
@@ -256,6 +263,14 @@ class User
             var cartTotalAsString = String(cartTotal)
             cartTotalAsString = cartTotalAsString.convertPriceInCentsToDollars()
             return cartTotalAsString
+        }
+        return nil
+    }
+    
+    func calculateCartTotalAsInt() -> Int? {
+        if !self.cart.isEmpty {
+            let cartTotal = self.cart.reduce(0) { return $0 + $1.price }
+            return cartTotal
         }
         return nil
     }
@@ -294,6 +309,10 @@ extension User {
         DatabaseReference.users(uid: uid).reference().updateChildValues(self.toDictionary())
         //save other user data
         
+    }
+    
+    func registerStripeId(id: String){
+        DatabaseReference.users(uid: uid).reference().child("stripe id").setValue(id)
     }
 
     
