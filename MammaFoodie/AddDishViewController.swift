@@ -55,7 +55,7 @@ class AddDishViewController: UIViewController {
         
         addButton.setTitle("Add Dish", for: .normal)
         
-        addButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     
@@ -79,16 +79,11 @@ class AddDishViewController: UIViewController {
         }
     }
     
-    func dismissAction() {
+    func addButtonTapped() {
         
         saveDish { (success) in
-            
             if success {
-                if let profileVC = self.sendingViewController as? ProfileViewController {
-                    self.dismiss(animated: true) {
-                        profileVC.profileView.tableView.reloadData()
-                    }
-                }
+                self.dismiss(animated: true, completion: nil)
             }
         }
         
@@ -115,8 +110,9 @@ class AddDishViewController: UIViewController {
                 print("The dish was successfully saved! Its image can be downloaded at \(url)")
                 newDish.mainImageURL = url.absoluteString
                 self.store.currentUser.dishes.append(newDish)
+                completion(true)
             }
-            completion(true)
+            
         }
         else { completion(false) }
         
@@ -138,15 +134,8 @@ class AddDishViewController: UIViewController {
     
     func validateFields(title: String?, description: String?, price: String?, image: UIImage?) -> Bool {
         print("validating now")
-//        let alertController = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-//            alertController.dismiss(animated: true, completion: nil)
-//        }
-//        alertController.addAction(okAction)
         
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
+        let appearance = SCLAlertView.SCLAppearance( showCloseButton: false )
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("OK") {
             print("ok button tapped")

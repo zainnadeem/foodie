@@ -48,6 +48,12 @@ class SearchViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if let pageVC = self.parent as? UserPageViewController {
+            pageVC.setUpCartView()
+        }
+    }
     
     func setViewConstraints() {
         

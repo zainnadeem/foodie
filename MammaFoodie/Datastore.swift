@@ -30,7 +30,7 @@ class DataStore {
         
     }
     
-    func getCurrentUserWithUID(uid: String,_ completion: @escaping () -> Void){
+    fileprivate func getCurrentUserWithUID(uid: String,_ completion: @escaping () -> Void){
         
         DatabaseReference.users(uid: uid).reference().observeSingleEvent(of: .value, with: { (snapshot) in
                 if let userDict = snapshot.value as? [String : Any] {

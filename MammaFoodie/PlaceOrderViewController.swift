@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Stripe
 
-class PlaceOrderViewController: UIViewController, STPPaymentContextDelegate {
+class PlaceOrderViewController: UIViewController {
 
     lazy var navBar: NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "cross_icon"), middleButtonImage: nil)
     lazy var tableView = UITableView()
@@ -133,9 +133,6 @@ class PlaceOrderViewController: UIViewController, STPPaymentContextDelegate {
             tableView.deleteRows(at: [indexPath!], with: .fade)
             setPlaceOrderButtonTitle()
             
-            if let total = self.store.currentUser.calculateCartTotalAsInt(){
-                paymentContext.paymentAmount = total
-            }
             
         }
         
@@ -143,9 +140,7 @@ class PlaceOrderViewController: UIViewController, STPPaymentContextDelegate {
     
     func placeOrderButtonTapped() {
         self.paymentInProgress = true
-        
 
-        self.paymentContext.requestPayment()
         store.currentUser.cart.removeAll()
         self.dismiss(animated: true, completion: nil)
          
@@ -169,186 +164,9 @@ class PlaceOrderViewController: UIViewController, STPPaymentContextDelegate {
     
     func setUpStripe(){
       
-        
-//        assert(stripePublishableKey.hasPrefix("pk_"), "You must set your Stripe publishable key at the top of CheckoutViewController.swift to run this app.")
-//        assert(backendBaseURL != nil, "You must set your backend base url at the top of CheckoutViewController.swift to run this app.")
-//
-//        APIClient.sharedClient.baseURLString = backendBaseURL!
-//        
-//        let settings = self.settingsVC.settings
-//        let config = STPPaymentConfiguration.shared()
-//        config.publishableKey = stripePublishableKey
-//        config.appleMerchantIdentifier = appleMerchantID
-//        config.companyName = companyName
-//        config.requiredBillingAddressFields = settings.requiredBillingAddressFields
-//        config.requiredShippingAddressFields = settings.requiredShippingAddressFields
-//        config.shippingType = settings.shippingType
-//        config.additionalPaymentMethods = settings.additionalPaymentMethods
-//        config.smsAutofillDisabled = !settings.smsAutofillEnabled
-//        
-//        let paymentContext = STPPaymentContext(apiAdapter: APIClient.sharedClient,
-//                                               configuration: config,
-//                                               theme: settings.theme)
-//        
-//        let userInformation = STPUserInformation()
-//        paymentContext.prefilledInformation = userInformation
-//        
-//        if let total = self.store.currentUser.calculateCartTotalAsInt(){
-//            paymentContext.paymentAmount = total
-//        }
-//        
-//        paymentContext.paymentCurrency = paymentCurrency
-//        self.paymentContext = paymentContext
-//        
-//        self.paymentRow = CheckoutRowView(title: "Payment", detail: "Select Payment",
-//                                          theme: settings.theme)
-//        var shippingString = "Contact"
-//        if config.requiredShippingAddressFields.contains(.postalAddress) {
-//            shippingString = config.shippingType == .shipping ? "Shipping" : "Delivery"
-//        }
-//        
-//        self.shippingString = shippingString
-//        self.shippingRow = CheckoutRowView(title: self.shippingString,
-//                                           detail: "Enter \(self.shippingString) Info",
-//            theme: settings.theme)
-//        var localeComponents: [String: String] = [
-//            NSLocale.Key.currencyCode.rawValue: paymentCurrency,
-//            ]
-//        localeComponents[NSLocale.Key.languageCode.rawValue] = NSLocale.preferredLanguages.first
-//        let localeID = NSLocale.localeIdentifier(fromComponents: localeComponents)
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.locale = Locale(identifier: localeID)
-//        numberFormatter.numberStyle = .currency
-//        numberFormatter.usesGroupingSeparator = true
-//        self.numberFormatter = numberFormatter
-//        self.paymentContext.delegate = self
-//        paymentContext.hostViewController = self
-//        
-//        self.paymentRow.onTap = { [weak self] _ in
-//            self?.paymentContext.presentPaymentMethodsViewController()
-//        }
-//        self.shippingRow.onTap = { [weak self] _ in
-//            self?.paymentContext.presentShippingViewController()
-//        }
-        
-    }
-    // MARK: STPPaymentContextDelegate
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
-//        APIClient.sharedClient.completeCharge(paymentResult, amount: self.paymentContext.paymentAmount,
-//                                              completion: completion)
-        let stpAddress = STPAddress()
-        stpAddress.name = "Zain"
-        stpAddress.city = "Hicksville"
-        stpAddress.state = "NY"
-        stpAddress.country = "United States"
-        stpAddress.phone = "516-244-2916"
-        stpAddress.postalCode = "11801"
-        
-        let card = STPCard()
-        
-        card.address = stpAddress
-        card.number = "4242424242424242"
-        card.expYear = 19
-        card.expMonth =  05
-        card.cvc = "111"
-        let stripeUtl = StripeUtil()
-        
-        
-        stripeUtl.createUser(card: card) { (success) in
-            
-        }
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
-        self.paymentInProgress = false
-        let title: String
-        let message: String
-        switch status {
-        case .error:
-            title = "Error"
-            message =  error?.localizedDescription ?? ""
-        case .success:
-            title = "Success"
-            message = "You will reveive conformation from your Chef soon!"
-        case .userCancellation:
-            return
-        }
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(action)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-        self.paymentRow.loading = paymentContext.loading
-        if let paymentMethod = paymentContext.selectedPaymentMethod {
-            self.paymentRow.detail = paymentMethod.label
-        }
-        else {
-            self.paymentRow.detail = "Select Payment"
-        }
-        if let shippingMethod = paymentContext.selectedShippingMethod {
-            self.shippingRow.detail = shippingMethod.label
-        }
-        else {
-            self.shippingRow.detail = "Enter \(self.shippingString) Info"
-        }
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
-        let alertController = UIAlertController(
-            title: "Error",
-            message: error.localizedDescription,
-            preferredStyle: .alert
-        )
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            // Need to assign to _ because optional binding loses @discardableResult value
-            // https://bugs.swift.org/browse/SR-1681
-            _ = self.navigationController?.popViewController(animated: true)
-        })
-        let retry = UIAlertAction(title: "Retry", style: .default, handler: { action in
-            self.paymentContext.retryLoading()
-        })
-        alertController.addAction(cancel)
-        alertController.addAction(retry)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didUpdateShippingAddress address: STPAddress, completion: @escaping STPShippingMethodsCompletionBlock) {
-        let upsGround = PKShippingMethod()
-        upsGround.amount = 0
-        upsGround.label = "UPS Ground"
-        upsGround.detail = "Arrives in 3-5 days"
-        upsGround.identifier = "ups_ground"
-        let upsWorldwide = PKShippingMethod()
-        upsWorldwide.amount = 10.99
-        upsWorldwide.label = "UPS Worldwide Express"
-        upsWorldwide.detail = "Arrives in 1-3 days"
-        upsWorldwide.identifier = "ups_worldwide"
-        let fedEx = PKShippingMethod()
-        fedEx.amount = 5.99
-        fedEx.label = "FedEx"
-        fedEx.detail = "Arrives tomorrow"
-        fedEx.identifier = "fedex"
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            if address.country == nil || address.country == "US" {
-                completion(.valid, nil, [upsGround, fedEx], fedEx)
-            }
-            else if address.country == "AQ" {
-                let error = NSError(domain: "ShippingError", code: 123, userInfo: [NSLocalizedDescriptionKey: "Invalid Shipping Address",
-                                                                                   NSLocalizedFailureReasonErrorKey: "We can't ship to this country."])
-                completion(.invalid, error, nil, nil)
-            }
-            else {
-                fedEx.amount = 20.99
-                completion(.valid, nil, [upsWorldwide, fedEx], fedEx)
-            }
-        }
-    }
-  
 
+
+    }
 }
 
 extension PlaceOrderViewController: UITableViewDelegate, UITableViewDataSource {

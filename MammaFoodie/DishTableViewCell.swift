@@ -12,22 +12,22 @@ import SnapKit
 
 class DishTableViewCell: UITableViewCell {
     
-    var dishImageView: UIImageView!
-    var titleLabel: UILabel!
-    var descriptionLabel: UILabel!
-    var titleDescriptionStackView: UIStackView!
-    var ratingView: CosmosView!
-    var priceLabel: UILabel!
-    var priceRatingStackView: UIStackView!
+    lazy var dishImageView = UIImageView()
+    lazy var titleLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
+    lazy var titleDescriptionStackView = UIStackView()
+    lazy var ratingView = CosmosView()
+    lazy var priceLabel = UILabel()
+    lazy var priceRatingStackView =  UIStackView()
 
     var dish: Dish! {
         didSet {
-            dishImageView = UIImageView(image: dish.mainImage)
-            titleLabel = UILabel(text: dish.name)
-            descriptionLabel = UILabel(text: dish.description)
+            dishImageView.image = dish.mainImage
+            titleLabel.text = dish.name
+            descriptionLabel.text = dish.description
             var priceAsString = String(dish.price)
-            priceLabel = UILabel(text: priceAsString.convertPriceInCentsToDollars())
-            setUpLayout()
+            priceLabel.text = priceAsString.convertPriceInCentsToDollars()
+            
         }
     }
     
@@ -38,6 +38,7 @@ class DishTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUpLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {

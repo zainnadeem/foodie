@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
 
         fbLoginButton = FBSDKLoginButton()
         fbLoginButton.readPermissions = ["public_profile", "email"]
@@ -70,37 +71,51 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             return
         }
         
-        /*
-         initiate graph request
-         get facebook email and user id
-         create user in firebase database
-        */
-        
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.width(300).height(300)"]).start { (connection, result, error) in
             if error != nil {
                 print("there was an error with the fb graph request: \(error?.localizedDescription)")
             }
             print("result: \(result)")
             if let result = result as? [String: Any] {
-                let signupVC = SignupViewController()
                 
                 let email = result["email"] as! String
                 let fullName: String = result["name"] as! String
                 let pictureDict = result["picture"] as! [String: Any]
                 let pictureData = pictureDict["data"] as! [String: Any]
                 let pictureURL = pictureData["url"] as! String
-                
-                
-                signupVC.email = email
-                signupVC.fullName = fullName
-                signupVC.userID = result["id"] as? String
-                signupVC.pictureURL = URL(string: pictureURL)
-                signupVC.userSelectedManualLogin = false
-                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                signupVC.credential = credential
-                OperationQueue.main.addOperation({ 
-                    self.present(signupVC, animated: true, completion: nil)
+                let id = result["id"] as! String
+                FirebaseAPIClient.checkForUserToken(for: id, completion: { (userExists) in
+                    if(userExists) {
+                        DataStore.sharedInstance.getCurrentUserWithToken(token: FBSDKAccessToken.current().userID, {
+                            print("in get current user")
+                            let nav1 = UINavigationController()
+                            let mainView = UserPageViewController()
+                            nav1.viewControllers = [mainView]
+                            nav1.setNavigationBarHidden(true, animated: false)
+                            nav1.view.backgroundColor = .white
+                            OperationQueue.main.addOperation({
+                                print("back in the main queue")
+                                self.present(nav1, animated: true, completion: nil)
+                            })
+                        })
+                        
+                    }
+                    else {
+                        let signupVC = SignupViewController()
+                        signupVC.email = email
+                        signupVC.fullName = fullName
+                        signupVC.userID = id
+                        signupVC.pictureURL = URL(string: pictureURL)
+                        signupVC.userSelectedManualLogin = false
+                        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                        signupVC.credential = credential
+                        OperationQueue.main.addOperation({
+                            self.present(signupVC, animated: true, completion: nil)
+                        })
+                    }
                 })
+                
+                
                 
             }
             

@@ -27,6 +27,17 @@ class FirebaseAPIClient {
         }
     }
     
+    class func checkForUserToken(for userID: String, completion: @escaping (Bool) -> ()) {
+        FIRDatabase.database().reference().child("tokens").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String: String]
+            if let check = value?.keys.contains(userID) {
+                completion(check)
+            }
+        }) { (error) in
+            print("Error in checkForUserToken: \(error.localizedDescription)")
+        }
+    }
+    
 //    class func saveDishToDatabase(dish: Dish, completion: @escaping (Error?) -> ()) {
 //        let userRef = DatabaseReference.users(uid: DataStore.sharedInstance.currentUser.uid).reference()
 //        let dishRef = userRef.child("dishes").childByAutoId()

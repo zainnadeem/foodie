@@ -15,10 +15,12 @@ class DeliveryInfoView: UIView {
         case pickUp, uber, postmates
     }
     
+    let viewHeight:CGFloat = 30
+    
     lazy var deliveryLabel = UILabel(text: "Delivery Options")
     
     lazy var pickUpLabel = UILabel(text: "Pick Up")
-    lazy var uberLabel = UILabel(text: "Uber Eats")
+    lazy var uberLabel = UILabel(text: "Uber")
     lazy var postmatesLabel = UILabel(text: "Postmates")
     var labelsStackView: UIStackView!
     
@@ -52,19 +54,6 @@ class DeliveryInfoView: UIView {
         pickUpButton.isSelected = true
         pickUpButton.setTitle("✔️", for: .normal)
         lastTappedButton = pickUpButton
-        pickUpButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
-        pickUpButton.layer.cornerRadius = 3
-        pickUpButton.layer.borderWidth = 2
-        pickUpButton.layer.borderColor = UIColor.black.cgColor
-        uberButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
-        uberButton.layer.cornerRadius = 3
-        uberButton.layer.borderWidth = 2
-        uberButton.layer.borderColor = UIColor.black.cgColor
-        postmatesButton.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
-        postmatesButton.layer.cornerRadius = 3
-        postmatesButton.layer.borderWidth = 2
-        postmatesButton.layer.borderColor = UIColor.black.cgColor
-
     }
     
     func setViewConstraints() {
@@ -97,6 +86,18 @@ class DeliveryInfoView: UIView {
         for view in buttonsStackView.arrangedSubviews {
             view.snp.makeConstraints({ (make) in
                 make.height.width.equalTo(30)
+            })
+            if let button = view as? SegmentedControlButton {
+                button.addTarget(self, action: #selector(segmentedControlButtonTapped(sender:)), for: .touchUpInside)
+                button.layer.cornerRadius = viewHeight/2.0
+                button.layer.borderWidth = 2
+                button.layer.borderColor = UIColor.black.cgColor
+            }
+        }
+        
+        for view in labelsStackView.arrangedSubviews {
+            view.snp.makeConstraints({ (make) in
+                make.height.equalTo(30)
             })
         }
     }
