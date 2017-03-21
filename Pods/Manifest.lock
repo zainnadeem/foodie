@@ -5,18 +5,18 @@ PODS:
     - ChameleonFramework/Default
   - Cosmos (8.0.2)
   - DZNEmptyDataSet (1.8.1)
-  - Firebase/Auth (3.13.0):
+  - Firebase/Auth (3.14.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.1)
-  - Firebase/Core (3.13.0):
+  - Firebase/Core (3.14.0):
     - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.0)
-  - Firebase/Database (3.13.0):
+    - FirebaseCore (= 3.5.1)
+  - Firebase/Database (3.14.0):
     - Firebase/Core
     - FirebaseDatabase (= 3.1.2)
-  - Firebase/Storage (3.13.0):
+  - Firebase/Storage (3.14.0):
     - Firebase/Core
-    - FirebaseStorage (= 1.0.6)
+    - FirebaseStorage (= 1.1.0)
   - FirebaseAnalytics (3.7.0):
     - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
@@ -25,12 +25,12 @@ PODS:
     - FirebaseAnalytics (~> 3.7)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (3.5.0):
+  - FirebaseCore (3.5.1):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseDatabase (3.1.2):
     - FirebaseAnalytics (~> 3.7)
   - FirebaseInstanceID (1.0.9)
-  - FirebaseStorage (1.0.6):
+  - FirebaseStorage (1.1.0):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleMaps (2.2.0):
@@ -67,14 +67,15 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.8)
   - IQKeyboardManagerSwift (4.0.8)
   - NSDate+TimeAgo (1.0.6)
-  - NVActivityIndicatorView (3.5)
-  - OneSignal (2.3.5)
+  - NVActivityIndicatorView (3.5.1)
+  - OneSignal (2.3.7)
   - SAMCache (0.3.3)
   - SCLAlertView (0.7.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.2.0)
+  - Stripe (10.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -97,6 +98,7 @@ DEPENDENCIES:
   - SCLAlertView
   - SDWebImage (~> 3.8)
   - SnapKit
+  - Stripe
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -104,7 +106,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
-    :commit: dcf98f9bf3a632a7f40679b7da46f09681e48526
+    :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
     :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
@@ -112,13 +114,13 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Cosmos: 007c0b8e33a85e5363911bdd933571bbe221f7ef
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
+  Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
-  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
   FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
-  FirebaseStorage: 63628572a5fde258f8e933b5fb42697468da0158
+  FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
@@ -128,13 +130,14 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
-  NVActivityIndicatorView: e5252b082f93885f0bfc24c318719b4eaabcd37b
-  OneSignal: 4cb42948ebc141bd5deb54d3fda25105db94f6d4
+  NVActivityIndicatorView: 075563b3547445ebcff840e3297ce9dd4a23731f
+  OneSignal: 95c86eec080b8c5e69b85d8ad21c4d38eed1b5a8
   SAMCache: 790b2623a3e087c903daff872c90c248726c4c82
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  Stripe: abf87fc01f74a2143bba1b1798dd2e4d71fd2cb3
 
-PODFILE CHECKSUM: 4153758b273bc54bfe167991680eabb90caea661
+PODFILE CHECKSUM: 1048a594a760e770708c08077d791f0903eab98f
 
 COCOAPODS: 1.2.0
