@@ -248,6 +248,7 @@ class User
             "fullName"        : fullName,
             "location"        : location,
             "email"           : email,
+            "phoneNumber"     : phoneNumber,
             "tags"            : tags,
             "bio"             : bio,
             "website"         : website,

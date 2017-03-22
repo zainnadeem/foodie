@@ -48,8 +48,14 @@ class FloatingCartView: UIView {
     }
     
     func updateLabels() {
-        cartTotalLabel.text = store.currentUser.calculateCartTotal()
-        numberOfItemsLabel.text = "\(store.currentUser.cart.count)"
+        let animation: CATransition = CATransition()
+        animation.duration = 0.4
+        animation.type = kCATransitionFade
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        self.cartTotalLabel.layer.add(animation, forKey: "changeTextTransition")
+        self.numberOfItemsLabel.layer.add(animation, forKey: "changeTextTransition")
+        self.cartTotalLabel.text = self.store.currentUser.calculateCartTotal()
+        self.numberOfItemsLabel.text = "\(self.store.currentUser.cart.count)"
     }
     
     func setViewConstraints() {

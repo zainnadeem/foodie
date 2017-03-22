@@ -78,7 +78,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             print("result: \(result)")
             if let result = result as? [String: Any] {
                 
-                let email = result["email"] as! String
                 let fullName: String = result["name"] as! String
                 let pictureDict = result["picture"] as! [String: Any]
                 let pictureData = pictureDict["data"] as! [String: Any]
@@ -102,7 +101,9 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                     }
                     else {
                         let signupVC = SignupViewController()
-                        signupVC.email = email
+                        if let email = result["email"] as? String {
+                            signupVC.email = email
+                        }
                         signupVC.fullName = fullName
                         signupVC.userID = id
                         signupVC.pictureURL = URL(string: pictureURL)

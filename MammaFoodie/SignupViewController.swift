@@ -12,6 +12,7 @@ import ChameleonFramework
 import Firebase
 import SDWebImage
 import SCLAlertView
+import FBSDKLoginKit
 
 class SignupViewController: UIViewController {
     
@@ -30,7 +31,7 @@ class SignupViewController: UIViewController {
     var profileImageView: UIImageView!
     var changePhotoButton: UIButton!
     
-    lazy var completeButton = UIButton()
+    lazy var completeButton: FormSubmitButton = FormSubmitButton()
     lazy var tableView = UITableView()
     let sections = ["Email", "Full Name", "Username"]
 
@@ -48,6 +49,7 @@ class SignupViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false
+        tableView.tableFooterView = UIView()
         tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldTableViewCellIdentifier)
         tableView.register(FormTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: formTableViewHeaderViewIdentifier)
         
@@ -100,14 +102,7 @@ class SignupViewController: UIViewController {
     
     fileprivate func setUpInputFields() {
         
-        
         completeButton.setTitle("Complete Signup", for: .normal)
-        completeButton.titleLabel?.font = UIFont.mammaFoodieFontBold(16)
-        completeButton.setTitleColor(.white, for: .normal)
-        completeButton.backgroundColor = .black
-        completeButton.layer.cornerRadius = 10
-        completeButton.layer.borderColor = UIColor.white.cgColor
-        completeButton.layer.borderWidth = 1
         completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         
         view.addSubview(completeButton)
@@ -146,18 +141,20 @@ class SignupViewController: UIViewController {
                     
                     self.store.currentUser = newUser
                     self.store.currentUser.updateUserInfo()
-                    
                     guard let id = self.userID else { return }
                     DatabaseReference.tokens(token: id).reference().setValue(user.uid)
-
+                    
+                    OperationQueue.main.addOperation({
+                        let pageVC = UserPageViewController()
+                        self.present(pageVC, animated: true, completion: nil)
+                    })
                 }
 
             })
             
         }
         
-        let pageVC = UserPageViewController()
-        present(pageVC, animated: true, completion: nil)
+        
 
     }
     
@@ -175,6 +172,7 @@ class SignupViewController: UIViewController {
     func preFillTextFields() {
         let emailCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TextFieldTableViewCell
         emailCell.textField.placeholder = "example@example.com"
+        emailCell.textField.autocapitalizationType = .none
         
         let fullNameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
         fullNameCell.textField.placeholder = "example@example.com"
@@ -209,6 +207,7 @@ extension SignupViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             cell.textField.placeholder = "Email"
+            cell.textField.autocapitalizationType = .none
             if let email = self.email { cell.textField.text = email }
         case 1:
             cell.textField.placeholder = "Full Name"
@@ -240,6 +239,7 @@ extension SignupViewController : NavBarViewDelegate {
     
     func leftBarButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
+        FBSDKLoginManager().logOut()
     }
     
     func middleBarButtonTapped(_ Sender: AnyObject) {}

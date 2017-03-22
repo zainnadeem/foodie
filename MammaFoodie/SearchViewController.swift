@@ -134,7 +134,10 @@ extension SearchViewController: UITableViewDelegate{
         }
 
         searchBar.resignFirstResponder()
-        self.dismiss(animated: true, completion: nil)
+        let profileVC = ProfileViewController()
+        let cell = tableView.cellForRow(at: indexPath) as! SearchUserTableViewCell
+        profileVC.user = cell.user
+        self.navigationController?.pushViewController(profileVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

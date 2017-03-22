@@ -25,6 +25,7 @@ class UserPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(cartView)
         
         self.edgesForExtendedLayout = []
         
@@ -81,16 +82,22 @@ class UserPageViewController: UIPageViewController {
     func setUpCartView() {
         if !(DataStore.sharedInstance.currentUser.cart.isEmpty) {
             cartView.updateLabels()
-            view.addSubview(cartView)
-            cartView.snp.makeConstraints { (make) in
+            cartView.snp.removeConstraints()
+            self.cartView.snp.makeConstraints { (make) in
                 make.bottom.centerX.width.equalToSuperview()
                 make.height.equalTo(50)
             }
+            
             let cartTapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPlaceOrderView))
             cartView.addGestureRecognizer(cartTapGesture)
         }
         else {
-            cartView.removeFromSuperview()
+            cartView.snp.removeConstraints()
+            self.cartView.snp.makeConstraints { (make) in
+                make.centerX.width.equalToSuperview()
+                make.top.equalTo(self.view.snp.bottom)
+                make.height.equalTo(50)
+            }
         }
     }
     

@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController {
         }
         else {
             self.navBar = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "back_arrow"), middleButtonImage: nil)
-            self.navBar.middleButton.title = "<"
+            self.navBar.leftButton.title = "‹"
         }
     }
     
