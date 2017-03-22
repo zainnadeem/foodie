@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     self.setUpNavigationController()
                 })
             })
-            
+        
 
 //
 //            

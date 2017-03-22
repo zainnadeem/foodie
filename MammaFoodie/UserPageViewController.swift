@@ -26,6 +26,7 @@ class UserPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = []
         
         self.accessibilityLabel = "Main User Page View Controller"
         

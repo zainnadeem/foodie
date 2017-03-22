@@ -37,7 +37,7 @@ class User
     var cart                            :           [Dish]
     
     var totalLikes                      :           Int
-    var averageRating                   :           Int
+    var averageRating                   :           Double
     var deviceTokens                    :           [String]
     var isAvailable                     :           Bool
     
@@ -59,7 +59,7 @@ class User
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, email: String, phoneNumber: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address], stripeId: String)
+    init(uid: String, username: String, fullName: String, email: String, phoneNumber: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Double, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address], stripeId: String)
     {
         self.uid = uid
         self.username = username
@@ -135,7 +135,7 @@ class User
         location = dictionary["location"] as! String
         profileImageURL = dictionary["profile image URL"] as! String
         
-        averageRating = dictionary["average rating"] as! Int
+        averageRating = dictionary["average rating"] as! Double
         totalLikes = dictionary["total likes"] as! Int
         isAvailable = dictionary["is available"] as! Bool
         tags = dictionary["tags"] as! [String]

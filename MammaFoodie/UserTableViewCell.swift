@@ -21,8 +21,8 @@ class UserTableViewCell: UITableViewCell {
     
     var user: User! {
         didSet {
-            profileImageView.image = #imageLiteral(resourceName: "profile_placeholder")
-//            profileImageView.sd_setImage(with: URL(string:user.profileImageURL))
+//            profileImageView.image = #imageLiteral(resourceName: "profile_placeholder")
+            profileImageView.sd_setImage(with: URL(string:user.profileImageURL))
             usernameLabel.text = user.username
             fullNameLabel.text = user.fullName
         }

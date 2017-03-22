@@ -20,12 +20,12 @@ enum SelectedTableViewStatus {
 class ProfileView: UIView, UITableViewDelegate {
     
     var profileTopStackView: UIStackView!
-    var profileImageView: UIImageView!
-    var ratingView: CosmosView!
-    var followButton: FollowButton!
-    var likesLabel: UILabel!
-    var bioTextView: UITextView!
-    var websiteTextView: UITextView!
+    lazy var profileImageView = UIImageView()
+    lazy var ratingView = CosmosView()
+    lazy var followButton = FollowButton()
+    lazy var likesLabel = UILabel()
+    lazy var bioTextView = UITextView()
+    lazy var websiteTextView = UITextView()
     
     var menuButton: SegmentedControlButton!
     var reviewsButton: SegmentedControlButton!
@@ -42,6 +42,11 @@ class ProfileView: UIView, UITableViewDelegate {
         didSet {
             let imageURL = URL(string: user.profileImageURL)
             profileImageView.sd_setImage(with: imageURL)
+            ratingView.rating = user.averageRating
+            likesLabel.text = "\(user.totalLikes) likes"
+//            bioTextView.text = user.bio
+            bioTextView.text = loremIpsumString
+            websiteTextView.text = user.website
         }
     }
     
@@ -92,26 +97,20 @@ extension ProfileView {
 //do all the auto layout here
 extension ProfileView {
     func setupViewLayout() {
-        
-        
-        profileImageView = UIImageView()
+    
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 3
         profileImageView.layer.cornerRadius = 10
         profileImageView.clipsToBounds = true
         
-        ratingView = CosmosView()
-        ratingView.settings.updateOnTouch = false
-        followButton = FollowButton()
         followButton.setTitle("Follow", for: .normal)
-        likesLabel = UILabel()
+        
         likesLabel.text = "0 likes"
         likesLabel.font = UIFont.mammaFoodieFont(14)
-        bioTextView = UITextView()
+        
         bioTextView.text = loremIpsumString
         bioTextView.isEditable = false
         
-        websiteTextView = UITextView()
         websiteTextView.dataDetectorTypes = .link
         websiteTextView.isEditable = false
         websiteTextView.font = UIFont.mammaFoodieFont(12)

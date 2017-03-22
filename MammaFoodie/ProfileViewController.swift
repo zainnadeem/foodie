@@ -71,8 +71,8 @@ class ProfileViewController: UIViewController {
         user.reviews.append(review1)
         arrayForTableView = user.dishes
         
-        let otherUser1 = User(uid: "123", username: "sulu_candles", fullName: "Sulu Candles", email: "sulu@gmail.com", profileImageURL: "google.com")
-        let otherUser2 = User(uid: "456", username: "ghee_buttersnaps", fullName: "Ghee Buttersnaps", email: "ghee@gmail.com", profileImageURL: "wikipedia.org")
+        let otherUser1 = User(uid: "123", username: "sulu_candles", fullName: "Sulu Candles", email: "sulu@gmail.com", profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fwearing-apron-in-the-kitchen.jpg?alt=media&token=2c903cc7-f143-4bab-bdc5-9a48ebd50d2e")
+        let otherUser2 = User(uid: "456", username: "ghee_buttersnaps", fullName: "Ghee Buttersnaps", email: "ghee@gmail.com", profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fimages.jpg?alt=media&token=89af4243-8189-4039-949b-5047e5cc9602")
         user.follows.append(otherUser1)
         user.follows.append(otherUser2)
         user.followedBy.append(otherUser1)
