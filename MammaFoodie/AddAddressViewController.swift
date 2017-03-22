@@ -25,6 +25,10 @@ class AddAddressViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Add Address"
         self.navBar.delegate = self
+        
+        let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(dismissGesture)
+        tableView.addGestureRecognizer(dismissGesture)
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -36,6 +40,8 @@ class AddAddressViewController: UIViewController {
         setViewProperties()
 
     }
+    
+    func hideKeyboard() { self.view.endEditing(true) }
     
     func setViewConstraints(){
        

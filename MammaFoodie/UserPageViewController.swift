@@ -63,6 +63,7 @@ class UserPageViewController: UIPageViewController {
         
         let settingsVC = SettingsViewController(nibName: nil, bundle: nil)
         let profileVC = ProfileViewController(nibName: nil, bundle: nil)
+        profileVC.user = DataStore.sharedInstance.currentUser
         let mainFeedVC = MainFeedViewController(nibName: nil, bundle: nil)
         let searchVC = SearchViewController(nibName: nil, bundle: nil)
         

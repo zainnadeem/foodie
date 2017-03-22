@@ -9,6 +9,8 @@
 import UIKit
 import ChameleonFramework
 
+//TODO: add functionality to switch button from follow/following
+
 class FollowButton: UIButton {
     
     required init() {

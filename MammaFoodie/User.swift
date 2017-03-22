@@ -18,6 +18,7 @@ class User
     var username                        :           String
     var fullName                        :           String
     var email                           :           String
+    var phoneNumber                     :           String
     var bio                             :           String
     var website                         :           String
     var location                        :           String
@@ -58,12 +59,13 @@ class User
     
     // MARK: - Initializers
     
-    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address], stripeId: String)
+    init(uid: String, username: String, fullName: String, email: String, phoneNumber: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address], stripeId: String)
     {
         self.uid = uid
         self.username = username
         self.fullName = fullName
         self.email = email
+        self.phoneNumber = phoneNumber
         self.bio = bio
         self.website = website
         self.location = location
@@ -99,6 +101,7 @@ class User
         self.username = ""
         self.fullName = ""
         self.email = ""
+        self.phoneNumber = ""
         self.bio = ""
         self.website = ""
         self.location = ""
@@ -126,6 +129,7 @@ class User
         username = dictionary["username"] as! String
         fullName = dictionary["fullName"] as! String
         email = dictionary["email"] as! String
+        phoneNumber = dictionary["phoneNumber"] as! String
         bio = dictionary["bio"] as! String
         website = dictionary["website"] as! String
         location = dictionary["location"] as! String

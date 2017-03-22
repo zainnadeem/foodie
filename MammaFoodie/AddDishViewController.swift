@@ -34,9 +34,7 @@ class AddDishViewController: UIViewController {
         setViewConstraints()
     }
     
-    func hideKeyboard() {
-        self.view.endEditing(true)
-    }
+    func hideKeyboard() { self.view.endEditing(true) }
     
     func setViewProperties() {
         

@@ -28,7 +28,7 @@ class Review {
         self.reviewCreatedByUID = reviewCreatedByUID
         self.reviewForUID = reviewForUID
         
-        self.createdTime = Constants.dateFormatter().string(from: Date(timeIntervalSinceNow: 0))
+        self.createdTime = Constants.reviewDateFormatter().string(from: Date(timeIntervalSinceNow: 0))
         ref = DatabaseReference.users(uid: reviewForUID).reference().child("reviews").childByAutoId()
         uid = ref.key
     }

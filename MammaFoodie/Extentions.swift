@@ -106,7 +106,7 @@ extension String {
         return currencyCheck
     }
     
-    mutating func convertPriceInCentsToDollars() -> String {
+    func convertPriceInCentsToDollars() -> String {
         var copy = self
         copy.insert(".", at: copy.index(endIndex, offsetBy: -2))
         copy.insert("$", at: copy.startIndex)

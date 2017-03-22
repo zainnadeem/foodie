@@ -21,7 +21,7 @@ class EditProfileViewController: UIViewController {
     
     var mediaPickerHelper:  MediaPickerHelper!
     
-    var sections = ["username", "fullname", "website", "tags", "bio"]
+    var sections = ["username", "fullname", "website", "tags (comma separated)", "phone number", "bio"]
     let store = DataStore.sharedInstance
     var userInfo = [""]
     
@@ -29,6 +29,10 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Edit Profile"
+        
+        let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(dismissGesture)
+        tableView.addGestureRecognizer(dismissGesture)
         
         self.user = store.currentUser
         userInfo = [user.username, user.fullName, user.website, user.tagsString, user.bio]
@@ -46,6 +50,7 @@ class EditProfileViewController: UIViewController {
         
     }
     
+    func hideKeyboard() { self.view.endEditing(true) }
     
     func setViewConstraints(){
         
@@ -116,12 +121,14 @@ class EditProfileViewController: UIViewController {
         let fullNameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
         let websiteCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
         let tagsCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
+        let phoneNumberCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
         let bioCell = tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! TextViewTableViewCell
         
         if let username     = userNameCell.textField.text     { store.currentUser.username   = username }
         if let fullName     = fullNameCell.textField.text     { store.currentUser.fullName   = fullName }
         if let website      = websiteCell.textField.text      { store.currentUser.website    = website }
         if let tags         = tagsCell.textField.text         { store.currentUser.tags       = tags.components(separatedBy: ", ")}
+        if let phoneNumber  = phoneNumberCell.textField.text  { store.currentUser.phoneNumber = phoneNumber }
         if let bio          = bioCell.textView.text           { store.currentUser.bio        = bio }
         
         
@@ -164,7 +171,7 @@ extension EditProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath == IndexPath(row: 0, section: 4){
+        if indexPath == IndexPath(row: 0, section: 5){
             let cell  = tableView.dequeueReusableCell(withIdentifier: textViewTableViewCellIdentifier, for: indexPath) as! TextViewTableViewCell
             cell.textView.delegate = self
             cell.textView.text = userInfo[4]
@@ -213,7 +220,7 @@ extension EditProfileViewController: UITableViewDelegate, UITextViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == IndexPath(row: 0, section: 4){
+        if indexPath == IndexPath(row: 0, section: 5){
             return self.view.frame.height / 3
         }else{
             return 44

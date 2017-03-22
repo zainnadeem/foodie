@@ -13,7 +13,7 @@ import ChameleonFramework
 class ProfileViewController: UIViewController {
     
     //NavBar
-    lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "home_icon"), leftButtonImage: #imageLiteral(resourceName: "settings"), middleButtonImage: nil)
+    var navBar : NavBarView!
     
     var profileView: ProfileView!
     var user: User!
@@ -25,7 +25,6 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         OperationQueue.main.addOperation {
-            self.user.dishes = self.store.currentUser.dishes
             self.profileView.tableView.reloadData()
         }
         
@@ -38,6 +37,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpNavBar()
+        
         navBar.delegate = self
         profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         profileView.tableView.delegate = self
@@ -47,6 +48,7 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(navBar)
         makeDummyData()
         profileView.user = user
+        
         navBar.middleButton.title = user.username
         
         profileView.tableView.register(DishTableViewCell.self, forCellReuseIdentifier: dishCellIdentifier)
@@ -64,8 +66,6 @@ class ProfileViewController: UIViewController {
     
     fileprivate func makeDummyData() {
         
-        user = store.currentUser
-        
         let review1 = Review(description: "good", rating: 5, reviewCreatedByUID: "123", reviewForUID: "1234")
         user.reviews.append(review1)
         user.reviews.append(review1)
@@ -79,7 +79,16 @@ class ProfileViewController: UIViewController {
         user.followedBy.append(otherUser2)
     }
 
-
+    func setUpNavBar() {
+        if let pageVC = self.parent as? UserPageViewController {
+            self.navBar = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "home_icon"), leftButtonImage: #imageLiteral(resourceName: "settings"), middleButtonImage: nil)
+        }
+        else {
+            self.navBar = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "back_arrow"), middleButtonImage: nil)
+            self.navBar.middleButton.title = "<"
+        }
+    }
+    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -101,17 +110,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         switch profileView.profileTableViewStatus {
-        case .menu: cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier, for: indexPath) as! DishTableViewCell
+        case .menu:
+            cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier, for: indexPath) as! DishTableViewCell
             (cell as! DishTableViewCell).dish = user.dishes[indexPath.row]
-            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(deleteDishTapped))
-            cell.addGestureRecognizer(longPressGesture)
-        case .reviews: cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier, for: indexPath) as! ReviewTableViewCell
+            if user === store.currentUser {
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(deleteDishTapped))
+                cell.addGestureRecognizer(longPressGesture)
+            }
+        case .reviews:
+            cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier, for: indexPath) as! ReviewTableViewCell
             (cell as! ReviewTableViewCell).review = user.reviews[indexPath.row]
-        case .followers: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
+        case .followers:
+            cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
             (cell as! UserTableViewCell).user = user.followedBy[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
-        case .following: cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
+        case .following:
+            cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
             (cell as! UserTableViewCell).user = user.follows[indexPath.row]
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
@@ -125,6 +140,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let purchaseDishVC = PurchaseDishViewController()
             purchaseDishVC.dish = self.user.dishes[indexPath.row]
             self.present(purchaseDishVC, animated: true, completion: nil)
+        case .followers, .following:
+            let profileVC = ProfileViewController()
+            let cell = tableView.cellForRow(at: indexPath) as! UserTableViewCell
+            profileVC.user = cell.user
+            self.navigationController?.pushViewController(profileVC, animated: true)
         default:
             return
         }
@@ -136,7 +156,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.addItemButton.addTarget(self, action: #selector(showAddDishVC), for: .touchUpInside)
         switch profileView.profileTableViewStatus {
         case .reviews, .followers, .following: headerView.addItemButton.isHidden = true
-        default: headerView.addItemButton.isHidden = false
+        default:
+            headerView.addItemButton.isHidden = !(user === store.currentUser)
         }
         
         return headerView
@@ -230,6 +251,9 @@ extension ProfileViewController : NavBarViewDelegate {
     func leftBarButtonTapped(_ sender: AnyObject) {
         if let pageVC = self.parent as? UserPageViewController {
             pageVC.navigateToSettingsViewController(.reverse)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

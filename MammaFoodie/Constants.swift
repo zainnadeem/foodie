@@ -111,6 +111,12 @@ class Constants {
         return dateFormatter
     }
     
+    class func reviewDateFormatter() -> DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yy"
+        return dateFormatter
+    }
+    
     
     
     //Magic Numbers
