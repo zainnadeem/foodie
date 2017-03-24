@@ -170,7 +170,7 @@ extension SettingsViewController: UITableViewDelegate{
             
         case .Payment:
             print("Show Payment Methods")
-            self.choosePaymentButtonTapped()
+            
             
         case .Address:
             let destinationVC = AddressesViewController()

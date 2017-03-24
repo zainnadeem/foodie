@@ -196,15 +196,9 @@ extension MainFeedViewController : NavBarViewDelegate {
 //        stpCardParams1.expYear = UInt(19)
 //        stpCardParams1.cvc = "989"
 //        stpCardParams1.name = "Zain"
-//        
-//        let stpCardParams2 = STPCardParams()
-//        stpCardParams2.number = "4012888888881881"
-//        stpCardParams2.last4()
-//        stpCardParams2.expMonth = UInt(09)
-//        stpCardParams2.expYear = UInt(19)
-//        stpCardParams2.cvc = "333"
-//        stpCardParams2.name = "Omer"
-//        
+//
+
+//
 //        let stpCardParams3 = STPCardParams()
 //        stpCardParams3.number = "4207670162371796"
 //        stpCardParams3.last4()
@@ -221,7 +215,7 @@ extension MainFeedViewController : NavBarViewDelegate {
 //                  
 //            }
 //        }
-//        
+//
 //     
         
         
@@ -232,7 +226,7 @@ extension MainFeedViewController : NavBarViewDelegate {
 //            print(success)
 //            
 //        }
-//        
+//
 //          str.retrieveCustomer { (customer, error) in
 //            
 //            let paymentContext = STPPaymentContext.init(apiAdapter: StripeUtil.sharedClient)
@@ -247,8 +241,65 @@ extension MainFeedViewController : NavBarViewDelegate {
 //            
 //            
 //        }
-  
+        
+        
+        
+        let uri = "MammaFoodie://"
+        let authorizeURL = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=\(stripeClientId)&scope=read_write"
+         UIApplication.shared.openURL(NSURL(string: authorizeURL)! as URL)
+        
+//        let request = NSURLRequest(url: URL(string: authorizeURL)!)
+//        let urlWebView = UIWebView()
+//        self.view = urlWebView
+//        
+//        urlWebView.loadRequest(request as URLRequest)
+        
+        
+//        let params = [         "AUTHORIZE_URI"      : "https://connect.stripe.com/oauth/authorize"
+//                               "response_type"      : "code",
+//                               "scope"              : "read_write",
+//                               "client_id"          : stripeClientId
+//                    ]
+        
+        
+//
+//        let stripeUtil = StripeUtil()
+//        
+//        stripeUtil.stripeAPICall(params: params, requestMethod: .GET, path: StripePath.authorize) { (success) in
+//            
+//        }
+    
     }
+//    
+//    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool
+//    {
+//        if let URL = request.url?.absoluteString
+//        {
+//            // This should be the redirect URL that you pass it can be anything like local host mentioned above.
+//            if URL.hasPrefix(backendBaseURL)
+//            {
+//                // Now you can simply do some string manipulation to pull out the relevant components.
+//                // I'm not sure what sort of token or how you get it back but assuming the redirect URL is
+//                // YourRedirectURL&code=ACCESS_TOKEN and you want access token heres how you would get it.
+//                var code : String?
+//                if let URLParams = request.url?.query?.components(separatedBy: "&")
+//                {
+//                    for param in URLParams
+//                    {
+//                        let keyValue = param.components(separatedBy: "=")
+//                        let key = keyValue.first
+//                        if key == "code"
+//                        {
+//                            code = keyValue.last
+//                        }
+//                    }
+//                }
+//                // Here if code != nil then it has the ACCESS_TOKEN and you are done! If its nil something went wrong.
+//                return false // So that the webview doesnt redirect to the dummy URL you passed.
+//            }
+//        }
+//        return true
+//    }
     
     
 }

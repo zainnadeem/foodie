@@ -19,4 +19,10 @@ let stripeSecret = "sk_test_ILoBhJpbX4bmuygd0NQs23V5"
 
 let stripePublishableKey = "pk_test_GR7oEMC78jWcX3qsXVXlMsuC"
 
-var backendBaseURL = "http://192.168.1.8:3000"
+var backendBaseURL = "http://10.101.104.124:3000"
+
+let stripeClientId = "ca_AIbAgUmsoG9cxGRwdYHOExQiMljqzDXZ"
+
+
+
+let redirectURI = "http://MammaFoodie"

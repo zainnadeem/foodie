@@ -20,10 +20,14 @@ class PlaceOrderViewController: UIViewController {
     
     let store = DataStore.sharedInstance
     var deliveryFee: Int?
+    
+    let stripeUtil = StripeUtil()
+    
+    var purchaseCard: STPCard? = nil
+    
 
     
     //Stripe
-    var paymentContext: STPPaymentContext!
     lazy var paymentRow: CheckoutRowView = CheckoutRowView(title: "Payment", detail: "Select", theme: .default())
     lazy var shippingRow: CheckoutRowView = CheckoutRowView(title: "Shipping", detail: "Select", theme: .default())
     lazy var placeOrderButton: FormSubmitButton = FormSubmitButton()
@@ -83,6 +87,10 @@ class PlaceOrderViewController: UIViewController {
         setPlaceOrderButtonTitle()
         placeOrderButton.addTarget(self, action: #selector(placeOrderButtonTapped), for: .touchUpInside)
         
+        self.paymentRow.onTap = { [weak self] _ in
+            self?.addPaymentTapped()
+        }
+        
         view.addSubview(placeOrderButton)
         
     }
@@ -139,12 +147,31 @@ class PlaceOrderViewController: UIViewController {
     }
     
     func placeOrderButtonTapped() {
-        self.paymentInProgress = true
 
-        store.currentUser.cart.removeAll()
-        self.dismiss(animated: true, completion: nil)
-         
+        guard let card = purchaseCard else { return print("please select payment method") }
+        
+        let customer = self.store.currentUser
+        var recipient: User = User()
+        recipient.uid = self.store.currentUser.cart[0].createdBy
+        
+        recipient.observeUser { (user) in
+            
+            recipient = user
+            
+            self.stripeUtil.createCharge(stripeId: customer.stripeId, amount: customer.calculateCartTotalAsInt()!, currency: paymentCurrency, destination: recipient.stripeId) { (success) in
+                
+                if success {
+                    self.store.currentUser.cart.removeAll()
+                    self.dismiss(animated: true, completion: nil)
+                }
+                
+                
+            }
+        }
+        
+     
     }
+
     
     func setPlaceOrderButtonTitle() {
         if let cartTotal = store.currentUser.calculateCartTotal() {
@@ -197,3 +224,45 @@ extension PlaceOrderViewController: NavBarViewDelegate {
     func middleBarButtonTapped(_ Sender: AnyObject) {}
     func rightBarButtonTapped(_ sender: AnyObject) {}
 }
+
+
+extension PlaceOrderViewController: STPAddCardViewControllerDelegate {
+
+func addPaymentTapped() {
+    
+    let addCardViewController = STPAddCardViewController()
+    addCardViewController.delegate = self
+    // STPAddCardViewController must be shown inside a UINavigationController.
+    let navigationController = UINavigationController(rootViewController: addCardViewController)
+    self.present(navigationController, animated: true, completion: nil)
+}
+    
+    
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        //set token & stripeID in parameters
+
+        let params = ["source" : token.tokenId,
+                      "id"     : self.store.currentUser.stripeId
+                    ]
+        
+        self.stripeUtil.stripeAPICall(params: params, requestMethod: .POST, path: StripePath.source) { (success) in
+            
+                   self.dismiss(animated: true, completion: { 
+                    if success{
+                       
+                        self.paymentRow.detail = (token.card?.last4())!
+                        self.purchaseCard = token.card
+                    
+                        }
+                   })
+        }
+        
+    }
+    
+    
+}
+
