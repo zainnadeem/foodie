@@ -32,17 +32,14 @@ class SelectDishViewController: UIViewController {
         
         navBar.middleButton.title = "Add Dish"
         navBar.leftButton.title = "back"
+
         
         user = self.store.currentUser
         
+        if let dishes = user?.dishes{
+            dishesToSearch = dishes
+        }
 
-        let dish1 = Dish(uid: "1", name: "chicken wings", description: "bacon", mainImage: UIImage(), mainImageURL: "", price: Int(12.00), likedBy: [], averageRating: 3)
-        let dish2 = Dish(uid: "1", name: "homemade pizza", description: "marinara", mainImage: UIImage(), mainImageURL: "", price: Int(12.00), likedBy: [], averageRating: 3)
-        
-        dishesToSearch = [dish1, dish2]
-            
-        
-        //dishesToSearch = self.store.currentUser.dishes
         
         setViewConstraints()
         

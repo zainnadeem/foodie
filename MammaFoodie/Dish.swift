@@ -13,7 +13,7 @@ class Dish {
     
     // MARK: - Dish Properties
     
-    let uid                             :           String
+    let createdBy                       :           String
     var name                            :           String
     var description                     :           String
     
@@ -25,9 +25,9 @@ class Dish {
     var mainImageURL                    :           String
     
     
-    init(uid: String, name: String, description: String, mainImage: UIImage, mainImageURL: String, price: Int, likedBy: [User], averageRating: Int){
+    init(createdBy: String, name: String, description: String, mainImage: UIImage, mainImageURL: String, price: Int, likedBy: [User], averageRating: Int){
         
-        self.uid = uid
+        self.createdBy = createdBy
         self.name = name
         self.description = description
         self.mainImage = mainImage
@@ -40,7 +40,7 @@ class Dish {
     
     init(dictionary: [String : Any])
     {
-        uid = dictionary["uid"] as! String
+        createdBy = dictionary["created by"] as! String
         
         name = dictionary["name"] as! String
         description = dictionary["description"] as! String
@@ -62,7 +62,7 @@ class Dish {
     
     func save(completion: @escaping (URL) -> Void) {
         
-        let ref = DatabaseReference.users(uid: self.uid).reference().child("dishes").childByAutoId()
+        let ref = DatabaseReference.users(uid: self.createdBy).reference().child("dishes").childByAutoId()
         
         
         //save likes
@@ -72,7 +72,7 @@ class Dish {
         //upload image to storage database
         if let mainImage = mainImage {
             let firImage = FIRImage(image: mainImage)
-            firImage.save(self.uid, completion: { (downloadURL) in
+            firImage.save(self.createdBy, completion: { (downloadURL) in
                 completion(downloadURL)
                 ref.setValue(self.toDictionary())
             })
@@ -86,7 +86,7 @@ class Dish {
     {
         
         return [
-            "uid" : uid,
+            "created by" : createdBy,
             "name" : name,
             "description" : description,
             "average rating" : averageRating,

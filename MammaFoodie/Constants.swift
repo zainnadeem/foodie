@@ -67,6 +67,10 @@ let notDigitsSet = CharacterSet.decimalDigits.inverted
 
 let buttonRect = CGRect(x: 0, y: 0, width: 30, height: 30)
 
+
+
+//Stripe Paths 
+
 class Constants {
     
      // MARK: - Time Constants

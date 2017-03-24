@@ -102,7 +102,8 @@ class AddDishViewController: UIViewController {
         
         if validateFields(title: title, description: description, price: price, image: image) {
             let priceInCents = Int(Float(price!)! * 100)
-            let newDish = Dish(uid: store.currentUser.uid, name: title!, description: description!, mainImage: image!, mainImageURL: "", price: priceInCents, likedBy: [], averageRating: 0)
+           
+            let newDish = Dish(createdBy: store.currentUser.uid, name: title!, description: description!, mainImage: image!, mainImageURL: "", price: priceInCents, likedBy: [], averageRating: 0)
             
             newDish.save { (url) in
                 print("The dish was successfully saved! Its image can be downloaded at \(url)")
