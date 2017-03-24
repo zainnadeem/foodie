@@ -10,46 +10,84 @@ import UIKit
 import Alamofire
 
 class UberAPIClient {
-    class func checkIfDeliveryIsAvailable(completion: @escaping (Bool) -> () ) {
+    
+    var params: [String: Any]
+    
+    init(pickup: Address, dropoff: Address, chef: User, purchasingUser: User) {
         
-        let params = [
-            "dropoff": [
-                "location": [
-                    "address": "530 W 113th Street",
-                    "address_2": "Floor 2",
-                    "city": "New York",
-                    "country": "US",
-                    "postal_code": "10025",
-                    "state": "NY"
-                ]
-            ],
-            "pickup": [
-                "location": [
-                    "address": "636 W 28th Street",
-                    "address_2": "Floor 2",
-                    "city": "New York",
-                    "country": "US",
-                    "postal_code": "10001",
-                    "state": "NY"
-                ]
-            ]
+        let pickupLocation = [
+            "address"       : pickup.addressLine,
+            "address_2"     : pickup.aptSuite,
+            "city"          : pickup.city,
+            "country"       : "US",
+            "postal_code"   : pickup.postalCode,
+            "state"         : pickup.state
+        ]
+        let pickupContact: [String: Any] = [
+            "email"         : chef.email,
+            "first_name"    : chef.fullName.components(separatedBy: " ").first as Any,
+            "last_name"     : chef.fullName.components(separatedBy: " ").last as Any,
+            "phone"         : [ "number" : chef.phoneNumber, "sms_enabled" : false]
         ]
         
-        let urlString = "\(uberBaseURL)/deliveries/quote"
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
-        print(encodedString)
+        let dropoffLocation = [
+                "address"       : dropoff.addressLine,
+                "address_2"     : dropoff.aptSuite,
+                "city"          : dropoff.city,
+                "country"       : "US",
+                "postal_code"   : dropoff.postalCode,
+                "state"         : dropoff.state
+        ]
+        let dropoffContact: [String: Any] = [
+            "email"         : purchasingUser.email,
+            "first_name"    : purchasingUser.fullName.components(separatedBy: " ").first as Any,
+            "last_name"     : purchasingUser.fullName.components(separatedBy: " ").last as Any,
+            "phone"         : [ "number" : chef.phoneNumber, "sms_enabled" : false]
+        ]
         
-        Alamofire.request(encodedString, method: .post, parameters: params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
+        self.params = ["dropoff" : ["location" : dropoffLocation, "contact" : dropoffContact], "pickup" : ["location" : pickupLocation, "contact" : pickupContact]]
+        
+    }
+    
+    
+    
+    
+    
+    func getDeliveryQuote(completion: @escaping (String?) -> ()) {
+        
+        let urlString = "\(uberBaseURL)/deliveries/quote"
+        
+        Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
             print("\n\n\n\n Status code: \(response.response?.statusCode)")
             if response.response?.statusCode == 400 {
                 print("\n\n\n\n\n\n There was an error")
-                completion(false)
+                completion(nil)
             }
             if let json = response.result.value {
                 print("\n\n\n\n\n\n")
                 print(json)
             }
         }
+    }
+    
+    func createDelivery(completion: @escaping (Bool) -> ()) {
         
+        let urlString = "\(uberBaseURL)/deliveries"
+        
+        self.getDeliveryQuote { (quoteID) in
+            guard let quoteID = quoteID else { completion(false); return }
+            self.params["quote_id"] = quoteID
+            Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
+                print("\n\n\n\n Status code: \(response.response?.statusCode)")
+                if response.response?.statusCode == 400 {
+                    print("\n\n\n\n\n\n There was an error")
+                    completion(false)
+                }
+                if let json = response.result.value {
+                    print("\n\n\n\n\n\n")
+                    print(json)
+                }
+            }
+        }
     }
 }

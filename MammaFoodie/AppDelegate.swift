@@ -27,9 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
 //        PostmatesAPIClient.checkIfDeliveryIsAvailable(pickupAddress: "41 E 7th St, New York, NY", dropOffAddress: "11 Broadway, New York, NY") { (success, id) in }
         
-        UberAPIClient.checkIfDeliveryIsAvailable { (success) in
-            
-        }
+        let address1 = Address(title: "home", addressLine: "11 Broadway", aptSuite: "Suite 260", city: "New York", state: "NY", postalCode: "10004", crossStreet: "", phone: "5555555555")
+        
+        let address2 = Address(title: "work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "2222222222")
+        
+        
         
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -54,6 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             store.getCurrentUserWithToken(token: token, { 
                 OperationQueue.main.addOperation({ 
                     self.setUpNavigationController()
+                })
+                let uberClient = UberAPIClient(pickup: address1, dropoff: address2, chef: User(), purchasingUser: self.store.currentUser)
+                
+                uberClient.getDeliveryQuote(completion: { (quoteID) in
+                    print(quoteID)
                 })
             })
         
