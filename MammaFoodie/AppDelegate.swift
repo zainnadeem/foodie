@@ -25,9 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //Stripe
         STPPaymentConfiguration.shared().publishableKey = stripePublishableKey
         
-        PostmatesAPIClient.checkIfDeliveryIsAvailable(pickupAddress: "41 E 7th St, New York, NY", dropOffAddress: "11 Broadway, New York, NY") { (success, id) in
+//        PostmatesAPIClient.checkIfDeliveryIsAvailable(pickupAddress: "41 E 7th St, New York, NY", dropOffAddress: "11 Broadway, New York, NY") { (success, id) in }
+        
+        UberAPIClient.checkIfDeliveryIsAvailable { (success) in
             
         }
+        
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         

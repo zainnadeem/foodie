@@ -32,4 +32,8 @@ class FollowButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setTitle(isFollowing: Bool) {
+        
+    }
+    
 }

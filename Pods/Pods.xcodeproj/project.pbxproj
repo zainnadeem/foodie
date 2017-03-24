@@ -728,6 +728,7 @@
 		0859F60B37306B3190DE0B2DF363CBA4 /* NSDate+TimeAgo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo-prefix.pch"; sourceTree = "<group>"; };
 		08B174464D71A1784489BC819FEAB30E /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
 		0A280CCD445FC3D4E3EE8C73A7EEF3EC /* RightToLeft.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RightToLeft.swift; path = Cosmos/Helpers/RightToLeft.swift; sourceTree = "<group>"; };
+		0A679D78232C8ECB6BEC12B10D9EA0E4 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneSignal.framework; path = iOS_SDK/OneSignalSDK/Framework/OneSignal.framework; sourceTree = "<group>"; };
 		0B65A9D7C64C42CC2A838F8E1191DE91 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BC5CC6D55D7406956BB3880F44FB7DD /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		0C0D942CD9D62BC0A19088BA9A754A7B /* STPBundleLocator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPBundleLocator.m; path = Stripe/STPBundleLocator.m; sourceTree = "<group>"; };
@@ -822,7 +823,6 @@
 		2C2227F977A2CEBB2EEF2B60EF6A02BB /* STPSourceSEPADebitDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSourceSEPADebitDetails.h; path = Stripe/PublicHeaders/STPSourceSEPADebitDetails.h; sourceTree = "<group>"; };
 		2C5417E1B4FC8C0D01A7B1EDA7D68B80 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C6AD919A64E9016C0F7471D693C2152 /* SAMCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SAMCache.m; path = SAMCache/SAMCache.m; sourceTree = "<group>"; };
-		2CC44C7065965149D92DD8E4F74189DA /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneSignal.framework; path = iOS_SDK/Framework/OneSignal.framework; sourceTree = "<group>"; };
 		2D9DDCBEA5A45A7A31D40F3E07D1B5B4 /* stp_card_discover@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "stp_card_discover@2x.png"; path = "Stripe/Resources/Images/stp_card_discover@2x.png"; sourceTree = "<group>"; };
 		2DCE8E14DB0BD6ABD708E351B26153EB /* SDWebImageCompat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCompat.m; path = SDWebImage/SDWebImageCompat.m; sourceTree = "<group>"; };
 		2EB0D789F8FD756FF7E231C6CDC97FBF /* IQKeyboardManagerSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IQKeyboardManagerSwift-dummy.m"; sourceTree = "<group>"; };
@@ -1552,7 +1552,7 @@
 		0F69B14ECCB2C87ED23706461A6A2537 /* OneSignal */ = {
 			isa = PBXGroup;
 			children = (
-				E937CC1CA0B2A26A2AEBCFF17C70C2AA /* Frameworks */,
+				AEDCE314646EA57E1E08F8F7259FBA30 /* Frameworks */,
 			);
 			name = OneSignal;
 			path = OneSignal;
@@ -2482,6 +2482,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AEDCE314646EA57E1E08F8F7259FBA30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A679D78232C8ECB6BEC12B10D9EA0E4 /* OneSignal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AF88B00241D696BA5160D345498DC16A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -2832,14 +2840,6 @@
 				1C6B3935161FB6149DE488825E7D0910 /* GTMDefines.h */,
 			);
 			name = Defines;
-			sourceTree = "<group>";
-		};
-		E937CC1CA0B2A26A2AEBCFF17C70C2AA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2CC44C7065965149D92DD8E4F74189DA /* OneSignal.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F10ED6E92650A8A41C99D1036E6F27F9 /* FirebaseCore */ = {

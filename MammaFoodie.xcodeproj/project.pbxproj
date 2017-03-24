@@ -24,6 +24,7 @@
 		2B6CD0BC1E5DDBA00001EA68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0BB1E5DDBA00001EA68 /* Assets.xcassets */; };
 		2B6CD0BF1E5DDBA00001EA68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CD0BD1E5DDBA00001EA68 /* LaunchScreen.storyboard */; };
 		2B6CD0CA1E5DDBA00001EA68 /* MammaFoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */; };
+		2B73C70D1E848A24009F89E8 /* UberAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73C70C1E848A24009F89E8 /* UberAPIClient.swift */; };
 		2B752A221E5DE3AE00EAECEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */; };
 		2B8881511E75C80A008BB0B5 /* PurchaseDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */; };
 		2B89C7B21E64BA0B009B88D9 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */; };
@@ -45,7 +46,6 @@
 		BF2981861E7B200200AE1357 /* CheckoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981851E7B200200AE1357 /* CheckoutRowView.swift */; };
 		BF2981881E7B203700AE1357 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981871E7B203700AE1357 /* Buttons.swift */; };
 		BF29818A1E7B20B000AE1357 /* StripeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2981891E7B20B000AE1357 /* StripeSettingsViewController.swift */; };
-		BF29818C1E7B2C5E00AE1357 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29818B1E7B2C5E00AE1357 /* Secrets.swift */; };
 		BF3F61021E6DF555008EF3C9 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61011E6DF555008EF3C9 /* Address.swift */; };
 		BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */; };
 		BF3F61061E6F0DD9008EF3C9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */; };
@@ -129,6 +129,7 @@
 		2B6CD0C51E5DDBA00001EA68 /* MammaFoodieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MammaFoodieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6CD0C91E5DDBA00001EA68 /* MammaFoodieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MammaFoodieTests.swift; sourceTree = "<group>"; };
 		2B6CD0CB1E5DDBA00001EA68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B73C70C1E848A24009F89E8 /* UberAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberAPIClient.swift; sourceTree = "<group>"; };
 		2B752A211E5DE3AE00EAECEB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseDishViewController.swift; sourceTree = "<group>"; };
 		2B89C7B11E64BA0B009B88D9 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
@@ -151,7 +152,6 @@
 		BF2981851E7B200200AE1357 /* CheckoutRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutRowView.swift; sourceTree = "<group>"; };
 		BF2981871E7B203700AE1357 /* Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		BF2981891E7B20B000AE1357 /* StripeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeSettingsViewController.swift; sourceTree = "<group>"; };
-		BF29818B1E7B2C5E00AE1357 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BF3F61011E6DF555008EF3C9 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesViewController.swift; sourceTree = "<group>"; };
 		BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -253,7 +253,6 @@
 			children = (
 				2B35B1591E5E2E1100A6C06C /* MammaFoodie.entitlements */,
 				2B6CD0B41E5DDBA00001EA68 /* AppDelegate.swift */,
-				BF29818B1E7B2C5E00AE1357 /* Secrets.swift */,
 				2B4900381E7C7078003403CD /* GoogleService-Info.plist */,
 				BF3F61091E6F20B5008EF3C9 /* To Do */,
 				BF7F19261E60DF2C00595CA4 /* ViewControllers */,
@@ -448,6 +447,7 @@
 				BFB853631E5DEE74009D7069 /* FIRImage.swift */,
 				2B9C92F21E6478950020FD28 /* FirebaseAPIClient.swift */,
 				2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */,
+				2B73C70C1E848A24009F89E8 /* UberAPIClient.swift */,
 				BFB853611E5DEA35009D7069 /* DatabaseReference.swift */,
 				BFB853651E5DFA7A009D7069 /* Datastore.swift */,
 				BF7F19181E60A51200595CA4 /* Constants.swift */,
@@ -777,6 +777,7 @@
 				2B4900371E7B24B7003403CD /* PaymentView.swift in Sources */,
 				BFCCC4A71E6DCDC000CFF898 /* EditProfileTableViewCell.swift in Sources */,
 				2B9C92F81E647F380020FD28 /* DishTableViewCell.swift in Sources */,
+				2B73C70D1E848A24009F89E8 /* UberAPIClient.swift in Sources */,
 				2B025E3C1E73070800113729 /* AddImageTableViewCell.swift in Sources */,
 				2B9C92F51E647ECA0020FD28 /* ProfileView.swift in Sources */,
 				2B9C92FA1E647F490020FD28 /* ReviewTableViewCell.swift in Sources */,

@@ -10,11 +10,18 @@ import Foundation
 import UIKit
 import Alamofire
 
-//Postmates strings
+//Postmates
 let postMatesBaseURL = "https://api.postmates.com/v1/customers/\(postmatesCustomerID)"
 let postmatesHeaders: HTTPHeaders = [
     "Authorization": encodedSandboxKey,
     "Accept": "application/json"
+]
+
+//Uber
+let uberBaseURL = "https://sandbox-api.uber.com/v1"
+let uberHeaders: HTTPHeaders = [
+    "Authorization": "Bearer \(uberOAuthToken)",
+    "Content-Type": "application/json"
 ]
 
 //Numbers

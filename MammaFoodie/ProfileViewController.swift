@@ -108,30 +108,35 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
         switch profileView.profileTableViewStatus {
         case .menu:
-            cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier, for: indexPath) as! DishTableViewCell
-            (cell as! DishTableViewCell).dish = user.dishes[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: dishCellIdentifier, for: indexPath) as! DishTableViewCell
+            cell.dish = user.dishes[indexPath.row]
             if user === store.currentUser {
                 let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(deleteDishTapped))
                 cell.addGestureRecognizer(longPressGesture)
             }
+            return cell
         case .reviews:
-            cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier, for: indexPath) as! ReviewTableViewCell
-            (cell as! ReviewTableViewCell).review = user.reviews[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier, for: indexPath) as! ReviewTableViewCell
+            cell.review = user.reviews[indexPath.row]
         case .followers:
-            cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
-            (cell as! UserTableViewCell).user = user.followedBy[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
+            let cellUser = user.followedBy[indexPath.row]
+            cell.user = cellUser
+            cell.followButton.setTitle(isFollowing: true)
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
+            return cell
         case .following:
-            cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
-            (cell as! UserTableViewCell).user = user.follows[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
+            let cellUser = user.followedBy[indexPath.row]
+            cell.user = cellUser
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
+            return cell
         }
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
