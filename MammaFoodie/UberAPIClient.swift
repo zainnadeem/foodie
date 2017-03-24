@@ -12,8 +12,11 @@ import Alamofire
 class UberAPIClient {
     
     var params: [String: Any]
+    var purchasingUser: User!
     
     init(pickup: Address, dropoff: Address, chef: User, purchasingUser: User) {
+        
+        self.purchasingUser = purchasingUser
         
         let pickupLocation = [
             "address"       : pickup.addressLine,
@@ -63,25 +66,41 @@ class UberAPIClient {
                 print("\n\n\n\n\n\n There was an error")
                 completion(nil)
             }
-            if let json = response.result.value {
+            if let json = response.result.value as? [String : Any], let quotes = json["quotes"] as? [[String : Any]] {
                 print("\n\n\n\n\n\n")
-                print(json)
+//                print(json)
+                if let firstQuote = quotes.first {
+                    completion(firstQuote["quote_id"] as? String)
+                }
+                
             }
         }
     }
     
-    func createDelivery(completion: @escaping (Bool) -> ()) {
+    func createDelivery(completion: @escaping (String?) -> ()) {
         
         let urlString = "\(uberBaseURL)/deliveries"
         
+        var items = [[String : Any]]()
+        for dish in self.purchasingUser.cart {
+            let item: [String : Any] = [
+                "currency_code" : "USD",
+                "price"         : Float(dish.price)/100.0,
+                "quantity"      : 1,
+                "title"         : dish.name
+            ]
+            items.append(item)
+        }
+        self.params["items"] = items
+        
         self.getDeliveryQuote { (quoteID) in
-            guard let quoteID = quoteID else { completion(false); return }
+            guard let quoteID = quoteID else { completion(nil); return }
             self.params["quote_id"] = quoteID
             Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
                 print("\n\n\n\n Status code: \(response.response?.statusCode)")
                 if response.response?.statusCode == 400 {
                     print("\n\n\n\n\n\n There was an error")
-                    completion(false)
+                    completion(nil)
                 }
                 if let json = response.result.value {
                     print("\n\n\n\n\n\n")

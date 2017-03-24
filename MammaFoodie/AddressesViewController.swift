@@ -37,7 +37,10 @@ class AddressesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        OperationQueue.main.addOperation { 
+            self.tableView.reloadData()
+        }
+        
     }
     
     private func setViewConstraints(){

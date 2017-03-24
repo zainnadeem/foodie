@@ -320,7 +320,7 @@ extension User {
         DatabaseReference.users(uid: uid).reference().child("stripe id").setValue(id)
     }
     
-    func observeUser(_ completion: @escaping (User) -> Void) {
+    class func observeUser(uid: String, _ completion: @escaping (User) -> Void) {
         
         DatabaseReference.users(uid: uid).reference().observe(.value, with: { (snapshot) in
             let user = User(dictionary: snapshot.value as! [String : AnyObject])

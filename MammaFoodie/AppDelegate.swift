@@ -59,18 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 })
                 let uberClient = UberAPIClient(pickup: address1, dropoff: address2, chef: User(), purchasingUser: self.store.currentUser)
                 
-                uberClient.getDeliveryQuote(completion: { (quoteID) in
-                    print(quoteID)
-                })
+//                uberClient.getDeliveryQuote(completion: { (quoteID) in
+//                    print(quoteID)
+//                })
             })
         
-
-//
-//            
-//            let pageVC = UserPageViewController()
-//            self.window?.rootViewController = pageVC
-
-
         }
         
         else {
