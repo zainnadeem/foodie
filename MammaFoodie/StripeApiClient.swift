@@ -9,8 +9,16 @@
 import Foundation
 import Stripe
 
+enum StripePath : String {
+        case source = "/customer/sources"
+        case customer = "/customer/"
+        case create = "/customer/create"
+        case charge = "/customer/charge"
+        case authorize = "/authorize"
+}
+
 struct StripeTools {
-    
+
     //generate token each time you need to get an api call
     func generateToken(card: STPCardParams, completion: @escaping (_ token: STPToken?) -> Void) {
         STPAPIClient.shared().createToken(withCard: card) { token, error in
@@ -152,11 +160,8 @@ class StripeUtil {
     
     
     //create card for given user
-    func createCard(stripeId: String, card: STPCardParams, completion: @escaping (_ success: Bool) -> Void) {
-        
-        stripeTool.generateToken(card: card) { (token) in
-            if(token != nil) {
-                
+    func createCard(stripeId: String, token: String, completion: @escaping (_ success: Bool) -> Void) {
+
                 let baseURL = URL(string: backendBaseURL)
                 let path = "/customer/sources"
                 let url = baseURL?.appendingPathComponent(path)
@@ -164,7 +169,7 @@ class StripeUtil {
                 
                 //token needed
                 var params = [String:String]()
-                params["source"] = token!.tokenId
+                params["source"] = token
                 params["id"] = stripeId
                 
                 var str = ""
@@ -194,9 +199,39 @@ class StripeUtil {
                 
                 self.dataTask?.resume()
             }
-        }
         
-    }
+        
+
+    
+    func stripeAPICall(params: [String: String], requestMethod: Method, path: StripePath, completion: @escaping (_ success: Bool) -> Void){
+        
+        let baseURL = URL(string: backendBaseURL)
+        let url = baseURL?.appendingPathComponent(path.rawValue)
+        var request = URLRequest.request(url!, method: requestMethod, params: params as [String : AnyObject])
+
+        request.setValue(self.stripeTool.getBasicAuth(), forHTTPHeaderField: "Authorization")
+        
+        self.dataTask = self.defaultSession.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                if let error = error {
+                    print(error)
+                    completion(false)
+                }
+                
+                else if let data = data {
+                    do {
+                        let info = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: AnyObject]
+                        print(info)
+                    } catch let myJSONError {
+                        print(myJSONError)
+                        
+                    }
+                    completion(true)
+                }
+            }
+            
+            self.dataTask?.resume()
+        }
     
     
     func decodeResponse(_ response: URLResponse?, error: NSError?) -> NSError? {

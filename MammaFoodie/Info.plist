@@ -8,8 +8,6 @@
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Mamma Foodie would like to access your camera</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,6 +22,14 @@
 	<string>1.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mammafoodie</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.developer.MammaFoodie</string>
+		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
@@ -54,6 +60,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Mamma Foodie would like to access your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Mamma Foodie would like to access your photo library</string>
 	<key>UIAppFonts</key>

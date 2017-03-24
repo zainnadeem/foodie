@@ -85,9 +85,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: [UIApplicationOpenURLOptionsKey.annotation])
+        
+        if (url.scheme == "mammafoodie") {
+            let queryParams: [Any] = url.query!.components(separatedBy: "&")
+            var codeParam: [Any] = queryParams.filter { NSPredicate(format: "SELF BEGINSWITH %@", "code=").evaluate(with: $0) }
+            let codeQuery: String? = (codeParam[0] as? String)
+            let code: String? = codeQuery?.replacingOccurrences(of: "code=", with: "")
+            print("My code is \(code)")
+            // Finish the OAuth flow with this code
+            return true
+        }
+        
+       
+        
         
         return handled
     }
@@ -142,8 +156,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         self.window?.makeKeyAndVisible()
     }
 
-    
 
+
+    
+   
 
 }
 
