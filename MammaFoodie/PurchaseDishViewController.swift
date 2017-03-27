@@ -108,10 +108,24 @@ class PurchaseDishViewController: UIViewController {
     func purchaseButtonTapped() {
         let quantityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
         if let quantity = Int(quantityCell.textField.text!){
-            for _ in 0..<quantity {
-                self.store.currentUser.cart.append(self.dish)
+            if self.dish.createdBy != store.currentUser.cart.first?.createdBy {
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false,
+                    hideWhenBackgroundViewIsTapped: true
+                )
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Yes", action: {
+                    for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
+                    self.dismiss(animated: true, completion: nil)
+                })
+                alertView.addButton("Cancel", action: {})
+                alertView.showError("Error", subTitle: "You can only purchase food from one chef at a time. Would you like to clear your cart and add this dish?")
             }
-            self.dismiss(animated: true, completion: nil)
+            else {
+                for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
+                self.dismiss(animated: true, completion: nil)
+            }
+            
         }
         
         else {

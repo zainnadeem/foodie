@@ -62,7 +62,7 @@ class UberAPIClient {
         
         Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
             print("\n\n\n\n Status code: \(response.response?.statusCode)")
-            if response.response?.statusCode == 400 {
+            if response.response?.statusCode != 201 {
                 print("\n\n\n\n\n\n There was an error")
                 completion(nil)
             }
@@ -98,15 +98,30 @@ class UberAPIClient {
             self.params["quote_id"] = quoteID
             Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
                 print("\n\n\n\n Status code: \(response.response?.statusCode)")
-                if response.response?.statusCode == 400 {
+                if response.response?.statusCode != 200 && response.response?.statusCode != 201 {
                     print("\n\n\n\n\n\n There was an error")
                     completion(nil)
                 }
-                if let json = response.result.value {
-                    print("\n\n\n\n\n\n")
-                    print(json)
+                if let json = response.result.value as? [String : Any] {
+                    completion(json["delivery_id"] as? String)
                 }
             }
         }
+    }
+    
+    func getDeliveryDetails(deliveryID: String, completion: @escaping ([String : Any]?) -> ()) {
+        
+        let urlString = "\(uberBaseURL)/deliveries/\(deliveryID)"
+        
+        Alamofire.request(urlString, headers: uberHeaders).responseJSON { (response) in
+            if response.response?.statusCode != 200 {
+                print("there was an error")
+                completion(nil)
+            }
+            if let json = response.result.value as? [String : Any] {
+                completion(json)
+            }
+        }
+        
     }
 }
