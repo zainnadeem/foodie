@@ -23,6 +23,7 @@ class AddressesViewController: UIViewController {
         navBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         
          self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Addresses"
@@ -99,6 +100,10 @@ extension AddressesViewController : UITableViewDataSource {
         cell.user = store.currentUser
         cell.address = store.currentUser.addresses[indexPath.row]
         cell.updateUIWithAddress()
+//        if indexPath.row == 0 {
+//            cell.checkButton.backgroundColor = UIColor.flatRedDark
+//            cell.checkButton.setTitle("X", for: .normal)
+//        }
         return cell
         
         
@@ -110,12 +115,21 @@ extension AddressesViewController: UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? InfoTableViewCell {
+            cell.checkButton.backgroundColor = UIColor.flatRedDark
+            cell.checkButton.setTitle("X", for: .normal)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? InfoTableViewCell {
+            cell.checkButton.backgroundColor = .white
+            cell.checkButton.setTitle("", for: .normal)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == IndexPath(row: 0, section: 0) { return self.view.bounds.width / 4 } else {
-            return self.view.bounds.width / 4 }
+        return 100
     }
  
 

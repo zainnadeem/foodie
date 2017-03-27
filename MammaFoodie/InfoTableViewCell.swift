@@ -9,17 +9,14 @@
 import UIKit
 
 class InfoTableViewCell: UITableViewCell {
-
-    lazy var rightTopLabel                  : UILabel     = UILabel()
-    lazy var rightMiddleLabel               : UILabel     = UILabel()
-    lazy var rightBottomLabel               : UILabel     = UILabel()
     
-    lazy var leftTopLabel                  : UILabel     = UILabel()
-    lazy var leftMiddleLabel               : UILabel     = UILabel()
-    lazy var leftBottomLabel               : UILabel     = UILabel()
+    lazy var titleLabel                    : UILabel     = UILabel()
+    lazy var addressLabel                  : UILabel     = UILabel()
+    lazy var phoneNumberLabel              : UILabel     = UILabel()
     
     lazy var leftStackView              : UIStackView = UIStackView()
-    lazy var rightStackView             : UIStackView = UIStackView()
+
+    lazy var checkButton                : UIButton = UIButton()
     
     var address: Address?
 
@@ -36,6 +33,10 @@ class InfoTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        checkButton.backgroundColor = .white
+        checkButton.layer.cornerRadius = 15
+        checkButton.titleLabel?.textColor = .white
+        
         createStackViews()
         setViewConstraints()
         setViewProperties()
@@ -50,12 +51,12 @@ class InfoTableViewCell: UITableViewCell {
     func updateUIWithAddress(){
         guard let address = self.address else { return }
         
-        leftTopLabel.text = address.title
-        leftMiddleLabel.text = address.phone
+        titleLabel.text = address.title
+        var aptSuite = ""
+        if address.aptSuite != "" { aptSuite = " \(address.aptSuite)" }
+        addressLabel.text = "\(address.addressLine)\(aptSuite), \(address.city), \(address.state) \(address.postalCode)"
+        phoneNumberLabel.text = address.phone
         
-        rightTopLabel.text = "\(address.addressLine), \(address.aptSuite)"
-        rightMiddleLabel.text = "\(address.city), \(address.state)"
-        rightBottomLabel.text = "\(address.postalCode)"
     }
     
     
@@ -69,55 +70,38 @@ class InfoTableViewCell: UITableViewCell {
         leftStackView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.6)
-            make.left.equalToSuperview().offset(5)
+            make.left.equalToSuperview().offset(20)
         }
         
-        contentView.addSubview(rightStackView)
-        rightStackView.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().offset(-5)
-            make.height.equalToSuperview().multipliedBy(0.6)
+        contentView.addSubview(checkButton)
+        checkButton.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-20)
+            make.width.height.equalTo(30)
         }
-        
         
     }
     
     func setViewProperties(){
-        //right side
-        rightTopLabel.font = UIFont.mammaFoodieFontBold(14)
-        rightTopLabel.textColor = .black
         
-        rightMiddleLabel.font = UIFont.mammaFoodieFontBold(12)
-        rightMiddleLabel.textColor = .black
+        titleLabel.font = UIFont.mammaFoodieFontBold(14)
+        titleLabel.textColor = .black
         
-        rightBottomLabel.font = UIFont.mammaFoodieFontBold(10)
-        rightBottomLabel.textColor = .black
+        addressLabel.font = UIFont.mammaFoodieFont(14)
+        addressLabel.textColor = .black
         
-        //right side
-        leftTopLabel.font = UIFont.mammaFoodieFontBold(14)
-        leftTopLabel.textColor = .black
-        
-        leftMiddleLabel.font = UIFont.mammaFoodieFontBold(12)
-        leftMiddleLabel.textColor = .black
-        
-        leftBottomLabel.font = UIFont.mammaFoodieFontBold(10)
-        leftBottomLabel.textColor = .black
+        phoneNumberLabel.font = UIFont.mammaFoodieFont(12)
+        phoneNumberLabel.textColor = .black
         
         
     }
     
     func createStackViews(){
-        leftStackView = UIStackView(arrangedSubviews: [leftTopLabel, leftMiddleLabel, leftBottomLabel])
+        leftStackView = UIStackView(arrangedSubviews: [titleLabel, addressLabel, phoneNumberLabel])
         leftStackView.axis = .vertical
         leftStackView.distribution = .fillProportionally
         leftStackView.alignment = .leading
         
-        
-        rightStackView = UIStackView(arrangedSubviews: [rightTopLabel, rightMiddleLabel, rightBottomLabel])
-        rightStackView.axis = .vertical
-        rightStackView.distribution = .fillProportionally
-        rightStackView.alignment = .trailing
-        rightStackView.spacing = 2
     }
     
     
