@@ -13,7 +13,7 @@ import SnapKit
 import GoogleSignIn
 
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GIDSignInDelegate {
     
     var logoView: UIImageView!
     var fbLoginButton: FBSDKLoginButton!
@@ -27,7 +27,12 @@ class LoginViewController: UIViewController {
         fbLoginButton.readPermissions = ["public_profile", "email"]
         fbLoginButton.delegate = self
         
+        
+        
         GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().scopes = ["https://www.googleapis.com/auth/plus.stream.read", "https://www.googleapis.com/auth/plus.me", "https://www.googleapis.com/auth/plus.login"]
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        
         googleLoginButton = GIDSignInButton()
         
         setUpViews()

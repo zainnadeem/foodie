@@ -42,7 +42,7 @@ class Address{
     {
         title       = dictionary["title"] as! String
         addressLine = dictionary["address line"] as! String
-        aptSuite    = dictionary["apt / suite#"] as! String
+        aptSuite    = dictionary["aptSuite"] as! String
         city        = dictionary["city"] as! String
         state       = dictionary["state"] as! String
         postalCode  = dictionary["postal code"] as! String
@@ -63,7 +63,7 @@ class Address{
     }
     
     
-    func save(ref: FIRDatabaseReference, completion: @escaping (Error?) -> Void) {
+    func save(completion: @escaping (Error?) -> Void) {
         
         let ref = DatabaseReference.users(uid: store.currentUser.uid).reference().child("addresses").childByAutoId()
         ref.setValue(toDictionary())
@@ -77,7 +77,7 @@ class Address{
         return [
             "title"        : title,
             "address line" : addressLine,
-            "apt / suite#" : aptSuite,
+            "aptSuite"  : aptSuite,
             "city"         : city,
             "state"        : state,
             "postal code"  : postalCode,

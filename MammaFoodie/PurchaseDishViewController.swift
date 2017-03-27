@@ -107,8 +107,21 @@ class PurchaseDishViewController: UIViewController {
     
     func purchaseButtonTapped() {
         let quantityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
-        if let quantity = Int(quantityCell.textField.text!){
-            if self.dish.createdBy != store.currentUser.cart.first?.createdBy {
+        
+        guard let quantity = Int(quantityCell.textField.text!)
+        else {
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false,
+                hideWhenBackgroundViewIsTapped: true
+            )
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Ok", action: {})
+            alertView.showError("Error", subTitle: "Please enter a valid quantity")
+            return
+        }
+        
+        if let firstItem = store.currentUser.cart.first {
+            if self.dish.createdBy != firstItem.createdBy {
                 let appearance = SCLAlertView.SCLAppearance(
                     showCloseButton: false,
                     hideWhenBackgroundViewIsTapped: true
@@ -125,19 +138,10 @@ class PurchaseDishViewController: UIViewController {
                 for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
                 self.dismiss(animated: true, completion: nil)
             }
-            
         }
         
-        else {
-            let appearance = SCLAlertView.SCLAppearance(
-                showCloseButton: false,
-                hideWhenBackgroundViewIsTapped: true
-            )
-            let alertView = SCLAlertView(appearance: appearance)
-            alertView.addButton("Ok", action: {})
-            alertView.showError("Error", subTitle: "Please enter a valid quantity")
-           
-        }
+        for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

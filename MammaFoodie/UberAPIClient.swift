@@ -56,7 +56,7 @@ class UberAPIClient {
     
     
     
-    func getDeliveryQuote(completion: @escaping (String?) -> ()) {
+    func getDeliveryQuote(completion: @escaping ([String : Any]?) -> ()) {
         
         let urlString = "\(uberBaseURL)/deliveries/quote"
         
@@ -70,7 +70,8 @@ class UberAPIClient {
                 print("\n\n\n\n\n\n")
 //                print(json)
                 if let firstQuote = quotes.first {
-                    completion(firstQuote["quote_id"] as? String)
+//                    completion(firstQuote["quote_id"] as? String)
+                    completion(firstQuote)
                 }
                 
             }

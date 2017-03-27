@@ -16,7 +16,7 @@ class AddressesViewController: UIViewController {
     let store = DataStore.sharedInstance
     let addAddressButton: UIButton = UIButton()
     
-    var userAddresses: [Address] = [Address]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,6 @@ class AddressesViewController: UIViewController {
         
         self.tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: infoTableViewCellIdentifier)
         
-
-        self.userAddresses = store.currentUser.addresses
         self.setViewConstraints()
         self.setViewProperties()
         
@@ -92,14 +90,14 @@ extension AddressesViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userAddresses.count
+        return store.currentUser.addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell  = tableView.dequeueReusableCell(withIdentifier: infoTableViewCellIdentifier, for: indexPath) as! InfoTableViewCell
         cell.user = store.currentUser
-        cell.address = userAddresses[indexPath.row]
+        cell.address = store.currentUser.addresses[indexPath.row]
         cell.updateUIWithAddress()
         return cell
         
