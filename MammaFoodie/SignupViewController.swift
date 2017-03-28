@@ -142,10 +142,12 @@ class SignupViewController: UIViewController {
                 let firImage = FIRImage(image: self.profileImageView.image!)
                 firImage.save(user.uid) { (downloadURL) in
                     
-                    let newUser = User(uid: user.uid, username: usernameCell.textField.text!, fullName: fullNameCell.textField.text!, email: emailCell.textField.text!, bio: "", website: "", location: "", follows: [], followedBy: [], profileImageURL: downloadURL.absoluteString, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 0, deviceTokens: [], isAvailable: false, tags: [""], addresses: [], stripeId: "")
+                    let newUser = User(uid: user.uid, username: usernameCell.textField.text!, fullName: fullNameCell.textField.text!, email: emailCell.textField.text!, bio: "", website: "", location: "", follows: [], followedBy: [], profileImageURL: downloadURL.absoluteString, dishes: [], reviews: [], notifications: [], broadcasts: [], blockedUsers: [], cart: [], totalLikes: 0, averageRating: 0, deviceTokens: [], isAvailable: false, tags: [""], addresses: [], stripeCustomerId: "", stripeAccountId: "")
                     
                     self.store.currentUser = newUser
                     self.store.currentUser.updateUserInfo()
+                    
+                    
                     
                     guard let id = self.userID else { return }
                     DatabaseReference.tokens(token: id).reference().setValue(user.uid)

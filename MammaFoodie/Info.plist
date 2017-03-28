@@ -19,12 +19,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>mammafoodie</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>com.developer.MammaFoodie</string>
 		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
@@ -47,8 +49,11 @@
 	<string>1431011083865206</string>
 	<key>FacebookDisplayName</key>
 	<string>Mamma Foodie</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>mammafoodie</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>

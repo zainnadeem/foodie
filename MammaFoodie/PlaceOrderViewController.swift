@@ -24,6 +24,7 @@ class PlaceOrderViewController: UIViewController {
     let stripeUtil = StripeUtil()
     
     var purchaseCard: STPCard? = nil
+    var purchaseToken: STPToken? = nil
     
 
     
@@ -148,25 +149,31 @@ class PlaceOrderViewController: UIViewController {
     
     func placeOrderButtonTapped() {
 
-        guard let card = purchaseCard else { return print("please select payment method") }
+     
         
         let customer = self.store.currentUser
         var recipient: User = User()
         recipient.uid = self.store.currentUser.cart[0].createdBy
         
+        let destinationAccount = "acct_1A0EMVBPLUBFgURL"
+        
         recipient.observeUser { (user) in
             
             recipient = user
+            var params = [String:Any]()
+            params["id"] = user.stripeCustomerId
+            params["amount"] = self.store.currentUser.calculateCartTotalAsInt()
+            params["currency"] = paymentCurrency
+            params["destination"] = destinationAccount
             
-            self.stripeUtil.createCharge(stripeId: customer.stripeId, amount: customer.calculateCartTotalAsInt()!, currency: paymentCurrency, destination: recipient.stripeId) { (success) in
+            self.stripeUtil.stripeAPICall(URLString: backendBaseURL, params: params, requestMethod: .POST, path: "/customer/charge", completion: { (success) in
                 
                 if success {
-                    self.store.currentUser.cart.removeAll()
-                    self.dismiss(animated: true, completion: nil)
+                    
+                    
                 }
                 
-                
-            }
+            })
         }
         
      
@@ -233,6 +240,7 @@ func addPaymentTapped() {
     let addCardViewController = STPAddCardViewController()
     addCardViewController.delegate = self
     // STPAddCardViewController must be shown inside a UINavigationController.
+    
     let navigationController = UINavigationController(rootViewController: addCardViewController)
     self.present(navigationController, animated: true, completion: nil)
 }
@@ -243,26 +251,18 @@ func addPaymentTapped() {
     }
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
-        //set token & stripeID in parameters
 
-        let params = ["source" : token.tokenId,
-                      "id"     : self.store.currentUser.stripeId
-                    ]
-        
-        self.stripeUtil.stripeAPICall(params: params, requestMethod: .POST, path: StripePath.source) { (success) in
+        stripeUtil.createUser(token: token) { (success) in
             
-                   self.dismiss(animated: true, completion: { 
-                    if success{
-                       
-                        self.paymentRow.detail = (token.card?.last4())!
-                        self.purchaseCard = token.card
-                    
-                        }
-                   })
+            self.dismiss(animated: true) {
+                self.paymentRow.detail = token.card!.last4()
+            }
+
         }
         
+  
+        
     }
-    
     
 }
 
