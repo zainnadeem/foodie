@@ -10,13 +10,11 @@ import UIKit
 
 class AddressesViewController: UIViewController {
     
-    lazy var navBar:                NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "settings"), middleButtonImage: nil)
+    lazy var navBar:                NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: nil, middleButtonImage: nil)
     lazy var tableView:             UITableView = UITableView()
     
     let store = DataStore.sharedInstance
     let addAddressButton: UIButton = UIButton()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +23,14 @@ class AddressesViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         
-         self.view.backgroundColor = .white
+        self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Addresses"
+        
+        if let _ = self.presentingViewController as? UINavigationController { navBar.leftButton.image = #imageLiteral(resourceName: "settings") }
+        else {
+            navBar.leftButton.title = "Cancel"
+            navBar.rightButton.title = "Done"
+        }
         
         self.tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: infoTableViewCellIdentifier)
         
@@ -35,7 +39,7 @@ class AddressesViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         OperationQueue.main.addOperation { 
             self.tableView.reloadData()
         }
@@ -53,14 +57,16 @@ class AddressesViewController: UIViewController {
             make.trailing.equalToSuperview()
         }
         
-        self.view.addSubview(addAddressButton)
-        addAddressButton.snp.makeConstraints { (make) in
-            make.top.equalTo(tableView.snp.bottom)
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
-            
+        if let _ = self.presentingViewController as? UINavigationController {
+            self.view.addSubview(addAddressButton)
+            addAddressButton.snp.makeConstraints { (make) in
+                make.top.equalTo(tableView.snp.bottom)
+                make.bottom.equalToSuperview()
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview().multipliedBy(0.8)
+            }
         }
+        
     }
    
     func setViewProperties(){
@@ -129,23 +135,21 @@ extension AddressesViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return self.view.bounds.size.height/8
     }
- 
-
 }
-
 
 extension AddressesViewController : NavBarViewDelegate {
     
     func rightBarButtonTapped(_ sender: AnyObject) {
-
-        
+        if let _ = self.presentingViewController as? PlaceOrderViewController {
+//            store.currentUser.mainAddress = selected address
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func leftBarButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     func middleBarButtonTapped(_ Sender: AnyObject) {

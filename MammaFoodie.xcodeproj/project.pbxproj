@@ -40,6 +40,7 @@
 		2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */; };
 		2BC3CA0F1E802EB900D8D855 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CA0E1E802EB900D8D855 /* Secrets.swift */; };
 		2BC3CA111E80343E00D8D855 /* PostmatesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */; };
+		2BC649101E89A2E100ED45DA /* SelectAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC6490F1E89A2E100ED45DA /* SelectAddressViewController.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 		BF29817D1E7B164900AE1357 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817C1E7B164900AE1357 /* APIClient.swift */; };
 		BF29817F1E7B16DD00AE1357 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817E1E7B16DD00AE1357 /* Networking.swift */; };
@@ -145,6 +146,7 @@
 		2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryInfoView.swift; sourceTree = "<group>"; };
 		2BC3CA0E1E802EB900D8D855 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesAPIClient.swift; sourceTree = "<group>"; };
+		2BC6490F1E89A2E100ED45DA /* SelectAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAddressViewController.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF29817C1E7B164900AE1357 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -342,7 +344,6 @@
 			children = (
 				BF3F61051E6F0DD9008EF3C9 /* OnboardingViewController.swift */,
 				BF706C3E1E7AE59700D792B5 /* PaymentViewController.swift */,
-				BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */,
 				BF2981801E7B1BAF00AE1357 /* Stripe */,
 			);
 			name = "To Do";
@@ -360,6 +361,7 @@
 				2B025E391E6F5D2300113729 /* AddDishViewController.swift */,
 				2B8881501E75C80A008BB0B5 /* PurchaseDishViewController.swift */,
 				2B05E7551E76DAF40060821C /* PlaceOrderViewController.swift */,
+				2BC6490F1E89A2E100ED45DA /* SelectAddressViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -470,6 +472,7 @@
 		BFCCC4AD1E6DF15F00CFF898 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BF75FF531E69DBB900DD7102 /* SettingsViewController.swift */,
 				BF3F61031E6E0A36008EF3C9 /* AddressesViewController.swift */,
 				BF75FF511E69C63A00DD7102 /* AddAddressViewController.swift */,
 				BF3F610A1E6F211E008EF3C9 /* EditProfileViewController.swift */,
@@ -721,6 +724,7 @@
 				2B35B15B1E60A86F00A6C06C /* SignupViewController.swift in Sources */,
 				2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */,
 				BF706C3F1E7AE59700D792B5 /* PaymentViewController.swift in Sources */,
+				2BC649101E89A2E100ED45DA /* SelectAddressViewController.swift in Sources */,
 				2B025E311E69CCFA00113729 /* ProfileTableViewButton.swift in Sources */,
 				BF7F19251E60DF1E00595CA4 /* SearchViewController.swift in Sources */,
 				BF7F19351E64BB8E00595CA4 /* SupplementaryHeaderCollectionReusableView.swift in Sources */,

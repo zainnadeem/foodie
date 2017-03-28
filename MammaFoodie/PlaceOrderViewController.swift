@@ -11,7 +11,7 @@ import SnapKit
 import Stripe
 import SCLAlertView
 
-class PlaceOrderViewController: UIViewController, DeliveryViewDelegate {
+class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestureRecognizerDelegate {
 
     lazy var navBar: NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "cross_icon"), middleButtonImage: nil)
     lazy var tableView = UITableView()
@@ -78,7 +78,12 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate {
             let dropoffAddress = self.store.currentUser.addresses.first
             self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
         }
-
+        if let address = store.currentUser.addresses.first {
+            var aptSuite = ""
+            if address.aptSuite != "" { aptSuite = " \(address.aptSuite)" }
+            shippingRow.title = "\(address.addressLine)\(aptSuite), \(address.city), \(address.state) \(address.postalCode)"
+        }
+        
         
     }
     
@@ -97,6 +102,11 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate {
         
         deliveryView.delegate = self
         
+        self.shippingRow.onTap = { [weak self] _ in
+            self?.presentAddressVC()
+        }
+        
+        
         setPlaceOrderButtonTitle()
         placeOrderButton.addTarget(self, action: #selector(placeOrderButtonTapped), for: .touchUpInside)
         
@@ -106,6 +116,11 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate {
         
         view.addSubview(placeOrderButton)
         
+    }
+    
+    func presentAddressVC() {
+        let addressVC = AddressesViewController()
+        self.present(addressVC, animated: true, completion: nil)
     }
     
     func setViewConstraints() {
