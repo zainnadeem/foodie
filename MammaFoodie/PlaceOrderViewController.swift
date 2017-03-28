@@ -17,6 +17,7 @@ class PlaceOrderViewController: UIViewController {
     lazy var deliveryView: DeliveryInfoView = DeliveryInfoView()
     lazy var paymentView: PaymentView = PaymentView()
     
+    var uberAPIClient: UberAPIClient!
     
     let store = DataStore.sharedInstance
     var deliveryFee: Int?
@@ -69,6 +70,15 @@ class PlaceOrderViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        //TODO: clean this function up, no force unwrapping
+        User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
+            let chef = user
+            chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            let pickupAddress = chef.addresses.first
+            let dropoffAddress = self.store.currentUser.addresses.first
+            self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
+        }
+
         
     }
     
@@ -149,22 +159,29 @@ class PlaceOrderViewController: UIViewController {
     
     func placeOrderButtonTapped() {
 
-     
+
+        uberAPIClient.createDelivery { (deliveryID) in
+            
+        }
+        
+
         
         let customer = self.store.currentUser
         var recipient: User = User()
-        recipient.uid = self.store.currentUser.cart[0].createdBy
+        let uid = self.store.currentUser.cart[0].createdBy
         
-        let destinationAccount = "acct_1A0EMVBPLUBFgURL"
+
         
-        recipient.observeUser { (user) in
-            
+        
+        User.observeUser(uid: uid) { (user) in
+
             recipient = user
             var params = [String:Any]()
-            params["id"] = user.stripeCustomerId
+           
+            params["id"] = customer.stripeCustomerId
             params["amount"] = self.store.currentUser.calculateCartTotalAsInt()
             params["currency"] = paymentCurrency
-            params["destination"] = destinationAccount
+            params["destination"] = user.stripeAccountId
             
             self.stripeUtil.stripeAPICall(URLString: backendBaseURL, params: params, requestMethod: .POST, path: "/customer/charge", completion: { (success) in
                 
@@ -175,7 +192,6 @@ class PlaceOrderViewController: UIViewController {
                 
             })
         }
-        
      
     }
 

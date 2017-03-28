@@ -18,6 +18,7 @@ class User
     var username                        :           String
     var fullName                        :           String
     var email                           :           String
+    var phoneNumber                     :           String
     var bio                             :           String
     var website                         :           String
     var location                        :           String
@@ -36,7 +37,7 @@ class User
     var cart                            :           [Dish]
     
     var totalLikes                      :           Int
-    var averageRating                   :           Int
+    var averageRating                   :           Double
     var deviceTokens                    :           [String]
     var isAvailable                     :           Bool
     
@@ -58,13 +59,15 @@ class User
     
     
     // MARK: - Initializers
-    
-    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address],  stripeCustomerId: String, stripeAccountId: String)
+
+    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address],  stripeCustomerId: String, stripeAccountId: String, phoneNumber: String)
+
     {
         self.uid = uid
         self.username = username
         self.fullName = fullName
         self.email = email
+        self.phoneNumber = phoneNumber
         self.bio = bio
         self.website = website
         self.location = location
@@ -78,7 +81,7 @@ class User
         self.totalLikes = totalLikes
         self.blockedUsers = blockedUsers
         self.cart = cart
-        self.averageRating = averageRating
+        self.averageRating = Double(averageRating)
         self.deviceTokens = deviceTokens
         self.isAvailable = isAvailable
         self.tags = tags
@@ -102,6 +105,7 @@ class User
         self.username = ""
         self.fullName = ""
         self.email = ""
+        self.phoneNumber = ""
         self.bio = ""
         self.website = ""
         self.location = ""
@@ -131,12 +135,13 @@ class User
         username = dictionary["username"] as! String
         fullName = dictionary["fullName"] as! String
         email = dictionary["email"] as! String
+        phoneNumber = dictionary["phoneNumber"] as! String
         bio = dictionary["bio"] as! String
         website = dictionary["website"] as! String
         location = dictionary["location"] as! String
         profileImageURL = dictionary["profile image URL"] as! String
         
-        averageRating = dictionary["average rating"] as! Int
+        averageRating = dictionary["average rating"] as! Double
         totalLikes = dictionary["total likes"] as! Int
         isAvailable = dictionary["is available"] as! Bool
         tags = dictionary["tags"] as! [String]
@@ -259,6 +264,7 @@ class User
             "stripe customer id"    : stripeCustomerId,
             "stripe account id"     : stripeAccountId,
             "is available"          : isAvailable
+
             
             
         ]
@@ -326,7 +332,7 @@ extension User {
         DatabaseReference.users(uid: uid).reference().child("stripe account id").setValue(id)
     }
     
-    func observeUser(_ completion: @escaping (User) -> Void) {
+    class func observeUser(uid: String, _ completion: @escaping (User) -> Void) {
         
         DatabaseReference.users(uid: uid).reference().observe(.value, with: { (snapshot) in
             let user = User(dictionary: snapshot.value as! [String : AnyObject])

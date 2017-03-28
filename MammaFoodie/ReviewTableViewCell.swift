@@ -12,13 +12,21 @@ import SnapKit
 
 class ReviewTableViewCell: UITableViewCell {
 
-    var usernameLabel: UILabel!
-    var ratingView: CosmosView!
-    var dateLabel: UILabel!
+    lazy var usernameLabel = UILabel ()
+    lazy var ratingView = CosmosView()
+    lazy var dateLabel = UILabel()
     var ratingDateStackView: UIStackView!
-    var descriptionTextView: UITextView!
+    lazy var descriptionTextView = UITextView()
     
-    var review: Review!
+    var review: Review! {
+        didSet {
+            usernameLabel.text = review.reviewCreatedByUID
+            ratingView.rating = Double(review.rating)
+            dateLabel.text = review.createdTime
+            descriptionTextView.text = loremIpsumString
+//            descriptionTextView.text = review.description
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,17 +35,15 @@ class ReviewTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        usernameLabel = UILabel(text: "Cherry Dude")
         usernameLabel.font = UIFont.mammaFoodieFont(14)
-        ratingView = CosmosView()
         ratingView.settings.starSize = 12
-        dateLabel = UILabel(text: "Feb 29, 2016")
         dateLabel.font = UIFont.mammaFoodieFont(12)
-        descriptionTextView = UITextView()
-        descriptionTextView.text = loremIpsumString
+        
         descriptionTextView.isScrollEnabled = false
         descriptionTextView.isEditable = false
         descriptionTextView.font = UIFont.mammaFoodieFont(12)
+        descriptionTextView.textContainerInset = .zero
+        descriptionTextView.textContainer.lineFragmentPadding = 0
         
         ratingDateStackView = UIStackView(arrangedSubviews: [ratingView, dateLabel])
         ratingDateStackView.axis = .horizontal
@@ -61,7 +67,7 @@ class ReviewTableViewCell: UITableViewCell {
         contentView.addSubview(descriptionTextView)
         
         usernameLabel.snp.makeConstraints { (make) in
-            make.top.left.equalToSuperview().offset(10)
+            make.top.left.equalToSuperview().offset(15)
         }
         
         ratingDateStackView.snp.makeConstraints { (make) in
@@ -70,7 +76,7 @@ class ReviewTableViewCell: UITableViewCell {
         }
         
         descriptionTextView.snp.makeConstraints { (make) in
-            make.top.equalTo(ratingDateStackView.snp.bottom)
+            make.top.equalTo(ratingDateStackView.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
             make.left.equalTo(usernameLabel)
             make.height.equalTo(30)

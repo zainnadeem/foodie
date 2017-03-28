@@ -25,6 +25,10 @@ class AddAddressViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Add Address"
         self.navBar.delegate = self
+        
+        let dismissGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(dismissGesture)
+        tableView.addGestureRecognizer(dismissGesture)
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -36,6 +40,8 @@ class AddAddressViewController: UIViewController {
         setViewProperties()
 
     }
+    
+    func hideKeyboard() { self.view.endEditing(true) }
     
     func setViewConstraints(){
        
@@ -75,13 +81,21 @@ class AddAddressViewController: UIViewController {
     func saveAddress(){
 
         let titleCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TextFieldTableViewCell
+        titleCell.textField.text = "Home"
         let addressCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
+        addressCell.textField.text = "11 Broadway"
         let aptSuiteCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
+        aptSuiteCell.textField.text = "Suite 260"
         let cityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
+        cityCell.textField.text = "New York"
         let stateCell = tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! TextFieldTableViewCell
+        stateCell.textField.text = "NY"
         let postalCell = tableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! TextFieldTableViewCell
+        postalCell.textField.text = "10004"
         let crossStreetCell = tableView.cellForRow(at: IndexPath(row: 0, section: 6)) as! TextFieldTableViewCell
+        crossStreetCell.textField.text = ""
         let phoneCell = tableView.cellForRow(at: IndexPath(row: 0, section: 7)) as! TextFieldTableViewCell
+        phoneCell.textField.text = "5165517202"
 
         
         let address = Address.init()

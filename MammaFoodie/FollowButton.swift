@@ -9,6 +9,8 @@
 import UIKit
 import ChameleonFramework
 
+//TODO: add functionality to switch button from follow/following
+
 class FollowButton: UIButton {
     
     required init() {
@@ -28,6 +30,10 @@ class FollowButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setTitle(isFollowing: Bool) {
+        
     }
     
 }

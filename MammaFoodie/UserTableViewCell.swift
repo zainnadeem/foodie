@@ -9,16 +9,24 @@
 import UIKit
 import SnapKit
 import ChameleonFramework
+import SDWebImage
 
 class UserTableViewCell: UITableViewCell {
     
-    var profileImageView: UIImageView!
-    var usernameLabel: UILabel!
-    var fullNameLabel: UILabel!
+    lazy var profileImageView =  UIImageView()
+    lazy var usernameLabel = UILabel()
+    lazy var fullNameLabel = UILabel()
     var labelStackView: UIStackView!
-    var followButton: UIButton!
+    lazy var followButton: FollowButton = FollowButton()
     
-    var user: User!
+    var user: User! {
+        didSet {
+//            profileImageView.image = #imageLiteral(resourceName: "profile_placeholder")
+            profileImageView.sd_setImage(with: URL(string:user.profileImageURL))
+            usernameLabel.text = user.username
+            fullNameLabel.text = user.fullName
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,16 +35,9 @@ class UserTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        profileImageView = UIImageView(image: UIImage(named: "profile_placeholder"))
-        usernameLabel = UILabel(text: "sulu_candles")
+        
         usernameLabel.font = UIFont.mammaFoodieFont(14)
-        fullNameLabel = UILabel(text: "Sulu Candles")
         fullNameLabel.font = UIFont.mammaFoodieFont(12)
-        followButton = FollowButton()
-        followButton.setTitle("Follow", for: .normal)
-        followButton.titleLabel?.font = UIFont.mammaFoodieFont(14)
-        followButton.setTitleColor(FlatWhite(), for: .normal)
-        followButton.backgroundColor = FlatSkyBlueDark()
         
         labelStackView = UIStackView(arrangedSubviews: [usernameLabel, fullNameLabel])
         labelStackView.axis = .vertical

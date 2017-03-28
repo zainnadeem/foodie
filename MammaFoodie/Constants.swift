@@ -8,6 +8,21 @@
 
 import Foundation
 import UIKit
+import Alamofire
+
+//Postmates
+let postMatesBaseURL = "https://api.postmates.com/v1/customers/\(postmatesCustomerID)"
+let postmatesHeaders: HTTPHeaders = [
+    "Authorization": encodedSandboxKey,
+    "Accept": "application/json"
+]
+
+//Uber
+let uberBaseURL = "https://sandbox-api.uber.com/v1"
+let uberHeaders: HTTPHeaders = [
+    "Authorization": "Bearer \(uberOAuthToken)",
+    "Content-Type": "application/json"
+]
 
 //Numbers
 let collectionCellCornerRadius = CGFloat(6)
@@ -21,6 +36,8 @@ let cookingNowCellHeightMultiplier = CGFloat(0.30)
 let liveNowCellHeightMultiplier = CGFloat(0.15)
 let upcomingBroadcastsCellHeightMultiplier = CGFloat(0.11)
 let formTableViewSectionHeaderHeight: CGFloat = 24
+
+let cartViewHeight = 50
 
 //Lorem Ipsum
 let loremIpsumString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel enim sed turpis congue pretium. Cras pharetra dolor ante, auctor semper neque tristique sed. Praesent ultricies porttitor ex. Aenean vulputate est vel nisi convallis, nec fermentum ante rutrum. Pellentesque eleifend, diam a malesuada ornare, quam mauris tempor urna, eu facilisis ante velit eget libero. Sed a ligula mattis sapien lobortis convallis vitae at libero. Integer sit amet venenatis ipsum. Fusce sed sapien enim. Sed sed scelerisque orci, semper egestas lacus. Aliquam fringilla, lacus nec venenatis condimentum, arcu purus condimentum turpis, a suscipit lectus ligula in eros. Proin aliquam arcu convallis turpis accumsan, in euismod odio imperdiet. Curabitur faucibus pharetra felis non tincidunt. Maecenas elit ex, tristique a urna vitae, sagittis dignissim orci."
@@ -105,11 +122,17 @@ class Constants {
         return dateFormatter
     }
     
+    class func reviewDateFormatter() -> DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yy"
+        return dateFormatter
+    }
+    
     
     
     //Magic Numbers
     let profileImageHeight = 100
-
+    
     
     
 }
