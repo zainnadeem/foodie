@@ -123,7 +123,7 @@ extension AddressesViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? InfoTableViewCell {
             cell.checkButton.backgroundColor = UIColor.flatRedDark
-            cell.checkButton.setTitle("X", for: .normal)
+            cell.checkButton.setTitle("✔️", for: .normal)
         }
     }
     
