@@ -31,6 +31,8 @@ class DeliveryInfoView: UIView {
     var buttonsStackView: UIStackView!
     
     var selectedDeliveryOption: DeliveryOption = .pickUp
+    
+    weak var delegate: DeliveryViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,6 +116,7 @@ extension DeliveryInfoView {
         lastTappedButton.setTitle("", for: .normal)
         sender.isSelected = true
         lastTappedButton = sender
+        
         sender.setTitle("✔️", for: .normal)
         switch sender {
         case pickUpButton:      selectedDeliveryOption = .pickUp
@@ -121,10 +124,15 @@ extension DeliveryInfoView {
         case postmatesButton:   selectedDeliveryOption = .postmates
         default: print("should never reach here - segmentedControlButtonTapped")
         }
+        self.delegate?.showAlert(for: sender)
     }
+    
+    
 }
 
-
+protocol DeliveryViewDelegate: class {
+    func showAlert(for button: UIButton)
+}
 
 
 

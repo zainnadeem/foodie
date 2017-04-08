@@ -32,7 +32,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         let address2 = Address(title: "work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "2222222222")
         
+        if FBSDKAccessToken.current() != nil {
+            let token = FBSDKAccessToken.current().userID
+            store.getCurrentUserWithToken(token: token!, {
+                OperationQueue.main.addOperation({
+                    self.setUpNavigationController()
+                })
+                
+                
+            })
+            
+        } else {
+            let loginVC = LoginViewController()
+            self.window?.rootViewController = loginVC
+        }
         
+        
+
+        // let uberClient = UberAPIClient(pickup: address1, dropoff: address2, chef: User(), purchasingUser: self.store.currentUser)
+        
+        //                uberClient.getDeliveryQuote(completion: { (quoteID) in
+        //                    print(quoteID)
+        //                })
         
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -42,36 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         signIn.clientID = FIRApp.defaultApp()?.options.clientID
         signIn.delegate = self
         if signIn.hasAuthInKeychain() {
+            
             signIn.signInSilently()
-        }
-        
-        if signIn.hasAuthInKeychain() || FBSDKAccessToken.current() != nil {
+            print("happening")
             
-            var token = String()
-            if let user = signIn.currentUser{
-                token = user.userID
-            } else{
-                token = FBSDKAccessToken.current().userID
-            }
-            
-            store.getCurrentUserWithToken(token: token, { 
-                OperationQueue.main.addOperation({ 
-                    self.setUpNavigationController()
-                })
-                let uberClient = UberAPIClient(pickup: address1, dropoff: address2, chef: User(), purchasingUser: self.store.currentUser)
-                
-//                uberClient.getDeliveryQuote(completion: { (quoteID) in
-//                    print(quoteID)
-//                })
-            })
-        
+          //  print(signIn.currentUser)
         }
         
-        else {
-            let loginVC = LoginViewController()
-            self.window?.rootViewController = loginVC
-        }
-        
+
         
         IQKeyboardManager.sharedManager().enable = true
         
@@ -137,6 +136,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        
+        if signIn.hasAuthInKeychain() {
+            var token = String()
+            
+            if let user = signIn.currentUser{
+                token = user.userID
+            }
+            
+            store.getCurrentUserWithToken(token: token, {
+                OperationQueue.main.addOperation({
+                    self.setUpNavigationController()
+                })
+                
+                
+            })
+            
+        } else {
+            let loginVC = LoginViewController()
+            self.window?.rootViewController = loginVC
+        }
         if let error = error {
             
             print("there was an error logging in with google: \(error.localizedDescription)")

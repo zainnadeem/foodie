@@ -81,25 +81,18 @@ class AddAddressViewController: UIViewController {
     func saveAddress(){
 
         let titleCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TextFieldTableViewCell
-        titleCell.textField.text = "Home"
+        
         let addressCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TextFieldTableViewCell
-        addressCell.textField.text = "11 Broadway"
         let aptSuiteCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! TextFieldTableViewCell
-        aptSuiteCell.textField.text = "Suite 260"
         let cityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
-        cityCell.textField.text = "New York"
         let stateCell = tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! TextFieldTableViewCell
-        stateCell.textField.text = "NY"
         let postalCell = tableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! TextFieldTableViewCell
-        postalCell.textField.text = "10004"
         let crossStreetCell = tableView.cellForRow(at: IndexPath(row: 0, section: 6)) as! TextFieldTableViewCell
-        crossStreetCell.textField.text = ""
         let phoneCell = tableView.cellForRow(at: IndexPath(row: 0, section: 7)) as! TextFieldTableViewCell
-        phoneCell.textField.text = "5165517202"
+        
 
         
-        let address = Address.init()
-        
+        let address = Address()
         if let title        = titleCell.textField.text          { address.title = title }
         if let addressLine  = addressCell.textField.text        { address.addressLine = addressLine }
         if let aptSuite     = aptSuiteCell.textField.text       { address.aptSuite = aptSuite }
@@ -109,7 +102,12 @@ class AddAddressViewController: UIViewController {
         if let crossStreet  = crossStreetCell.textField.text    { address.crossStreet = crossStreet }
         if let phone        = phoneCell.textField.text          { address.phone = phone }
 
-        //save to firebase 
+        //save to firebase
+        address.save { (error) in
+            if error != nil {
+                
+            }
+        }
         
         //add to current user
         store.currentUser.addresses.append(address)

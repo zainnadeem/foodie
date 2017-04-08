@@ -9,8 +9,9 @@
 import UIKit
 import SnapKit
 import Stripe
+import SCLAlertView
 
-class PlaceOrderViewController: UIViewController {
+class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestureRecognizerDelegate {
 
     lazy var navBar: NavBarView = NavBarView(withView: self.view, rightButtonImage: nil, leftButtonImage: #imageLiteral(resourceName: "cross_icon"), middleButtonImage: nil)
     lazy var tableView = UITableView()
@@ -78,7 +79,12 @@ class PlaceOrderViewController: UIViewController {
             let dropoffAddress = self.store.currentUser.addresses.first
             self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
         }
-
+        if let address = store.currentUser.addresses.first {
+            var aptSuite = ""
+            if address.aptSuite != "" { aptSuite = " \(address.aptSuite)" }
+            shippingRow.title = "\(address.addressLine)\(aptSuite), \(address.city), \(address.state) \(address.postalCode)"
+        }
+        
         
     }
     
@@ -95,6 +101,13 @@ class PlaceOrderViewController: UIViewController {
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
+        deliveryView.delegate = self
+        
+        self.shippingRow.onTap = { [weak self] _ in
+            self?.presentAddressVC()
+        }
+        
+        
         setPlaceOrderButtonTitle()
         placeOrderButton.addTarget(self, action: #selector(placeOrderButtonTapped), for: .touchUpInside)
         
@@ -104,6 +117,11 @@ class PlaceOrderViewController: UIViewController {
         
         view.addSubview(placeOrderButton)
         
+    }
+    
+    func presentAddressVC() {
+        let addressVC = AddressesViewController()
+        self.present(addressVC, animated: true, completion: nil)
     }
     
     func setViewConstraints() {
@@ -142,6 +160,36 @@ class PlaceOrderViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-5)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.80)
+        }
+    }
+    
+    func showAlert(for button: UIButton) {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            hideWhenBackgroundViewIsTapped: true
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Ok") {}
+        switch deliveryView.selectedDeliveryOption {
+        case .uber:
+            uberAPIClient.getDeliveryQuote(completion: { (quote) in
+                if let quote = quote {
+                    let subtitle = "Cost for delivery: $\(quote["fee"]!)"
+                    OperationQueue.main.addOperation({
+                        alertView.showInfo("Uber", subTitle: subtitle)
+                    })
+                }
+                else {
+                    OperationQueue.main.addOperation({
+                        alertView.showInfo("We're sorry :(", subTitle: "Uber delivery is unable to deliver food between this chef's home and your selected address. Please select another option.")
+                    })
+                }
+                
+            })
+        case .postmates:
+            return
+        case .pickUp:
+            return
         }
     }
     
