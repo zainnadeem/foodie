@@ -14,7 +14,7 @@ import Alamofire
 let postMatesBaseURL = "https://api.postmates.com/v1/customers/\(postmatesCustomerID)"
 let postmatesHeaders: HTTPHeaders = [
     "Authorization": encodedSandboxKey,
-    "Accept": "application/json"
+    "Content-Type": "application/x-www-form-urlencoded"
 ]
 
 //Uber

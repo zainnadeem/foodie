@@ -21,11 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        FIRApp.configure()
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         //Stripe
         STPPaymentConfiguration.shared().publishableKey = stripePublishableKey
         
-//        PostmatesAPIClient.checkIfDeliveryIsAvailable(pickupAddress: "41 E 7th St, New York, NY", dropOffAddress: "11 Broadway, New York, NY") { (success, id) in }
+        PostmatesAPIClient.checkIfDeliveryIsAvailable(pickupAddress: "41 E 7th St, New York, NY", dropOffAddress: "11 Broadway, New York, NY") { (success, id) in }
         
         let address1 = Address(title: "home", addressLine: "11 Broadway", aptSuite: "Suite 260", city: "New York", state: "NY", postalCode: "10004", crossStreet: "", phone: "5555555555")
         
@@ -54,8 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //                    print(quoteID)
         //                })
         
-        FIRApp.configure()
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         
         guard let signIn = GIDSignIn.sharedInstance() else { fatalError() }
         signIn.scopes = ["https://www.googleapis.com/auth/plus.stream.read", "https://www.googleapis.com/auth/plus.me", "https://www.googleapis.com/auth/plus.login"]

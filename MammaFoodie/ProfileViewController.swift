@@ -202,6 +202,7 @@ extension ProfileViewController {
         if sender.state == .began {
             print ("delete dish tapped")
             let cell = sender.view as! DishTableViewCell
+            guard let dish = cell.dish else { print("ERROR: please try again later"); return }
             let appearance = SCLAlertView.SCLAppearance(
                 showCloseButton: false,
                 hideWhenBackgroundViewIsTapped: true
@@ -212,8 +213,10 @@ extension ProfileViewController {
             }
             alertView.addButton("Delete", backgroundColor: FlatRed(), textColor: .white, showDurationStatus: false, action: { 
                 print("delete button tapped")
+                let index = self.user.dishes.index{$0 === dish}
+                self.user.dishes.remove(at: index!)
             })
-            alertView.showEdit(cell.dish.name, subTitle: cell.dish.description)
+            alertView.showEdit(dish.name, subTitle: cell.dish.description)
 
         }
     }
