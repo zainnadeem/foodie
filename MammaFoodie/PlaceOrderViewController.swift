@@ -74,9 +74,13 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         //TODO: clean this function up, no force unwrapping
         User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
             let chef = user
+            
             chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            self.store.currentUser.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            
             let pickupAddress = chef.addresses.first
             let dropoffAddress = self.store.currentUser.addresses.first
+            
             self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
         }
         if let address = store.currentUser.addresses.first {
@@ -199,8 +203,6 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
             store.currentUser.cart.remove(at: indexPath!.row)
             tableView.deleteRows(at: [indexPath!], with: .fade)
             setPlaceOrderButtonTitle()
-            
-            
         }
         
     }
@@ -211,30 +213,29 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         uberAPIClient.createDelivery { (deliveryID) in
             
         }
-        
 
-        
         let customer = self.store.currentUser
-        var recipient: User = User()
-        let uid = self.store.currentUser.cart[0].createdBy
-        
+        let chefUid = self.store.currentUser.cart[0].createdBy
 
         
-        
-        User.observeUser(uid: uid) { (user) in
+        User.observeUser(uid: chefUid) { (chef) in
 
-            recipient = user
             var params = [String:Any]()
            
             params["id"] = customer.stripeCustomerId
-            params["amount"] = self.store.currentUser.calculateCartTotalAsInt()
+            params["amount"] = customer.calculateCartTotalAsInt()
             params["currency"] = paymentCurrency
-            params["destination"] = user.stripeAccountId
+            params["destination"] = chef.stripeAccountId
             
             self.stripeUtil.stripeAPICall(URLString: backendBaseURL, params: params, requestMethod: .POST, path: "/customer/charge", completion: { (success) in
                 
                 if success {
                     
+                    print("completed transaction")
+                    
+                }else{
+                    
+                    print("transaction Error")
                     
                 }
                 

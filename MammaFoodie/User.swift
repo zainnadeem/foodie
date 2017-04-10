@@ -257,6 +257,7 @@ class User
             "email"                 : email,
             "tags"                  : tags,
             "bio"                   : bio,
+            "phoneNumber"           : phoneNumber,
             "website"               : website,
             "profile image URL"     : profileImageURL,
             "average rating"        : averageRating,

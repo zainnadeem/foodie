@@ -117,6 +117,7 @@ class StripeUtil {
                                 //serialize the returned datas an get the customerId
                                 if let id = json?["id"] as? String {
                                     self.customerId = id
+                                    self.store.currentUser.stripeCustomerId = id
                                     self.store.currentUser.registerStripeCustomerId(id: id)
                                 }
                                 
@@ -226,8 +227,6 @@ class StripeUtil {
         let baseURL = URL(string: URLString)
         let url = baseURL?.appendingPathComponent(path)
         var request = URLRequest.request(url!, method: requestMethod, params: params as [String : AnyObject])
-
-        //request.setValue(self.stripeTool.getBasicAuth(), forHTTPHeaderField: "Authorization")
         
         self.dataTask = self.defaultSession.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -251,43 +250,6 @@ class StripeUtil {
             self.dataTask?.resume()
         }
     
-    func stripeAPICallCreateCustomer(URLString: String, params: [String: Any], requestMethod: Method, path: String, completion: @escaping (_ success: Bool) -> Void){
-        
-        let baseURL = URL(string: URLString)
-        let url = baseURL?.appendingPathComponent(path)
-        var request = URLRequest.request(url!, method: requestMethod, params: params as [String : AnyObject])
-        
-        //request.setValue(self.stripeTool.getBasicAuth(), forHTTPHeaderField: "Authorization")
-        
-        self.dataTask = self.defaultSession.dataTask(with: request as URLRequest) { (data, response, error) in
-            
-            if let error = error {
-                print(error)
-                completion(false)
-            }
-                
-            else if let data = data {
-                do {
-                    let info = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: AnyObject]
-                    
-                    if let id = info["id"] as? String {
-                        self.customerId = id
-                        self.store.currentUser.stripeCustomerId = self.customerId!
-                        self.store.currentUser.registerStripeCustomerId(id: self.customerId!)
-                    }
-
-                    
-                    print(info)
-                } catch let myJSONError {
-                    print(myJSONError)
-                    
-                }
-                completion(true)
-            }
-        }
-        
-        self.dataTask?.resume()
-    }
 
     
     
