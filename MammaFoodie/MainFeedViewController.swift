@@ -10,7 +10,7 @@ import UIKit
 import Stripe
 import GoogleSignIn
 
-class MainFeedViewController: UIViewController {
+class MainFeedViewController: UIViewController{
     
     //NavBar
     lazy var navBar : NavBarView = NavBarView(withView: self.view, rightButtonImage: #imageLiteral(resourceName: "searchIcon"), leftButtonImage: #imageLiteral(resourceName: "icon-profile"), middleButtonImage: nil)
@@ -24,6 +24,9 @@ class MainFeedViewController: UIViewController {
     let store = DataStore.sharedInstance
     
     let str = StripeUtil()
+    
+
+    
     
     //CollectionViews
     override func viewDidLoad() {
@@ -189,118 +192,8 @@ extension MainFeedViewController : NavBarViewDelegate {
     
     func middleBarButtonTapped(_ Sender: AnyObject) {
         
-//        let stpCardParams1 = STPCardParams()
-//        stpCardParams1.number = "4242424242424242"
-//        stpCardParams1.last4()
-//        stpCardParams1.expMonth = UInt(09)
-//        stpCardParams1.expYear = UInt(19)
-//        stpCardParams1.cvc = "989"
-//        stpCardParams1.name = "Zain"
-//
-
-//
-//        let stpCardParams3 = STPCardParams()
-//        stpCardParams3.number = "4207670162371796"
-//        stpCardParams3.last4()
-//        stpCardParams3.expMonth = UInt(06)
-//        stpCardParams3.expYear = UInt(20)
-//        stpCardParams3.cvc = "720"
-//        stpCardParams3.name = "Zain Nadeem"
-//        
-//        
-//        
-//        str.createUser(card: stpCardParams2) { (success) in
-//            
-//            self.str.createCharge(stripeId: self.store.currentUser.stripeId, amount: Int(50), currency: paymentCurrency) { (success) in
-//                  
-//            }
-//        }
-//
-//     
-        
-        
-//
-        
-//        
-//        str.createUser(card: stpCardParams1) { (success) in
-//            print(success)
-//            
-//        }
-//
-//          str.retrieveCustomer { (customer, error) in
-//            
-//            let paymentContext = STPPaymentContext.init(apiAdapter: StripeUtil.sharedClient)
-//            paymentContext.paymentAmount = Int(20.00)
-//            paymentContext.requestPayment()
-// 
-//        
-//        }
-        
-//        str.createCard(stripeId: self.store.currentUser.stripeId, card: stpCardParams3) { (success) in
-//            
-//            
-//            
-//        }
-        
-        
-        
-        let uri = "MammaFoodie://"
-        let authorizeURL = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=\(stripeClientId)&scope=read_write"
-         UIApplication.shared.openURL(NSURL(string: authorizeURL)! as URL)
-        
-//        let request = NSURLRequest(url: URL(string: authorizeURL)!)
-//        let urlWebView = UIWebView()
-//        self.view = urlWebView
-//        
-//        urlWebView.loadRequest(request as URLRequest)
-        
-        
-//        let params = [         "AUTHORIZE_URI"      : "https://connect.stripe.com/oauth/authorize"
-//                               "response_type"      : "code",
-//                               "scope"              : "read_write",
-//                               "client_id"          : stripeClientId
-//                    ]
-        
-        
-//
-//        let stripeUtil = StripeUtil()
-//        
-//        stripeUtil.stripeAPICall(params: params, requestMethod: .GET, path: StripePath.authorize) { (success) in
-//            
-//        }
     
     }
-//    
-//    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool
-//    {
-//        if let URL = request.url?.absoluteString
-//        {
-//            // This should be the redirect URL that you pass it can be anything like local host mentioned above.
-//            if URL.hasPrefix(backendBaseURL)
-//            {
-//                // Now you can simply do some string manipulation to pull out the relevant components.
-//                // I'm not sure what sort of token or how you get it back but assuming the redirect URL is
-//                // YourRedirectURL&code=ACCESS_TOKEN and you want access token heres how you would get it.
-//                var code : String?
-//                if let URLParams = request.url?.query?.components(separatedBy: "&")
-//                {
-//                    for param in URLParams
-//                    {
-//                        let keyValue = param.components(separatedBy: "=")
-//                        let key = keyValue.first
-//                        if key == "code"
-//                        {
-//                            code = keyValue.last
-//                        }
-//                    }
-//                }
-//                // Here if code != nil then it has the ACCESS_TOKEN and you are done! If its nil something went wrong.
-//                return false // So that the webview doesnt redirect to the dummy URL you passed.
-//            }
-//        }
-//        return true
-//    }
-    
     
 }
 

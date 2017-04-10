@@ -41,7 +41,7 @@ class User
     var deviceTokens                    :           [String]
     var isAvailable                     :           Bool
     
-    var tagsString                      : String {
+    var tagsString                      :           String {
         
         var string = ""
         
@@ -53,13 +53,15 @@ class User
         return string
     }
     
-    var stripeId: String
+    var stripeCustomerId: String
+    var stripeAccountId: String
     
     
     
     // MARK: - Initializers
-    
-    init(uid: String, username: String, fullName: String, email: String, phoneNumber: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Double, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address], stripeId: String)
+
+    init(uid: String, username: String, fullName: String, email: String, bio: String, website: String, location: String, follows: [User], followedBy: [User], profileImageURL: String, dishes: [Dish], reviews: [Review], notifications: [Notification], broadcasts: [Broadcast], blockedUsers: [User], cart: [Dish], totalLikes: Int, averageRating: Int, deviceTokens: [String], isAvailable: Bool, tags: [String], addresses: [Address],  stripeCustomerId: String, stripeAccountId: String, phoneNumber: String)
+
     {
         self.uid = uid
         self.username = username
@@ -79,12 +81,14 @@ class User
         self.totalLikes = totalLikes
         self.blockedUsers = blockedUsers
         self.cart = cart
-        self.averageRating = averageRating
+        self.averageRating = Double(averageRating)
         self.deviceTokens = deviceTokens
         self.isAvailable = isAvailable
         self.tags = tags
         self.addresses = addresses
-        self.stripeId = stripeId
+        
+        self.stripeCustomerId = stripeCustomerId
+        self.stripeAccountId = stripeAccountId
     }
     
     convenience init(uid: String, username: String, fullName: String, email: String, profileImageURL: String) {
@@ -120,7 +124,9 @@ class User
         self.isAvailable = false
         self.tags = [""]
         self.addresses = []
-        self.stripeId = ""
+        self.stripeAccountId = ""
+        self.stripeCustomerId = ""
+        
     }
     
     init(dictionary: [String : Any])
@@ -140,8 +146,9 @@ class User
         isAvailable = dictionary["is available"] as! Bool
         tags = dictionary["tags"] as! [String]
         
-        stripeId = dictionary["stripe id"] as! String
-        
+        stripeCustomerId = dictionary["stripe customer id"] as! String
+        stripeAccountId = dictionary["stripe account id"] as! String
+
         // deviceToken: created for notifications
         self.deviceTokens = []
         if let deviceTokDict = dictionary["device tokens"] as? [String]
@@ -243,20 +250,22 @@ class User
     
     func toDictionary() -> [String : Any] {
         return [
-            "uid"             : uid,
-            "username"        : username,
-            "fullName"        : fullName,
-            "location"        : location,
-            "email"           : email,
-            "phoneNumber"     : phoneNumber,
-            "tags"            : tags,
-            "bio"             : bio,
-            "website"         : website,
-            "profile image URL" : profileImageURL,
-            "average rating"  : averageRating,
-            "total likes"     : totalLikes,
-            "stripe id"       : stripeId,
-            "is available"    : isAvailable
+            "uid"                   : uid,
+            "username"              : username,
+            "fullName"              : fullName,
+            "location"              : location,
+            "email"                 : email,
+            "tags"                  : tags,
+            "bio"                   : bio,
+            "phoneNumber"           : phoneNumber,
+            "website"               : website,
+            "profile image URL"     : profileImageURL,
+            "average rating"        : averageRating,
+            "total likes"           : totalLikes,
+            "stripe customer id"    : stripeCustomerId,
+            "stripe account id"     : stripeAccountId,
+            "is available"          : isAvailable
+
             
             
         ]
@@ -316,8 +325,12 @@ extension User {
         
     }
     
-    func registerStripeId(id: String){
-        DatabaseReference.users(uid: uid).reference().child("stripe id").setValue(id)
+    func registerStripeCustomerId(id: String){
+        DatabaseReference.users(uid: uid).reference().child("stripe customer id").setValue(id)
+    }
+    
+    func registerStripeAccountId(id: String){
+        DatabaseReference.users(uid: uid).reference().child("stripe account id").setValue(id)
     }
     
     class func observeUser(uid: String, _ completion: @escaping (User) -> Void) {

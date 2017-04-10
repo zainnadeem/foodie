@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController {
     enum Item {
         case EditProfile
         case Payment
+        case Connect
         case Address
         case SubmitFeedback
         case Terms
@@ -65,7 +66,7 @@ class SettingsViewController: UIViewController {
         self.tableView.register(EditProfileTableViewCell.self, forCellReuseIdentifier: editProfileTableViewCellIdentifier)
         
         sections = [
-            Section(type: .YourAccount, items: [.EditProfile, .Payment, .Address]),
+            Section(type: .YourAccount, items: [.EditProfile, .Payment, .Connect, .Address]),
             Section(type: .Support, items: [.SubmitFeedback, .Terms]),
             Section(type: .Logout, items: [.LogoutUser]),
         ]
@@ -128,6 +129,10 @@ extension SettingsViewController : UITableViewDataSource {
                 cell.textLabel?.text = "Payment"
                 cell.accessoryType = .disclosureIndicator
                 
+            case .Connect:
+                cell.textLabel?.text = "Connect"
+                cell.accessoryType = .disclosureIndicator
+                
             case .Address:
                 cell.textLabel?.text = "Address"
                 cell.accessoryType = .disclosureIndicator
@@ -171,7 +176,10 @@ extension SettingsViewController: UITableViewDelegate{
         case .Payment:
             print("Show Payment Methods")
             
-            
+        case .Connect:
+            let authorize = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=\(stripeClientId)&scope=read_write"
+            UIApplication.shared.openURL(NSURL(string: authorize)! as URL)
+      
         case .Address:
             let destinationVC = AddressesViewController()
             destinationVC.modalTransitionStyle = .crossDissolve

@@ -26,6 +26,7 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
     let stripeUtil = StripeUtil()
     
     var purchaseCard: STPCard? = nil
+    var purchaseToken: STPToken? = nil
     
 
     
@@ -73,9 +74,13 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         //TODO: clean this function up, no force unwrapping
         User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
             let chef = user
+            
             chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            self.store.currentUser.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            
             let pickupAddress = chef.addresses.first
             let dropoffAddress = self.store.currentUser.addresses.first
+            
             self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
         }
         if let address = store.currentUser.addresses.first {
@@ -198,38 +203,43 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
             store.currentUser.cart.remove(at: indexPath!.row)
             tableView.deleteRows(at: [indexPath!], with: .fade)
             setPlaceOrderButtonTitle()
-            
-            
         }
         
     }
     
     func placeOrderButtonTapped() {
 
+
         uberAPIClient.createDelivery { (deliveryID) in
             
         }
-        
-        guard let card = purchaseCard else { return print("please select payment method") }
-        
+
         let customer = self.store.currentUser
-        var recipient: User = User()
-        let uid = self.store.currentUser.cart[0].createdBy
+        let chefUid = self.store.currentUser.cart[0].createdBy
+
         
-        
-        
-        User.observeUser(uid: uid) { (user) in
-            recipient = user
+        User.observeUser(uid: chefUid) { (chef) in
+
+            var params = [String:Any]()
+           
+            params["id"] = customer.stripeCustomerId
+            params["amount"] = customer.calculateCartTotalAsInt()
+            params["currency"] = paymentCurrency
+            params["destination"] = chef.stripeAccountId
             
-            self.stripeUtil.createCharge(stripeId: customer.stripeId, amount: customer.calculateCartTotalAsInt()!, currency: paymentCurrency, destination: recipient.stripeId) { (success) in
+            self.stripeUtil.stripeAPICall(URLString: backendBaseURL, params: params, requestMethod: .POST, path: "/customer/charge", completion: { (success) in
                 
                 if success {
-                    self.store.currentUser.cart.removeAll()
-                    self.dismiss(animated: true, completion: nil)
+                    
+                    print("completed transaction")
+                    
+                }else{
+                    
+                    print("transaction Error")
+                    
                 }
                 
-                
-            }
+            })
         }
      
     }
@@ -295,6 +305,7 @@ func addPaymentTapped() {
     let addCardViewController = STPAddCardViewController()
     addCardViewController.delegate = self
     // STPAddCardViewController must be shown inside a UINavigationController.
+    
     let navigationController = UINavigationController(rootViewController: addCardViewController)
     self.present(navigationController, animated: true, completion: nil)
 }
@@ -305,26 +316,18 @@ func addPaymentTapped() {
     }
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
-        //set token & stripeID in parameters
 
-        let params = ["source" : token.tokenId,
-                      "id"     : self.store.currentUser.stripeId
-                    ]
-        
-        self.stripeUtil.stripeAPICall(params: params, requestMethod: .POST, path: StripePath.source) { (success) in
+        stripeUtil.createUser(token: token) { (success) in
             
-                   self.dismiss(animated: true, completion: { 
-                    if success{
-                       
-                        self.paymentRow.detail = (token.card?.last4())!
-                        self.purchaseCard = token.card
-                    
-                        }
-                   })
+            self.dismiss(animated: true) {
+                self.paymentRow.detail = token.card!.last4()
+            }
+
         }
         
+  
+        
     }
-    
     
 }
 

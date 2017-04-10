@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 import IQKeyboardManagerSwift
 import Stripe
+import SCLAlertView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -91,27 +92,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        return true
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: [UIApplicationOpenURLOptionsKey.annotation])
         
-        if (url.scheme == "mammafoodie") {
-            let queryParams: [Any] = url.query!.components(separatedBy: "&")
-            var codeParam: [Any] = queryParams.filter { NSPredicate(format: "SELF BEGINSWITH %@", "code=").evaluate(with: $0) }
-            let codeQuery: String? = (codeParam[0] as? String)
-            let code: String? = codeQuery?.replacingOccurrences(of: "code=", with: "")
-            print("My code is \(code)")
-            // Finish the OAuth flow with this code
-            return true
+        
+        
+        //receive stripe oauth token
+        if url.scheme == "mammafoodie"{
+            let query = url.query?.replacingPercentEscapes(using: String.Encoding.utf8)
+            let data: Data? = query?.data(using: String.Encoding.utf8)
+            var json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
+            
+            let errorString: String? = (json?["error"] as? String)
+            
+            var accessToken: String? = (json?["access_token"] as? String)
+           
+            var stripePubKey: String? = (json?["stripe_publishable_key"] as? String)
+            
+            var stripeUserId: String? = (json?["stripe_user_id"] as? String)
+            
+            if errorString != nil {
+            
+                print(errorString)
+            
+            } else {
+                
+                self.store.currentUser.stripeAccountId = stripeUserId!
+                self.store.currentUser.registerStripeAccountId(id: stripeUserId!)
+                
+                showSuccess()
+            }
         }
         
-       
-        
-        
         return handled
+
     }
+
+    func getQueryStringParameter(url: String?, param: String) -> String? {
+        if let url = url, let urlComponents = URLComponents(string: url), let queryItems = (urlComponents.queryItems) {
+            return queryItems.filter({ (item) in item.name == param }).first?.value!
+        }
+        return nil
+    }
+    
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        
+    }
+    
+    
    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         
@@ -184,9 +221,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
 
+    func showSuccess(){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            hideWhenBackgroundViewIsTapped: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Successful") {}
 
+        alertView.showWarning("Great!", subTitle: "You're all set up to receive payments!")
+    }
     
-   
-
 }
+
+
 

@@ -9,13 +9,32 @@
 import Foundation
 import Stripe
 
-enum StripePath : String {
-        case source = "/customer/sources"
-        case customer = "/customer/"
-        case create = "/customer/create"
-        case charge = "/customer/charge"
-        case authorize = "/authorize"
-}
+enum StripePath  {
+        case source
+        case customer(uid: String)
+        case create
+        case charge
+        case authorize
+        case none
+    
+        private var path: String{
+            switch self {
+            case .source:
+                return "/customer/sources"
+            case .customer(let uid):
+                return "/customer/\(uid)"
+            case .create:
+                return "/customer/create"
+            case .charge:
+                return "/customer/charge"
+            case .authorize:
+                return "/authorize"
+            case .none:
+                return ""
+                
+            }
+        }
+    }
 
 struct StripeTools {
 
@@ -53,12 +72,10 @@ class StripeUtil {
     let store = DataStore.sharedInstance
     
     //createUser
-    func createUser(card: STPCardParams, completion: @escaping (_ success: Bool) -> Void) {
+    func createUser(token: STPToken, completion: @escaping (_ success: Bool) -> Void) {
         
         //Stripe iOS SDK will gave us a token to make APIs call possible
-        stripeTool.generateToken(card: card) { (token) in
-            if(token != nil) {
-                
+
                 //request to create the user
                 let baseURL = URL(string: backendBaseURL)
                 let path = "/customer/create"
@@ -67,9 +84,9 @@ class StripeUtil {
                 
                 
                 //params array where you can put your user informations
-                var params = [String:String]()
+                var params = [String:Any]()
                 params["email"] = "zn.nadeem@gmail.com"
-                params["token"] = token?.tokenId
+                params["token"] = token
                 
                 //transform this array into a string
                 var str = ""
@@ -100,13 +117,15 @@ class StripeUtil {
                                 //serialize the returned datas an get the customerId
                                 if let id = json?["id"] as? String {
                                     self.customerId = id
-                                    self.store.currentUser.registerStripeId(id: id)
+                                    self.store.currentUser.stripeCustomerId = id
+                                    self.store.currentUser.registerStripeCustomerId(id: id)
                                 }
                                 
                                 let responseData = String(data: data, encoding: String.Encoding.utf8)
                                 //
                                 print(responseData ?? "No data")
                             }
+                            completion(true)
                         }
                         else {
                             completion(false)
@@ -117,8 +136,8 @@ class StripeUtil {
                 //launch request
                 self.dataTask?.resume()
             }
-        }
-    }
+    
+    
     
     func retrieveCustomer(_ completion: @escaping STPCustomerCompletionBlock) {
         guard let key = Stripe.defaultPublishableKey() , !key.contains("#") else {
@@ -133,7 +152,7 @@ class StripeUtil {
         
         var defaultSource: STPCard? = nil
         var sources: [STPCard] = []
-        let customer = STPCustomer(stripeID: self.store.currentUser.stripeId, defaultSource: defaultSource , sources: sources)
+        let customer = STPCustomer(stripeID: self.store.currentUser.stripeCustomerId, defaultSource: defaultSource , sources: sources)
         
         completion(customer, nil)
         //    return
@@ -191,8 +210,8 @@ class StripeUtil {
                         completion(false)
                     }
                     else if let data = data {
-                        _ = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                        //                        print(json)
+//                        _ = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
+//                        //                        print(json)
                         completion(true)
                     }
                 }
@@ -203,13 +222,11 @@ class StripeUtil {
         
 
     
-    func stripeAPICall(params: [String: String], requestMethod: Method, path: StripePath, completion: @escaping (_ success: Bool) -> Void){
+    func stripeAPICall(URLString: String, params: [String: Any], requestMethod: Method, path: String, completion: @escaping (_ success: Bool) -> Void){
         
-        let baseURL = URL(string: backendBaseURL)
-        let url = baseURL?.appendingPathComponent(path.rawValue)
+        let baseURL = URL(string: URLString)
+        let url = baseURL?.appendingPathComponent(path)
         var request = URLRequest.request(url!, method: requestMethod, params: params as [String : AnyObject])
-
-        request.setValue(self.stripeTool.getBasicAuth(), forHTTPHeaderField: "Authorization")
         
         self.dataTask = self.defaultSession.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -232,6 +249,8 @@ class StripeUtil {
             
             self.dataTask?.resume()
         }
+    
+
     
     
     func decodeResponse(_ response: URLResponse?, error: NSError?) -> NSError? {
@@ -271,13 +290,20 @@ class StripeUtil {
         request.httpBody = str.data(using: String.Encoding.utf8)
         
         self.dataTask = self.defaultSession.dataTask(with: request as URLRequest) { (data, response, error) in
-            DispatchQueue.main.async {
-                if let error = self.decodeResponse(response, error: error as NSError?) {
-                    completion(false)
-                    return
+           
+            if let error = error {
+                print(error)
+                completion(false)
+            }
+                
+            else if let data = data {
+                do {
+                    let info = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: AnyObject]
+                    print(info)
+                } catch let myJSONError {
+                    print(myJSONError)
+                    
                 }
-                
-                
                 completion(true)
             }
         }

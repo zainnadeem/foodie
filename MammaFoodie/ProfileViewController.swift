@@ -25,6 +25,8 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         OperationQueue.main.addOperation {
+            self.user = self.store.currentUser
+            self.user.dishes = self.store.currentUser.dishes
             self.profileView.tableView.reloadData()
         }
         
@@ -158,7 +160,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: profileHeaderIdentifier) as! ProfileTableHeaderView
-        headerView.addItemButton.addTarget(self, action: #selector(showAddDishVC), for: .touchUpInside)
+        
+        if user.stripeAccountId != "" {
+            headerView.addItemButton.removeTarget(self, action: #selector(setUpStripeAlert), for: .touchUpInside)
+            headerView.addItemButton.addTarget(self, action: #selector(showAddDishVC), for: .touchUpInside)
+
+        }else{
+            headerView.addItemButton.removeTarget(self, action: #selector(showAddDishVC), for: .touchUpInside)
+            headerView.addItemButton.addTarget(self, action: #selector(setUpStripeAlert), for: .touchUpInside)
+
+        }
+   
         switch profileView.profileTableViewStatus {
         case .reviews, .followers, .following: headerView.addItemButton.isHidden = true
         default:
@@ -178,6 +190,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .reviews: return 120
         case .followers, .following: return 60
         }
+    }
+    
+    func setUpStripeAlert(){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            hideWhenBackgroundViewIsTapped: true
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Okay") {
+            
+            if let pageVC = self.parent as? UserPageViewController {
+                pageVC.navigateToSettingsViewController(.reverse)
+            }
+        
+        }
+        
+        alertView.showNotice("Missing Information", subTitle: "Please set up your stripe connect account in settings")
     }
 }
 
