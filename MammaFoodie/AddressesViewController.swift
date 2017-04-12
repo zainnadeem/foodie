@@ -26,11 +26,7 @@ class AddressesViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navBar.middleButton.title = "Addresses"
         
-        if let _ = self.presentingViewController as? UINavigationController { navBar.leftButton.image = #imageLiteral(resourceName: "settings") }
-        else {
-            navBar.leftButton.title = "Cancel"
-            navBar.rightButton.title = "Done"
-        }
+        
         
         self.tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: infoTableViewCellIdentifier)
         
@@ -42,6 +38,11 @@ class AddressesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         OperationQueue.main.addOperation { 
             self.tableView.reloadData()
+        }
+        if let _ = self.presentingViewController as? UINavigationController { navBar.leftButton.image = #imageLiteral(resourceName: "settings") }
+        else {
+            navBar.leftButton.title = "Cancel"
+            navBar.rightButton.title = "Done"
         }
         
     }
@@ -57,14 +58,12 @@ class AddressesViewController: UIViewController {
             make.trailing.equalToSuperview()
         }
         
-        if let _ = self.presentingViewController as? UINavigationController {
-            self.view.addSubview(addAddressButton)
+        self.view.addSubview(addAddressButton)
             addAddressButton.snp.makeConstraints { (make) in
                 make.top.equalTo(tableView.snp.bottom)
                 make.bottom.equalToSuperview()
                 make.centerX.equalToSuperview()
                 make.width.equalToSuperview().multipliedBy(0.8)
-            }
         }
         
     }

@@ -122,6 +122,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .reviews:
             let cell = tableView.dequeueReusableCell(withIdentifier: reviewCellIdentifier, for: indexPath) as! ReviewTableViewCell
             cell.review = user.reviews[indexPath.row]
+            return cell
         case .followers:
             let cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
             let cellUser = user.followedBy[indexPath.row]
@@ -144,9 +145,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.profileTableViewStatus {
         case .menu:
-            let purchaseDishVC = PurchaseDishViewController()
-            purchaseDishVC.dish = self.user.dishes[indexPath.row]
-            self.present(purchaseDishVC, animated: true, completion: nil)
+//            if self.user === self.store.currentUser {
+//                <#code#>
+//            }
+//            else {
+                let purchaseDishVC = PurchaseDishViewController()
+                purchaseDishVC.dish = self.user.dishes[indexPath.row]
+                self.present(purchaseDishVC, animated: true, completion: nil)
+//            }
         case .followers, .following:
             let profileVC = ProfileViewController()
             let cell = tableView.cellForRow(at: indexPath) as! UserTableViewCell
@@ -219,7 +225,10 @@ extension ProfileViewController: ProfileTableViewDelegate {
         case .following: arrayForTableView = user.follows
         }
         
-        profileView.tableView.reloadData()
+        OperationQueue.main.addOperation {
+            self.profileView.tableView.reloadData()
+        }
+        
         
     }
 }

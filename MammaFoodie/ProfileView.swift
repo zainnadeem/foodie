@@ -176,7 +176,7 @@ extension ProfileView {
             make.width.equalTo(self.snp.width)
         }
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
+        tableView = UITableView()
         self.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(profileTopStackView.snp.bottom)

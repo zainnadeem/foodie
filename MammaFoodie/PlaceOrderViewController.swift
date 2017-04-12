@@ -319,7 +319,10 @@ extension PlaceOrderViewController: NavBarViewDelegate {
     func leftBarButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
-    func middleBarButtonTapped(_ Sender: AnyObject) {}
+    func middleBarButtonTapped(_ Sender: AnyObject) {
+        let uberOAuthURL = URL(string: "https://login.uber.com/oauth/v2/authorize?client_id=\(uberClientID)&response_type=code")
+        UIApplication.shared.open(uberOAuthURL!, options: [:], completionHandler: nil)
+    }
     func rightBarButtonTapped(_ sender: AnyObject) {}
 }
 
