@@ -20,8 +20,8 @@ class DataStore {
     func getCurrentUserWithToken(token: String,_ completion: @escaping () -> Void){
         
         DatabaseReference.tokens(token: token).reference().observeSingleEvent(of: .value, with: { (snapshot) in
-            if let uid = snapshot.value {
-                self.getCurrentUserWithUID(uid: uid as! String, {
+            if let uid = snapshot.value as? String {
+                self.getCurrentUserWithUID(uid: uid, {
                    completion()
                 })
             }

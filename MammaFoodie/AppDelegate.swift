@@ -152,25 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         
-        if signIn.hasAuthInKeychain() {
-            var token = String()
-            
-            if let user = signIn.currentUser{
-                token = user.userID
-            }
-            
-            store.getCurrentUserWithToken(token: token, {
-                OperationQueue.main.addOperation({
-                    self.setUpNavigationController()
-                })
-                
-                
-            })
-            
-        } else {
-            let loginVC = LoginViewController()
-            self.window?.rootViewController = loginVC
-        }
+        
         if let error = error {
             
             print("there was an error logging in with google: \(error.localizedDescription)")
@@ -186,6 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         FirebaseAPIClient.checkForUserToken(for: user.userID) { (userExists) in
             if userExists {
+                print("User exists!")
                 OperationQueue.main.addOperation({ 
                     self.setUpNavigationController()
                 })
@@ -204,6 +187,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 })
                 
             }
+        }
+        if signIn.hasAuthInKeychain() {
+            var token = String()
+            
+            if let user = signIn.currentUser{
+                token = user.userID
+            }
+            
+            store.getCurrentUserWithToken(token: token, {
+                OperationQueue.main.addOperation({
+                    self.setUpNavigationController()
+                })
+                
+                
+            })
+            
+        } else {
+            let loginVC = LoginViewController()
+            self.window?.rootViewController = loginVC
         }
         
         
