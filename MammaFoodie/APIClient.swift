@@ -15,7 +15,7 @@ class APIClient: NSObject, STPBackendAPIAdapter {
     
     static let sharedClient = APIClient()
     let session: URLSession
-    var baseURLString = "http://10.101.104.124:3000/"
+    var baseURLString = "https://mf-server.herokuapp.com"
     var defaultSource: STPCard? = nil
     var sources: [STPCard] = []
     
