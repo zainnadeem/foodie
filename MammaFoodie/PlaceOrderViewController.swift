@@ -76,7 +76,7 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
             let chef = user
             
             chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
-            self.store.currentUser.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            self.store.currentUser.addresses.append(Address(title: "Work", addressLine: "11 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10004", crossStreet: "", phone: "+15165517202"))
             
             let pickupAddress = chef.addresses.first
             let dropoffAddress = self.store.currentUser.addresses.first
@@ -167,6 +167,30 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         }
     }
     
+    func displayDeliveryFee() {
+        switch deliveryView.selectedDeliveryOption {
+        case .uber:
+            uberAPIClient.getDeliveryQuote(completion: { (quote) in
+                if let quote = quote {
+                    let subtitle = "Cost for delivery: $\(quote["fee"]!)"
+                    OperationQueue.main.addOperation({
+//                        alertView.showInfo("Uber", subTitle: subtitle)
+                    })
+                }
+                else {
+                    OperationQueue.main.addOperation({
+//                        alertView.showInfo("We're sorry :(", subTitle: "Uber delivery is unable to deliver food between this chef's home and your selected address. Please select another option.")
+                    })
+                }
+                
+            })
+        case .postmates:
+            return
+        case .pickUp:
+            return
+        }
+    }
+    
     func showAlert(for button: UIButton) {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false,
@@ -175,23 +199,12 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Ok") {}
         switch deliveryView.selectedDeliveryOption {
-        case .uber:
-            uberAPIClient.getDeliveryQuote(completion: { (quote) in
-                if let quote = quote {
-                    let subtitle = "Cost for delivery: $\(quote["fee"]!)"
-                    OperationQueue.main.addOperation({
-                        alertView.showInfo("Uber", subTitle: subtitle)
-                    })
-                }
-                else {
-                    OperationQueue.main.addOperation({
-                        alertView.showInfo("We're sorry :(", subTitle: "Uber delivery is unable to deliver food between this chef's home and your selected address. Please select another option.")
-                    })
-                }
-                
-            })
-        case .postmates:
-            return
+        case .uber, .postmates:
+            if store.currentUser.addresses.isEmpty {
+                //present alert to add address
+                let addAddressVC = AddAddressViewController()
+                self.present(addAddressVC, animated: true, completion: nil)
+            }
         case .pickUp:
             return
         }
@@ -211,6 +224,19 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
 
 
         uberAPIClient.createDelivery { (deliveryID) in
+            print(deliveryID)
+            if let deliveryID = deliveryID {
+                
+//                self.uberAPIClient.assignVehicleToDelivery(deliveryID: deliveryID, completion: { (success) in
+//                    if success {
+//                        print("success!")
+//                    }
+//                    else { print("failure!") }
+//                })
+                self.uberAPIClient.getDeliveryDetails(deliveryID: deliveryID, completion: { (response) in
+                    dump(response)
+                })
+            }
             
         }
 

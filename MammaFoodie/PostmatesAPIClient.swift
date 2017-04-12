@@ -34,8 +34,12 @@ class PostmatesAPIClient {
         let session = URLSession(configuration: config)
         session.dataTask(with: request) { (data, response, error) in
             guard let response = response as? HTTPURLResponse else { print("there was an error"); return }
+            if response.statusCode != 200 {
+                print("There was an error with your request")
+                completion(false, nil)
+            }
             if let responseDict = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                if responseDict != nil && response.statusCode == 200 {
+                if let responseDict = responseDict {
                     completion(true, responseDict)
                 }
                 else { completion(false, nil) }
@@ -74,9 +78,13 @@ class PostmatesAPIClient {
         let session = URLSession(configuration: config)
         
         session.dataTask(with: request) { (data, response, error) in
-            guard let response = response as? HTTPURLResponse else { print("there was an error: malformed request"); return }
+            guard let response = response as? HTTPURLResponse else { print("there was an error"); return }
+            if response.statusCode != 200 {
+                print("There was an error with your request")
+                completion(false, nil)
+            }
             if let responseDict = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                if responseDict != nil && response.statusCode == 200 {
+                if let responseDict = responseDict {
                     completion(true, responseDict)
                 }
                 else { completion(false, nil) }

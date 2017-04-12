@@ -38,9 +38,9 @@
 		2B9C92FC1E647F740020FD28 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */; };
 		2BA794EE1E7ABD2F00489F8D /* CartItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */; };
 		2BA794F21E7ACEA800489F8D /* DeliveryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */; };
-		2BC3CA0F1E802EB900D8D855 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CA0E1E802EB900D8D855 /* Secrets.swift */; };
 		2BC3CA111E80343E00D8D855 /* PostmatesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */; };
 		2BC649101E89A2E100ED45DA /* SelectAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC6490F1E89A2E100ED45DA /* SelectAddressViewController.swift */; };
+		2BFEE8861E9BF3DC004363A8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFEE8851E9BF3DC004363A8 /* Secrets.swift */; };
 		845D39E68BE4626233789129 /* Pods_MammaFoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECF1084C50127AB0E98CCE /* Pods_MammaFoodie.framework */; };
 		BF29817D1E7B164900AE1357 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817C1E7B164900AE1357 /* APIClient.swift */; };
 		BF29817F1E7B16DD00AE1357 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29817E1E7B16DD00AE1357 /* Networking.swift */; };
@@ -144,9 +144,9 @@
 		2B9C92FB1E647F740020FD28 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		2BA794ED1E7ABD2F00489F8D /* CartItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItemTableViewCell.swift; sourceTree = "<group>"; };
 		2BA794F11E7ACEA800489F8D /* DeliveryInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryInfoView.swift; sourceTree = "<group>"; };
-		2BC3CA0E1E802EB900D8D855 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesAPIClient.swift; sourceTree = "<group>"; };
 		2BC6490F1E89A2E100ED45DA /* SelectAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAddressViewController.swift; sourceTree = "<group>"; };
+		2BFEE8851E9BF3DC004363A8 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		B1533229496A4BCF63BB62D3 /* Pods-MammaFoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodie/Pods-MammaFoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		BD02199AB0AA243CD21FBD43 /* Pods-MammaFoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MammaFoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MammaFoodieTests/Pods-MammaFoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF29817C1E7B164900AE1357 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -445,7 +445,7 @@
 		BFB853671E5DFABF009D7069 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2BC3CA0E1E802EB900D8D855 /* Secrets.swift */,
+				2BFEE8851E9BF3DC004363A8 /* Secrets.swift */,
 				BFB853631E5DEE74009D7069 /* FIRImage.swift */,
 				2B9C92F21E6478950020FD28 /* FirebaseAPIClient.swift */,
 				2BC3CA101E80343E00D8D855 /* PostmatesAPIClient.swift */,
@@ -760,7 +760,6 @@
 				BF3F610B1E6F211E008EF3C9 /* EditProfileViewController.swift in Sources */,
 				BF3F61041E6E0A36008EF3C9 /* AddressesViewController.swift in Sources */,
 				BF7F19211E60DEE900595CA4 /* ProfileViewController.swift in Sources */,
-				2BC3CA0F1E802EB900D8D855 /* Secrets.swift in Sources */,
 				2B6CD0B51E5DDBA00001EA68 /* AppDelegate.swift in Sources */,
 				2B025E3A1E6F5D2300113729 /* AddDishViewController.swift in Sources */,
 				BF7F193F1E64D03600595CA4 /* LiveNowTableViewCell.swift in Sources */,
@@ -771,6 +770,7 @@
 				2B025E331E69DB1C00113729 /* DishAlertView.swift in Sources */,
 				BF29817F1E7B16DD00AE1357 /* Networking.swift in Sources */,
 				BF3F61061E6F0DD9008EF3C9 /* OnboardingViewController.swift in Sources */,
+				2BFEE8861E9BF3DC004363A8 /* Secrets.swift in Sources */,
 				BF9E09B51E77157D00059A30 /* BroadcastTitleViewController.swift in Sources */,
 				BF75FF521E69C63A00DD7102 /* AddAddressViewController.swift in Sources */,
 				BFB853571E5DE20B009D7069 /* User.swift in Sources */,

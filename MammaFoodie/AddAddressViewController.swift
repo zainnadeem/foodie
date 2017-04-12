@@ -171,7 +171,13 @@ extension AddAddressViewController : NavBarViewDelegate {
     }
     
     func leftBarButtonTapped(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
+        
+        self.dismiss(animated: true) { 
+            if let presentingVC = self.presentingViewController as? PlaceOrderViewController {
+                presentingVC.displayDeliveryFee()
+            }
+        }
+        
     }
     
     func middleBarButtonTapped(_ Sender: AnyObject) {

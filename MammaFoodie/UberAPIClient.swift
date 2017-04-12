@@ -28,9 +28,9 @@ class UberAPIClient {
         ]
         let pickupContact: [String: Any] = [
             "email"         : chef.email,
-            "first_name"    : chef.fullName.components(separatedBy: " ").first as Any,
-            "last_name"     : chef.fullName.components(separatedBy: " ").last as Any,
-            "phone"         : [ "number" : chef.phoneNumber, "sms_enabled" : false]
+            "first_name"    : chef.fullName.components(separatedBy: " ").first!,
+            "last_name"     : chef.fullName.components(separatedBy: " ").last!,
+            "phone"         : [ "number" : pickup.phone, "sms_enabled" : false]
         ]
         
         let dropoffLocation = [
@@ -43,9 +43,9 @@ class UberAPIClient {
         ]
         let dropoffContact: [String: Any] = [
             "email"         : purchasingUser.email,
-            "first_name"    : purchasingUser.fullName.components(separatedBy: " ").first as Any,
-            "last_name"     : purchasingUser.fullName.components(separatedBy: " ").last as Any,
-            "phone"         : [ "number" : chef.phoneNumber, "sms_enabled" : false]
+            "first_name"    : purchasingUser.fullName.components(separatedBy: " ").first!,
+            "last_name"     : purchasingUser.fullName.components(separatedBy: " ").last!,
+            "phone"         : [ "number" : dropoff.phone, "sms_enabled" : false]
         ]
         
         self.params = ["dropoff" : ["location" : dropoffLocation, "contact" : dropoffContact], "pickup" : ["location" : pickupLocation, "contact" : pickupContact]]
@@ -96,7 +96,7 @@ class UberAPIClient {
         
         self.getDeliveryQuote { (quoteID) in
             guard let quoteID = quoteID else { completion(nil); return }
-            self.params["quote_id"] = quoteID
+            self.params["quote_id"] = quoteID["quote_id"]
             Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: uberHeaders).responseJSON { (response) in
                 print("\n\n\n\n Status code: \(response.response?.statusCode)")
                 if response.response?.statusCode != 200 && response.response?.statusCode != 201 {
@@ -116,13 +116,26 @@ class UberAPIClient {
         
         Alamofire.request(urlString, headers: uberHeaders).responseJSON { (response) in
             if response.response?.statusCode != 200 {
-                print("there was an error")
+                print("there was an error in getDeliveryDetails")
                 completion(nil)
             }
             if let json = response.result.value as? [String : Any] {
                 completion(json)
             }
         }
+    }
+    
+    func assignVehicleToDelivery(deliveryID: String, completion: @escaping (Bool) -> ()) {
+        let urlString = "\(uberBaseURL)/sandbox/deliveries/\(deliveryID)"
         
+        Alamofire.request(urlString, method: .put, headers: uberHeaders).responseJSON { (response) in
+            if response.response?.statusCode != 204 {
+                print("there was an error in assignVehicleToDelivery: status code \(response.response?.statusCode)")
+                completion(false)
+            }
+            if let json = response.result.value as? [String : Any] {
+                completion(true)
+            }
+        }
     }
 }
