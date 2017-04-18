@@ -78,11 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         signIn.clientID = FIRApp.defaultApp()?.options.clientID
         signIn.delegate = self
         if signIn.hasAuthInKeychain() {
-            
             signIn.signInSilently()
-            print("happening")
-            
-          //  print(signIn.currentUser)
         }
         
 
@@ -98,6 +94,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        
+        if url.scheme == "mammafoodie-uber" {
+            let urlString = url.relativeString
+            let codeRange = urlString.range(of: "code=")
+            let authCode = urlString.substring(from: (codeRange?.upperBound)!)
+            print(authCode)
+            UberAPIClient.getAccessToken(authorizationCode: authCode, completion: { (response) in
+                print(response)
+                guard let response = response else { print("no response from uber authorization"); return }
+                if let accessToken = response["access_token"] as? String, let refreshToken = response["refresh_token"] as? String {
+                    self.store.currentUser.uberAccessToken = accessToken
+                    self.store.currentUser.uberRefreshToken = refreshToken
+                    self.store.currentUser.registerUberTokens(accessToken: accessToken, refreshToken: refreshToken)
+                }
+            })
+        }
         
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
@@ -131,6 +144,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 showSuccess()
             }
         }
+        
+        
         
         return handled
 
@@ -234,6 +249,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         alertView.showWarning("Great!", subTitle: "You're all set up to receive payments!")
     }
+    
+    
     
 }
 

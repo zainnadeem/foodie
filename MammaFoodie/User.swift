@@ -56,6 +56,8 @@ class User
     var stripeCustomerId: String
     var stripeAccountId: String
     
+    var uberAccessToken: String?
+    var uberRefreshToken: String?
     
     
     // MARK: - Initializers
@@ -148,6 +150,9 @@ class User
         
         stripeCustomerId = dictionary["stripe customer id"] as! String
         stripeAccountId = dictionary["stripe account id"] as! String
+        
+        if let uberAccessToken = dictionary["uber access token"] as? String { self.uberAccessToken = uberAccessToken }
+        if let uberRefreshToken = dictionary["uber refresh token"] as? String { self.uberRefreshToken = uberRefreshToken }
 
         // deviceToken: created for notifications
         self.deviceTokens = []
@@ -264,8 +269,9 @@ class User
             "total likes"           : totalLikes,
             "stripe customer id"    : stripeCustomerId,
             "stripe account id"     : stripeAccountId,
-            "is available"          : isAvailable
-
+            "is available"          : isAvailable,
+            "uber access token"     : uberAccessToken,
+            "uber refresh token"    : uberRefreshToken
             
             
         ]
@@ -331,6 +337,11 @@ extension User {
     
     func registerStripeAccountId(id: String){
         DatabaseReference.users(uid: uid).reference().child("stripe account id").setValue(id)
+    }
+    
+    func registerUberTokens(accessToken: String, refreshToken: String) {
+        DatabaseReference.users(uid: uid).reference().child("uber access token").setValue(accessToken)
+        DatabaseReference.users(uid: uid).reference().child("uber refresh token").setValue(refreshToken)
     }
     
     class func observeUser(uid: String, _ completion: @escaping (User) -> Void) {

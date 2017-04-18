@@ -71,18 +71,7 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //TODO: clean this function up, no force unwrapping
-        User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
-            let chef = user
-            
-            chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
-            self.store.currentUser.addresses.append(Address(title: "Work", addressLine: "11 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10004", crossStreet: "", phone: "+15165517202"))
-            
-            let pickupAddress = chef.addresses.first
-            let dropoffAddress = self.store.currentUser.addresses.first
-            
-            self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
-        }
+        
         if let address = store.currentUser.addresses.first {
             var aptSuite = ""
             if address.aptSuite != "" { aptSuite = " \(address.aptSuite)" }
@@ -191,7 +180,7 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         }
     }
     
-    func showAlert(for button: UIButton) {
+    func displayInfo(for button: UIButton) {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false,
             hideWhenBackgroundViewIsTapped: true
@@ -199,12 +188,23 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Ok") {}
         switch deliveryView.selectedDeliveryOption {
-        case .uber, .postmates:
+        case .uber:
             if store.currentUser.addresses.isEmpty {
-                //present alert to add address
+                //TODO: present alert to add address
                 let addAddressVC = AddAddressViewController()
                 self.present(addAddressVC, animated: true, completion: nil)
             }
+            if store.currentUser.uberAccessToken == nil {
+                //TODO: present alert to connect with uber
+            }
+            displayDeliveryFee()
+        case .postmates:
+            if store.currentUser.addresses.isEmpty {
+                //TODO: present alert to add address
+                let addAddressVC = AddAddressViewController()
+                self.present(addAddressVC, animated: true, completion: nil)
+            }
+            displayDeliveryFee()
         case .pickUp:
             return
         }
@@ -319,10 +319,7 @@ extension PlaceOrderViewController: NavBarViewDelegate {
     func leftBarButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
-    func middleBarButtonTapped(_ Sender: AnyObject) {
-        let uberOAuthURL = URL(string: "https://login.uber.com/oauth/v2/authorize?client_id=\(uberClientID)&response_type=code")
-        UIApplication.shared.open(uberOAuthURL!, options: [:], completionHandler: nil)
-    }
+    func middleBarButtonTapped(_ Sender: AnyObject) {}
     func rightBarButtonTapped(_ sender: AnyObject) {}
 }
 

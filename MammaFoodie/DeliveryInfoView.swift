@@ -124,14 +124,14 @@ extension DeliveryInfoView {
         case postmatesButton:   selectedDeliveryOption = .postmates
         default: print("should never reach here - segmentedControlButtonTapped")
         }
-        self.delegate?.showAlert(for: sender)
+        self.delegate?.displayInfo(for: sender)
     }
     
     
 }
 
 protocol DeliveryViewDelegate: class {
-    func showAlert(for button: UIButton)
+    func displayInfo(for button: UIButton)
 }
 
 

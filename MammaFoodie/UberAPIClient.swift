@@ -133,9 +133,25 @@ class UberAPIClient {
                 print("there was an error in assignVehicleToDelivery: status code \(response.response?.statusCode)")
                 completion(false)
             }
-            if let json = response.result.value as? [String : Any] {
+            if (response.result.value as? [String : Any]) != nil {
                 completion(true)
             }
+        }
+    }
+    
+    class func getAccessToken(authorizationCode: String, completion: @escaping ([String : Any]?) -> ()) {
+        let urlString = "https://login.uber.com/oauth/v2/token"
+        let parameters = ["client_secret"   : uberClientSecret,
+                      "client_id"       : uberClientID,
+                      "grant_type"      : "authorization_code",
+                      "redirect_uri"    : "mammafoodie-uber://oauth",
+                      "code"            : authorizationCode
+                      ]
+        Alamofire.request(urlString, method: .post, parameters: parameters).responseJSON { (response) in
+            if let json = response.result.value as? [String : Any] {
+                completion(json)
+            }
+            
         }
     }
 }

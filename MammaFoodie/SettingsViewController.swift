@@ -38,7 +38,8 @@ class SettingsViewController: UIViewController {
     enum Item {
         case EditProfile
         case Payment
-        case Connect
+        case StripeConnect
+        case UberConnect
         case Address
         case SubmitFeedback
         case Terms
@@ -66,7 +67,7 @@ class SettingsViewController: UIViewController {
         self.tableView.register(EditProfileTableViewCell.self, forCellReuseIdentifier: editProfileTableViewCellIdentifier)
         
         sections = [
-            Section(type: .YourAccount, items: [.EditProfile, .Payment, .Connect, .Address]),
+            Section(type: .YourAccount, items: [.EditProfile, .Payment, .StripeConnect, .UberConnect, .Address]),
             Section(type: .Support, items: [.SubmitFeedback, .Terms]),
             Section(type: .Logout, items: [.LogoutUser]),
         ]
@@ -129,8 +130,12 @@ extension SettingsViewController : UITableViewDataSource {
                 cell.textLabel?.text = "Payment"
                 cell.accessoryType = .disclosureIndicator
                 
-            case .Connect:
-                cell.textLabel?.text = "Connect"
+            case .StripeConnect:
+                cell.textLabel?.text = "Connect with Stripe"
+                cell.accessoryType = .disclosureIndicator
+                
+            case .UberConnect:
+                cell.textLabel?.text = "Connect with Uber"
                 cell.accessoryType = .disclosureIndicator
                 
             case .Address:
@@ -176,10 +181,25 @@ extension SettingsViewController: UITableViewDelegate{
         case .Payment:
             print("Show Payment Methods")
             
-        case .Connect:
+        case .StripeConnect:
             let authorize = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=\(stripeClientId)&scope=read_write"
             UIApplication.shared.openURL(NSURL(string: authorize)! as URL)
       
+        case .UberConnect:
+            if let accessToken = store.currentUser.uberAccessToken {
+                //TODO: tell the user they're already good to go with uber
+            }
+            else {
+                if let refreshToken = store.currentUser.uberRefreshToken {
+                    //TODO: do the API call to grab a new access token
+                }
+                else {
+                    let uberOAuthURL = URL(string: "https://login.uber.com/oauth/v2/authorize?client_id=\(uberClientID)&response_type=code")
+                    UIApplication.shared.open(uberOAuthURL!, options: [:], completionHandler: nil)
+                }
+            }
+            
+            
         case .Address:
             let destinationVC = AddressesViewController()
             destinationVC.modalTransitionStyle = .crossDissolve
