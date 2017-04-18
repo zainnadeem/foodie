@@ -30,6 +30,11 @@ class DeliveryInfoView: UIView {
     var lastTappedButton: SegmentedControlButton!
     var buttonsStackView: UIStackView!
     
+    lazy var pickupSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    lazy var uberSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    lazy var postmatesSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    var spinnerStackView: UIStackView!
+    
     var selectedDeliveryOption: DeliveryOption = .pickUp
     
     weak var delegate: DeliveryViewDelegate?
@@ -37,11 +42,11 @@ class DeliveryInfoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.flatWhite
-        setViewProprties()
+        setViewProperties()
         setViewConstraints()
     }
     
-    func setViewProprties() {
+    func setViewProperties() {
         
         self.addTopBorderWithColor(color: .black, width: 2)
         self.addBottomBorderWithColor(color: .black, width: 2)
@@ -67,7 +72,7 @@ class DeliveryInfoView: UIView {
         labelsStackView.isLayoutMarginsRelativeArrangement = true
         self.addSubview(labelsStackView)
         labelsStackView.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.5)
+            make.width.equalToSuperview().multipliedBy(0.6)
             make.height.equalToSuperview()
             make.top.left.equalToSuperview()
         }
@@ -80,9 +85,22 @@ class DeliveryInfoView: UIView {
         buttonsStackView.isLayoutMarginsRelativeArrangement = true
         self.addSubview(buttonsStackView)
         buttonsStackView.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.5)
-            make.height.equalToSuperview()
-            make.top.right.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.3)
+            make.height.top.equalToSuperview()
+            make.left.equalTo(labelsStackView.snp.right)
+        }
+        
+        spinnerStackView = UIStackView(arrangedSubviews: [pickupSpinner, uberSpinner, postmatesSpinner])
+        spinnerStackView.axis = .vertical
+        spinnerStackView.distribution = .equalCentering
+        spinnerStackView.alignment = .center
+        spinnerStackView.layoutMargins = UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
+        spinnerStackView.isLayoutMarginsRelativeArrangement = true
+        self.addSubview(spinnerStackView)
+        spinnerStackView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().multipliedBy(0.1)
+            make.height.top.equalToSuperview()
+            make.left.equalTo(buttonsStackView.snp.right)
         }
         
         for view in buttonsStackView.arrangedSubviews {

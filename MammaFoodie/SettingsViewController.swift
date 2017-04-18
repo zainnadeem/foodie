@@ -187,11 +187,26 @@ extension SettingsViewController: UITableViewDelegate{
       
         case .UberConnect:
             if let accessToken = store.currentUser.uberAccessToken {
-                //TODO: tell the user they're already good to go with uber
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false,
+                    hideWhenBackgroundViewIsTapped: true
+                )
+                
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Successful") {}
+                
+                alertView.showWarning("Great!", subTitle: "You're all set up to receive payments!")
             }
             else {
                 if let refreshToken = store.currentUser.uberRefreshToken {
-                    //TODO: do the API call to grab a new access token
+                    UberAPIClient.refreshAccessToken(refreshToken: refreshToken, completion: { (response) in
+                        guard let response = response else { print("no response from uber authorization"); return }
+                        if let accessToken = response["access_token"] as? String, let refreshToken = response["refresh_token"] as? String {
+                            self.store.currentUser.uberAccessToken = accessToken
+                            self.store.currentUser.uberRefreshToken = refreshToken
+                            self.store.currentUser.registerUberTokens(accessToken: accessToken, refreshToken: refreshToken)
+                        }
+                    })
                 }
                 else {
                     let uberOAuthURL = URL(string: "https://login.uber.com/oauth/v2/authorize?client_id=\(uberClientID)&response_type=code")

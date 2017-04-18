@@ -25,7 +25,7 @@ class DishTableViewCell: UITableViewCell {
             dishImageView.image = dish.mainImage
             titleLabel.text = dish.name
             descriptionLabel.text = dish.description
-            var priceAsString = String(dish.price)
+            let priceAsString = String(dish.price)
             priceLabel.text = priceAsString.convertPriceInCentsToDollars()
             
         }

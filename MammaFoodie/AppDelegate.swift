@@ -247,7 +247,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Successful") {}
 
-        alertView.showWarning("Great!", subTitle: "You're all set up to receive payments!")
+        alertView.showSuccess("Great!", subTitle: "You're all set up to receive payments!")
     }
     
     

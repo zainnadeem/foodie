@@ -72,6 +72,18 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
     
     override func viewDidAppear(_ animated: Bool) {
         
+        User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
+            let chef = user
+            
+            chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
+            self.store.currentUser.addresses.append(Address(title: "Work", addressLine: "11 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10004", crossStreet: "", phone: "+15165517202"))
+            
+            let pickupAddress = chef.addresses.first
+            let dropoffAddress = self.store.currentUser.addresses.first
+            
+            self.uberAPIClient = UberAPIClient(pickup: pickupAddress!, dropoff: dropoffAddress!, chef: chef, purchasingUser: self.store.currentUser)
+        }
+        
         if let address = store.currentUser.addresses.first {
             var aptSuite = ""
             if address.aptSuite != "" { aptSuite = " \(address.aptSuite)" }
@@ -159,10 +171,12 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
     func displayDeliveryFee() {
         switch deliveryView.selectedDeliveryOption {
         case .uber:
+            self.deliveryView.uberSpinner.startAnimating()
             uberAPIClient.getDeliveryQuote(completion: { (quote) in
                 if let quote = quote {
                     let subtitle = "Cost for delivery: $\(quote["fee"]!)"
                     OperationQueue.main.addOperation({
+                        self.deliveryView.uberSpinner.stopAnimating()
 //                        alertView.showInfo("Uber", subTitle: subtitle)
                     })
                 }

@@ -145,14 +145,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.profileTableViewStatus {
         case .menu:
-//            if self.user === self.store.currentUser {
-//                <#code#>
-//            }
-//            else {
+            if self.user === self.store.currentUser {
+                let editDishVC = EditDishViewController()
+                editDishVC.dish = user.dishes[indexPath.row]
+                self.present(editDishVC, animated: true, completion: nil)
+            }
+            else {
                 let purchaseDishVC = PurchaseDishViewController()
                 purchaseDishVC.dish = self.user.dishes[indexPath.row]
                 self.present(purchaseDishVC, animated: true, completion: nil)
-//            }
+            }
         case .followers, .following:
             let profileVC = ProfileViewController()
             let cell = tableView.cellForRow(at: indexPath) as! UserTableViewCell

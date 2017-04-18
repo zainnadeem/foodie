@@ -1,5 +1,5 @@
 //
-//  Extentions.swift
+//  Extensions.swift
 //  MammaFoodie
 //
 //  Created by Zain Nadeem on 2/24/17.
