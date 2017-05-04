@@ -25,8 +25,6 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         OperationQueue.main.addOperation {
-            self.user = self.store.currentUser
-            self.user.dishes = self.store.currentUser.dishes
             self.profileView.tableView.reloadData()
         }
         
@@ -139,7 +137,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             cell.addGestureRecognizer(longPressGesture)
             return cell
         }
-        return UITableViewCell()
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

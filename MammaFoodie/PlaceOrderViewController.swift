@@ -169,6 +169,12 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
     }
     
     func displayDeliveryFee() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            hideWhenBackgroundViewIsTapped: true
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Ok") {}
         switch deliveryView.selectedDeliveryOption {
         case .uber:
             self.deliveryView.uberSpinner.startAnimating()
@@ -177,18 +183,37 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
                     let subtitle = "Cost for delivery: $\(quote["fee"]!)"
                     OperationQueue.main.addOperation({
                         self.deliveryView.uberSpinner.stopAnimating()
-//                        alertView.showInfo("Uber", subTitle: subtitle)
+                        alertView.showInfo("Uber", subTitle: subtitle)
                     })
                 }
                 else {
                     OperationQueue.main.addOperation({
-//                        alertView.showInfo("We're sorry :(", subTitle: "Uber delivery is unable to deliver food between this chef's home and your selected address. Please select another option.")
+                        alertView.showInfo("We're sorry :(", subTitle: "Uber delivery is unable to deliver food between this chef's home and your selected address. Please select another option.")
                     })
                 }
                 
             })
         case .postmates:
-            return
+            self.deliveryView.postmatesSpinner.startAnimating()
+            User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
+                PostmatesAPIClient.createDeliveryRequest(manifest: "Food from \(user.username)", pickupAddress: user.addresses.first!, dropoffAddress: self.store.currentUser.addresses.first!, completion: { (success, result) in
+                    if let priceInCents = result?["fee"] as? String {
+                        let price = priceInCents.convertPriceInCentsToDollars()
+                        let subtitle = "Cost for delivery: $\(price)"
+                        OperationQueue.main.addOperation({
+                            self.deliveryView.postmatesSpinner.stopAnimating()
+                            alertView.showInfo("Postmates", subTitle: subtitle)
+                        })
+                    }
+                    else {
+                        OperationQueue.main.addOperation({
+                            alertView.showInfo("We're sorry :(", subTitle: "Postmates is unable to deliver food between this chef's home and your selected address. Please select another option.")
+                        })
+
+                    }
+                })
+            }
+            
         case .pickUp:
             return
         }
