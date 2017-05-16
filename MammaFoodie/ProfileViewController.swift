@@ -72,11 +72,12 @@ class ProfileViewController: UIViewController {
         arrayForTableView = user.dishes
         
         let otherUser1 = User(uid: "123", username: "sulu_candles", fullName: "Sulu Candles", email: "sulu@gmail.com", profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fwearing-apron-in-the-kitchen.jpg?alt=media&token=2c903cc7-f143-4bab-bdc5-9a48ebd50d2e")
+        let dish1 = Dish(createdBy: "riGrI8caYIZg84lcXHs3CjpDQVr2", name: "Burrito", description: "Chicken, comes with guacamole and sour cream", mainImage: #imageLiteral(resourceName: "chicken burrito"), mainImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/chicken%20burrito.jpg?alt=media&token=bd88f3cc-fd7b-4cac-aad5-ffe30b74e15b", price: 1000, likedBy: [], averageRating: 0)
+        otherUser1.dishes.append(dish1)
+        otherUser1.addresses.append(Address(title: "home", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "5165517202"))
         let otherUser2 = User(uid: "456", username: "ghee_buttersnaps", fullName: "Ghee Buttersnaps", email: "ghee@gmail.com", profileImageURL: "https://firebasestorage.googleapis.com/v0/b/mamma-foodie.appspot.com/o/images%2Fimages.jpg?alt=media&token=89af4243-8189-4039-949b-5047e5cc9602")
-        user.follows.append(otherUser1)
         user.follows.append(otherUser2)
         user.followedBy.append(otherUser1)
-        user.followedBy.append(otherUser2)
     }
 
     func setUpNavBar() {
@@ -131,7 +132,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .following:
             let cell = tableView.dequeueReusableCell(withIdentifier: followCellIdentifier, for: indexPath) as! UserTableViewCell
-            let cellUser = user.followedBy[indexPath.row]
+            let cellUser = user.follows[indexPath.row]
             cell.user = cellUser
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(blockUserTapped))
             cell.addGestureRecognizer(longPressGesture)
@@ -151,6 +152,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             else {
                 let purchaseDishVC = PurchaseDishViewController()
                 purchaseDishVC.dish = self.user.dishes[indexPath.row]
+                purchaseDishVC.user = self.user
                 self.present(purchaseDishVC, animated: true, completion: nil)
             }
         case .followers, .following:

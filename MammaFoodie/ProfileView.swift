@@ -47,6 +47,9 @@ class ProfileView: UIView, UITableViewDelegate {
 //            bioTextView.text = user.bio
             bioTextView.text = loremIpsumString
             websiteTextView.text = user.website
+            if user === DataStore.sharedInstance.currentUser {
+                self.followButton.isHidden = true
+            }
         }
     }
     

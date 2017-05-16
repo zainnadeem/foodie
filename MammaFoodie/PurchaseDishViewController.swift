@@ -18,6 +18,7 @@ class PurchaseDishViewController: UIViewController {
     
     var broadcast: Broadcast?
     var dish: Dish!
+    var user: User!
     
     let store = DataStore.sharedInstance
     
@@ -106,19 +107,6 @@ class PurchaseDishViewController: UIViewController {
     }
     
     func purchaseButtonTapped() {
-        let quantityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
-        
-        guard let quantity = Int(quantityCell.textField.text!)
-        else {
-            let appearance = SCLAlertView.SCLAppearance(
-                showCloseButton: false,
-                hideWhenBackgroundViewIsTapped: true
-            )
-            let alertView = SCLAlertView(appearance: appearance)
-            alertView.addButton("Ok", action: {})
-            alertView.showError("Error", subTitle: "Please enter a valid quantity")
-            return
-        }
         
         if let firstItem = store.currentUser.cart.first {
             if self.dish.createdBy != firstItem.createdBy {
@@ -128,22 +116,39 @@ class PurchaseDishViewController: UIViewController {
                 )
                 let alertView = SCLAlertView(appearance: appearance)
                 alertView.addButton("Yes", action: {
-                    for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
-                    self.dismiss(animated: true, completion: nil)
+                    self.addDishesToCart()
                 })
                 alertView.addButton("Cancel", action: {})
                 alertView.showError("Error", subTitle: "You can only purchase food from one chef at a time. Would you like to clear your cart and add this dish?")
             }
-            else {
-                for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
-                self.dismiss(animated: true, completion: nil)
-            }
+            else { addDishesToCart() }
         }
+        
+        addDishesToCart()
+    }
+    
+    fileprivate func addDishesToCart() {
+        let quantityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! TextFieldTableViewCell
+        
+        guard let quantity = Int(quantityCell.textField.text!)
+            else {
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false,
+                    hideWhenBackgroundViewIsTapped: true
+                )
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Ok", action: {})
+                alertView.showError("Error", subTitle: "Please enter a valid quantity")
+                return
+        }
+
         
         for _ in 0..<quantity { self.store.currentUser.cart.append(self.dish) }
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+
 
 extension PurchaseDishViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {

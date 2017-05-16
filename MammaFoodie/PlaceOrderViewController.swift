@@ -72,7 +72,7 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
     
     override func viewDidAppear(_ animated: Bool) {
         
-        User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
+        User.observeUser(uid: (store.currentUser.cart.first?.createdBy)!) { (user) in
             let chef = user
             
             chef.addresses.append(Address(title: "Work", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "+15166336625"))
@@ -177,12 +177,12 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
         alertView.addButton("Ok") {}
         switch deliveryView.selectedDeliveryOption {
         case .uber:
-            self.deliveryView.uberSpinner.startAnimating()
+            
             uberAPIClient.getDeliveryQuote(completion: { (quote) in
                 if let quote = quote {
                     let subtitle = "Cost for delivery: $\(quote["fee"]!)"
                     OperationQueue.main.addOperation({
-                        self.deliveryView.uberSpinner.stopAnimating()
+                        
                         alertView.showInfo("Uber", subTitle: subtitle)
                     })
                 }
@@ -194,14 +194,14 @@ class PlaceOrderViewController: UIViewController, DeliveryViewDelegate, UIGestur
                 
             })
         case .postmates:
-            self.deliveryView.postmatesSpinner.startAnimating()
-            User.observeUser(uid: (store.currentUser.dishes.first?.createdBy)!) { (user) in
-                PostmatesAPIClient.createDeliveryRequest(manifest: "Food from \(user.username)", pickupAddress: user.addresses.first!, dropoffAddress: self.store.currentUser.addresses.first!, completion: { (success, result) in
+            
+            User.observeUser(uid: (store.currentUser.cart.first?.createdBy)!) { (user) in
+                PostmatesAPIClient.createDeliveryRequest(manifest: "Food from \(user.username)", pickupAddress: Address(title: "home", addressLine: "1000 Broadway", aptSuite: "", city: "New York", state: "NY", postalCode: "10010", crossStreet: "", phone: "5555555555"), dropoffAddress: self.store.currentUser.addresses.first!, completion: { (success, result) in
                     if let priceInCents = result?["fee"] as? String {
                         let price = priceInCents.convertPriceInCentsToDollars()
                         let subtitle = "Cost for delivery: $\(price)"
                         OperationQueue.main.addOperation({
-                            self.deliveryView.postmatesSpinner.stopAnimating()
+                            
                             alertView.showInfo("Postmates", subTitle: subtitle)
                         })
                     }

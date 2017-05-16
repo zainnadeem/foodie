@@ -24,6 +24,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(searchBar)
         searchBar.searchBarStyle = .minimal
+        searchBar.isHidden = true
         
         addItemButton.setTitle("+", for: .normal)
         addItemButton.titleLabel?.font = UIFont.mammaFoodieFont(30)
